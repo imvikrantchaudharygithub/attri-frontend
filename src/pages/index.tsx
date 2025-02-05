@@ -1,5 +1,13 @@
 import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
+import BestSeller from "@/Components/bestseller";
+import TakeCare from "@/Components/Takecare";
+import NewProduct from "@/Components/NewProduct";
+import HomeBanner from "@/Components/HomeBanner";
+import Nutrition from "@/Components/Nutrition";
+import Review from "@/Components/Review";
+import HaveFun from "@/Components/HaveFun";
+import About from "@/Components/About";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,10 +21,19 @@ const geistMono = Geist_Mono({
 
 export default function Home() {
   return (
-    <div
-      className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
-    >
-     <h1>Home page</h1>
-    </div>
+    <>
+      <HomeBanner></HomeBanner>
+      <Nutrition></Nutrition>
+      <BestSeller></BestSeller>
+      <TakeCare></TakeCare>
+      <div className="newproduct-sec">
+        <NewProduct></NewProduct>
+        <NewProduct></NewProduct>
+        <NewProduct></NewProduct>
+      </div>
+      <Review></Review>
+      <HaveFun></HaveFun>
+      <About></About>
+    </>
   );
 }

@@ -1,0 +1,10 @@
+.about .attriheading{color: var(--primary-color); font-weight: 700; margin-bottom: 15px;}
+.about p{font-size: 16px; color: var(--primary-color);}
+.about-top p .readmore{display: inline-block; color: var(--green-color); text-decoration: underline; cursor: pointer; margin-left: 10px;}
+
+.about-mib{background: var(--light-green);}
+.about-mib ol{padding-left: 20px; margin: 0; list-style: upper-alpha;}
+.about-mib ol li, .about-bottom ul li{margin-bottom: 15px;}
+.about-mib ol li:last-child, .about-bottom ul li:last-child{margin-bottom: 0;}
+.about-mib, .about-bottom{display: none;}
+.about-mib.active, .about-bottom.active{display: block;}

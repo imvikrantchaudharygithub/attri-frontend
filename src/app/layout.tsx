@@ -1,5 +1,6 @@
 // import type { Metadata } from "next";
 import "@/styles/globals.css";
+import "slick-carousel/slick/slick.css";
 import Header from "../Components/header";
 import Footer from "../Components/footer";
 
@@ -12,7 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
 <>
         <Header />
-        <main className="flex-1 container mx-auto p-4">{children}</main>
+        <main>{children}</main>
         <Footer />
         </>
   );

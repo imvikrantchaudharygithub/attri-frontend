@@ -1,0 +1,6 @@
+.newproduct{padding: 60px 0 0;}
+.newproduct-main{margin: 0 -15px; flex-wrap: nowrap; justify-content: flex-start;}
+.newproduct-left{width: 500px; min-width: 500px; height: 100%; padding: 0 15px;}
+.newproduct-left img{height: 100%;}
+.newproduct-left .anchor-button{position: absolute; bottom: 20px; right: 30px;}
+.newproduct-right{width: 64%; padding: 0 15px;}

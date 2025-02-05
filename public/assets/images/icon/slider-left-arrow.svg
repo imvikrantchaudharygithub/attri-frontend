@@ -1,0 +1,10 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="50" height="50">
+	<title>slider-left-arrow</title>
+	<style>
+		.s0 { fill: #ffffff;stroke: #5dd37c } 
+		.s1 { fill: none;stroke: #5dd37c;stroke-linecap: round;stroke-linejoin: round;stroke-width: 1.5 } 
+	</style>
+	<path fill-rule="evenodd" class="s0" d="m25 49.5c13.5 0 24.5-11 24.5-24.5 0-13.5-11-24.5-24.5-24.5-13.5 0-24.5 11-24.5 24.5 0 13.5 11 24.5 24.5 24.5z"/>
+	<path class="s1" d="m32 25h-14"/>
+	<path class="s1" d="m25 32l-7-7 7-7"/>
+</svg>

@@ -1,0 +1,17 @@
+.review .heading-top .attriheading{color: var(--white-color);}
+.review-card{background: var(--green-color); border-radius: 12px; padding: 30px 40px;}
+.review-card .review-thumb{width: 210px; height: 210px; border-radius: 50%; margin: auto; overflow: hidden;}
+.review-card .quote-icon{margin-top: 30px}
+.review-card .attrismheading{font-weight: 600; font-style: italic; margin: 10px 0;}
+.review-card p{font-size: 16px;}
+.review-card .username{font-weight: 700; margin: 10px 0;}
+.review-card .review-star{gap: 2px;}
+.review-card .quote-icon svg{margin: auto}
+.review-card .review-star svg{width: 18px; height: 18px;}
+.review-card .attrismheading, .review-card .quote-icon svg path, .review-card p, .review-card .username, .review-card .review-star svg{color: var(--red-color); fill: var(--red-color);}
+
+.reviewslider .slick-slide:nth-child(2n) .review-card{background: var(--light-blue);}
+.reviewslider .slick-slide:nth-child(2n) .review-card .attrismheading, .reviewslider .slick-slide:nth-child(2n) .review-card .quote-icon svg path, .reviewslider .slick-slide:nth-child(2n) .review-card p, .reviewslider .slick-slide:nth-child(2n) .review-card .username, .reviewslider .slick-slide:nth-child(2n) .review-card .review-star svg{color: var(--dark-blue); fill: var(--dark-blue);}
+
+.reviewslider .slick-slide:nth-child(3n) .review-card{background: var(--light-green);}
+.reviewslider .slick-slide:nth-child(3n) .review-card .attrismheading, .reviewslider .slick-slide:nth-child(3n) .review-card .quote-icon svg path, .reviewslider .slick-slide:nth-child(3n) .review-card p, .reviewslider .slick-slide:nth-child(3n) .review-card .username, .reviewslider .slick-slide:nth-child(3n) .review-card .review-star svg{color: var(--primary-color); fill: var(--primary-color);}
