@@ -1,0 +1,11 @@
+.faq-card{border-bottom: 1px solid var(--gray-color); padding: 10px 0;}
+.faq-card .faq-card-top{padding-bottom: 15px; cursor: pointer;}
+.faq-card .attrismheading{color: var(--black-color); font-weight: 500;}
+.faq-card .faq-arrow{width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--green-color);}
+.faq-card .faq-arrow .faq-icon rect{fill:var(--green-color);}
+.faq-card .faq-arrow .faq-icon path{stroke: var(--white-color);}
+.faq-card .faq-content{padding-bottom: 15px;}
+.faq-card .faq-content p{width: 70%; font-size: 16px; color: var(--black-color); font-weight: 400; opacity: 0.7;}
+.faq-card .faq-arrow .faq-up, .faq-card .faq-content{display: none;}
+.faq-card.active .faq-arrow .faq-up, .faq-card.active .faq-content{display: block;}
+.faq-card.active .faq-arrow .faq-down{display: none;}
