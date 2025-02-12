@@ -4,3 +4,20 @@
 .newproduct-left img{height: 100%;}
 .newproduct-left .anchor-button{position: absolute; bottom: 20px; right: 30px;}
 .newproduct-right{width: 64%; padding: 0 15px;}
+
+@media only screen and (max-width: 1399px) {
+.newproduct-left{width: 40%; min-width: 40%;}
+.newproduct-right{width: 60%;}
+}
+
+@media only screen and (max-width: 1199px) {
+.newproduct-left{width: 40%; min-width: 40%;}
+.newproduct-right{width: 60%;}
+}
+
+@media only screen and (max-width: 767px) {
+.newproduct{padding-top: 40px;}
+.newproduct-main{flex-wrap: wrap;}
+.newproduct-left{width: 100%; min-width: 100%; margin-bottom: 30px;}
+.newproduct-right{width: 100%;}
+}

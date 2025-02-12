@@ -14,29 +14,29 @@ export default function FasterResults(){
 				breakpoint: 1199,
 				settings: {
                     arrows: true,
-					slidesToShow:6.5,
+					slidesToShow:3,
 				}
 			},
 			{
 				breakpoint: 991,
 				settings: {
                     arrows: true,
-					slidesToShow: 5.5,
+					slidesToShow: 3,
 				}
 			},
 			{
 				breakpoint: 767,
 				settings: {
 					arrows: true,
-					slidesToShow: 4.5,
+					slidesToShow: 2,
 					slidesToScroll: 1,
 				}
 			},
 			{
-				breakpoint: 379,
+				breakpoint: 479,
 				settings: {
 					arrows: true,
-					slidesToShow: 3.5,
+					slidesToShow: 1,
 					slidesToScroll: 1,
 				}
 			}

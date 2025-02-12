@@ -9,3 +9,10 @@
 .faq-card .faq-arrow .faq-up, .faq-card .faq-content{display: none;}
 .faq-card.active .faq-arrow .faq-up, .faq-card.active .faq-content{display: block;}
 .faq-card.active .faq-arrow .faq-down{display: none;}
+
+@media only screen and (max-width: 767px) {
+.faq-card .faq-card-top{padding-bottom: 0;}
+.faq-card .faq-arrow{width: 30px; height: 30px;}
+.faq-card .faq-content{padding: 15px 0;}    
+.faq-card .faq-content p {width: 100%;}
+}

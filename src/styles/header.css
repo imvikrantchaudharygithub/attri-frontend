@@ -39,3 +39,17 @@
 .nav-list li.active .arrow{transform: rotate(-90deg);}
 .nav-list li .list-link{display: none;}
 .header-menu.menu-active, .nav-list li.active .list-link{display: block;}
+
+@media only screen and (max-width: 1199px) {
+.header-left .search{width: 250px;}
+}
+
+@media only screen and (max-width: 767px) {
+.header-left{gap: 15px;}
+.header-left .logo{width: 70px;}
+.header-left .logo svg{width: 100%;}
+.header-right ul li{margin-left: 10px;}
+.header-right ul li:last-child{margin-left: 0}
+.menu-sticky{width: 300px;}
+.header-right .anchor-button, .header-left .search{display: none;}
+}

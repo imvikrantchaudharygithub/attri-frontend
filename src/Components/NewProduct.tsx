@@ -12,32 +12,32 @@ export default function NewProduct(){
 		slidesToScroll: 1,
 		responsive: [
             {
-				breakpoint: 1199,
+				breakpoint: 1399,
 				settings: {
                     arrows: true,
-					slidesToShow:6.5,
+					slidesToShow:2,
 				}
 			},
 			{
 				breakpoint: 991,
 				settings: {
                     arrows: true,
-					slidesToShow: 5.5,
+					slidesToShow: 2,
 				}
 			},
 			{
 				breakpoint: 767,
 				settings: {
 					arrows: true,
-					slidesToShow: 4.5,
+					slidesToShow: 2,
 					slidesToScroll: 1,
 				}
 			},
 			{
-				breakpoint: 379,
+				breakpoint: 479,
 				settings: {
 					arrows: true,
-					slidesToShow: 3.5,
+					slidesToShow: 1,
 					slidesToScroll: 1,
 				}
 			}

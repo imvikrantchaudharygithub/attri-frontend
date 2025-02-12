@@ -56,8 +56,8 @@ export default function Footer() {
           </div>
 
           <div className="item">
-            <div className={accordionState === 1 ? "footer-col active" : "footer-col"}>
-              <h6 onClick={() => accordion(1)} className={accordionState === 1 ? "attrixxsheading d-flex align" : "attrixxsheading d-flex align"}>
+            <div className={accordionState === 2 ? "footer-col active" : "footer-col"}>
+              <h6 onClick={() => accordion(2)} className={accordionState === 2 ? "attrixxsheading d-flex align" : "attrixxsheading d-flex align"}>
                 Learn
                 <span>
                   <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -73,8 +73,8 @@ export default function Footer() {
                 </li>
               </ul>
             </div>
-            <div className={accordionState === 1 ? "footer-col active" : "footer-col"}>
-              <h6 onClick={() => accordion(1)} className={accordionState === 1 ? "attrixxsheading d-flex align" : "attrixxsheading d-flex align"}>
+            <div className={accordionState === 3 ? "footer-col active" : "footer-col"}>
+              <h6 onClick={() => accordion(3)} className={accordionState === 3 ? "attrixxsheading d-flex align" : "attrixxsheading d-flex align"}>
                 Connect
                 <span>
                   <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -93,8 +93,8 @@ export default function Footer() {
           </div>
 
           <div className="item">
-            <div className={accordionState === 1 ? "footer-col active" : "footer-col"}>
-              <h6 onClick={() => accordion(1)} className={accordionState === 1 ? "attrixxsheading d-flex align" : "attrixxsheading d-flex align"}>
+            <div className={accordionState === 4 ? "footer-col active" : "footer-col"}>
+              <h6 onClick={() => accordion(4)} className={accordionState === 4 ? "attrixxsheading d-flex align" : "attrixxsheading d-flex align"}>
                 Legal
                 <span>
                   <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -110,8 +110,8 @@ export default function Footer() {
                 </li>
               </ul>
             </div>
-            <div className={accordionState === 1 ? "footer-col active" : "footer-col"}>
-              <h6 onClick={() => accordion(1)} className={accordionState === 1 ? "attrixxsheading d-flex align" : "attrixxsheading d-flex align"}>
+            <div className={accordionState === 5 ? "footer-col active" : "footer-col"}>
+              <h6 onClick={() => accordion(5)} className={accordionState === 5 ? "attrixxsheading d-flex align" : "attrixxsheading d-flex align"}>
                 My Account
                 <span>
                   <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -121,9 +121,9 @@ export default function Footer() {
               </h6>
               <ul className="footer-list">
                 <li>
-                  <Link href='/' className="cursor-pointer">
+                  <Link href='/' className="cursor-pointer dflex align">
                     Login
-                    <svg width="1em" height="1em" viewBox="0 0 13 13" fill="none"><path d="M5.96.103l-.546.52c-.137.136-.137.355 0 .464l4.238 4.238H.328A.332.332 0 000 5.653v.766c0 .191.137.328.328.328h9.324l-4.238 4.266c-.137.11-.137.328 0 .464l.547.52c.11.137.328.137.465 0l5.715-5.715a.315.315 0 000-.465L6.426.103c-.137-.137-.356-.137-.465 0z" fill="#E7E7E7"></path></svg>
+                    <svg width="1em" height="1em" viewBox="0 0 13 13" fill="none" style={{marginLeft:"10px"}}><path d="M5.96.103l-.546.52c-.137.136-.137.355 0 .464l4.238 4.238H.328A.332.332 0 000 5.653v.766c0 .191.137.328.328.328h9.324l-4.238 4.266c-.137.11-.137.328 0 .464l.547.52c.11.137.328.137.465 0l5.715-5.715a.315.315 0 000-.465L6.426.103c-.137-.137-.356-.137-.465 0z" fill="#E7E7E7"></path></svg>
                   </Link>
                 </li>
               </ul>
