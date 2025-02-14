@@ -76,8 +76,8 @@ export default function Header() {
                   </div>
                 </li>
                 <li>
-                  <Link href='/' className="anchor-button hovertime">
-                    Shop All
+                  <Link href='/signup' className="anchor-button hovertime">
+                    Sign Up
                   </Link>
                 </li>
               </ul>

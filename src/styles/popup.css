@@ -1,0 +1,53 @@
+.attri-popup {width: 100%; height: 100%; display: none; position:fixed; top: 0; left: 0; overflow-x: hidden; overflow-y: hidden; transition: opacity .15s linear; z-index: 123;}
+.attri-popup-overlay {width: 100%; height: 100%; position: fixed; top: 0; left: 0; background: rgba(0, 0, 0, .5); z-index: 10;}
+.attri-popup-wrapper {width: 80%; position: absolute; top: 50%; left: 50%; background-color: var(--white-color); opacity: 1; border-radius: 20px; transform: translate(-50%, -50%); margin: 0 auto; z-index: 123;}
+.attri-popup-close {display: flex; align-items: center; justify-content: center; position: absolute; width: 32px; height: 32px; padding: 5px; border: 0px solid var(--green-color); border-radius: 50%; text-align: center; top: 10px; right: 10px; background: var(--green-color); cursor: pointer; z-index: 1;}
+.attri-popup-close svg path{stroke: var(--white-color);}
+.attri-popup-body {width: 100%;}
+.attri-popup-body {background: var(--white-color); padding: 20px; border-radius: 20px;}
+
+.login-popup .attri-popup-wrapper{width: 900px; background: var(--green-color);}
+.login-popup .attri-popup-body{background: var(--green-color); align-items: normal;}
+.login-popup .login-left{width: 55%;}
+.login-popup .login-box{width: 40%; background: var(--white-color); border-radius: 10px; padding: 30px;}
+.login-box{text-align: center;}
+
+.login-step-one, .login-step-two, .login-step-three{display: flex; align-content: center; flex-wrap: wrap; align-items: center; justify-content: center; height: 100%;}
+.login-step-two .anchor-button, .login-step-three .anchor-button, .login-step-three form, .login-step-one form{width: 100%;}
+.login-step-one{display: none;}
+.login-step-one .form-group{text-align: left; margin-bottom: 10px;}
+.login-box .attrismheading{color: var(--black-color); font-weight: 700; text-align: center; line-height: 30px; margin-bottom: 10px;}
+.login-step-one .attrismheading{margin-bottom: 20px;}
+.login-step-one .form-group label{font-size: 12px; color: var(--gray-color); cursor: pointer;}
+.login-step-one .form-group .checkbox{margin-right: 5px;}
+.login-step-one .ortxt{width: 100%; display: flex; flex-direction: row; color: var(--gray-color); margin-bottom: 10px;}
+.login-step-one .ortxt::before, .login-step-one .ortxt::after{content: ''; flex: 1 1; border-bottom: 1px solid; border-color: var(--gray-color); margin: auto; max-width: 60px;}
+.login-step-one .ortxt::before{margin-right: 15px;}
+.login-step-one .ortxt::after{margin-left: 15px;}
+.login-step-one .anchor-button-line{width: 100%; justify-content: center;}
+.login-box .login-footer{font-size: 12px; color: var(--gray-color); margin-top: 20px;}
+.login-box .login-footer a{font-weight: 700; margin: 0 2px; text-decoration: underline;}
+.login-box .login-footer p:last-child{margin-top: 15px;}
+
+.login-step-two{display: flex; align-content: center; flex-wrap: wrap; align-items: center; justify-content: center; height: 100%;}
+.login-step-two .verifi{color: var(--gray-color); margin-bottom: 10px;}
+.login-step-two .verifi .verifi-number{font-size: 16px; font-weight: 700; display: flex; align-items: center;}
+.login-step-two .editbtn{font-size: 12px; color: var(--green-color); border: 1px solid var(--green-color); border-radius: 50px; padding: 2px 8px;}
+.login-step-two .otp-code{gap: 10px; margin:10px 0 20px;}
+.login-step-two .otp-input{width: 25%; height: 48px; font-size: 26px; border: 1px solid var(--gray-color); border-radius: 8px; text-align: center;}
+.login-step-two .resend{width: 100%; color: var(--green-color); display: flex; align-items: center; justify-content: center; gap: 5px;}
+.login-step-two .resend svg path{stroke: var(--green-color);}
+.login-step-three{display: none;}
+.login-step-three .attrismheading{margin-bottom: 20px;}
+
+
+@media only screen and (max-width: 991px) {
+.login-popup .attri-popup-wrapper{width: 95%;}
+.login-popup .login-box{padding: 20px;}
+}
+
+@media only screen and (max-width: 767px) {
+.login-popup .attri-popup-body{flex-wrap: wrap;}
+.login-popup .login-left{display: none;}
+.login-popup .login-box{width: 100%;}
+}

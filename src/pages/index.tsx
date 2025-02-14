@@ -8,6 +8,7 @@ import Nutrition from "@/Components/Nutrition";
 import Review from "@/Components/Review";
 import HaveFun from "@/Components/HaveFun";
 import About from "@/Components/About";
+import LoginPopup from "@/Components/loginpopup";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +35,7 @@ export default function Home() {
       <Review></Review>
       <HaveFun></HaveFun>
       <About></About>
+      <LoginPopup></LoginPopup>
     </>
   );
 }

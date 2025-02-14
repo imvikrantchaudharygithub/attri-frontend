@@ -96,7 +96,7 @@
 
 
 *{box-sizing: border-box;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;}
-html, body {font-size: 14px; color: var(--primary-color); background: var(--white-color); font-family: 'CocoSharp Trial'; font-weight: 400; line-height: 1.5; vertical-align: baseline; margin: 0; padding: 0;}
+html, body {font-size: 14px; color: var(--black-color); background: var(--white-color); font-family: 'CocoSharp Trial'; font-weight: 400; line-height: 1.5; vertical-align: baseline; margin: 0; padding: 0;}
 h1,h2,h3,h4,h5,h6,p,ul,li {margin: 0;}
 small{font-size:100%;}
 img{max-width:100%;}
@@ -104,37 +104,30 @@ button:focus{outline:none;}
 a:focus{text-decoration:none;outline:0;}
 
 .form-group{margin-bottom: 15px;}
-/* // .form-group:last-child{margin-bottom: 0;} */
-.form-label{width: 100%; display: inline-block; font-size: 16px; color: var(--primary-color); font-weight: 600; padding: 0; background: transparent; margin-bottom: 10px;}
-.form-control{width: 100%; font-size: 14px; color: var(--dark-gray); font-family: 'CocoSharp Trial'; font-weight: 400; padding: 0 15px; height: 50px; border: 1px solid var(--dark-gray); background: var(--white-color); border-radius: 5px;}
-
-
-.form-search{width: 100%; font-size: 14px; color: var(--pra-color); font-family: "Open Sans", sans-serif; font-weight: 700; height: 60px; padding: 0 90px 0 30px; border: 1px solid var(--sslight-gray-color); background: var(--white-color); border-radius: 30px;}
-/* .search-btn{width: 80px; height: 40px; position: absolute; top: 0; bottom: 0; right: 10px; margin: auto; text-align: center; background: var(--blue-color); border-radius: 20px; border: 0; cursor: pointer;} */
+.form-label{width: 100%; display: inline-block; font-size: 16px; color: var(--gray-color); font-weight: 600; padding: 0; background: transparent; margin-bottom: 10px;}
+.form-control{width: 100%; font-size: 14px; color: var(--gray-color); font-family: 'CocoSharp Trial'; font-weight: 400; padding: 0 15px; height: 50px; border: 1px solid var(--gray-color); background: var(--white-color); border-radius: 5px;}
+  
+  
+.form-search{width: 100%; font-size: 14px; color: var(--pra-color); font-family: 'CocoSharp Trial'; font-weight: 700; height: 60px; padding: 0 90px 0 30px; border: 1px solid var(--sslight-gray-color); background: var(--white-color); border-radius: 30px;}
 textarea.form-control{resize:none; height: 50px;}
-/* .form-control.selectarrow {background: url(assets/images/icons/gray-arrow.svg) no-repeat 100% transparent; background-size: 10px; -webkit-appearance: none;} */
-select option{color: var(--dark-gray);}
-input[type="text"]:focus, input[type="email"]:focus, input[type="phone"]:focus, input[type="number"]:focus {outline: 0px solid var(--blue-color);border: none; border: 1px solid var(--blue-color); box-shadow: 0 0 0; color: var(--dark-gray);}
+select option{color: var(--gray-color);}
+input[type="text"]:focus, input[type="email"]:focus, input[type="phone"]:focus, input[type="number"]:focus {outline: 0px solid var(--gray-color);border: none; border: 1px solid var(--gray-color); box-shadow: 0 0 0; color: var(--gray-color);}
 input[type="submit"]:focus {outline: 0; background: transparent; border-color: transparent; box-shadow: 0 0 0;}
-select:focus {outline: 1px solid var(--blue-color);}
-textarea:focus {outline: 1px solid var(--blue-color);}
-input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {color: var(--dark-gray); opacity: 1;}
-input::-moz-placeholder, textarea::-moz-placeholder {color: var(--dark-gray); opacity: 1;}
-input:-ms-input-placeholder, textarea:-ms-input-placeholder {color: var(--dark-gray); opacity: 1;}
+select:focus {outline: 1px solid var(--gray-color);}
+textarea:focus {outline: 1px solid var(--gray-color);}
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {color: var(--gray-color); opacity: 1;}
+input::-moz-placeholder, textarea::-moz-placeholder {color: var(--gray-color); opacity: 1;}
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {color: var(--gray-color); opacity: 1;}
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {-webkit-appearance: none;}
-/* // input[type="search"]::-webkit-search-cancel-button {display: none;}
+  /* // input[type="search"]::-webkit-search-cancel-button {display: none;} */
 input[type="number"] {-moz-appearance: textfield;}
-.form-control:focus {outline: 0px solid var(--blue-color);border: 1px solid var(--blue-color); box-shadow: 0 0 0; color: var(--dark-gray);}
-// .form-control.selectarrow:focus {
-//   background: url(../images/down-arrow.svg) no-repeat 90% var(--white-color);
-//   background-size: 10px;
-// } */
-.form-control::placeholder {color: var(--dark-gray); opacity: 1;}
-.form-control::-ms-input-placeholder {color: var(--dark-gray);}
+.form-control:focus {outline: 0px solid var(--gray-color);border: 1px solid var(--gray-color); box-shadow: 0 0 0; color: var(--gray-color);}
+.form-control::placeholder {color: var(--gray-color); opacity: 1;}
+.form-control::-ms-input-placeholder {color: var(--gray-color);}
 .form-check{display: flex; align-items: center; gap: 10px; margin-bottom: 15px;}
 .form-check .checkbox{width: 20px; height: 20px; margin: 0;}
-.form-check label{font-size: 14px; color: var(--dark-gray); font-weight: 400;}
+.form-check label{font-size: 14px; color: var(--gray-color); font-weight: 400;}
 .form-check:last-child{margin-bottom: 0;}
 
 .d-flex{display: flex; flex-wrap: wrap; justify-content: space-between;}
@@ -192,7 +185,7 @@ tbody, td, tfoot, th, thead, tr {
 .anchor-button{font-size: 14px; font-family: 'CocoSharp Trial'; font-weight: 500; color: var(--white-color); text-align: center; text-transform: capitalize; padding: 12px 30px; background: var(--green-color); border: 1px solid transparent; border-radius: 6px; cursor: pointer;}
 .anchor-button:hover{background: transparent; border-color: var(--green-color); color: var(--green-color);}
 
-.anchor-button-line{font-size: 14px; font-family: 'CocoSharp Trial'; color: var(--green-color); font-weight: 600; text-transform: capitalize; display: flex; align-items: center; gap: 10px; cursor: pointer; text-decoration: none;}
+.anchor-button-line{font-size: 14px; font-family: 'CocoSharp Trial'; color: var(--green-color); font-weight: 600; text-transform: capitalize; display: flex; align-items: center; gap: 10px; border-color: var(--green-color); cursor: pointer; text-decoration: none; background: transparent;}
 .anchor-button-line span{width: 34px; height: 34px; background: var(--green-color); font-size: 0px; border-radius: 50%; cursor: pointer; position: relative; display: block; transition: transform .3s ease-in-out;}
 .anchor-button-line span::after{content: ""; position: absolute; top: 12px; left: 11px; height: 10px; width: 10px; border-top: 3px solid #fff;border-right: 3px solid #fff; transform: rotate(45deg);pointer-events: none; border-radius: 1px;}
 .anchor-button-line:hover{color: var(--green-color);}
@@ -313,8 +306,36 @@ tbody, td, tfoot, th, thead, tr {
 .footer-right .footer-col:last-child{margin-bottom: 0;}
 /* footer-end */
 
+/* signup-page */
+.sign-main{width: 80%; border-radius: 20px; overflow: hidden; box-shadow: 0 0px 10px rgba(0,0,0,.2); margin: auto;}
+.sign-left{width: 55%;}
+.sign-right{width: 45%; padding: 30px;} 
+.sign-right .sign-top{margin-bottom: 20px}
+/* .signup-step-one{display: none;} */
+.sign-right .attrilgheading{font-weight: 700; margin-bottom: 10px;}
+.sign-right p{font-size: 16px; font-weight: 500; display: flex; justify-content: flex-start; align-items: center; gap: 10px;}
+.sign-right p span{display: inline-block; background: var(--green-color); font-size: 14px; color: var(--white-color); border-radius: 50px; padding: 5px 20px;}
+/* .sign-right .anchor-button{width: 100%;} */
+.signup-step-two{display: none; align-content: center; flex-wrap: wrap; align-items: center; justify-content: center; height: 100%;}
+.signup-step-two .verifi{color: var(--gray-color); margin-bottom: 10px;}
+.signup-step-two .verifi .verifi-number{font-size: 16px; font-weight: 700; display: flex; align-items: center;}
+.signup-step-two .editbtn{font-size: 12px; color: var(--green-color); border: 1px solid var(--green-color); border-radius: 50px; padding: 2px 8px;}
+.signup-step-two .otp-code{gap: 10px; margin:10px 0 20px;}
+.signup-step-two .otp-input{width: 25%; height: 48px; font-size: 26px; border: 1px solid var(--gray-color); border-radius: 8px; text-align: center;}
+.signup-step-two .resend{width: 100%; color: var(--green-color); display: flex; align-items: center; justify-content: center; gap: 5px;}
+.signup-step-two .resend svg path{stroke: var(--green-color);}
+.sign-right .signup-step-two p{justify-content: center;}
+/* signup-page-end */
+
+.search-box .plp-list{padding: 0;}
+.search-box .plp-right p{text-align: center; margin-bottom: 20px;}
+
 @media only screen and (min-width: 1919px) {
   .container {max-width: 1699px;}
+}
+@media only screen and (max-width: 1399px) {
+.sign-left{width: 60%;}
+.sign-right{width: 40%;}
 }
 @media only screen and (max-width: 1199px) {
 .container{max-width: 100%;}
@@ -334,6 +355,7 @@ tbody, td, tfoot, th, thead, tr {
 .footer-left{width: 40%; min-width: 40%;}
 .why-card{align-items: flex-start;}
 .why-card .why-icon {width: 100px; height: 100px; margin-right: 15px;}
+.sign-main{width: 100%;}
 }
 
 @media only screen and (max-width: 767px) {
@@ -382,4 +404,8 @@ tbody, td, tfoot, th, thead, tr {
 .why-main {gap: 20px 0;}
 .why-card{width: 100%; align-items: flex-start;}
 .why-card .why-icon{width: 90px; height: 90px; margin-right: 10px;}
+
+.sign-main{width: 80%;}
+.sign-left{width: 100%; order: 2;}
+.sign-right{width: 100%; padding: 30px;}
 }
