@@ -40,6 +40,26 @@
 .login-step-three{display: none;}
 .login-step-three .attrismheading{margin-bottom: 20px;}
 
+.attri-popup.newaddress-popup{display: none;}
+.attri-popup.editaddress-popup{display: none;}
+.attri-popup.newaddress-popup .attri-popup-wrapper, .attri-popup.editaddress-popup .attri-popup-wrapper{width: 60%;}
+.attri-popup.newaddress-popup .attri-popup-body, .attri-popup.editaddress-popup .attri-popup-body{padding: 30px 30px;}
+.attri-popup.newaddress-popup .attri-popup-close, .attri-popup.editaddress-popup .attri-popup-close{top: 20px; right: 20px;}
+.attri-popup-body .attrimdheading{color: var(--black-color); font-weight: 700; margin-bottom: 30px;}
+.attri-popup .attri-popup-form .form-row{margin: 0 -15px;}
+.attri-popup .attri-popup-form .form-row .form-group{width: 50%; padding: 0 15px; margin-bottom: 20px;}
+.attri-popup .attri-popup-form .form-control{background: transparent;}
+
+.attri-popup .attri-popup-form .form-row .form-radio{width: 100%; display: flex;}
+.attri-popup .attri-popup-form .form-row .radio-item{display: flex; align-items: center; margin-right: 30px;}
+.attri-popup .attri-popup-form .form-row .radio-item label{font-size: 14px; color: var(--);}
+.attri-popup .attri-popup-form .form-row .radio-item .radio-input{width: 18px; height: 18px; margin-right: 10px;}
+.attri-popup .attri-popup-form .form-row .form-group .kenstar-btn{width: 100%;}
+.attri-popup .attri-popup-form .form-row .radio-item input[type='radio'] {-webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; outline: none; margin-right: 10px; box-shadow: 0 0 0 1px var(--black-color);}
+.attri-popup .attri-popup-form .form-row .radio-item input[type='radio']:before {content: ''; display: block; width: 60%; height: 60%; margin: 20% auto; border-radius: 50%;}
+.attri-popup .attri-popup-form .form-row .radio-item input[type='radio']:checked{box-shadow: 0 0 0 1px var(--green-color);}
+.attri-popup .attri-popup-form .form-row .radio-item input[type='radio']:checked:before {background: var(--green-color);}
+.attri-popup .attri-popup-form .form-row .form-group:last-child{margin-bottom: 0;}
 
 @media only screen and (max-width: 991px) {
 .login-popup .attri-popup-wrapper{width: 95%;}
@@ -50,4 +70,7 @@
 .login-popup .attri-popup-body{flex-wrap: wrap;}
 .login-popup .login-left{display: none;}
 .login-popup .login-box{width: 100%;}
+.attri-popup-body .attrimdheading{margin-bottom: 20px;}
+.attri-popup .attri-popup-form .form-row .form-group{margin-bottom: 20px;}
+.attri-popup .attri-popup-form .form-row .form-group:last-child{margin-bottom: 0;}
 }
