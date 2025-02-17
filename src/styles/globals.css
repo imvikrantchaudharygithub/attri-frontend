@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 :root {
   --steps: 5;
   --primary-color:#095933;
@@ -16,87 +15,10 @@
   --light-blue:#9edcf2;
   --dark-blue:#002863;
 }
-@font-face {
-  font-family: 'CocoSharp Trial';
-  src: url('../../public/assets/fonts/CocoSharpTrial-ExtraLight.eot');
-  src: url('../../public/assets/fonts/CocoSharpTrial-ExtraLight.eot?#iefix') format('embedded-opentype'),
-      url('../../public/assets/fonts/CocoSharpTrial-ExtraLight.woff2') format('woff2'),
-      url('../../public/assets/fonts/CocoSharpTrial-ExtraLight.woff') format('woff'),
-      url('../../public/assets/fonts/CocoSharpTrial-ExtraLight.ttf') format('truetype'),
-      url('../../public/assets/fonts/CocoSharpTrial-ExtraLight.svg#CocoSharpTrial-ExtraLight') format('svg');
-  font-weight: 200;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'CocoSharp Trial';
-  src: url('../../public/assets/fonts/CocoSharpTrial-Extrabold.eot');
-  src: url('../../public/assets/fonts/CocoSharpTrial-Extrabold.eot?#iefix') format('embedded-opentype'),
-      url('../../public/assets/fonts/CocoSharpTrial-Extrabold.woff2') format('woff2'),
-      url('../../public/assets/fonts/CocoSharpTrial-Extrabold.woff') format('woff'),
-      url('../../public/assets/fonts/CocoSharpTrial-Extrabold.ttf') format('truetype'),
-      url('../../public/assets/fonts/CocoSharpTrial-Extrabold.svg#CocoSharpTrial-Extrabold') format('svg');
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'CocoSharp Trial';
-  src: url('../../public/assets/fonts/CocoSharpTrial-Bold.eot');
-  src: url('../../public/assets/fonts/CocoSharpTrial-Bold.eot?#iefix') format('embedded-opentype'),
-      url('../../public/assets/fonts/CocoSharpTrial-Bold.woff2') format('woff2'),
-      url('../../public/assets/fonts/CocoSharpTrial-Bold.woff') format('woff'),
-      url('../../public/assets/fonts/CocoSharpTrial-Bold.ttf') format('truetype'),
-      url('../../public/assets/fonts/CocoSharpTrial-Bold.svg#CocoSharpTrial-Bold') format('svg');
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'CocoSharp Trial';
-  src: url('../../public/assets/fonts/CocoSharpTrial-Heavy.eot');
-  src: url('../../public/assets/fonts/CocoSharpTrial-Heavy.eot?#iefix') format('embedded-opentype'),
-      url('../../public/assets/fonts/CocoSharpTrial-Heavy.woff2') format('woff2'),
-      url('../../public/assets/fonts/CocoSharpTrial-Heavy.woff') format('woff'),
-      url('../../public/assets/fonts/CocoSharpTrial-Heavy.ttf') format('truetype'),
-      url('../../public/assets/fonts/CocoSharpTrial-Heavy.svg#CocoSharpTrial-Heavy') format('svg');
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'CocoSharp Trial';
-  src: url('../../public/assets/fonts/CocoSharpTrial-Regular.eot');
-  src: url('../../public/assets/fonts/CocoSharpTrial-Regular.eot?#iefix') format('embedded-opentype'),
-      url('../../public/assets/fonts/CocoSharpTrial-Regular.woff2') format('woff2'),
-      url('../../public/assets/fonts/CocoSharpTrial-Regular.woff') format('woff'),
-      url('../../public/assets/fonts/CocoSharpTrial-Regular.ttf') format('truetype'),
-      url('../../public/assets/fonts/CocoSharpTrial-Regular.svg#CocoSharpTrial-Regular') format('svg');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'CocoSharp Trial';
-  src: url('../../public/assets/fonts/CocoSharpTrial-Light.eot');
-  src: url('../../public/assets/fonts/CocoSharpTrial-Light.eot?#iefix') format('embedded-opentype'),
-      url('../../public/assets/fonts/CocoSharpTrial-Light.woff2') format('woff2'),
-      url('../../public/assets/fonts/CocoSharpTrial-Light.woff') format('woff'),
-      url('../../public/assets/fonts/CocoSharpTrial-Light.ttf') format('truetype'),
-      url('../../public/assets/fonts/CocoSharpTrial-Light.svg#CocoSharpTrial-Light') format('svg');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
 
 
 *{box-sizing: border-box;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;}
-html, body {font-size: 14px; color: var(--black-color); background: var(--white-color); font-family: 'CocoSharp Trial'; font-weight: 400; line-height: 1.5; vertical-align: baseline; margin: 0; padding: 0;}
+html, body {font-size: 14px; color: var(--black-color); background: var(--white-color); font-family: "Noto Sans", serif; font-weight: 400; line-height: 1.5; vertical-align: baseline; margin: 0; padding: 0;}
 h1,h2,h3,h4,h5,h6,p,ul,li {margin: 0;}
 small{font-size:100%;}
 img{max-width:100%;}
@@ -105,10 +27,10 @@ a:focus{text-decoration:none;outline:0;}
 
 .form-group{margin-bottom: 15px;}
 .form-label{width: 100%; display: inline-block; font-size: 16px; color: var(--gray-color); font-weight: 600; padding: 0; background: transparent; margin-bottom: 10px;}
-.form-control{width: 100%; font-size: 14px; color: var(--gray-color); font-family: 'CocoSharp Trial'; font-weight: 400; padding: 0 15px; height: 50px; border: 1px solid var(--gray-color); background: var(--white-color); border-radius: 5px;}
+.form-control{width: 100%; font-size: 14px; color: var(--gray-color); font-family: "Noto Sans", serif; font-weight: 400; padding: 0 15px; height: 50px; border: 1px solid var(--gray-color); background: var(--white-color); border-radius: 5px;}
   
   
-.form-search{width: 100%; font-size: 14px; color: var(--pra-color); font-family: 'CocoSharp Trial'; font-weight: 700; height: 60px; padding: 0 90px 0 30px; border: 1px solid var(--sslight-gray-color); background: var(--white-color); border-radius: 30px;}
+.form-search{width: 100%; font-size: 14px; color: var(--pra-color); font-family: "Noto Sans", serif; font-weight: 700; height: 60px; padding: 0 90px 0 30px; border: 1px solid var(--sslight-gray-color); background: var(--white-color); border-radius: 30px;}
 textarea.form-control{resize:none; height: 50px;}
 select option{color: var(--gray-color);}
 input[type="text"]:focus, input[type="email"]:focus, input[type="phone"]:focus, input[type="number"]:focus {outline: 0px solid var(--gray-color);border: none; border: 1px solid var(--gray-color); box-shadow: 0 0 0; color: var(--gray-color);}
@@ -182,10 +104,10 @@ tbody, td, tfoot, th, thead, tr {
 .display{display: inline-block;}
 
 
-.anchor-button{font-size: 14px; font-family: 'CocoSharp Trial'; font-weight: 500; color: var(--white-color); text-align: center; text-transform: capitalize; padding: 12px 30px; background: var(--green-color); border: 1px solid transparent; border-radius: 6px; cursor: pointer;}
+.anchor-button{font-size: 14px; font-family: "Noto Sans", serif; font-weight: 500; color: var(--white-color); text-align: center; text-transform: capitalize; padding: 12px 30px; background: var(--green-color); border: 1px solid transparent; border-radius: 6px; cursor: pointer;}
 .anchor-button:hover{background: transparent; border-color: var(--green-color); color: var(--green-color);}
 
-.anchor-button-line{font-size: 14px; font-family: 'CocoSharp Trial'; color: var(--green-color); font-weight: 600; text-transform: capitalize; display: flex; align-items: center; gap: 10px; border-color: var(--green-color); cursor: pointer; text-decoration: none; background: transparent;}
+.anchor-button-line{font-size: 14px; font-family: "Noto Sans", serif; color: var(--green-color); font-weight: 600; text-transform: capitalize; display: flex; align-items: center; gap: 10px; border-color: var(--green-color); cursor: pointer; text-decoration: none; background: transparent;}
 .anchor-button-line span{width: 34px; height: 34px; background: var(--green-color); font-size: 0px; border-radius: 50%; cursor: pointer; position: relative; display: block; transition: transform .3s ease-in-out;}
 .anchor-button-line span::after{content: ""; position: absolute; top: 12px; left: 11px; height: 10px; width: 10px; border-top: 3px solid #fff;border-right: 3px solid #fff; transform: rotate(45deg);pointer-events: none; border-radius: 1px;}
 .anchor-button-line:hover{color: var(--green-color);}
