@@ -1,11 +1,14 @@
-import Layout from "@/app/layout";
+import Footer from "@/Components/footer";
+import Header from "@/Components/header";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <Layout>
+    <>
+      <Header/>
       <Component {...pageProps} />
-    </Layout>
+      <Footer/>
+    </>
   );
 }
