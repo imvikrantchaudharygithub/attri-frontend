@@ -2,12 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface UserState {
   id: string;
-  amount: string;
+  name: string;
+  balance: string;
 }
 
 const initialState: UserState = {
   id: '',
-  amount: ''
+  name: '',
+  balance: '',
 };
 
 const userSlice = createSlice({
@@ -16,11 +18,13 @@ const userSlice = createSlice({
   reducers: {
     setUser: (state, action: PayloadAction<UserState>) => {
       state.id = action.payload.id;
-      state.amount = action.payload.amount;
+      state.name = action.payload.name;
+      state.balance = action.payload.balance;
     },
     clearUser: (state) => {
       state.id = '';
-      state.amount = '';
+      state.name = '';
+      state.balance = '';
     },
   },
 });

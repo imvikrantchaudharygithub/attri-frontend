@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 import React from 'react';
 import Image from "next/image";
@@ -8,10 +7,15 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
+import { useAppDispatch, useAppSelector } from '@/hooks/hooks';
+import { setUser } from "@/slices/userSlice";
 
 export default function SignUp() {
     const router = useRouter();
     const { referralCode } = router.query;
+    const dispatch = useAppDispatch();
+    const isTokenSet = useAppSelector((state: any) => state.token.isTokenSet);
+    const user = useAppSelector((state: any) => state.user);
 
     // Log to debug
     console.log('Router query:', router.query);
@@ -69,6 +73,8 @@ export default function SignUp() {
         toast.success('OTP sent to your mobile number');
       console.log('Form submitted:', values);
       setOtpStep(false);
+    //   dispatch(setUser({ name:values.name ,id:values.mobileNumber,balance:"20", }));
+
       // Handle form submission here
     },
   });
@@ -102,7 +108,7 @@ useEffect(() => {
                     {otpStep ? (
                     <div className="signup-step-one">
                         <div className="sign-top">
-                            <div className="attrilgheading">Sign Up</div>
+                            <div className="attrilgheading">Sign Up </div>
                             <p>Your are join with <span>himanshu</span></p>
                         </div>
                         <form onSubmit={signupFormik.handleSubmit}>

@@ -2,13 +2,19 @@ import Footer from "@/Components/footer";
 import Header from "@/Components/header";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from '../store/store';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <>
-      <Header/>
-      <Component {...pageProps} />
-      <Footer/>
-    </>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Header/>
+        <Component {...pageProps} />
+        <Footer/>
+      </PersistGate>
+    </Provider>
   );
 }
