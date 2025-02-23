@@ -22,7 +22,7 @@ export default function Order() {
 						</div>
 						<div className="shipped-left d-flex align relative">
 							<div className="cart-order-left relative">
-								<Image width={600} height={600} className="full-image hovertime" src={'/assets/images/product.jpg'} alt=""></Image>
+								<Image width={600} height={600} className="w-full hovertime" src={'/assets/images/product.jpg'} alt=""></Image>
 							</div>
 							<div className="cart-order-right">
 								<div className="attrixxsheading">Air Cooler</div>

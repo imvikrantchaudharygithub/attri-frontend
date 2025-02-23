@@ -13,7 +13,29 @@ export default function MyAccount() {
 					<AccountSideBar/>
 				</div>
 				<div className="account-right">
-					<div className="account-form text-center">
+					<div className="account-form">
+						<form>
+							<div className="form-row d-flex">
+								<div className="form-group">
+									<label className="form-label">Name</label>
+									<input type="text" className="form-control" placeholder="Name"/>
+								</div>
+								<div className="form-group">
+									<label className="form-label">Last Name</label>
+									<input type="text" className="form-control" placeholder="Last Name"/>
+								</div>
+								<div className="form-group">
+									<label className="form-label">Mobile Number</label>
+									<input type="number" className="form-control" placeholder="Mobile Number"/>
+								</div>
+								<div className="form-group">
+									<label className="form-label">Email</label>
+									<input type="email" className="form-control" placeholder="Email"/>
+								</div>
+							</div>
+						</form>
+					</div>
+					{/* <div className="account-form text-center">
 						<div className="user-profile-icon relative">
 							<Image width={150} height={150} className="w-full" src={'/assets/images/product.jpg'} alt=""></Image>
 							<div className="profile-edit-icon">
@@ -50,7 +72,7 @@ export default function MyAccount() {
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</div>

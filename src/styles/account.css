@@ -20,7 +20,7 @@
 .account-box .cart-order-item{padding: 20px 40px 20px 20px; box-shadow: 0 0px 15px rgba(0,0,0,.1); border-radius: 20px; margin-bottom: 30px;}
 .account-box .cart-order-item .shipped-left{width: 100%; padding: 30px 0; border-bottom: 1px solid #D9D9D9; justify-content: flex-start; gap: 0 40px;}
 .account-box .cart-order-item .shipped-right{width: 25%;}
-.account-box .cart-order-item .cart-order-left{width: 250px; height: 250px; border-radius: 10px; padding: 25px 70px; background: var(--slight-gray-color);}
+.account-box .cart-order-item .cart-order-left{width: 250px; height: 250px; border-radius: 10px; padding: 25px 70px; background: var(--bg-gray);}
 .account-box .cart-order-item .cart-order-right{width: 56%;}
 .account-box .cart-order-item .attrixxsheading{color: var(--gray-color); font-weight: 400; text-transform: uppercase; margin-bottom: 5px;}
 .account-box .cart-order-item .attrixsheading{width: 100%; color: var(--light-black); font-weight: 700; margin-bottom: 15px;}
@@ -135,10 +135,10 @@
   
 @media (max-width: 767px) {
 .account-box{padding-top: 30px;}
-.account-main .account-left{width: 100%; padding: 10px 20px; border-radius: 15px;}
+.account-main .account-left{width: 100%; padding: 10px 20px; border-radius: 15px; order: 2;}
 .account-list li, .account-left-top{padding: 15px 0;}
 .account-left-top{display: flex;}
-.account-list{display: none;}
+/* .account-list{display: none;} */
 .account-main .accountactive .account-list{display: block;}
 .account-left-top{border-bottom: 0;}
 .account-main .accountactive .account-left-top{border-bottom: 1px solid #ECECEC;}
@@ -163,7 +163,7 @@
 .account-box .address-item:last-child{margin-bottom: 0;}
 
 
-.account-left-top .account-arrow {transform: rotate(90deg);}
+/* .account-left-top .account-arrow {transform: rotate(90deg);} */
 .account-main .accountactive .account-left-top .account-arrow{transform: rotate(0);}
 
 .account-box .cart-order-item .shipped-left{padding: 20px 0;}
