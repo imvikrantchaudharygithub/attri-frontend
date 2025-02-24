@@ -13,7 +13,7 @@ export default function MyAccount() {
 					<AccountSideBar/>
 				</div>
 				<div className="account-right">
-					<div className="account-form">
+					{/* <div className="account-form">
 						<form>
 							<div className="form-row d-flex">
 								<div className="form-group">
@@ -34,8 +34,8 @@ export default function MyAccount() {
 								</div>
 							</div>
 						</form>
-					</div>
-					{/* <div className="account-form text-center">
+					</div> */}
+					<div className="account-form text-center">
 						<div className="user-profile-icon relative">
 							<Image width={150} height={150} className="w-full" src={'/assets/images/product.jpg'} alt=""></Image>
 							<div className="profile-edit-icon">
@@ -72,7 +72,7 @@ export default function MyAccount() {
 								</div>
 							</div>
 						</div>
-					</div> */}
+					</div>
 				</div>
 			</div>
 		</div>

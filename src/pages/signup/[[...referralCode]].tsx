@@ -9,14 +9,15 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { useAppDispatch, useAppSelector } from '@/hooks/hooks';
 import { setUser } from "@/slices/userSlice";
+import { getData } from '@/services/apiServices';
 
 export default function SignUp() {
     const router = useRouter();
     const { referralCode } = router.query;
     const dispatch = useAppDispatch();
     const isTokenSet = useAppSelector((state: any) => state.token.isTokenSet);
-    const user = useAppSelector((state: any) => state.user);
-
+    const user = useAppSelector((state: any) => state.user); 
+    const [refrralby,setRefrralby] = useState<any>(null);
     // Log to debug
     console.log('Router query:', router.query);
     console.log('Current path:', router.asPath);
@@ -54,6 +55,17 @@ export default function SignUp() {
     }
   };
 
+  const fetchReferralData = async (code: string) => {
+    
+        getData(`/user/referral/${code}`).then((res:any)=>{
+            console.log(res);
+            setRefrralby(res.user)
+        }).catch((err:any)=>{
+            console.log(err);
+        })
+    
+  };
+
   const signupFormik = useFormik({
     initialValues: {
       referralCode: '',
@@ -79,20 +91,21 @@ export default function SignUp() {
     },
   });
 
-//   useEffect(() => {
-//     // Get referral code from URL path
-//     const path = router.asPath;
-//     const code = path.split('/signup/')[1];
-//     if (code) {
-//         console.log('Setting referral code:', code);
-//         signupFormik.setFieldValue('referralCode', code);
-//     }
-//   }, [router.asPath]);
-useEffect(() => {
-    // Check if referralCode is an array and has a valid string value
+  // Watch for manual changes to referral code field
+  useEffect(() => {
+    if (signupFormik.values.referralCode) {
+        fetchReferralData(signupFormik.values.referralCode);
+    }
+  }, [signupFormik.values.referralCode]);
+
+  // Watch for URL referral code
+  useEffect(() => {
     if (Array.isArray(referralCode) && referralCode[0]) {
-      console.log('Setting referral code:', referralCode[0]);
-      signupFormik.setFieldValue('referralCode', referralCode[0]);
+        console.log('Setting referral code:', referralCode[0]);
+        signupFormik.setFieldValue('referralCode', referralCode[0]);
+
+        fetchReferralData(referralCode[0]);
+        // No need to call fetchReferralData here as it will be triggered by the above useEffect
     }
   }, [referralCode]);
 
@@ -109,7 +122,7 @@ useEffect(() => {
                     <div className="signup-step-one">
                         <div className="sign-top">
                             <div className="attrilgheading">Sign Up </div>
-                            <p>Your are join with <span>himanshu</span></p>
+                           {referralCode || signupFormik.values.referralCode &&  <p>Your are join with <span>{refrralby?.username ? refrralby?.username : 'Laoding...'}</span></p>}
                         </div>
                         <form onSubmit={signupFormik.handleSubmit}>
                             <div className="form-group">
