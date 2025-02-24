@@ -73,6 +73,16 @@ export default function MyAccount() {
 							</div>
 						</div>
 					</div>
+					<div className="team-list">
+						<div className="team-card d-flex align">
+							<div className="attrixsheading">Level 1</div>
+							<div className="team-num">30</div>
+						</div>
+						<div className="team-card d-flex align">
+							<div className="attrixsheading">Level 1</div>
+							<div className="team-num">30</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

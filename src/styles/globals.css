@@ -343,7 +343,7 @@ tbody, td, tfoot, th, thead, tr {
 .why-card{width: 100%; align-items: flex-start;}
 .why-card .why-icon{width: 90px; height: 90px; margin-right: 10px;}
 
-.sign-main{width: 80%;}
+.sign-main{width: 95%;}
 .sign-left{width: 100%; order: 2;}
-.sign-right{width: 100%; padding: 30px;}
+.sign-right{width: 100%; padding: 20px;}
 }

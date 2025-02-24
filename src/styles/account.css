@@ -78,6 +78,17 @@
 .account-right .user-wallet .wallet-card .wallet-left{width: 200px;}
 .account-right .user-wallet .wallet-card .wallet-icon{width: 40px; min-width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; padding: 10px; box-shadow: 0 0 10px rgba(0,0,0,.1);}
 
+.account-right .account-form{margin-bottom: 40px;}
+.team-card{padding: 15px 25px; border-radius: 50px; box-shadow: 0 0 10px #0003; margin-bottom: 20px; background-color: #0093E9;  background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);}
+.team-card .attrixsheading{color: var(--black-color); font-weight: 700;}
+.team-card .team-num{width: 50px; min-width: 50px; height: 50px; padding: 5px; background: var(--primary-color); border-radius: 50%; font-size: 18px; color: var(--white-color); font-weight: 600; display: flex; align-items: center; justify-content: center;}
+.team-card:last-child{margin-bottom: 0;}
+
+.team-card:nth-child(2n){background-color: #85FFBD;
+    background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
+    }
+
+
 @media only screen and (min-width: 1919px) {
 }
 @media only screen and (min-width: 1300px) {
@@ -109,6 +120,7 @@
 .cart-order-item .shipped-order-top .shipped-tag{width: 28%;}
 .account-box .cart-order-item .cart-order-right{width: 100%; margin-top: 20px;}
 .account-box .cart-order-item .cart-order-left{width: 100%; height: auto; padding: 25px 115px;}
+.account-right .user-wallet{width:80%}
 }
 @media (max-width: 1023px){
 }
@@ -130,7 +142,7 @@
 .account-box .address-item .address-details{width: 70%;}
 .cart-order-item .shipped-price{padding-top: 20px; order: 3;}
 .cart-order-item .shipped-order-top .shipped-tag{width: 100%; padding-right: 0; border-right: 0;}
-
+.account-right .user-wallet{width: 100%; gap: 10px;}
 }
   
 @media (max-width: 767px) {
@@ -144,7 +156,7 @@
 .account-main .accountactive .account-left-top{border-bottom: 1px solid #ECECEC;}
 .account-main{padding-top: 25px; gap: 30px 50px;}
 .account-main .account-right{width: 100%;}
-.account-form{padding: 20px; border-radius: 15px;}
+.account-form{padding: 15px; border-radius: 15px;}
 .account-form .form-row .form-group{width: 100%; margin-bottom: 20px;}
 .form-label{font-size: 14px}
 .account-box .cart-order-item{padding: 20px; border-radius: 15px; margin-bottom: 20px;}
@@ -167,6 +179,8 @@
 .account-main .accountactive .account-left-top .account-arrow{transform: rotate(0);}
 
 .account-box .cart-order-item .shipped-left{padding: 20px 0;}
+.account-right .user-wallet{width: 100%; gap: 10px;}
+.account-right .user-wallet .wallet-card{width: 48%;}
 }
 @media (max-width: 599px) {
 .account-box .cart-order-item .cart-order-right{width: 57%;}
@@ -175,6 +189,8 @@
 @media (max-width: 479px) {
 .account-box .cart-order-item .cart-order-left{width: 100%; height: auto; padding: 20px 70px;}
 .account-box .cart-order-item .cart-order-right{width: 100%; margin-top: 0px;}
+.account-right .user-wallet{width: 100%;}
+.account-right .user-wallet .wallet-card{width: 100%;}
 }
 @media (max-width:379px) {
 .account-box .cart-order-item .shipped-text{width: 80%;}
