@@ -1,4 +1,5 @@
-.thankyou-box{width: 70%; margin: 0 auto;}
+.thankyou-main{background: #e8e8e8;}
+.thankyou-box{width: 50%; margin: 0 auto;}
 .right-check{width: 70px; height: 70px; background: var(--green-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;}
 .right-check svg{width: 40px; height: 40px; fill: var(--white-color);}
 .thankyou-box .attrilgheading{color: var(--black-color); margin: 15px 0;}
@@ -18,7 +19,7 @@
 .order-summary-item:last-child{margin-bottom: 0;}
 .order-summary .order-total{width: 565px; display: flex; align-items: center; justify-content: space-between; color: var(--black-color); font-weight: 600; margin-left: auto;}
 .thank-video{margin-top: 20px;}
-.thank-video iframe{width: 100%;}
+.thank-video iframe{width: 100%; border-radius: 20px;}
 
 @media (max-width: 1299px) {
 .thankyou-box{width: 80%;}
@@ -26,6 +27,7 @@
 
 @media (max-width: 991px) {
 .thankyou-box{width: 96%;}
+
 }
 
 @media (max-width: 767px) {

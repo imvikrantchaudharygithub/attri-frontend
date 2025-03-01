@@ -4,7 +4,7 @@ import { SetStateAction, useState } from "react";
 import "@/styles/thankyou.css";
 export default function OrderDetails() {
   return (
-    <section className="thankyou-box padding-tb">
+    <section className="thankyou-main padding-tb">
         <div className="container">
             <div className="thankyou-box text-center">
               <div className="right-check">
