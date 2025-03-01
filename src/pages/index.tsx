@@ -9,6 +9,7 @@ import Review from "@/Components/Review";
 import HaveFun from "@/Components/HaveFun";
 import About from "@/Components/About";
 import LoginPopup from "@/Components/loginpopup";
+import { getData } from '@/services/apiServices';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,11 +21,22 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export default function Home() {
+interface HomeProps {
+  homeData: any;
+  error?: string;
+}
+
+export default function Home({ homeData, error }: HomeProps) {
+  if (error) {
+    console.error('Error from server:', error);
+  }
+  if(homeData){
+    console.log(homeData)
+  }
   
   return (
     <>
-      <HomeBanner></HomeBanner>
+      <HomeBanner ></HomeBanner>
       <Nutrition></Nutrition>
       <BestSeller></BestSeller>
       <TakeCare></TakeCare>
@@ -39,4 +51,24 @@ export default function Home() {
       <LoginPopup></LoginPopup>
     </>
   );
+}
+
+export async function getServerSideProps() {
+  try {
+    const homeData = await getData('/home-pagedata');
+    
+    return {
+      props: {
+        homeData,
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching home data:', error);
+    return {
+      props: {
+        homeData: null,
+        error: 'Failed to fetch home data'
+      },
+    };
+  }
 }
