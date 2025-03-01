@@ -1,0 +1,44 @@
+.thankyou-box{width: 70%; margin: 0 auto;}
+.right-check{width: 70px; height: 70px; background: var(--green-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;}
+.right-check svg{width: 40px; height: 40px; fill: var(--white-color);}
+.thankyou-box .attrilgheading{color: var(--black-color); margin: 15px 0;}
+.thankyou-box .thank-pra{width: 420px; font-size: 16px; color: var(--gray-color); margin: 0 auto 15px;}
+.thankyou-box .anchor-button{display: inline-block;}
+.thankyou-box .copy-btn{width: 50%; display: flex; align-items: center; justify-content: space-between; margin: 0 auto;}
+.thankyou-box .copy-btn .icon{display: flex; align-items: center; gap: 10px;}
+.thankyou-box .copy-btn .icon svg{width: 25px; height: 25px;}
+.thankyou-box .copy-btn .icon svg path{fill: var(--white-color);}
+.thankyou-box .copy-btn:hover .icon svg path{fill:var(--green-color);}
+.order-summary{text-align: left; background: var(--white-color); box-shadow: 0 0 10px #0003; border-radius: 20px; padding: 20px; margin: 20px 0;}
+.order-summary .attrixsheading{color: var(--black-color); font-weight: 600; margin-bottom: 15px;}
+.order-summary-item{padding-bottom: 15px; margin-bottom: 10px; border-bottom: 1px solid var(--text-color); align-items: center;}
+.order-summary-item .order-summary-thumb{width: 60px; min-width: 60px; height: 60px; margin-right: 20px;}
+.order-summary-item .attrixxsheading{font-size: 16px; color: var(--black-color); font-weight: 600;}
+.order-summary-item p{font-size: 16px; color: var(--black-color); font-weight: 600; margin-left: auto;}
+.order-summary-item:last-child{margin-bottom: 0;}
+.order-summary .order-total{width: 565px; display: flex; align-items: center; justify-content: space-between; color: var(--black-color); font-weight: 600; margin-left: auto;}
+.thank-video{margin-top: 20px;}
+.thank-video iframe{width: 100%;}
+
+@media (max-width: 1299px) {
+.thankyou-box{width: 80%;}
+}
+
+@media (max-width: 991px) {
+.thankyou-box{width: 96%;}
+}
+
+@media (max-width: 767px) {
+.thankyou-box, .thankyou-box .thank-pra{width: 100%;}
+.thankyou-box .copy-btn{width: 70%;}
+.order-summary-item .order-summary-thumb{width: 40px; min-width: 40px; height: 40px; margin-right: 10px;}
+.order-summary-item .attrixxsheading, .order-summary-item p{font-size: 14px;}
+.order-summary .order-total{width: 100%;}
+.thank-video iframe{height: 200px;}
+}
+
+
+
+
+
+

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { SetStateAction, useState } from "react";
 import "@/styles/cart.css";
 import About from "@/Components/About";
+import OfferSection from "@/Components/OfferSection";
 export default function Cart() {
   return (
     <>
@@ -72,7 +73,9 @@ export default function Cart() {
                             </div>
                         </div>
                         <button type="button" className="anchor-button hovertime">CHECKOUT</button>
+                        
                     </div>
+                    
                 </div>
             </div>
         </section>
