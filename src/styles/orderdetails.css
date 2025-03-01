@@ -1,0 +1,33 @@
+.orderdetails-left{width: 25%;}
+.orderdetails-right{width: 70%;}
+
+.orderfilter{padding: 15px 20px; background: var(--white-color); box-shadow: 0 0 10px #0003; border-radius: 20px;}
+.orderfilter .filter-top .attrixxsheading{width: 180px; min-width: 180px; color: var(--black-color); font-weight: 600;}
+.orderfilter .filter-list{margin: 15px 0 0; justify-content: flex-start; gap: 10px;}
+.orderfilter .filter-list .filter-btn{display: flex; align-items: center; font-size: 14px; color: var(--white-color); background: var(--green-color); padding: 6px 10px; border-radius: 5px; border: 0;}
+.orderfilter .filter-list .filter-btn svg{width: 14px; height: 14px; margin-right: 5px;}
+.orderfilter .filter-list .filter-btn svg path{stroke: var(--white-color);}
+.orderfilter .order-status{margin-top: 15px;}
+.orderfilter .order-status .attrixxsheading{color: var(--black-color); font-weight: 600; margin-bottom: 10px;} 
+.orderfilter .filter-check{display: flex; align-items: center; margin-bottom: 10px; cursor: pointer;}
+.orderfilter .filter-check .check{width: 16px; height: 16px;}
+.orderfilter .filter-check label{font-size: 14px; color: var(--black-color); margin-left: 10px;}
+.orderfilter .filter-check:last-child{margin-bottom: 0;}
+
+.order-search{margin-bottom: 20px;}
+.order-search .form-group{margin-bottom: 0;}
+.order-search .form-group .form-control{background: var(--white-color); border: 1px solid var(--text-color); padding-right: 60px;}
+.order-search .form-group .search-icon{height: 32px; position: absolute; top: 0; bottom: 0;  right: 15px; margin: auto;}
+
+.ordercard{padding: 15px; box-shadow: 0 0 10px #0003; border-radius: 10px; border: 1px solid var(--text-color); margin-bottom: 20px;}
+.ordercard .ordercard-product{width: 50%;}
+.ordercard .ordercard-product .order-product-thumb{width: 100px; min-width: 100px; margin-right: 20px;}
+.ordercard .ordercard-product .ordercard-text{padding-right: 30px;}
+.ordercard .ordercard-product .ordercard-text .attrixxsheading{font-size: 16px; color: var(--black-color); font-weight: 600; margin-bottom: 5px;}
+.ordercard .ordercard-product .ordercard-text ul li{color: var(--gray-color); display: inline-block; padding-right: 10px;}
+.ordercard .order-price-txt{width: 15%; font-size: 16px; color: var(--black-color);}
+.ordercard .order-status-right{width: 35%;}
+.ordercard .order-status-right .attrixxsheading{font-size: 16px; color: var(--black-color); margin-bottom: 5px; font-weight: 600;}
+.ordercard .order-status-right span{width: 10px; height: 10px; background: var(--green-color); border-radius: 50%; display: inline-block; margin-right: 5px;}
+.ordercard .order-status-right p{color: var(--gray-color);}
+.ordercard:last-child{margin-bottom: 0;}
