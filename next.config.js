@@ -6,7 +6,8 @@ const nextConfig = {
     domains: [
       'res.cloudinary.com',
       'images.unsplash.com', // Add other image domains if needed
-      'localhost'
+      'localhost',
+      'your-image-domain.com'
     ],
     formats: ['image/avif', 'image/webp'],
     // Optional: Set remote patterns for more specific control
@@ -16,7 +17,8 @@ const nextConfig = {
         hostname: 'res.cloudinary.com',
         pathname: '/**',
       }
-    ]
+    ],
+    unoptimized: true
   },
   // Keep your existing configuration below
   async headers() {
@@ -30,6 +32,9 @@ const nextConfig = {
         ]
       }
     ]
+  },
+  env: {
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL
   }
 };
 

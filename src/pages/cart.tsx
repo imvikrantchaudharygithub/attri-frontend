@@ -8,27 +8,42 @@ import OfferSection from "@/Components/OfferSection";
 import SaveAddress from "@/Components/saveaddress";
 import NewAddressPopUp from "@/Components/newaddresspopup";
 import EditAddressPopUp from "@/Components/editaddresspopup";
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '@/slices/rootReduces';
+import { removeFromCart } from '@/slices/cartSlice';
+import { toast, ToastContainer } from 'react-toastify';
+
 export default function Cart() {
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state: RootState) => state.cart.items);
+  console.log(cartItems)
+  const handleRemoveFromCart = (item: any) => {
+    dispatch(removeFromCart(item));
+    toast.success('Item removed from cart');
+  };
   return (
     <>
+            {/* <ToastContainer position="top-right" autoClose={3000} /> */}
+
         <section className="cart-box">
             <div className="container">
                 <h1 className="attriheading">Cart</h1>
                 <div className="cart-main d-flex">
                     <div className="cart-left">
-                        <div className="cart-order-item d-flex align relative">
+                        {cartItems?.map((item: any) => (  
+                        <div className="cart-order-item d-flex align relative" key={item?._id}>
                             <div className="cart-order-left relative">
-                                <Image width={600} height={600} className="w-full hovertime" src={'/assets/images/product.jpg'} alt=""></Image>
+                                <Image width={600} height={600} className="w-full hovertime" src={item?.images[0]} alt=""></Image>
                             </div>
                             <div className="cart-order-right">
                                 <div className="attrixxsheading">Air Cooler</div>
-                                <h3 className="attrixsheading">Hercules 100 Liters Honeycomb Desert Cooler (White &amp; Black)</h3>
+                                <h3 className="attrixsheading">{item?.name}</h3>
                                 <div className="product-price d-flex align">
                                     <div className="product-bottom-left attrixxsheading">
-                                        ₹6,500 <span>₹7,999</span>
+                                        ₹{item?.price}<span>₹{item?.mrp}</span>
                                     </div>
                                     <div className="product-bottom-right">
-                                        (10%off)
+                                        ({item?.discount}%off)
                                     </div>
                                 </div>
                                 <p className="tax-text">Inclusive of all Taxes</p>
@@ -45,8 +60,9 @@ export default function Cart() {
                                     </div>
                                 </div>
                             </div>
-                            <button className="cart-close"><svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.6654 4.3335L4.33203 21.6668M21.6654 21.6668L4.33203 4.3335L21.6654 21.6668Z" stroke="#8B8B8B" stroke-width="2" stroke-linecap="round"></path></svg></button>
+                            <button className="cart-close" onClick={() => handleRemoveFromCart(item)}><svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.6654 4.3335L4.33203 21.6668M21.6654 21.6668L4.33203 4.3335L21.6654 21.6668Z" stroke="#8B8B8B" stroke-width="2" stroke-linecap="round"></path></svg></button>
                         </div>
+                        ))}
                     </div>
                     <div className="cart-right">
                         <div className="cart-right-card">

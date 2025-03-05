@@ -49,7 +49,7 @@ export default function NewProduct({categoryData}:any){
                 <div className="newproduct-main d-flex">
                     <div className="newproduct-left relative">
                         <Image width={676} height={548} className="w-full" src={categoryData?.image ? categoryData?.image : '/assets/images/new-banner.jpg'} alt=""></Image>
-						<Link href='/' className="anchor-button hovertime">
+						<Link href={`/category/${categoryData?.slug}`} className="anchor-button hovertime">
 							SHOP ALL
 						</Link>
                     </div>

@@ -15,14 +15,17 @@ export default function ProductDetails() {
     const router = useRouter();
     const { productslug } = router.query;
     const [productData, setProductData] = useState<any>({});
-
+    const [isLoading, setIsLoading] = useState(false);
     const fetchProductData = async () => {
+        setIsLoading(true);
         if (Array.isArray(productslug) && productslug.length > 0) {
             getData(`/get-product/${productslug[0]}`).then((res: any) => {
                 setProductData(res.product);
                 console.log(res.product);
+                setIsLoading(false);
             }).catch((err: any) => {
                 console.log(err);
+                setIsLoading(false);
             });
         }
     };
@@ -33,6 +36,15 @@ export default function ProductDetails() {
             fetchProductData();
         }
     }, [productslug]);
+
+    if(isLoading){
+        return <div className="flex justify-center items-center h-screen">
+            <div className="loader">
+              <span className="loader-text">loading</span>
+              <span className="load"></span>
+            </div>
+          </div>
+    }
 
   return (
     <>

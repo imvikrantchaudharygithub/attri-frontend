@@ -11,14 +11,17 @@ export default function ProductListing() {
     const router = useRouter();
     const { category } = router.query;
     const [categoryData, setCategoryData] = useState<any>({});
+    const [isLoading, setIsLoading] = useState(false);
 
     const fetchCategoryData = async () => {
+        setIsLoading(true);
         if (Array.isArray(category) && category.length > 0) {
             getData(`/get-product-category/${category[0]}`, '').then((res: any) => {
                 setCategoryData(res.category);
-               
+                setIsLoading(false);
             }).catch((err: any) => {
                 console.log(err);
+                setIsLoading(false);
             });
         }
     };
@@ -29,6 +32,18 @@ export default function ProductListing() {
             fetchCategoryData();
         }
     }, [category]);
+
+    if(categoryData?.length === 0){
+        return <div>No data found</div>
+    }
+    if(isLoading){
+        return <div className="flex justify-center items-center h-screen">
+            <div className="loader">
+              <span className="loader-text">loading</span>
+              <span className="load"></span>
+            </div>
+          </div>
+    }
 
     return (
         <>

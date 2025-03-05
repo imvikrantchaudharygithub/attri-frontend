@@ -1,11 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
 import "@/styles/product.css";
+import { useDispatch } from 'react-redux';
+import { addToCart } from '@/slices/cartSlice';
+import { toast } from 'react-toastify';
 export default function ProductCard({product , category}:any){
+    const dispatch = useDispatch();
+    const handleAddToCart = (productitem: any) => {
+        dispatch(addToCart(productitem));
+        toast.success('Item added to cart');
+    };
     return (
         <div className="product-card relative">
             <div className="product-thumb relative">
-                <Link href='/'>
+                <Link href={`/product/${product?.slug}`}>
                     <Image width={600} height={600} className="full-image hovertime" src={product?.images[0] ? product?.images[0] :  '/assets/images/product.jpg'} alt=""></Image>
                 </Link>
             </div>
@@ -32,7 +40,7 @@ export default function ProductCard({product , category}:any){
                 <div className="product-price">
                     ₹{product?.price}<span>₹{product?.mrp}</span>
                 </div>
-                <button className="anchor-button hovertime">
+                <button className="anchor-button hovertime" onClick={() => handleAddToCart(product)}>
                     Add To Bag
                 </button>
             </div>

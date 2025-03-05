@@ -4,12 +4,16 @@ import Image from "next/image";
 import { SetStateAction, useState, useEffect } from "react";
 import Slider from "react-slick";
 import ProductCard from "./ProductCard";
+import { useDispatch } from 'react-redux';
+
 
 export default function BestSeller({data}:any){
+    
     // Safe initialization with fallback to null if data is empty
     const [toggleState, setToggleState] = useState(null);
     const [activeProducts, setActiveProducts] = useState([]);
     const [activeCategoryName, setActiveCategoryName] = useState('');
+    const dispatch = useDispatch();
     
     // Set initial category when component mounts or data changes
     useEffect(() => {
@@ -43,7 +47,8 @@ export default function BestSeller({data}:any){
         console.log("Products updated:", products);
         console.log("Category name:", categoryName);
     }
-    
+
+  
     const bestsellerslider = {
 		dots: false,
 		arrows: true,
@@ -109,7 +114,7 @@ export default function BestSeller({data}:any){
                         <div className="slider-btn slider-height slider-rl">
                             <Slider className="bestsellerslider" {...bestsellerslider}>
                                 {activeProducts && activeProducts.length > 0 ? (
-                                    activeProducts.map((product:any) => (
+                                    activeProducts?.map((product:any) => (
                                         <div className="item" key={product?._id || Math.random()}>
                                             <ProductCard product={product} category={activeCategoryName}></ProductCard>
                                         </div>

@@ -66,7 +66,7 @@
 .card .card-content .attrixsheading{color: var(--primary-color); font-weight: 700; text-transform: capitalize; margin-bottom: 15px;}
 .card .card-content p{color: var(--primary-color); font-weight: 400; opacity: 0.7;}
 
-.product-table{width: 70%; border-radius: 10px; margin: auto;}
+.product-table{ border-radius: 10px; margin: auto;}
 .product-table .table_custom_wrap {border-spacing: 0;}
 /* .product-table .table-bordered > :not(caption) > *{border-bottom: 1px solid #e7e7e7;} */
 .product-table table tr td{color: var(--black-color); padding: 15px 30px; border-bottom: 1px solid #e7e7e7; text-align: left;}
