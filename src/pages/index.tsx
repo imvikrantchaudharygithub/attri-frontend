@@ -36,14 +36,14 @@ export default function Home({ homeData, error }: HomeProps) {
   
   return (
     <>
-      <HomeBanner ></HomeBanner>
-      <Nutrition></Nutrition>
-      <BestSeller></BestSeller>
-      <TakeCare></TakeCare>
+      <HomeBanner bannerdata={homeData?.data?.banners}></HomeBanner>
+      <Nutrition data={homeData?.data?.sectionsData[0]}></Nutrition>
+      <BestSeller data={homeData?.data?.categories}></BestSeller>
+      <TakeCare data={homeData?.data?.sectionsData[1]}></TakeCare>
       <div className="newproduct-sec">
-        <NewProduct></NewProduct>
-        <NewProduct></NewProduct>
-        <NewProduct></NewProduct>
+        {/* <NewProduct></NewProduct> */}
+        <NewProduct categoryData={homeData?.data?.categories[1]}></NewProduct>
+        {/* <NewProduct></NewProduct> */}
       </div>
       <Review></Review>
       <HaveFun></HaveFun>

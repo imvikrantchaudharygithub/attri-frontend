@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Slider from "react-slick";
 import { SetStateAction, useState } from "react";
-export default function ProductDescription(){
+export default function ProductDescription({ingredients,productinfo}:any){
     const [toggleState, setToggleState] = useState(1);
     const toggleTab = (index: SetStateAction<number>) => {
         setToggleState(index);
@@ -21,56 +21,29 @@ export default function ProductDescription(){
                     <div className="latest-content">
                         <div className={toggleState === 1 ? "content-tab active" : "content-tab"}>
                             <div className="description-content d-grid">
-                                <div className="card">
+                                {ingredients?.map((ingredient:any,index:number)=>(
+                                <div key={index} className="card">
                                     <div className="card-thumb">
-                                        <Image width={160} height={160} className="" src={'/assets/images/product.jpg'} alt=""></Image>
+                                        <Image width={160} height={160} className="" src={ingredient?.image} alt=""></Image>
                                     </div>
                                     <div className="card-content">
-                                        <div className="attrixsheading">Brown Rice & Green Peas</div>
-                                        <p>20G Premium Plant Protein</p>
+                                        <div className="attrixsheading">{ingredient?.title}</div>
+                                        <p>{ingredient?.description}</p>
                                     </div>
-                                </div>
-                                <div className="card">
-                                    <div className="card-thumb">
-                                        <Image width={160} height={160} className="" src={'/assets/images/product.jpg'} alt=""></Image>
                                     </div>
-                                    <div className="card-content">
-                                        <div className="attrixsheading">Brown Rice & Green Peas</div>
-                                        <p>20G Premium Plant Protein</p>
-                                    </div>
-                                </div>
-                                <div className="card">
-                                    <div className="card-thumb">
-                                        <Image width={160} height={160} className="" src={'/assets/images/product.jpg'} alt=""></Image>
-                                    </div>
-                                    <div className="card-content">
-                                        <div className="attrixsheading">Brown Rice & Green Peas</div>
-                                        <p>20G Premium Plant Protein</p>
-                                    </div>
-                                </div>
-                                <div className="card">
-                                    <div className="card-thumb">
-                                        <Image width={160} height={160} className="" src={'/assets/images/product.jpg'} alt=""></Image>
-                                    </div>
-                                    <div className="card-content">
-                                        <div className="attrixsheading">Brown Rice & Green Peas</div>
-                                        <p>20G Premium Plant Protein</p>
-                                    </div>
-                                </div>
+                                ))}
                             </div>
                         </div>
                         <div className={toggleState === 2 ? "content-tab active" : "content-tab"}>
                             <div className="table-responsive product-table">
                                 <table className="table table-bordered table_custom_wrap">
                                     <tbody>
-                                        <tr>
-                                            <td colSpan={1}>Product Name</td>
-                                            <td colSpan={2}>Super Woman 20G Plant Protein</td>
+                                        {productinfo?.map((info:any,index:number)=>(
+                                        <tr key={index}>
+                                            <td colSpan={1}>{info?.title}</td>
+                                            <td colSpan={2}>{info?.description}</td>
                                         </tr>
-                                        <tr>
-                                            <td colSpan={1}>Product Name</td>
-                                            <td colSpan={2}>Super Woman 20G Plant Protein</td>
-                                        </tr>
+                                        ))}
                                     </tbody>
                                 </table>
                             </div>

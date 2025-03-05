@@ -2,10 +2,10 @@ import Link from "next/link";
 import Image from "next/image";
 import Slider from "react-slick";
 import OfferSection from "./OfferSection";
-export default function ProductInfo(){
+export default function ProductInfo({ProductDetails}:any){
     return (
         <div className="pdp-info">
-            <h1 className="attrimdheading">Jamun 2% Salicylic Acid Body Wash For Body Acne, Bumpy Skin | For All Skin Types</h1>
+            <h1 className="attrimdheading">{ProductDetails?.name}</h1>
             <div className="info-tags-list d-flex justify-content">
                 <div className="info-tag">
                     No Maltodextrin
@@ -22,6 +22,7 @@ export default function ProductInfo(){
             </div>
             <div className="addcartinfo dflex">
                 <div className="product-star d-flex align">
+                    {ProductDetails?.rating ? ProductDetails?.rating : 0}
                     <span className="filledicon">
                         <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
@@ -56,9 +57,9 @@ export default function ProductInfo(){
             <div className="product-price">
                 <div className="price-info dflex align">
                     <span>MRP:</span>
-                    <span>₹1400</span>
-                    ₹1199
-                    <span className="off-tag">14% OFF</span>
+                    <span>₹{ProductDetails?.mrp}</span>
+                    ₹{ProductDetails?.price}
+                    <span className="off-tag">{ProductDetails?.discount}% OFF</span>
                 </div>
                 <p>Inclusive of all taxes</p>
             </div>

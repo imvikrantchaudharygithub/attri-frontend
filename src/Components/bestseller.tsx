@@ -1,14 +1,49 @@
 "use client"
 import Link from "next/link";
 import Image from "next/image";
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useState, useEffect } from "react";
 import Slider from "react-slick";
 import ProductCard from "./ProductCard";
-export default function BestSeller(){
-    const [toggleState, setToggleState] = useState(1);
-    const toggleTab = (index: SetStateAction<number>) => {
+
+export default function BestSeller({data}:any){
+    // Safe initialization with fallback to null if data is empty
+    const [toggleState, setToggleState] = useState(null);
+    const [activeProducts, setActiveProducts] = useState([]);
+    const [activeCategoryName, setActiveCategoryName] = useState('');
+    
+    // Set initial category when component mounts or data changes
+    useEffect(() => {
+        if (data && data.length > 0) {
+            const initialCategory = data[0]?._id;
+            const initialCategoryName = data[0]?.name || '';
+            setToggleState(initialCategory);
+            setActiveCategoryName(initialCategoryName);
+            
+            // Find and set the products for the initial category
+            const initialProducts = data.find((item:any) => item._id === initialCategory)?.products || [];
+            setActiveProducts(initialProducts);
+            console.log("Initial products set:", initialProducts);
+        }
+    }, [data]);
+    
+    const toggleTab = (index: SetStateAction<any>) => {
+        console.log("Toggling to category:", index);
         setToggleState(index);
+        
+        // Find the selected category
+        const selectedCategory = data.find((item:any)=> item._id === index);
+        
+        // Set the category name
+        const categoryName = selectedCategory?.name || '';
+        setActiveCategoryName(categoryName);
+        
+        // Find and set the products for the selected category
+        const products = selectedCategory?.products || [];
+        setActiveProducts(products);
+        console.log("Products updated:", products);
+        console.log("Category name:", categoryName);
     }
+    
     const bestsellerslider = {
 		dots: false,
 		arrows: true,
@@ -48,6 +83,12 @@ export default function BestSeller(){
 			}
 		]
 	};
+    
+    // Let's check if we have valid data
+    if (!data || data.length === 0) {
+        return <div>No bestseller data available</div>;
+    }
+    
     return (
         <section className="bestseller padding-tb">
             <div className="container">
@@ -59,41 +100,23 @@ export default function BestSeller(){
                     </Link>
                 </div>
                 <div className="custom-tab d-flex justify-content">
-                    <div className={toggleState === 1 ? "tabs hovertime active" : "tabs hovertime"} onClick={() => toggleTab(1)}>Latest bets</div>
-                    <div className={toggleState === 2 ? "tabs hovertime active" : "tabs hovertime"} onClick={() => toggleTab(2)}>High rollers</div>
-                    <div className={toggleState === 3 ? "tabs hovertime active" : "tabs hovertime"} onClick={() => toggleTab(3)}>Wager contest</div>
+                  {data?.map((item:any)=>(  
+                    <div key={item?._id} className={toggleState === item?._id ? "tabs hovertime active" : "tabs hovertime"} onClick={() => toggleTab(item?._id)}>{item?.name}</div>
+                   ))}
                 </div>
                 <div className="latest-content">
-                    <div className={toggleState === 1 ? "content-tab active" : "content-tab"}>
+                    <div className="content-tab active">
                         <div className="slider-btn slider-height slider-rl">
                             <Slider className="bestsellerslider" {...bestsellerslider}>
-                                <div className="item">
-                                    <ProductCard></ProductCard>
-                                </div>
-                                <div className="item">
-                                    <ProductCard></ProductCard>
-                                </div>
-                                <div className="item">
-                                    <ProductCard></ProductCard>
-                                </div>
-                                <div className="item">
-                                    <ProductCard></ProductCard>
-                                </div>
-                                <div className="item">
-                                    <ProductCard></ProductCard>
-                                </div>
-                                <div className="item">
-                                    <ProductCard></ProductCard>
-                                </div>
-                            </Slider>
-                        </div>
-                    </div>
-                    <div className={toggleState === 2 ? "content-tab active" : "content-tab"}>
-                        <div className="slider-btn slider-height slider-rl">
-                            <Slider className="bestsellerslider" {...bestsellerslider}>
-                                <div className="item">
-                                    adsf
-                                </div>
+                                {activeProducts && activeProducts.length > 0 ? (
+                                    activeProducts.map((product:any) => (
+                                        <div className="item" key={product?._id || Math.random()}>
+                                            <ProductCard product={product} category={activeCategoryName}></ProductCard>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className="item">No products available in this category</div>
+                                )}
                             </Slider>
                         </div>
                     </div>

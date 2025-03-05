@@ -1,34 +1,27 @@
 import Link from "next/link";
 import Image from "next/image";
-export default function TakeCare(){
+export default function TakeCare({data}:any){
     return (
         <section className="take bg-gray padding-tb">
             <div className="container">
                 <div className="take-main d-flex">
                     <div className="take-left">
-                        <h4 className="attriheading">Take care, have fun!</h4>
-                        <p>We are on a mission to make nutrition fun! Taking care of yourself and having fun need not be mutually exclusive. Our flavourful blends created from clinically backed wholefood ingredients empower your mind, body and soul.</p>
+                        <h4 className="attriheading">{data?.title}</h4>
+                        <p>{data?.description}</p>
                         <Link href='/' className="anchor-button d-inline cursor-pointer hovertime">
                             Learn more
                         </Link>
                     </div>
                     <div className="take-right d-flex align justify-end">
-                        <div className="take-card d-flex">
-                            <span className="take-icon"></span>
-                            <div className="attrixxsheading">Vegan Friendly</div>
-                        </div>
-                        <div className="take-card d-flex">
-                            <span className="take-icon"></span>
-                            <div className="attrixxsheading">Clean Label Certified</div>
-                        </div>
-                        <div className="take-card d-flex">
-                            <span className="take-icon"></span>
-                            <div className="attrixxsheading">Reusable & Recyclable Packaging</div>
-                        </div>
-                        <div className="take-card d-flex">
-                            <span className="take-icon"></span>
-                            <div className="attrixxsheading">Gluten Free</div>
-                        </div>
+                        {data?.gallery?.map((item: any, index: number) => (
+                            <div className="take-card d-flex" key={index}>
+                                <span className="take-icon">
+                                    <Image width={50} height={50} src={item.image} alt={item.title} />
+                                </span>
+                                <div className="attrixxsheading">{item.title}</div>
+                            </div>
+                        ))}
+                     
                     </div>
                 </div>
             </div>

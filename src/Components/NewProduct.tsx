@@ -3,7 +3,7 @@ import Image from "next/image";
 import Slider from "react-slick";
 import ProductCard from "./ProductCard";
 import "@/styles/newproduct.css";
-export default function NewProduct(){
+export default function NewProduct({categoryData}:any){
     const newproductslider = {
 		dots: false,
 		arrows: true,
@@ -48,7 +48,7 @@ export default function NewProduct(){
             <div className="container">
                 <div className="newproduct-main d-flex">
                     <div className="newproduct-left relative">
-                        <Image width={676} height={548} className="w-full" src={'/assets/images/new-banner.jpg'} alt=""></Image>
+                        <Image width={676} height={548} className="w-full" src={categoryData?.image ? categoryData?.image : '/assets/images/new-banner.jpg'} alt=""></Image>
 						<Link href='/' className="anchor-button hovertime">
 							SHOP ALL
 						</Link>
@@ -56,18 +56,16 @@ export default function NewProduct(){
                     <div className="newproduct-right">
                         <div className="slider-btn slider-height slider-rl">
                             <Slider className="newproductslider" {...newproductslider}>
-                                <div className="item">
-                                    <ProductCard></ProductCard>
-                                </div>
-                                <div className="item">
-                                    <ProductCard></ProductCard>
-                                </div>
-                                <div className="item">
-                                    <ProductCard></ProductCard>
-                                </div>
-                                <div className="item">
-                                    <ProductCard></ProductCard>
-                                </div>
+							{categoryData?.products && categoryData?.products.length > 0 ? (
+                                    categoryData?.products.map((product:any) => (
+                                        <div className="item" key={product?._id || Math.random()}>
+                                            <ProductCard product={product} category={categoryData?.name}></ProductCard>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className="item">No products available in this category</div>
+                                )}
+                               
                             </Slider>
                         </div>
                     </div>
