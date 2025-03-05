@@ -49,63 +49,51 @@ export default function Cart() {
                         </div>
                     </div>
                     <div className="cart-right">
-                        <div className="attrixxsheading">Price Details <span>(3 items)</span></div>
-                        <div className="cart-order-box">
-                            <div className="order-item d-flex">
-                                <div className="order-name">Order Total</div>
-                                <div className="order-price">₹6,500</div>
+                        <div className="cart-right-card">
+                            <div className="attrixxsheading">Select Address</div>
+                            <div className="address-details">
+                                <div className="attrixxsheading">Shakeel Shah</div>
+                                <p>Delhi Technological University, Shahbad Daulatpur Village Main Bawana Delhi Road - 110044</p>
+                                <div className="address-number">Mobile Number : <span>+91 7289819440</span></div>
                             </div>
-                            <div className="order-item order-blue d-flex">
-                                <div className="order-name">Discount on MRP</div>
-                                <div className="order-price">-₹1,500</div>
-                            </div>
-                            <div className="order-item d-flex">
-                                <div className="order-name">Tax</div>
-                                <div className="order-price">₹150</div>
-                            </div>
-                            <div className="order-item order-red d-flex">
-                                <div className="order-name">Coupon Discount</div>
-                                <div className="order-price">Apply Coupon</div>
-                            </div>
-                            <div className="order-item order-red d-flex">
-                                <div className="order-name">Shipping</div>
-                                <div className="order-price">FREE</div>
-                            </div>
-                            <div className="order-item d-flex">
-                                <div className="order-name">Grand Total</div>
-                                <div className="order-price">₹6,500</div>
-                            </div>
+                            <Link href={''} className="anchor-button hovertime">Change Address</Link>
                         </div>
-                        <button type="button" className="anchor-button hovertime">CHECKOUT</button>
-                        
+                        <div className="cart-right-card">
+                            <div className="attrixxsheading">Price Details <span>(3 items)</span></div>
+                            <div className="cart-order-box">
+                                <div className="order-item d-flex">
+                                    <div className="order-name">Order Total</div>
+                                    <div className="order-price">₹6,500</div>
+                                </div>
+                                <div className="order-item order-blue d-flex">
+                                    <div className="order-name">Discount on MRP</div>
+                                    <div className="order-price">-₹1,500</div>
+                                </div>
+                                <div className="order-item d-flex">
+                                    <div className="order-name">Tax</div>
+                                    <div className="order-price">₹150</div>
+                                </div>
+                                <div className="order-item order-red d-flex">
+                                    <div className="order-name">Coupon Discount</div>
+                                    <div className="order-price">Apply Coupon</div>
+                                </div>
+                                <div className="order-item order-red d-flex">
+                                    <div className="order-name">Shipping</div>
+                                    <div className="order-price">FREE</div>
+                                </div>
+                                <div className="order-item d-flex">
+                                    <div className="order-name">Grand Total</div>
+                                    <div className="order-price">₹6,500</div>
+                                </div>
+                            </div>
+                            <button type="button" className="anchor-button hovertime">CHECKOUT</button>
+                        </div>
                     </div>
                     
                 </div>
             </div>
         </section>
-          <section className="account-box">
-              <div className="container">
-                  <h1 className="attriheading">My Address</h1>
-                  <div className="account-main padding-tb">
-                      <div className="account-right">
-                          <div className="address-top d-flex">
-                              <h2 className="attrixsheading">Saved Address</h2>
-                              <button type="button" className="address-btn align d-flex">
-                                  <svg className="plus-icon" width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                      <path d="M8 1.5V15.5M1 8.5H15" stroke="#D03438" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                  </svg>
-                                  ADD NEW ADDRESS
-                              </button>
-                          </div>
-                          <SaveAddress/>
-                          <SaveAddress/>
-                      </div>
-                  </div>
-              </div>
-          </section>
         <About></About>
-        <NewAddressPopUp/>
-        <EditAddressPopUp/>
     </>
   );
 }
