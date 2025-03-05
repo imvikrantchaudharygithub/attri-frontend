@@ -9,15 +9,16 @@
 .plpslider .slider-rl{margin: 0 -5px;}
 .plpslider .slider-rl .item {padding: 0 5px;}
 .productnavslider{margin-top: 25px;}
-.productnavslider .plp-slider{border: 1px solid transparent; border-radius: 10px; overflow: hidden; cursor: pointer;}
+.productnavslider .plp-slider{border: 1px solid transparent; border-radius: 20px; overflow: hidden; cursor: pointer;}
 .productnavslider .slick-current .plp-slider{border-color: var(--green-color);}
 
 .pdp-main .pdp-left{width: 40%;}
+.pdp-main .pdp-left .plp-slider img{border-radius: 20px;}
 .pdp-main .pdp-right{width: 50%;}
 .pdp-info .attrimdheading{color: var(--primary-color); font-weight: 700; text-transform: capitalize; margin-bottom: 15px;}
 .info-tags-list{margin: 10px 0px; gap: 10px;}
-.info-tag{font-size: 14px; text-align: center; background: var(--green-color); border-radius: 5px; padding: 4px 8px;}
-.info-tag span{font-size: 20px; margin-left: 2px;}
+.info-tag{font-size: 14px; text-align: center; background: var(--green-color); border-radius: 50px; padding: 4px 8px;}
+.info-tag span{font-size: 20px; margin-right: 5px;}
 .info-tag:nth-child(2n){background: var(--light-green);}
 .info-tag:nth-child(3n){background: var(--light-blue);}
 
@@ -32,7 +33,7 @@
 .product-price .price-info{font-size: 26px;}
 .product-price .price-info span{font-size: 14px; color: var(--gray-color); font-weight: 700;}
 .product-price .price-info span:nth-child(2){text-decoration: line-through; margin: 0px 10px 0px 5px;}
-.product-price .price-info .off-tag{font-size: 10px; color: var(--white-color); font-weight: 700; text-align: center; border-radius: 5px; background: var(--primary-color); padding: 3px 6px;}
+.product-price .price-info .off-tag{font-size: 10px; color: var(--white-color); font-weight: 700; text-align: center; border-radius: 5px; background: var(--primary-color); padding: 3px 6px; margin-left: 5px;}
 .product-price p{font-size: 12px; color: var(--gray-color);}
 .pdp-info .anchor-button{width: 100%;}
 .service-list{padding: 25px 40px 35px;}
@@ -73,6 +74,9 @@
 .product-table table tr:last-child td{border-bottom: 0;}
 
 .description-tab .custom-tab{border-bottom: 0;}
+
+.pdp-info-text{margin-top: 20px;}
+.pdp-info-text .attrimdheading{color: var(--primary-color); font-weight: 600; margin-bottom: 10px;}
 
 @media only screen and (max-width: 1199px) {
 .plp-list{grid-template-columns: repeat(3, minmax(0, 1fr));}

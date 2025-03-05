@@ -33,12 +33,14 @@ export default function ProductListing() {
     return (
         <>
             <div className="inner-banner relative">
-                <picture className="picture">
-                    <source media="(max-width: 767px)" srcSet={categoryData?.image ? categoryData?.image : '/assets/images/inner-banner.jpg'} />
-                    <source media="(min-width: 768px)" srcSet={categoryData?.banner ? categoryData?.banner : '/assets/images/inner-banner.jpg'} />
-                    <Image className="w-full" width={1920} height={340} src={categoryData?.banner ? categoryData?.banner : '/assets/images/inner-banner.jpg'} alt="Kurlon Hula Hula" />
-                </picture>
-                <h1 className="attrilgheading">Weight Supplements & Products {category}</h1>
+                <div className="container ">
+                    <picture className="picture relative">
+                        <source media="(max-width: 767px)" srcSet={categoryData?.image ? categoryData?.image : '/assets/images/inner-banner.jpg'} />
+                        <source media="(min-width: 768px)" srcSet={categoryData?.banner ? categoryData?.banner : '/assets/images/inner-banner.jpg'} />
+                        <Image className="w-full" width={1920} height={340} src={categoryData?.banner ? categoryData?.banner : '/assets/images/inner-banner.jpg'} alt="Kurlon Hula Hula" />
+                    </picture>
+                    <h1 className="attrilgheading">Weight Supplements & Products {category}</h1>
+                </div>
             </div>
             <div className="plp-box padding-tb">
                 <div className="container">

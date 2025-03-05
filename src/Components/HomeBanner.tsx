@@ -12,7 +12,7 @@ export default function HomeBanner({bannerdata}:any){
 	};
     console.log(bannerdata)
     return (
-        <section className="home-banner">
+        <section className="home-banner slider-height">
             <Slider className="homebannerslider" {...homebannerslider}>
             {bannerdata?.sort((a:any, b:any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).map((item:any, index:number) => (
                <div className="item" key={index}>
@@ -21,7 +21,7 @@ export default function HomeBanner({bannerdata}:any){
                             <source media="(max-width: 767px)"  srcSet={item.mob_image || '/assets/images/home-banner.jpg'}/>
                             <source media="(min-width: 768px)" srcSet={item.image || '/assets/images/home-banner.jpg'}/>
                             <Image 
-                                className="w-full h-auto max-h-[300px] md:max-h-[250px] object-cover" 
+                                className="w-full" 
                                 width={1920} 
                                 height={340} 
                                 src={item.image || '/assets/images/home-banner.jpg'} 

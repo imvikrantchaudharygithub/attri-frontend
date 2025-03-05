@@ -10,9 +10,9 @@ export default function Nutrition({data}:any){
                 <div className="nutrition-main d-flex justify-center">
                     {data?.gallery?.map((item: any, index: number) => (
                         <div className="nutrition-card d-flex align justify-content" key={index}>
-                            <span className="nutrition-icon">
-                                <Image width={50} height={50} src={item.image} alt={item.title} />
-                            </span>
+                            <div className="nutrition-icon">
+                                <Image width={50} height={50} className="w-full" src={item.image} alt={item.title} />
+                            </div>
                             <div className="attrixxsheading">{item.title}</div>
                         </div>
                     ))}

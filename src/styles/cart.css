@@ -43,6 +43,7 @@
 .breadcrumbs ul li a::after{content: '/'; position: absolute; top: 0; right: -3px; font-size: 16px; font-weight: 500; color: var(--white-color);}
 .pdp-page .breadcrumbs ul li a::after{color: var(--gray-color);}
 .cart-right .anchor-button{width: 100%;}
+.account-main .account-right{width: 100%;}
 
 @media only screen and (min-width: 1919px) {
 }
