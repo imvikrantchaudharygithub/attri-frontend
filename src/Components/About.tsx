@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import "@/styles/about.css";
+// import "@/styles/about.css";
 export default function About(){
     const [isReadMore, setIsReadMore] = useState(false);
 

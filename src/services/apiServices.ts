@@ -1,4 +1,6 @@
 import axios from 'axios';
+// import { store } from '@/store';
+import { getToken } from '@/utils/auth';
 
 const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api',
@@ -7,28 +9,37 @@ const apiClient = axios.create({
   xsrfCookieName: 'XSRF-TOKEN',
   headers: {
     'Content-Type': 'application/json',
-    // 'Authorization': `Bearer ${typeof window !== 'undefined' ? localStorage.getItem('token') : ''}`
+
+    'Authorization': `Bearer ${typeof window !== 'undefined' ? localStorage.getItem('token') : ''}`
   }
 });
 
-export const getData = async (endpoint: string, config?: any): Promise<any> => {
-  try {
-    const response = await apiClient.get(endpoint, config);
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    throw error;
+// Add request interceptor
+apiClient.interceptors.request.use(
+  (config:any) => {
+    // Only run on client-side
+    if (typeof window !== 'undefined') {
+      const token = getToken();
+      
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
   }
+);
+
+export const getData = async (endpoint: string, config?: any): Promise<any> => {
+  return await apiClient.get(endpoint, config);
+  
 };
 
-export const postData = async (endpoint: string, data: unknown, config?: any): Promise<any> => {
-  try {
-    const response = await apiClient.post(endpoint, data, config);
-    return response.data;
-  } catch (error) {
-    console.error('Error posting data:', error);
-    throw error;
-  }
+export const postData = async (endpoint: string, data: any, config?: any): Promise<any> => {
+  return await apiClient.post(endpoint, data, config);
+  
 };
 
 // const baseURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';

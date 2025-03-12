@@ -7,24 +7,15 @@ export default function ProductInfo({ProductDetails}:any){
         <div className="pdp-info">
             <h1 className="attrimdheading">{ProductDetails?.name}</h1>
             <div className="info-tags-list d-flex justify-content">
+                {ProductDetails?.tags && ProductDetails?.tags?.length > 0 && ProductDetails?.tags.map((item: any) => (
                 <div className="info-tag dflex align">
                     <span className="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 14 14"><path fill="#000" d="M7 14A7 7 0 107 0a7 7 0 000 14z"></path><path stroke="#fff" stroke-width="1.4" d="M3.01 6.694l1.92 2.398 5.642-4.422"></path></svg>
                     </span>
-                    No Maltodextrin
+                    {item}
                 </div>
-                <div className="info-tag dflex align">
-                    <span className="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 14 14"><path fill="#000" d="M7 14A7 7 0 107 0a7 7 0 000 14z"></path><path stroke="#fff" stroke-width="1.4" d="M3.01 6.694l1.92 2.398 5.642-4.422"></path></svg>
-                    </span>
-                    No Added Sugar
-                </div>
-                <div className="info-tag dflex align">
-                    <span className="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 14 14"><path fill="#000" d="M7 14A7 7 0 107 0a7 7 0 000 14z"></path><path stroke="#fff" stroke-width="1.4" d="M3.01 6.694l1.92 2.398 5.642-4.422"></path></svg>
-                    </span>
-                    US Clean Label Certified
-                </div>
+                ))}
+               
             </div>
             <div className="addcartinfo dflex">
                 <div className="product-star d-flex align">
@@ -85,10 +76,12 @@ export default function ProductInfo({ProductDetails}:any){
                 </div>
             </div>
             <OfferSection></OfferSection>
+            {ProductDetails?.description && (
             <div className="pdp-info-text">
-                <h2 className="attrimdheading">Lorem ipsum dolor</h2>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium distinctio quos molestiae cumque vero! Praesentium, maxime quibusdam fugiat porro placeat debitis possimus necessitatibus ab ea adipisci inventore laborum explicabo illum!</p>
+                <h2 className="attrimdheading">Product Description</h2>
+                <p>{ProductDetails?.description}</p>
             </div>
+            )}
         </div>
     );
 }

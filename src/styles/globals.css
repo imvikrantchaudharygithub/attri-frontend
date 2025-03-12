@@ -270,6 +270,7 @@ tbody, td, tfoot, th, thead, tr {
 .search-box .plp-list{padding: 0;}
 .search-box .plp-right p{text-align: center; margin-bottom: 20px;}
 
+.error-message{color: var(--red-color); font-size: 12px; margin-top: 5px;}
 /* From Uiverse.io by alexruix */ 
 .loader {
   width: 180px;

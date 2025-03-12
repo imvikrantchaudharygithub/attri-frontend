@@ -1,31 +1,32 @@
 // src/slices/tokenSlice.ts
 
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import { setToken } from '@/utils/auth';
 
 interface TokenState {
   token: string | null;
-  isTokenSet: boolean;
 }
 
 const initialState: TokenState = {
-  token: null,
-  isTokenSet: false,
+  token: null
 };
 
 const tokenSlice = createSlice({
   name: 'token',
   initialState,
   reducers: {
-    setToken: (state, action: PayloadAction<string>) => {
+    setToken: (state, action) => {
       state.token = action.payload;
-      state.isTokenSet = true;
+      if (action.payload) {
+        setToken(action.payload); // Sync with localStorage
+      }
     },
     clearToken: (state) => {
       state.token = null;
-      state.isTokenSet = false;
-    },
-  },
+      localStorage.removeItem('token');
+    }
+  }
 });
 
-export const { setToken, clearToken } = tokenSlice.actions;
+export const { setToken: setReduxToken, clearToken } = tokenSlice.actions;
 export default tokenSlice.reducer;

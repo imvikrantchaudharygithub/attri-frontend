@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import Slider from "react-slick";
-import "@/styles/review.css";
+// import "@/styles/review.css";
 import ReviewCard from "./ReviewCard";
 export default function Review(){
     const reviewslider = {

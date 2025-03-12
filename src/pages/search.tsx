@@ -1,5 +1,5 @@
 import Image from "next/image";
-import "@/styles/plp.css";
+// import "@/styles/plp.css";
 import ProductCard from "@/Components/ProductCard";
 export default function Search() {
   return (

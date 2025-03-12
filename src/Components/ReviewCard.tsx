@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import "@/styles/review.css";
+// import "@/styles/review.css";
 export default function ReviewCard(){
     return (
         <div className="review-card text-center">

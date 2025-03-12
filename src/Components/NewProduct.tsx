@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Slider from "react-slick";
 import ProductCard from "./ProductCard";
-import "@/styles/newproduct.css";
+// import "@/styles/newproduct.css";
 export default function NewProduct({categoryData}:any){
     const newproductslider = {
 		dots: false,
@@ -47,8 +47,8 @@ export default function NewProduct({categoryData}:any){
         <section className="newproduct">
             <div className="container">
                 <div className="newproduct-main d-flex">
-                    <div className="newproduct-left relative">
-                        <Image width={676} height={548} className="w-full" src={categoryData?.image ? categoryData?.image : '/assets/images/new-banner.jpg'} alt=""></Image>
+                    <div className="newproduct-left relative ">
+                        <Image width={676} height={548} className="w-full " src={categoryData?.image ? categoryData?.image : '/assets/images/new-banner.jpg'} alt=""></Image>
 						<Link href={`/category/${categoryData?.slug}`} className="anchor-button hovertime">
 							SHOP ALL
 						</Link>

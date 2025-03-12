@@ -1,5 +1,5 @@
 import Image from "next/image";
-import "@/styles/plp.css";
+// import "@/styles/plp.css";
 import ProductCard from "@/Components/ProductCard";
 import HaveFun from "@/Components/HaveFun";
 import About from "@/Components/About";
@@ -17,7 +17,8 @@ export default function ProductListing() {
         setIsLoading(true);
         if (Array.isArray(category) && category.length > 0) {
             getData(`/get-product-category/${category[0]}`, '').then((res: any) => {
-                setCategoryData(res.category);
+                setCategoryData(res?.data?.category);
+                console.log(res);
                 setIsLoading(false);
             }).catch((err: any) => {
                 console.log(err);
@@ -54,7 +55,7 @@ export default function ProductListing() {
                         <source media="(min-width: 768px)" srcSet={categoryData?.banner ? categoryData?.banner : '/assets/images/inner-banner.jpg'} />
                         <Image className="w-full" width={1920} height={340} src={categoryData?.banner ? categoryData?.banner : '/assets/images/inner-banner.jpg'} alt="Kurlon Hula Hula" />
                     </picture>
-                    <h1 className="attrilgheading">Weight Supplements & Products {category}</h1>
+                    <h1 className="attrilgheading">{categoryData?.name}</h1>
                 </div>
             </div>
             <div className="plp-box padding-tb">

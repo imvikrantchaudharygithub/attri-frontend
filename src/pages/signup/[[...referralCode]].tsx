@@ -2,14 +2,15 @@ import Link from "next/link";
 import React from 'react';
 import Image from "next/image";
 import { SetStateAction, useState, useEffect } from "react";
-import "@/styles/popup.css";
+// import "@/styles/popup.css";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import toast, { Toaster } from 'react-hot-toast';
+import { toast, ToastContainer } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { useAppDispatch, useAppSelector } from '@/hooks/hooks';
 import { setUser } from "@/slices/userSlice";
-import { getData } from '@/services/apiServices';
+import { setReduxToken } from "@/slices/tokenSlice";
+import { getData, postData } from '@/services/apiServices';
 
 export default function SignUp() {
     const router = useRouter();
@@ -17,10 +18,11 @@ export default function SignUp() {
     const dispatch = useAppDispatch();
     const isTokenSet = useAppSelector((state: any) => state.token.isTokenSet);
     const user = useAppSelector((state: any) => state.user); 
-    const [refrralby,setRefrralby] = useState<any>(null);
+    const [refrralby,setRefrralby] = useState<any>();
+    const [signuploading,setSignuploading] = useState<boolean>(false);
     // Log to debug
-    console.log('Router query:', router.query);
-    console.log('Current path:', router.asPath);
+    // console.log('Router query:', router.query);
+    // console.log('Current path:', router.asPath);
 
     const [otpStep, setOtpStep] = useState(true);
   const otpFormik = useFormik({
@@ -34,10 +36,35 @@ export default function SignUp() {
           .required('Required')
       ).length(4, 'Must be exactly 4 digits'),
     }),
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log('OTP:', values.otp.join(''));
-    
+      console.log('Signup Form Values:', signupFormik.values);
       // Handle OTP verification here
+      const data = {
+        otp:values.otp.join(''),
+        phone:signupFormik.values.mobileNumber,
+        username:signupFormik.values.name,
+        referralcode:signupFormik.values.referralCode
+    }
+        await postData('verify-otp',data).then((res:any)=>{
+            console.log(res);
+            // toast.success(res?.message);
+            // router.push('/');
+            dispatch(setReduxToken(res?.data?.token));
+            dispatch(setUser({ 
+                id:res?.data?.user?._id,
+                name:res?.data?.user?.username,
+                balance:res?.data?.user?.balance,
+                phone:res?.data?.user?.phone,
+              }));
+            router.push('/');
+            otpFormik.resetForm();
+        }).catch((err:any)=>{
+            console.log(err);
+            toast.error("Something went wrong");
+            otpFormik.resetForm();
+
+        })
     },
   });
 
@@ -59,12 +86,24 @@ export default function SignUp() {
     
         getData(`/user/referral/${code}`).then((res:any)=>{
             console.log(res);
-            setRefrralby(res.user)
+            setRefrralby(res?.data?.user)
         }).catch((err:any)=>{
             console.log(err);
         })
     
   };
+  const resentOtp = async ()=>{
+    const data = {
+        phone:signupFormik.values.mobileNumber,
+    }
+    await postData('send-otp',data).then((res:any)=>{
+        console.log(res);
+        toast.success(res?.data?.message);
+    }).catch((err:any)=>{
+        console.log(err);
+        toast.error("Something went wrong");
+    })
+  }
 
   const signupFormik = useFormik({
     initialValues: {
@@ -81,13 +120,26 @@ export default function SignUp() {
         .required('Mobile number is required')
         .matches(/^[0-9]{10}$/, 'Mobile number must be 10 digits'),
     }),
-    onSubmit: (values) => {
-        toast.success('OTP sent to your mobile number');
-      console.log('Form submitted:', values);
-      setOtpStep(false);
+    onSubmit: async (values) => {
+        setSignuploading(true);
+        // toast.success('OTP sent to your mobile number');
+    //   console.log('Form submitted:', values);
+     
     //   dispatch(setUser({ name:values.name ,id:values.mobileNumber,balance:"20", }));
-
-      // Handle form submission here
+    const data = {
+        phone:values.mobileNumber,
+        newuser:true
+    }
+        await postData('send-otp',data).then((res:any)=>{
+            console.log(res);
+            toast.success(res?.data?.message);
+            setOtpStep(false);
+            setSignuploading(false);
+        }).catch((err:any)=>{
+            console.log(err);
+            toast.error(err?.response?.data?.message || "Something went wrong");
+            setSignuploading(false);
+        })
     },
   });
 
@@ -114,7 +166,7 @@ export default function SignUp() {
         <div className="container">
             <div className="sign-main d-flex align">
                 <div className="sign-left">
-                    <Image width={676} height={548} className="w-full" src={'/assets/images/new-banner.jpg'} alt=""></Image>
+                    <Image width={676} height={548} className="w-full" src={'https://res.cloudinary.com/doz4dnf0h/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1741119080/products/mstxle3if99bx5uo9llz.jpg'} alt=""></Image>
                 </div>
                 <div className="sign-right">
                     {/* signup css globals 311*/}
@@ -122,13 +174,13 @@ export default function SignUp() {
                     <div className="signup-step-one">
                         <div className="sign-top">
                             <div className="attrilgheading">Sign Up </div>
-                           {referralCode || signupFormik.values.referralCode &&  <p>Your are join with <span>{refrralby?.username ? refrralby?.username : 'Laoding...'}</span></p>}
+                           {referralCode  &&  <p>Your are join with <span>{refrralby?.username ? refrralby?.username : 'Laoding...'}</span></p>}
                         </div>
                         <form onSubmit={signupFormik.handleSubmit}>
                             <div className="form-group">
                                 <input
                                     type="text"
-                                    name="referralCode"
+                                    // name="referralCode"
                                     className={`form-control ${
                                         signupFormik.touched.referralCode && signupFormik.errors.referralCode ? 'error' : ''
                                     }`}
@@ -144,7 +196,7 @@ export default function SignUp() {
                             <div className="form-group">
                                 <input
                                     type="text"
-                                    name="name"
+                                    // name="name"
                                     className={`form-control ${
                                         signupFormik.touched.name && signupFormik.errors.name ? 'error' : ''
                                     }`}
@@ -160,7 +212,7 @@ export default function SignUp() {
                             <div className="form-group">
                                 <input
                                     type="text"
-                                    name="mobileNumber"
+                                    // name="mobileNumber"
                                     className={`form-control ${
                                         signupFormik.touched.mobileNumber && signupFormik.errors.mobileNumber ? 'error' : ''
                                     }`}
@@ -175,10 +227,11 @@ export default function SignUp() {
                             </div>
                             <div className="form-group">
                                 <button 
+                                    disabled={signuploading}
                                     type="submit" 
                                     className="w-full anchor-button hovertime"
                                 >
-                                    Sign Up
+                                    {signuploading ? 'Signing Up...' : 'Sign Up'}
                                 </button>
                             </div>
                         </form>
@@ -189,7 +242,7 @@ export default function SignUp() {
                         <div className="verifi">
                             <p>We have sent verification code to</p>
                             <div className="verifi-number">
-                            +917042549650
+                            +91{signupFormik.values.mobileNumber}
                             <button type="button" className="editbtn" onClick={() => setOtpStep(true)}>Edit</button>
                             </div>
                         </div>
@@ -214,6 +267,39 @@ export default function SignUp() {
                                     if (prevInput) prevInput.focus();
                                     }
                                 }}
+                                onPaste={(e) => {
+                                    // Prevent default paste behavior
+                                    e.preventDefault();
+                                    
+                                    // Get pasted data
+                                    const pastedData = e.clipboardData.getData('text');
+                                    
+                                    // Extract digits only
+                                    const digits = pastedData.replace(/[^0-9]/g, '').substring(0, 4);
+                                    
+                                    // Only proceed if we have digits
+                                    if (digits.length > 0) {
+                                        // Create new OTP array
+                                        const newOtp = [...otpFormik.values.otp];
+                                        
+                                        // Fill in the digits
+                                        for (let i = 0; i < digits.length; i++) {
+                                            if (index + i < 4) {
+                                                newOtp[index + i] = digits[i];
+                                            }
+                                        }
+                                        
+                                        // Update formik state
+                                        otpFormik.setFieldValue('otp', newOtp);
+                                        
+                                        // Focus on next empty field or last field
+                                        const nextEmptyIndex = newOtp.findIndex(val => !val);
+                                        const nextInput = document.querySelector(
+                                            `input[name="otp[${nextEmptyIndex !== -1 ? nextEmptyIndex : 3}]"]`
+                                        ) as HTMLInputElement;
+                                        if (nextInput) nextInput.focus();
+                                    }
+                                }}
                                 />
                             ))}
                             </div>
@@ -225,7 +311,7 @@ export default function SignUp() {
                                 </div>
                             )}
                             <div className="form-group">
-                            <button type="button" className="resend">
+                            <button type="button" className="resend"  onClick={()=>{ resentOtp()}}>
                                 <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.1333 9.5L13.8004 8.16667L12.4666 9.5M14 8.5C14 11.8137 11.3137 14.5 8 14.5C4.68629 14.5 2 11.8137 2 8.5C2 5.18629 4.68629 2.5 8 2.5C10.2013 2.5 12.1257 3.68542 13.1697 5.45273M8 5.16667V8.5L10 9.83333" stroke="#dce9ff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                                 Resend OTP
                             </button>

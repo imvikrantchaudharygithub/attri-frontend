@@ -13,6 +13,8 @@ class MyDocument extends Document {
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+          <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
         </Head>
         <body className="antialiased">
           <Main />

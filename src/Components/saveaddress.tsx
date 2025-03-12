@@ -1,17 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
-export default function SaveAddress(){
+export default function SaveAddress({address,defaultAddress}:any){
     return (
-        <div className="address-item active relative">
-            <input className="radio-input" type="radio" id="html" name="fav_language" value="HTML"></input>
+        <div className={`address-item ${address?.isDefault === true ? 'active' : ''} relative`}>
+            <input className="radio-input" type="radio" id="html" name="fav_language" value="HTML" checked={address?.isDefault === true} onChange={()=>defaultAddress(address?._id)}></input>
             <label htmlFor="html">
             <div className="address-details">
-                <div className="attrixxsheading">Shakeel Shah</div>
-                <p>Delhi Technological University, Shahbad Daulatpur Village Main Bawana Delhi Road - 110044</p>
-                <div className="address-number">Mobile Number : <span>+91 7289819440</span></div>
+                <div className="attrixxsheading">{address?.name}</div>
+                <p>{address?.street}, {address?.city}, {address?.state} - {address?.pincode}</p>
+                <div className="address-number">Mobile Number : <span>+91{address?.contact}</span></div>
             </div>
             <div className="address-tag">
-                Home
+                {address?.type === 'home' ? 'Home' : 'Office'}
             </div>
             <div className="address-bottom">
                 <button type="button" className="address-btn align d-flex">

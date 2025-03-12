@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import "@/styles/faq.css";
+// import "@/styles/faq.css";
 import { useState } from 'react';
 export default function Faq({faqs}:any){
     const [accordionState, setAccordionState] = useState<any>();

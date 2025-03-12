@@ -1,8 +1,25 @@
 import Link from "next/link";
 import Image from "next/image";
-import { SetStateAction, useState } from "react";
-import "@/styles/thankyou.css";
+import { SetStateAction, useEffect, useState } from "react";
+// import "@/styles/thankyou.css";
+import { useRouter } from "next/router";
+import { getData } from "@/services/apiServices";
 export default function OrderDetails() {
+  const router = useRouter();
+  const { orderId } = router.query;
+  console.log("orderId",orderId)
+  const [orderData,setOrderData] = useState<any>(null)
+  const getOrder = async () => {
+    await getData(`/get-order/${orderId}`).then((response)=>{
+      console.log("orderResponse",response)
+      setOrderData(response?.data)
+    }).catch((error)=>{
+      console.log("error",error)
+    })
+  }
+  useEffect(()=>{
+    getOrder()
+  },[orderId])
   return (
     <section className="thankyou-main padding-tb">
         <div className="container">
@@ -15,7 +32,7 @@ export default function OrderDetails() {
               <div className="attrilgheading">Thank you for your purchase</div>
               <p className="thank-pra">We've received your order will ship in 5-7 business days. Your order number is #B6CT3</p>
               <button className="anchor-button hovertime copy-btn">
-                B6CT3
+                {orderData?.user?.referral_code}
                 <div className="icon">
                   <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 30 30">
                     <path d="M 23 3 A 4 4 0 0 0 19 7 A 4 4 0 0 0 19.09375 7.8359375 L 10.011719 12.376953 A 4 4 0 0 0 7 11 A 4 4 0 0 0 3 15 A 4 4 0 0 0 7 19 A 4 4 0 0 0 10.013672 17.625 L 19.089844 22.164062 A 4 4 0 0 0 19 23 A 4 4 0 0 0 23 27 A 4 4 0 0 0 27 23 A 4 4 0 0 0 23 19 A 4 4 0 0 0 19.986328 20.375 L 10.910156 15.835938 A 4 4 0 0 0 11 15 A 4 4 0 0 0 10.90625 14.166016 L 19.988281 9.625 A 4 4 0 0 0 23 11 A 4 4 0 0 0 27 7 A 4 4 0 0 0 23 3 z"></path>
@@ -27,19 +44,22 @@ export default function OrderDetails() {
               </button>
               <div className="order-summary">
                 <div className="attrixsheading">Order Summary</div>
-                <div className="order-summary-item dflex">
-                  <div className="order-summary-thumb">
-                    <Image width={100} height={100} className="w-full" src={'/assets/images/product.jpg'} alt=""></Image>
-                  </div>
-                  <div className="attrixxsheading">Half Sleeve 100% Cotton Shirts For Women</div>
-                  <p>₹1,400</p>
+                {orderData?.products?.map((item:any)=>(
+                  <div className="order-summary-item dflex">
+                    <div className="order-summary-thumb">
+                      <Image width={100} height={100} className="w-full" src={item?.product?.images[0]} alt=""></Image>
+                    </div>
+                  <div className="attrixxsheading">{item?.product?.name}</div>
+                  <div className="attrixxsheading">Quantity : {item?.quantity}</div>
+                  <p>₹{item?.product?.price}</p>
                 </div>
+                ))}
                 <div className="order-total">
                   <div className="attrixxsheading">Total</div>
-                  <div className="attrixxsheading total-price">₹1,400</div>
+                  <div className="attrixxsheading total-price">₹{orderData?.totalAmount}</div>
                 </div>
               </div>
-              <Link href={''} className="anchor-button hovertime">
+              <Link href={'/'} className="anchor-button hovertime">
                 Back To Home
               </Link>
               <div className="thank-video">

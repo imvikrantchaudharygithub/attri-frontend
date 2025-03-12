@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { SetStateAction, useState } from "react";
-import "@/styles/account.css";
-import "@/styles/popup.css";
+// import "@/styles/account.css";
+// import "@/styles/popup.css";
 export default function EditAddressPopUp() {
   return (
     <div className="attri-popup editaddress-popup">

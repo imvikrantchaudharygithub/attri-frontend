@@ -1,7 +1,23 @@
+
 import Link from "next/link";
+import { toast } from "react-toastify";
+import { clearUser } from '@/slices/userSlice';
+import { clearToken } from '@/slices/tokenSlice';
+import { resetCartCount } from '@/slices/loginUserSlice';
+import { clearCart } from '@/slices/cartSlice';
+import { useAppDispatch } from "@/hooks/hooks";
 export default function AccountSideBar() {
+    const dispatch = useAppDispatch();
+    const logout = () => {
+        dispatch(clearUser());
+        dispatch(clearToken());
+        dispatch(resetCartCount()); 
+        dispatch(clearCart());
+        toast.success('Logged out successfully');
+        }   
     return (
         <>
+            <Link href='/myaccount' className="hovertime">
             <div className="account-left-top active hovertime">
                 <span className="account-icon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -16,9 +32,10 @@ export default function AccountSideBar() {
                     </svg>
                 </span>
             </div>
+            </Link>
             <ul className="account-list">
                 <li>
-                    <Link href='/' className="hovertime">
+                    <Link href='/order' className="hovertime">
                         <span className="account-icon">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M20.3889 7.75L11.9444 3L3.5 7.75M20.3889 7.75V17.25L11.9444 22M20.3889 7.75L11.9444 12.5M11.9444 22L3.5 17.25V7.75M11.9444 22V12.5M3.5 7.75L11.9444 12.5M7.93335 10.1778L15.9556 5.32222" stroke="#636266" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -48,7 +65,7 @@ export default function AccountSideBar() {
                     </Link>
                 </li>
                 <li>
-                    <Link href='/' className="hovertime">
+                    <Link href='/myaddress' className="hovertime">
                         <span className="account-icon">
                             <svg width="15" height="21" viewBox="0 0 15 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.57692 1C3.94591 1 1 3.80401 1 7.25752C1 11.2313 5.38462 17.5285 6.99459 19.7036C7.06142 19.7954 7.14901 19.8701 7.25021 19.9216C7.35142 19.9731 7.46337 20 7.57692 20C7.69048 20 7.80243 19.9731 7.90363 19.9216C8.00484 19.8701 8.09243 19.7954 8.15925 19.7036C9.76923 17.5295 14.1538 11.2345 14.1538 7.25752C14.1538 3.80401 11.2079 1 7.57692 1Z" stroke="#636266" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -109,7 +126,7 @@ export default function AccountSideBar() {
                     </Link>
                 </li>
                 <li>
-                    <Link href='/' className="hovertime">
+                    <Link href='/' onClick={logout} className="hovertime">
                         <span className="account-icon">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <mask id="mask0_1083_2142" maskUnits="userSpaceOnUse" x="3" y="3" width="19" height="19">

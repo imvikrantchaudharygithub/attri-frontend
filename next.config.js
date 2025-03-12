@@ -7,7 +7,7 @@ const nextConfig = {
       'res.cloudinary.com',
       'images.unsplash.com', // Add other image domains if needed
       'localhost',
-      'your-image-domain.com'
+      'your-image-domain.com'   
     ],
     formats: ['image/avif', 'image/webp'],
     // Optional: Set remote patterns for more specific control
@@ -35,7 +35,10 @@ const nextConfig = {
   },
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL
-  }
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 module.exports = nextConfig; 

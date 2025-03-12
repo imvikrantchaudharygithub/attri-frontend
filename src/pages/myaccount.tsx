@@ -1,9 +1,30 @@
 import Link from "next/link";
 import Image from "next/image";
-import { SetStateAction, useState } from "react";
-import "@/styles/account.css";
+import { SetStateAction, useEffect, useState } from "react";
+// import "@/styles/account.css";
 import AccountSideBar from "@/Components/accountsidebar";
+import { useAppSelector } from "@/hooks/hooks";	
+import { useRouter } from "next/router";
+import { getData, postData } from "@/services/apiServices";
 export default function MyAccount() {
+	const token = useAppSelector((state: any) => state.token.token);
+	const router = useRouter();
+	if(!token){
+		router.push('/');
+	}
+	const [userData,setUserData] = useState<any>({});
+	useEffect(()=>{
+		getUserData();
+	},[])
+
+	const getUserData = async () => {
+		await getData('user/profile').then((res:any)=>{
+			console.log(res);
+			setUserData(res?.data?.user);
+		}).catch((err:any)=>{
+			console.log(err);
+		})
+	}
   return (
     <section className="account-box">
 		<div className="container">
@@ -44,12 +65,12 @@ export default function MyAccount() {
 								</svg>
 							</div>
 						</div>
-						<div className="attrixsheading">Himanshu Ghosh</div>
-						<p>9999999999</p>
+						<div className="attrixsheading">{userData?.username}</div>
+						<p>{userData?.phone}</p>
 						<div className="user-wallet d-flex">
 							<div className="wallet-card">
 								<div className="wallet-left">
-									<div className="attrixsheading">Rs.7,490</div>
+									<div className="attrixsheading">₹{userData?.balance}</div>
 									<p>Total Balance</p>
 								</div>
 								<div className="wallet-icon">
@@ -60,8 +81,8 @@ export default function MyAccount() {
 							</div>
 							<div className="wallet-card">
 								<div className="wallet-left">
-									<div className="attrixsheading">Rs.7,490</div>
-									<p>Total Balance</p>
+									<div className="attrixsheading">₹{userData?.cashback}</div>
+									<p>Total Cashback</p>
 								</div>
 								<div className="wallet-icon">
 									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="money">
@@ -71,6 +92,13 @@ export default function MyAccount() {
 									</svg>
 								</div>
 							</div>
+						</div>
+						<div className="referral-code">
+							<div className="referral-code-left">
+								<div className="attrixsheading">Referral Code</div>
+								<p>{userData?.referral_code}</p>
+							</div>
+							
 						</div>
 					</div>
 					<div className="team-list">

@@ -9,6 +9,19 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from '../store/store';
 import toast, { Toaster } from 'react-hot-toast';
 import { ToastContainer } from 'react-toastify';
+import '../styles/about.css'
+import '../styles/account.css'
+import '../styles/cart.css'
+import '../styles/faq.css'
+import '../styles/header.css'
+import '../styles/newproduct.css'
+import '../styles/orderdetails.css'
+import '../styles/plp.css'
+import 'react-toastify/dist/ReactToastify.css';
+import '../styles/popup.css'
+import '../styles/product.css'
+import '../styles/review.css'
+import '../styles/thankyou.css'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

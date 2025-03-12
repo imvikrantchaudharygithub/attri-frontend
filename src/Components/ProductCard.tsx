@@ -1,15 +1,43 @@
 import Link from "next/link";
 import Image from "next/image";
-import "@/styles/product.css";
-import { useDispatch } from 'react-redux';
-import { addToCart } from '@/slices/cartSlice';
+// import "@/styles/product.css";
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart, updateQuantity, selectCartTotal, selectCartItemCount } from '@/slices/cartSlice';
 import { toast } from 'react-toastify';
+import { useAppSelector } from "@/store/hooks";
+import { RootState } from "@/slices/rootReduces";
+import { postData } from "@/services/apiServices";
+import { setCartCount } from "@/slices/loginUserSlice";
 export default function ProductCard({product , category}:any){
     const dispatch = useDispatch();
+    const token = useSelector((state: RootState) => state?.token?.token);
+    const user = useAppSelector((state: any) => state.user);
+    const cartCount = useSelector((state: RootState) => state?.cartCount?.count);
     const handleAddToCart = (productitem: any) => {
-        dispatch(addToCart(productitem));
+        if(!token){
+        dispatch(addToCart({ 
+            product: productitem, 
+            quantity: 1 
+        }));
         toast.success('Item added to cart');
+    }else{
+       const data = {
+        userId: user?.id,
+        productId: productitem?._id,
+        quantity: 1
+       }
+       postData('add-item',data)
+       .then((res:any)=>{
+        dispatch(setCartCount(cartCount + 1));
+        toast.success('Item added to cart loginapi');
+       })
+       .catch((err:any)=>{
+        toast.error('Item not added to cart');
+       })
+    }
     };
+
+
     return (
         <div className="product-card relative">
             <div className="product-thumb relative">

@@ -3,12 +3,21 @@
 import Link from "next/link";
 import Image from "next/image";
 import { SetStateAction, useState } from "react";
-import "@/styles/header.css";
+// import "@/styles/header.css";
 import { useSelector } from 'react-redux';
 import { RootState } from '@/slices/rootReduces';
-
+import { useAppSelector } from "@/hooks/hooks";
+import LoginPopup from "./loginpopup";
+import { useAppDispatch } from "@/hooks/hooks";
+import { openLoginPopup ,closeLoginPopup} from '@/slices/popupSlice';
+import { toast } from "react-toastify";
+import { clearUser } from '@/slices/userSlice';
+import { clearToken } from '@/slices/tokenSlice';
+import { resetCartCount } from '@/slices/loginUserSlice';
+import { clearCart } from '@/slices/cartSlice';
 export default function Header() {
   const [isUserDropDown, setIsUserDropDown] = useState(false);
+  const dispatch = useAppDispatch();
     const toggleUserDropDown = () => {
     setIsUserDropDown(!isUserDropDown);
   };
@@ -22,7 +31,22 @@ export default function Header() {
     setAccordionState((prev) => (prev === index ? 0 : index));
   } 
   const cartItems = useSelector((state: RootState) => state.cart.items);
-  console.log(cartItems)
+  // console.log(cartItems)
+  const token = useAppSelector((state: any) => state.token.token);
+  const user = useAppSelector((state: any) => state.user);
+  const cartCount = useSelector((state: RootState) => state?.cartCount?.count);
+  console.log(user)
+  const { isLoginPopupOpen, closeLoginPopup } = useAppSelector((state: any) => state.popup);
+
+
+  const logout = () => {
+    dispatch(clearUser());
+    dispatch(clearToken());
+    dispatch(resetCartCount());
+    dispatch(clearCart());
+    toast.success('Logged out successfully');
+    }
+  
   return (
     <>
       <header className="header">
@@ -52,6 +76,7 @@ export default function Header() {
                   </div>
                 </form>
               </div>
+              {/* <div><p>{token ? 'true' : 'false'} - {user ? user.name : ''}</p></div> */}
             </div>
             <div className="header-right">
               <ul className="d-flex align justify-end">
@@ -63,31 +88,56 @@ export default function Header() {
                 <Link href='/cart'>
                 <li>
                     <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.9375 21.9375C9.38623 21.9375 9.75 21.5737 9.75 21.125C9.75 20.6763 9.38623 20.3125 8.9375 20.3125C8.48877 20.3125 8.125 20.6763 8.125 21.125C8.125 21.5737 8.48877 21.9375 8.9375 21.9375Z" stroke="#FCFCEC" stroke-width="1.68304" stroke-linecap="round" stroke-linejoin="round"></path><path d="M20.3125 21.9375C20.7612 21.9375 21.125 21.5737 21.125 21.125C21.125 20.6763 20.7612 20.3125 20.3125 20.3125C19.8638 20.3125 19.5 20.6763 19.5 21.125C19.5 21.5737 19.8638 21.9375 20.3125 21.9375Z" stroke="#FCFCEC" stroke-width="1.68304" stroke-linecap="round" stroke-linejoin="round"></path><path d="M2.4375 4.0625H5.6875L8.125 17.875H21.125" stroke="#FCFCEC" stroke-width="1.68304" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.125 14.625H20.7919C20.8858 14.6251 20.9769 14.5926 21.0496 14.533C21.1223 14.4735 21.1721 14.3906 21.1905 14.2985L22.653 6.98598C22.6648 6.92701 22.6634 6.86616 22.6488 6.80782C22.6342 6.74948 22.6069 6.6951 22.5688 6.6486C22.5306 6.60211 22.4826 6.56466 22.4283 6.53896C22.3739 6.51327 22.3145 6.49996 22.2544 6.5H6.5" stroke="#FCFCEC" stroke-width="1.68304" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                    <span className="cart-num">{cartItems?.length ? cartItems?.length : 0}</span>
+                   {!token ? (
+                    <span className="cart-num"> {cartItems?.length ? cartItems?.length : 0}</span>
+                  ):(   <span className="cart-num"> {cartCount}</span>
+
+                    )}
                 </li>
                 </Link>
                 <li onClick={toggleUserDropDown}>
                   <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.4999 2.08203C6.74679 2.08203 2.08325 6.74557 2.08325 12.4987C2.08325 18.2518 6.74679 22.9154 12.4999 22.9154C18.253 22.9154 22.9166 18.2518 22.9166 12.4987C22.9166 6.74557 18.253 2.08203 12.4999 2.08203Z" stroke="#FCFCEC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M4.44885 19.1091C4.44885 19.1091 6.77073 16.1445 12.4999 16.1445C18.2291 16.1445 20.552 19.1091 20.552 19.1091" stroke="#FCFCEC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12.5 12.5C13.3288 12.5 14.1237 12.1708 14.7097 11.5847C15.2958 10.9987 15.625 10.2038 15.625 9.375C15.625 8.5462 15.2958 7.75134 14.7097 7.16529C14.1237 6.57924 13.3288 6.25 12.5 6.25C11.6712 6.25 10.8763 6.57924 10.2903 7.16529C9.70424 7.75134 9.375 8.5462 9.375 9.375C9.375 10.2038 9.70424 10.9987 10.2903 11.5847C10.8763 12.1708 11.6712 12.5 12.5 12.5V12.5Z" stroke="#FCFCEC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                   <div className= {isUserDropDown ? "user-dropdown active" : "user-dropdown"}>
+                    
+                    {/* <div className="accountlink hovertime">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" fill="none" viewBox="0 0 14 12"><path fill="#5DD37C" d="M11.756.438c.432 0 .813.38.813.812 0 .457-.381.813-.813.813H2.413a.418.418 0 00-.407.406c0 .228.178.406.407.406h9.343c.889 0 1.625.736 1.625 1.625v5.688a1.62 1.62 0 01-1.625 1.624h-9.75c-.914 0-1.625-.71-1.625-1.624V2.062c0-.888.711-1.624 1.625-1.624h9.75zm-.812 7.718a.818.818 0 00.812-.812.835.835 0 00-.812-.813.818.818 0 00-.813.813c0 .457.356.812.813.812z"></path></svg>
+                      Wallet
+                    </div> */}
+                    {token ? (
+                      <>
+                     
+                    <Link href='/myaccount'>
                     <div className="accountlink hovertime">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12"><path fill="#5DD37C" d="M1 12s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6z"></path></svg>
+                     Profile
+                    </div>
+                    </Link>
+                    <Link href='/order'>
+                      <div className="accountlink hovertime">
                       <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" fill="none" viewBox="0 0 15 14"><path fill="#5DD37C" d="M9.545.002c.48 0 .95.136 1.364.395.415.258.76.63.999 1.079.24.448.365.956.365 1.473 0 .518-.126 1.026-.366 1.474H15v1.473h-1.364v7.367a.768.768 0 01-.2.521.657.657 0 01-.482.216H2.045a.657.657 0 01-.482-.216.768.768 0 01-.2-.52V5.895H0V4.422l3.093.001a3.153 3.153 0 01-.306-2.095A2.974 2.974 0 013.862.554 2.577 2.577 0 015.76.019 2.669 2.669 0 017.5 1c.255-.314.57-.566.922-.738.353-.172.735-.26 1.122-.26zM8.182 5.896H6.818v7.367h1.364V5.896zm-2.727-4.42c-.353 0-.691.149-.944.413a1.53 1.53 0 00-.416 1.005c-.013.38.11.751.345 1.035.234.284.561.46.912.489l.103.004h1.363V2.95c0-.352-.116-.693-.329-.96a1.34 1.34 0 00-.828-.497l-.105-.013-.102-.004zm4.09 0c-.344 0-.675.14-.927.393-.252.252-.407.599-.433.97l-.003.11v1.473h1.363c.344 0 .676-.14.928-.393s.406-.599.432-.97l.004-.11c0-.39-.144-.766-.4-1.042a1.314 1.314 0 00-.964-.432z"></path></svg>
                       Order history
                     </div>
-                    <div className="accountlink hovertime">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" fill="none" viewBox="0 0 14 12"><path fill="#5DD37C" d="M11.756.438c.432 0 .813.38.813.812 0 .457-.381.813-.813.813H2.413a.418.418 0 00-.407.406c0 .228.178.406.407.406h9.343c.889 0 1.625.736 1.625 1.625v5.688a1.62 1.62 0 01-1.625 1.624h-9.75c-.914 0-1.625-.71-1.625-1.624V2.062c0-.888.711-1.624 1.625-1.624h9.75zm-.812 7.718a.818.818 0 00.812-.812.835.835 0 00-.812-.813.818.818 0 00-.813.813c0 .457.356.812.813.812z"></path></svg>
-                      Wallet
-                    </div>
-                    <div className="accountlink hovertime">
+                    </Link>
+                    <button className="accountlink hovertime"  onClick={() => logout()}>
                       <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12"><path fill="#5DD37C" d="M1 12s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6z"></path></svg>
-                      Login / Register
-                    </div>
+                     Logout
+                    </button>
+                    </>
+                    ) : (
+                   
+                    <button className="accountlink hovertime"  onClick={() => dispatch(openLoginPopup())}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12"><path fill="#5DD37C" d="M1 12s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6z"></path></svg>
+                     Login / Register
+                    </button>
+                   
+                    )}
                   </div>
                 </li>
-                <li>
+               {!token && <li>
                   <Link href='/signup' className="anchor-button hovertime">
                     Sign Up
                   </Link>
-                </li>
+                </li>}
               </ul>
             </div>
           </div>
@@ -168,6 +218,9 @@ export default function Header() {
           </div>
         </div>
       </div>
+      {isLoginPopupOpen && <LoginPopup />}
+     
+
     </>
   );
 }

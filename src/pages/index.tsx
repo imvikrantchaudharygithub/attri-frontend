@@ -42,13 +42,14 @@ export default function Home({ homeData, error }: HomeProps) {
       <TakeCare data={homeData?.data?.sectionsData[1]}></TakeCare>
       <div className="newproduct-sec">
         {/* <NewProduct></NewProduct> */}
-        <NewProduct categoryData={homeData?.data?.categories[1]}></NewProduct>
+        {homeData?.data?.categories && homeData?.data?.categories.map((item: any) => (
+          <NewProduct categoryData={item}></NewProduct>
+        ))}
         {/* <NewProduct></NewProduct> */}
       </div>
       <Review></Review>
       <HaveFun></HaveFun>
       <About></About>
-      <LoginPopup></LoginPopup>
     </>
   );
 }
@@ -59,7 +60,7 @@ export async function getServerSideProps() {
     
     return {
       props: {
-        homeData,
+        homeData : homeData?.data,   
       },
     };
   } catch (error) {

@@ -1,4 +1,4 @@
-.attri-popup {width: 100%; height: 100%; display: none; position:fixed; top: 0; left: 0; overflow-x: hidden; overflow-y: hidden; transition: opacity .15s linear; z-index: 123;}
+.attri-popup {width: 100%; height: 100%; position:fixed; top: 0; left: 0; overflow-x: hidden; overflow-y: hidden; transition: opacity .15s linear; z-index: 123;}
 .attri-popup-overlay {width: 100%; height: 100%; position: fixed; top: 0; left: 0; background: rgba(0, 0, 0, .5); z-index: 10;}
 .attri-popup-wrapper {width: 80%; position: absolute; top: 50%; left: 50%; background-color: var(--white-color); opacity: 1; border-radius: 20px; transform: translate(-50%, -50%); margin: 0 auto; z-index: 123;}
 .attri-popup-close {display: flex; align-items: center; justify-content: center; position: absolute; width: 32px; height: 32px; padding: 5px; border: 0px solid var(--green-color); border-radius: 50%; text-align: center; top: 10px; right: 10px; background: var(--green-color); cursor: pointer; z-index: 1;}
@@ -14,7 +14,7 @@
 
 .login-step-one, .login-step-two, .login-step-three{display: flex; align-content: center; flex-wrap: wrap; align-items: center; justify-content: center; height: 100%;}
 .login-step-two .anchor-button, .login-step-three .anchor-button, .login-step-three form, .login-step-one form{width: 100%;}
-.login-step-one{display: none;}
+/* .login-step-one{display: none;} */
 .login-step-one .form-group{text-align: left; margin-bottom: 10px;}
 .login-box .attrismheading{color: var(--black-color); font-weight: 700; text-align: center; line-height: 30px; margin-bottom: 10px;}
 .login-step-one .attrismheading{margin-bottom: 20px;}
@@ -37,10 +37,10 @@
 .login-step-two .otp-input{width: 25%; height: 48px; font-size: 26px; border: 1px solid var(--gray-color); border-radius: 8px; text-align: center;}
 .login-step-two .resend{width: 100%; color: var(--green-color); display: flex; align-items: center; justify-content: center; gap: 5px;}
 .login-step-two .resend svg path{stroke: var(--green-color);}
-.login-step-three{display: none;}
+/* .login-step-three{display: none;} */
 .login-step-three .attrismheading{margin-bottom: 20px;}
 
-.attri-popup.newaddress-popup{display: none;}
+/* .attri-popup.newaddress-popup{display: none;} */
 .attri-popup.editaddress-popup{display: none;}
 .attri-popup.newaddress-popup .attri-popup-wrapper, .attri-popup.editaddress-popup .attri-popup-wrapper{width: 60%;}
 .attri-popup.newaddress-popup .attri-popup-body, .attri-popup.editaddress-popup .attri-popup-body{padding: 30px 30px;}

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import "@/styles/plp.css";
+// import "@/styles/plp.css";  
 import PlpProductSlider from "@/Components/PlpProductSlider";
 import ProductInfo from "@/Components/ProductInfo";
 import HaveFun from "@/Components/HaveFun";
@@ -20,8 +20,8 @@ export default function ProductDetails() {
         setIsLoading(true);
         if (Array.isArray(productslug) && productslug.length > 0) {
             getData(`/get-product/${productslug[0]}`).then((res: any) => {
-                setProductData(res.product);
-                console.log(res.product);
+                setProductData(res?.data?.product);
+                console.log(res);
                 setIsLoading(false);
             }).catch((err: any) => {
                 console.log(err);

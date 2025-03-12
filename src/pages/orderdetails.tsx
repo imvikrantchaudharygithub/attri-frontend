@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { SetStateAction, useState } from "react";
-import "@/styles/orderdetails.css";
+// import "@/styles/orderdetails.css";
 import OrderFilter from "@/Components/OrderFilter";
 import OrderCard from "@/Components/OrderCard";
 export default function OrderDetails() {
