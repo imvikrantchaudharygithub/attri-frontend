@@ -149,6 +149,7 @@ const handlePayment = async () => {
     if(!token){
     dispatch(openLoginPopup())
     }
+    if(token){
     try {
         // Step 1: Create our database order first
         const orderResponse = await postData('/create-order', {
@@ -222,6 +223,7 @@ const handlePayment = async () => {
         console.error('Payment failed:', error);
         toast.error('Payment initialization failed');
     }
+}
 };
 const orderdetails ={
     ordermrptotal:usercartItems?.reduce((acc:any,item:any)=>acc+item?.product?.mrp*item?.quantity,0),
