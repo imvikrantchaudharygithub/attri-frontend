@@ -128,6 +128,7 @@ tbody, td, tfoot, th, thead, tr {
 .anchor-button-line span::after{content: ""; position: absolute; top: 12px; left: 11px; height: 10px; width: 10px; border-top: 3px solid #fff;border-right: 3px solid #fff; transform: rotate(45deg);pointer-events: none; border-radius: 1px;}
 .anchor-button-line:hover{color: var(--green-color);}
 .anchor-button-line:hover span{transform: translate(5px);}
+.anchor-button:disabled{background: var(--gray-color); color: var(--white-color)}
 
 
 .bg-gray{background: var(--primary-color);}
@@ -229,7 +230,7 @@ tbody, td, tfoot, th, thead, tr {
 
 /* footer-start */
 .footer-left{width: 490px; min-width: 490px;}
-.footer-left .footer-logo svg{width: 160px; height: 50px; margin-bottom: 30px;}
+.footer-left .footer-logo{width: 160px; margin-bottom: 30px;}
 .footer-left .footer-app{gap: 25px; margin-bottom: 15px;}
 .footer-signup .attrixsheading{color: var(--white-color); font-weight: 600; margin-bottom: 15px;}
 .footer-signup .anchor-button{width: 225px;}

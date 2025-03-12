@@ -285,10 +285,10 @@ const orderdetails ={
                         </div>
                         )
                         ):(
-                          <div className="cart-order-item d-flex align relative  justify-center items-center">
-                            <div className="cart-order-left relative">
+                          <div className="cart-order-item cart-empty text-center">
+                            <div className="cart-empty-left relative">
                                 <Image width={600} height={600} className="w-full hovertime" src={'/assets/images/empty-cart.jpg'} alt=""></Image>
-                                <h4 className="text-center">Cart is empty</h4>
+                                <h4 className="attrixsheading">Cart is empty</h4>
                             </div>
                                 <Link href={'/'} className="anchor-button hovertime">Add Items</Link>
                           </div>

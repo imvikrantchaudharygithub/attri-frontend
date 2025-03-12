@@ -74,6 +74,7 @@
 .attri-popup .attri-popup-form .form-row .form-group{margin-bottom: 20px;}
 .attri-popup .attri-popup-form .form-row .form-group:last-child{margin-bottom: 0;}
 .attri-popup.newaddress-popup .attri-popup-wrapper, .attri-popup.editaddress-popup .attri-popup-wrapper{width: 95%;}
+.attri-popup.newaddress-popup .attri-popup-body, .attri-popup.editaddress-popup .attri-popup-body{height: 650px; overflow-y: scroll;}
 }
 
 @media (max-width: 599px) {
