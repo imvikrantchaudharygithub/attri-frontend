@@ -79,11 +79,42 @@ const cartSlice = createSlice({
         item.totalPrice = quantity * item.product.price;
         state.total = state.items.reduce((acc, item) => acc + item.totalPrice, 0);
       }
+    },
+    
+    // Increment quantity by 1
+    incrementQuantity: (state, action: PayloadAction<string>) => {
+      const productId = action.payload;
+      const item = state.items.find(item => item.product._id === productId);
+      
+      if (item) {
+        item.quantity += 1;
+        item.totalPrice = item.quantity * item.product.price;
+        state.total = state.items.reduce((acc, item) => acc + item.totalPrice, 0);
+      }
+    },
+    
+    // Decrement quantity by 1 (minimum 1)
+    decrementQuantity: (state, action: PayloadAction<string>) => {
+      const productId = action.payload;
+      const item = state.items.find(item => item.product._id === productId);
+      
+      if (item && item.quantity > 1) {
+        item.quantity -= 1;
+        item.totalPrice = item.quantity * item.product.price;
+        state.total = state.items.reduce((acc, item) => acc + item.totalPrice, 0);
+      }
     }
   },
 });
 
-export const { addToCart, removeFromCart, clearCart, updateQuantity } = cartSlice.actions;
+export const { 
+  addToCart, 
+  removeFromCart, 
+  clearCart, 
+  updateQuantity,
+  incrementQuantity,
+  decrementQuantity 
+} = cartSlice.actions;
 
 // Selectors
 export const selectCartTotal = (state: { cart: CartState }) => state.cart.total;

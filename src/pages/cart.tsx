@@ -10,7 +10,7 @@ import About from "@/Components/About";
 // import EditAddressPopUp from "@/Components/editaddresspopup";
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/slices/rootReduces';
-import { removeFromCart, clearCart, addToCart } from '@/slices/cartSlice';
+import { removeFromCart, clearCart, addToCart, decrementQuantity, incrementQuantity } from '@/slices/cartSlice';
 import { toast, ToastContainer } from 'react-toastify';
 import { getData, postData } from "@/services/apiServices";
 import { setCartCount } from "@/slices/loginUserSlice";
@@ -271,11 +271,11 @@ const orderdetails ={
                                 <div className="quantity-box">
                                     <div className="attrixxsheading">Quantity :</div>
                                     <div className="wrap d-flex">
-                                        <button type="button" id="sub" className="sub quantity-btn">
+                                        <button type="button" id="sub" className="sub quantity-btn" onClick={() => dispatch(decrementQuantity(item?.product?._id))}>
                                             <Image width={16} height={16} src={'/assets/images/icon/minus-icon.png'} alt=""></Image>
                                         </button>
                                         <input className="count" type="text" id="1" value={item?.quantity} min="1" max="100"/>
-                                        <button type="button" id="add" className="add quantity-btn">
+                                        <button type="button" id="add" className="add quantity-btn" onClick={() => dispatch(incrementQuantity(item?.product?._id))}>
                                             <Image width={16} height={16} src={'/assets/images/icon/plus-icon.png'} alt=""></Image>
                                         </button>
                                     </div>
