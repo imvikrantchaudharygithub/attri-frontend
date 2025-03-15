@@ -14,6 +14,7 @@ export default function MyAccount() {
 		router.push('/');
 	}
 	const [userData,setUserData] = useState<any>({});
+	const [teamData,setTeamData] = useState<any>([]);
 	useEffect(()=>{
 		getUserData();
 	},[])
@@ -33,6 +34,15 @@ export default function MyAccount() {
 	const shareWhatsapp = () => {
 		const text = `Hey, I'm using Attrixs app and I'm loving it! Get 10% off on your first purchase using my referral code: ${userData?.referral_code}`;
 		window.open(`https://wa.me/?text=${text}`, '_blank');
+	}
+	const getTeamData = async () => {
+		await getData(`/get-user/${userData?._id}`).then((res:any)=>{
+			console.log(res);
+			setTeamData(res?.data);
+			console.log(teamData?.user?.referralsByLevel);
+		}).catch((err:any)=>{
+			console.log(err);
+		})
 	}
   return (
     <section className="account-box">
@@ -116,11 +126,27 @@ export default function MyAccount() {
 							
 						</div>
 					</div>
-					<div className="team-list">
-						<div className="team-card d-flex align">
+					 <div className="team-list">
+						{/* <div className="team-card d-flex align">
 							<div className="attrixsheading">Level 1</div>
 							<div className="team-num">{userData?.referralFamily?.length}</div>
+						</div> */}
+						{teamData?.user?.referralsByLevel?.length > 0 && teamData?.user?.referralsByLevel?.map((item:any,index:number)=>{
+							return <div className="team-card d-flex align" key={index}>
+								<div className="attrixsheading">Level {item?.level}</div>
+								<div className="team-num">{item?.referrals?.length}</div>
+							</div>
+						})}
+						
+						<div className="flex justify-center items-center">
+						<button className="spcl-button learn-more" onClick={()=>getTeamData()}>
+							<span className="circle" aria-hidden="true">
+								<span className="icon arrow"></span>
+							</span>
+							<span className="button-text">View Team</span>
+						</button>
 						</div>
+
 						{/* <div className="team-card d-flex align">
 							<div className="attrixsheading">Level 1</div>
 							<div className="team-num">30</div>

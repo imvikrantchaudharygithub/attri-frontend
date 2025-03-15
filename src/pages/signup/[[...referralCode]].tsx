@@ -82,12 +82,14 @@ export default function SignUp() {
       if (nextInput) nextInput.focus();
     }
   };
+  const [showreferral,setShowreferral] = useState<boolean>(false);
 
   const fetchReferralData = async (code: string) => {
     
         getData(`/user/referral/${code}`).then((res:any)=>{
             console.log(res);
             setRefrralby(res?.data?.user)
+            setShowreferral(true);
         }).catch((err:any)=>{
             console.log(err);
         })
@@ -180,7 +182,7 @@ export default function SignUp() {
                     <div className="signup-step-one">
                         <div className="sign-top">
                             <div className="attrilgheading">Sign Up </div>
-                           {referralCode  &&  <p>Your are join with <span>{refrralby?.username ? refrralby?.username : 'Laoding...'}</span></p>}
+                           {(refrralby || signupFormik.values.referralCode) && <p>Your are join with <span>{refrralby?.username ? refrralby?.username : 'Laoding...'}</span></p>}
                         </div>
                         <form onSubmit={signupFormik.handleSubmit}>
                             <div className="form-group">
