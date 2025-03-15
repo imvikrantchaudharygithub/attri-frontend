@@ -124,12 +124,16 @@ export default function Header() {
                     </button>
                     </>
                     ) : (
-                   
+                   <>
                     <button className="accountlink hovertime"  onClick={() => dispatch(openLoginPopup())}>
                       <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12"><path fill="#5DD37C" d="M1 12s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6z"></path></svg>
-                     Login / Register
+                     Login 
                     </button>
-                   
+                    <Link href={'/signup'} className="accountlink hovertime">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12"><path fill="#5DD37C" d="M1 12s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6z"></path></svg>
+                   Register
+                  </Link>
+                  </>
                     )}
                   </div>
                 </li>
@@ -154,8 +158,8 @@ export default function Header() {
             </div>
             <div className="menu-name">
               <div className="attrismheading">Hey Plixfam</div>
-              <Link href='/' className="d-flex align justify-content">
-                Login
+              <Link href='/signup' className="d-flex align justify-content">
+                Sign up
                 <svg width="15" height="15" viewBox="0 0 6 10" fill="none"><path d="M1 1l4 4-4 4" stroke="#2E3642" stroke-linecap="round"></path></svg>
               </Link>
             </div>

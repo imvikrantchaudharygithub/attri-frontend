@@ -273,13 +273,13 @@ tbody, td, tfoot, th, thead, tr {
 
 .error-message{color: var(--red-color); font-size: 12px; margin-top: 5px;}
 /* From Uiverse.io by alexruix */ 
-.loader {
+.line-loader {
   width: 180px;
   height: 50px;
   position: relative;
 }
 
-.loader-text {
+.line-loader-text {
   position: absolute;
   top: -14px;
   padding: 0;
@@ -290,7 +290,7 @@ tbody, td, tfoot, th, thead, tr {
   letter-spacing: 1px;
 }
 
-.load {
+.line-load {
 
   background-color: #9A79FF;
   border-radius: 50px;
@@ -303,7 +303,7 @@ tbody, td, tfoot, th, thead, tr {
   animation: loading_713 3.5s ease both infinite;
 }
 
-.load::before {
+.line-load::before {
   position: absolute;
   content: "";
   width: 100%;
@@ -391,6 +391,192 @@ tbody, td, tfoot, th, thead, tr {
   100% {
     transform: translateX(0px);
     width: 16px;
+  }
+}
+/* From Uiverse.io by roroland */ 
+.loader {
+  --col1: rgba(228, 19, 141, 0.925);
+  --col2: rgb(255, 179, 80);
+  font-size: 2em;
+  font-weight: 600;
+  perspective: 800px;
+  position: relative;
+}
+
+.loader::after,
+.loader::before,
+.loader .text::after,
+.loader .text::before {
+  perspective: 800px;
+  animation: anim 2s ease-in-out infinite, dotMove 10s ease-out alternate infinite, move 10s linear infinite 1s;
+  ;
+  content: '●';
+  color: var(--col1);
+  position: absolute;
+  translate: -60px 500px;
+  width: 5px;
+  height: 5px;
+}
+
+.loader::before {
+  animation-delay: 3s;
+  color: var(--col1);
+}
+
+.loader .text::before {
+  color: var(--col2);
+  animation-delay: 2s;
+}
+
+.loader .text::after {
+  color: var(--col2);
+}
+
+.loader .text {
+  animation: anim 20s linear infinite, move 10s linear infinite 1s;
+  color: transparent;
+  background-image: linear-gradient(90deg, 
+  var(--col1) 0%,
+  var(--col2) 100%);
+  background-clip: text;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  transform: skew(5deg, -5deg);
+  -webkit-background-clip: text;
+  position: relative;
+}
+
+@keyframes anim {
+  0%, 100% {
+    text-shadow: 2px 0px 2px rgba(179, 158, 158, .5);
+  }
+
+  50% {
+    background-size: 0%;
+    background-position-x: left;
+    text-shadow: 2px 10px 6px rgba(179, 158, 158, 1);
+  }
+}
+
+@keyframes move {
+  50% {
+    translate: 0px 0px;
+    rotate: x 60deg;
+    transform: skew(-5deg, 5deg);
+  }
+}
+
+@keyframes dotMove {
+  0%, 100% {
+    translate: -60px 300px;
+  }
+
+  50% {
+    translate: 160px -250px;
+    scale: .5;
+    opacity: .85;
+  }
+}
+
+  /* Dark theme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: hsl(var(--hue), 90%, 5%);
+    --fg: hsl(var(--hue), 90%, 95%);
+  }
+
+  .loader_ring {
+    stroke: hsla(var(--hue), 90%, 95%, 0.1);
+  }
+}
+
+  /* Animations */
+@keyframes worm1 {
+  from,
+    to {
+    stroke-dashoffset: 0;
+  }
+
+  12.5% {
+    animation-timing-function: ease-out;
+    stroke-dashoffset: -175.91;
+  }
+
+  25% {
+    animation-timing-function: cubic-bezier(0, 0, 0.43, 1);
+    stroke-dashoffset: -307.88;
+  }
+
+  50% {
+    animation-timing-function: ease-in;
+    stroke-dashoffset: -483.8;
+  }
+
+  62.5% {
+    animation-timing-function: ease-out;
+    stroke-dashoffset: -307.88;
+  }
+
+  75% {
+    animation-timing-function: cubic-bezier(0, 0, 0.43, 1);
+    stroke-dashoffset: -175.91;
+  }
+}
+
+@keyframes worm2 {
+  from,
+    12.5%,
+    75%,
+    to {
+    transform: rotate(0) translate(-42px, 0);
+  }
+
+  25%,
+    62.5% {
+    transform: rotate(0.5turn) translate(-42px, 0);
+  }
+}
+
+@keyframes worm2-1 {
+  from {
+    stroke-dashoffset: 175.91;
+    transform: rotate(0);
+  }
+
+  12.5% {
+    animation-timing-function: cubic-bezier(0, 0, 0.42, 1);
+    stroke-dashoffset: 0;
+    transform: rotate(0);
+  }
+
+  25% {
+    animation-timing-function: linear;
+    stroke-dashoffset: 0;
+    transform: rotate(1.5turn);
+  }
+
+  37.5%,
+    50% {
+    stroke-dashoffset: -175.91;
+    transform: rotate(1.5turn);
+  }
+
+  62.5% {
+    animation-timing-function: cubic-bezier(0, 0, 0.42, 1);
+    stroke-dashoffset: 0;
+    transform: rotate(1.5turn);
+  }
+
+  75% {
+    animation-timing-function: linear;
+    stroke-dashoffset: 0;
+    transform: rotate(0);
+  }
+
+  87.5%,
+    to {
+    stroke-dashoffset: 175.92;
+    transform: rotate(0);
   }
 }
  

@@ -39,9 +39,9 @@ export default function ProductListing() {
     }
     if(isLoading){
         return <div className="flex justify-center items-center h-screen">
-            <div className="loader">
-              <span className="loader-text">loading</span>
-              <span className="load"></span>
+              <div className="line-loader">
+              <span className="line-loader-text">loading</span>
+              <span className="line-load"></span>
             </div>
           </div>
     }

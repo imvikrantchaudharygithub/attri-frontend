@@ -153,7 +153,7 @@ export default function LoginPopup() {
                           Notify me for any updates & offers
                         </label>
                       </div>
-                      <button type="submit" className="anchor-button anchor-button-line hovertime">
+                      <button type="submit" disabled={!formik.isValid} className="anchor-button anchor-button-line hovertime">
                         Continue
                       </button>
                     </form>
@@ -247,7 +247,7 @@ export default function LoginPopup() {
                       <button 
                         type="submit" 
                         className="anchor-button hovertime"
-                        disabled={isOtpVerifying}
+                        disabled={ !otpFormik.isValid || isOtpVerifying}
                       >
                         {isOtpVerifying ? 'Verifying...' : 'Verify'}
                       </button>

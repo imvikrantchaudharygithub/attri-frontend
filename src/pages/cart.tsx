@@ -25,6 +25,8 @@ export default function Cart() {
  
   const [usercartItems, setUserCartItems] = useState<any[]>([]);
   const [useraddress, setUseraddress] = useState<any>({});
+  const [isPaymentLoading, setIsPaymentLoading] = useState(false);
+  const [ischeckoutLoading, setIscheckoutLoading] = useState(false);
   const handleRemoveFromCart = async(item: any) => {
     if(!token){
       dispatch(removeFromCart(item));
@@ -130,6 +132,46 @@ export default function Cart() {
       setUseraddress(null)
     })
   }
+  const incrementproductQuantity = async(productId: string) => {
+    if(!token){
+      dispatch(incrementQuantity(productId));     
+    }
+    if(token){
+      const data = {
+        userId: user?.id,
+        productId: productId,
+      }
+      await postData('/cart/increase-quantity',data)
+      .then((res:any)=>{
+        console.log(res)
+        getusercart()
+      })
+      .catch((err:any)=>{
+        console.log(err)
+      })
+    }
+ 
+  };
+
+  const decrementproductQuantity = async(productId: string) => {
+    if(!token){
+      dispatch(decrementQuantity(productId));
+    }
+    if(token){
+      const data = {
+        userId: user?.id,
+        productId: productId,
+      }
+      await postData('/cart/decrease-quantity',data)
+      .then((res:any)=>{
+        console.log(res)
+        getusercart()
+      })
+      .catch((err:any)=>{
+        console.log(err)
+      })
+    }
+  };
 //   const createOrder = () => {
 //     const data = {
 //       user: user?.id,
@@ -151,6 +193,8 @@ const handlePayment = async () => {
     }
     if(token){
     try {
+        setIscheckoutLoading(true)
+        
         // Step 1: Create our database order first
         const orderResponse = await postData('/create-order', {
             user: user?.id,
@@ -165,7 +209,7 @@ const handlePayment = async () => {
         console.log("orderResponse",orderResponse)
         
         const orderId = orderResponse.data._id;
-        
+        window.scrollTo(0, 0);  // Scroll to top of page when payment process starts
         // Step 2: Create Razorpay order using our order ID
         const razorpayResponse = await postData('/create-razorpay-order', {
             orderId: orderId
@@ -177,7 +221,7 @@ const handlePayment = async () => {
         }
         
         const { order: razorpayOrder, key } = razorpayResponse.data;
-        
+        setIsPaymentLoading(true)
         // Step 3: Initialize Razorpay with response data
         const options = {
             key: key,
@@ -205,10 +249,14 @@ const handlePayment = async () => {
                         dispatch(clearCart());
                         dispatch(setCartCount(0))
                         // Add navigation to success page
+                        setIsPaymentLoading(false)
+                        setIscheckoutLoading(false)
                         router.push(`/thankyou/${orderId}`);
                     
                 } catch (err) {
                     toast.error("Payment verification failed");
+                    setIsPaymentLoading(false)  
+                    setIscheckoutLoading(false)
                 }
             },
             theme: {
@@ -222,6 +270,8 @@ const handlePayment = async () => {
     } catch (error) {
         console.error('Payment failed:', error);
         toast.error('Payment initialization failed');
+        setIsPaymentLoading(false)
+        setIscheckoutLoading(false)
     }
 }
 };
@@ -241,6 +291,19 @@ const orderdetails ={
     .then((res:any)=>{
       console.log(res)
     })
+}
+
+if(isPaymentLoading){
+    return <div className="flex justify-center items-center h-screen">
+      
+<div className="loader">
+  <p className="text">
+    loading...
+  </p>
+</div>
+
+  
+    </div>
 }
   return (
     <>
@@ -271,11 +334,11 @@ const orderdetails ={
                                 <div className="quantity-box">
                                     <div className="attrixxsheading">Quantity :</div>
                                     <div className="wrap d-flex">
-                                        <button type="button" id="sub" className="sub quantity-btn" onClick={() => dispatch(decrementQuantity(item?.product?._id))}>
+                                        <button type="button" id="sub" className="sub quantity-btn" onClick={() => decrementproductQuantity(item?.product?._id)}>
                                             <Image width={16} height={16} src={'/assets/images/icon/minus-icon.png'} alt=""></Image>
                                         </button>
                                         <input className="count" type="text" id="1" value={item?.quantity} min="1" max="100"/>
-                                        <button type="button" id="add" className="add quantity-btn" onClick={() => dispatch(incrementQuantity(item?.product?._id))}>
+                                        <button type="button" id="add" className="add quantity-btn" onClick={() => incrementproductQuantity(item?.product?._id)}>
                                             <Image width={16} height={16} src={'/assets/images/icon/plus-icon.png'} alt=""></Image>
                                         </button>
                                     </div>
@@ -295,18 +358,20 @@ const orderdetails ={
                         )}
                     </div>
                     <div className="cart-right">
-                       {token && useraddress !== null && ( <div className="cart-right-card">
+                        <div className="cart-right-card">
                             <div className="attrixxsheading">Select Address</div>
+                       {token && useraddress !== null && ( 
                             <div className="address-details">
                                 <div className="attrixxsheading"> {useraddress?.name}</div>
                                 <p>{useraddress?.street}, {useraddress?.city}, {useraddress?.state} - {useraddress?.pincode}</p>
                                 <div className="address-number">Mobile Number : <span>+91{useraddress?.contact}</span></div>
                             </div>
-                            <Link href={'/myaddress'} className="anchor-button hovertime">Change Address</Link>
+                        )}
+                            <Link href={'/myaddress'} className="anchor-button hovertime">{useraddress !== null ? "Change Address" : "Add Address"}</Link>
                         </div>
-                       )}
+                      
                         <div className="cart-right-card">
-                            <div className="attrixxsheading">Price Details <span>( {usercartItems?.length} items)</span></div>
+                            <div className="attrixxsheading">Price Details <span>( {usercartItems?.length ? usercartItems?.length : 0} items)</span></div>
                             <div className="cart-order-box">
                                 <div className="order-item d-flex">
                                     <div className="order-name">Order Total</div>
@@ -333,7 +398,7 @@ const orderdetails ={
                                     <div className="order-price">₹{orderdetails?.grandtotal}</div>
                                 </div>
                             </div>
-                            <button onClick={()=>handlePayment()} type="button" className="anchor-button hovertime">CHECKOUT</button>
+                            <button onClick={()=>handlePayment()} type="button" className="anchor-button hovertime" disabled={ischeckoutLoading}>{ischeckoutLoading ? "CHECKING OUT..." : "CHECKOUT"}</button>
                         </div>
                     </div>
                     

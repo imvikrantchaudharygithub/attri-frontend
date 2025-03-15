@@ -3,11 +3,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from 'react';
 import { SetStateAction} from "react";
+import { useAppSelector } from '@/hooks/hooks';
 export default function Footer() {
   const [accordionState, setAccordionState] = useState(0);
   const accordion = (index: number) => {
     setAccordionState((prev) => (prev === index ? 0 : index));
   }
+  const token = useAppSelector((state: any) => state.token.token);
   return (
     <footer className="footer bg-gray padding-tb">
       <div className="container d-flex">
@@ -28,13 +30,13 @@ export default function Footer() {
               <Image width={165} height={54} className="w-full" src={'/assets/images/playstpre-app.png'} alt=""></Image>
             </Link>
           </div>
-          <div className="footer-signup">
+         { !token && <div className="footer-signup">
             <div className="attrixsheading">Sign up for exclusive deals and offers</div>
             <Link href='/' className="anchor-button d-inline cursor-pointer hovertime">
               Sign up
             </Link>
             <p>By signing up, you agree to our Privacy Policy</p>
-          </div>
+          </div>}
 
         </div>
         <div className="footer-right d-flex justify-end">

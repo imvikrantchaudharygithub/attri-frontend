@@ -6,6 +6,7 @@ import AccountSideBar from "@/Components/accountsidebar";
 import { useAppSelector } from "@/hooks/hooks";	
 import { useRouter } from "next/router";
 import { getData, postData } from "@/services/apiServices";
+import { toast } from "react-toastify";
 export default function MyAccount() {
 	const token = useAppSelector((state: any) => state.token.token);
 	const router = useRouter();
@@ -24,6 +25,14 @@ export default function MyAccount() {
 		}).catch((err:any)=>{
 			console.log(err);
 		})
+	}
+	const copyReferralcode = () => {
+		navigator.clipboard.writeText(userData?.referral_code);
+		toast.success('Referral code copied to clipboard');
+	}
+	const shareWhatsapp = () => {
+		const text = `Hey, I'm using Attrixs app and I'm loving it! Get 10% off on your first purchase using my referral code: ${userData?.referral_code}`;
+		window.open(`https://wa.me/?text=${text}`, '_blank');
 	}
   return (
     <section className="account-box">
@@ -98,7 +107,10 @@ export default function MyAccount() {
 								<div className="attrixsheading">Referral Code</div>
 								<p className="anchor-button hovertime copy-btn">
 									{userData?.referral_code}
-									<div className="icon"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 30 30"><path d="M 23 3 A 4 4 0 0 0 19 7 A 4 4 0 0 0 19.09375 7.8359375 L 10.011719 12.376953 A 4 4 0 0 0 7 11 A 4 4 0 0 0 3 15 A 4 4 0 0 0 7 19 A 4 4 0 0 0 10.013672 17.625 L 19.089844 22.164062 A 4 4 0 0 0 19 23 A 4 4 0 0 0 23 27 A 4 4 0 0 0 27 23 A 4 4 0 0 0 23 19 A 4 4 0 0 0 19.986328 20.375 L 10.910156 15.835938 A 4 4 0 0 0 11 15 A 4 4 0 0 0 10.90625 14.166016 L 19.988281 9.625 A 4 4 0 0 0 23 11 A 4 4 0 0 0 27 7 A 4 4 0 0 0 23 3 z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" id="copy"><path fill="#212121" d="M4.00029246,4.08524952 L4,10.5 C4,11.8254834 5.03153594,12.9100387 6.33562431,12.9946823 L6.5,13 L10.9143985,13.000703 C10.7082819,13.5829319 10.1528467,14 9.5,14 L6,14 C4.34314575,14 3,12.6568542 3,11 L3,5.5 C3,4.84678131 3.41754351,4.29108512 4.00029246,4.08524952 Z M11.5,2 C12.3284271,2 13,2.67157288 13,3.5 L13,10.5 C13,11.3284271 12.3284271,12 11.5,12 L6.5,12 C5.67157288,12 5,11.3284271 5,10.5 L5,3.5 C5,2.67157288 5.67157288,2 6.5,2 L11.5,2 Z"></path></svg></div>
+									<div className="icon">
+										<button onClick={shareWhatsapp}><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 30 30"><path d="M 23 3 A 4 4 0 0 0 19 7 A 4 4 0 0 0 19.09375 7.8359375 L 10.011719 12.376953 A 4 4 0 0 0 7 11 A 4 4 0 0 0 3 15 A 4 4 0 0 0 7 19 A 4 4 0 0 0 10.013672 17.625 L 19.089844 22.164062 A 4 4 0 0 0 19 23 A 4 4 0 0 0 23 27 A 4 4 0 0 0 27 23 A 4 4 0 0 0 23 19 A 4 4 0 0 0 19.986328 20.375 L 10.910156 15.835938 A 4 4 0 0 0 11 15 A 4 4 0 0 0 10.90625 14.166016 L 19.988281 9.625 A 4 4 0 0 0 23 11 A 4 4 0 0 0 27 7 A 4 4 0 0 0 23 3 z"></path></svg></button>
+									<button onClick={()=>copyReferralcode()}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" id="copy"><path fill="#212121" d="M4.00029246,4.08524952 L4,10.5 C4,11.8254834 5.03153594,12.9100387 6.33562431,12.9946823 L6.5,13 L10.9143985,13.000703 C10.7082819,13.5829319 10.1528467,14 9.5,14 L6,14 C4.34314575,14 3,12.6568542 3,11 L3,5.5 C3,4.84678131 3.41754351,4.29108512 4.00029246,4.08524952 Z M11.5,2 C12.3284271,2 13,2.67157288 13,3.5 L13,10.5 C13,11.3284271 12.3284271,12 11.5,12 L6.5,12 C5.67157288,12 5,11.3284271 5,10.5 L5,3.5 C5,2.67157288 5.67157288,2 6.5,2 L11.5,2 Z"></path></svg></button>
+									</div>
 								</p>
 							</div>
 							
@@ -107,12 +119,12 @@ export default function MyAccount() {
 					<div className="team-list">
 						<div className="team-card d-flex align">
 							<div className="attrixsheading">Level 1</div>
-							<div className="team-num">30</div>
+							<div className="team-num">{userData?.referralFamily?.length}</div>
 						</div>
-						<div className="team-card d-flex align">
+						{/* <div className="team-card d-flex align">
 							<div className="attrixsheading">Level 1</div>
 							<div className="team-num">30</div>
-						</div>
+						</div> */}
 					</div>
 				</div>
 			</div>

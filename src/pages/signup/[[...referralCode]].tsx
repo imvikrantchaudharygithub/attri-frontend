@@ -17,6 +17,7 @@ export default function SignUp() {
     const { referralCode } = router.query;
     const dispatch = useAppDispatch();
     const isTokenSet = useAppSelector((state: any) => state.token.isTokenSet);
+    const token = useAppSelector((state: any) => state.token.token);
     const user = useAppSelector((state: any) => state.user); 
     const [refrralby,setRefrralby] = useState<any>();
     const [signuploading,setSignuploading] = useState<boolean>(false);
@@ -160,6 +161,11 @@ export default function SignUp() {
         // No need to call fetchReferralData here as it will be triggered by the above useEffect
     }
   }, [referralCode]);
+  useEffect(()=>{
+    if(token){
+        router.push('/');
+    }
+  },[token])
 
   return (
     <div className="sign-box padding-tb">
