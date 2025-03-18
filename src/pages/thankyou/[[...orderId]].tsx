@@ -44,9 +44,9 @@ export default function OrderDetails() {
               </button>
               <div className="order-summary">
                 <div className="attrixsheading">Order Summary</div>
-                {orderData?.products?.map((item:any)=>(
+                {orderData?.products?.map((item:any,index:number)=>(
                   <div className="order-summary-item dflex">
-                    <div className="order-summary-thumb">
+                    <div className="order-summary-thumb" key={index}>
                       <Image width={100} height={100} className="w-full" src={item?.product?.images[0]} alt=""></Image>
                     </div>
                   <div className="attrixxsheading">{item?.product?.name}</div>

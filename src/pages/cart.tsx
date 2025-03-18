@@ -274,6 +274,8 @@ const handlePayment = async () => {
         setIscheckoutLoading(false)
     }
 }
+// setIsPaymentLoading(false)
+// setIscheckoutLoading(false)
 };
 const orderdetails ={
     ordermrptotal:usercartItems?.reduce((acc:any,item:any)=>acc+item?.product?.mrp*item?.quantity,0),

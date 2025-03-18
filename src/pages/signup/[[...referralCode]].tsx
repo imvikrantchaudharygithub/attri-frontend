@@ -115,7 +115,7 @@ export default function SignUp() {
       mobileNumber: '',
     },
     validationSchema: Yup.object({
-      referralCode: Yup.string(),
+      referralCode: Yup.string().required('Referral code is required'),
       name: Yup.string()
         .required('Name is required')
         .min(2, 'Name must be at least 2 characters'),
@@ -184,8 +184,48 @@ export default function SignUp() {
                             <div className="attrilgheading">Sign Up </div>
                            {(refrralby || signupFormik.values.referralCode) && <p>Your are join with <span>{refrralby?.username ? refrralby?.username : 'Laoding...'}</span></p>}
                         </div>
-                        <form onSubmit={signupFormik.handleSubmit}>
-                            <div className="form-group">
+                        {!(refrralby || signupFormik.values.referralCode) &&   <div className="flex justify-center items-center overflow-y-scroll mb-2 gap-2">
+                            <div className="text-sm ">Suggested Referrals</div>
+                        <div className="flex items-center rounded-full bg-[#282936] px-2 py-1 text-xs text-white whitespace-nowrap">
+                          {/* <svg
+                            className="mr-1 h-4 w-4 fill-current"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg> */}
+                          <svg width="10" height="10" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 1V15M1 8H15" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                          </svg>
+                          <span className="ml-2">Referral Applied</span>
+                        </div>
+                        <div className="flex items-center rounded-full bg-[#282936] px-2 py-1 text-xs text-white whitespace-nowrap">
+                          {/* <svg
+                            className="mr-1 h-4 w-4 fill-current"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg> */}
+                          <svg width="10" height="10" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 1V15M1 8H15" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                          </svg>
+                          <span className="ml-2">Referral Applied</span>
+                        </div>
+                      
+                        
+                        
+
+                        </div>
+                        }
+                            <form onSubmit={signupFormik.handleSubmit}>
+                                <div className="form-group">
                                 <input
                                     type="text"
                                     // name="referralCode"
@@ -259,7 +299,7 @@ export default function SignUp() {
                             {[0, 1, 2, 3].map((index) => (
                                 <input
                                 key={index}
-                                type="text"
+                                type="number"
                                 maxLength={1}
                                 name={`otp[${index}]`}
                                 className={`otp-input ${

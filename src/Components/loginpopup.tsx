@@ -186,7 +186,7 @@ export default function LoginPopup() {
                       {[0, 1, 2, 3].map((index) => (
                         <input
                           key={index}
-                          type="text"
+                          type="number"
                           maxLength={1}
                           name={`otp[${index}]`}
                           className={`otp-input ${

@@ -670,7 +670,6 @@ tbody, td, tfoot, th, thead, tr {
   color: #fff;
  }
 
-
 @media only screen and (min-width: 1919px) {
   .container {max-width: 1699px;}
 }
