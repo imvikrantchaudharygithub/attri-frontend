@@ -10,7 +10,7 @@
 .header-right ul li{margin-left: 20px; cursor: pointer; position: relative;}
 .header-right .cart-num{font-size: 8px; color: var(--white-color); display: flex; align-items: center; justify-content: center; position: absolute; top: -5px; left: 10px; width: 14px; height: 14px; border-radius: 50%; background: var(--primary-color);}
 .header-right .user-dropdown{width: 180px; border-radius: 5px; position: absolute; top: 53px; right: 0; background: var(--white-color); box-shadow: 0 0 10px rgba(0,0,0,.5); z-index: 1; display: none;}
-.header-right .user-dropdown .accountlink{color: var(--black-color); border-bottom: 1px solid var(--text-color); display: flex; align-items: center; gap: 10px; padding: 10px;}
+.header-right .user-dropdown .accountlink{width: 100%; color: var(--black-color); border-bottom: 1px solid var(--text-color); display: flex; align-items: center; gap: 10px; padding: 10px;}
 .header-right .user-dropdown .accountlink:hover{color: var(--green-color);}
 .header-right .user-dropdown .accountlink:last-child{border-bottom: 0;}
 .header-right .user-dropdown.active{display: block;}

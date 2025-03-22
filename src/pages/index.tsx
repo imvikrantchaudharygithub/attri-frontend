@@ -10,6 +10,7 @@ import HaveFun from "@/Components/HaveFun";
 import About from "@/Components/About";
 import LoginPopup from "@/Components/loginpopup";
 import { getData } from '@/services/apiServices';
+import StickyBar from "@/Components/stickybar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -50,6 +51,7 @@ export default function Home({ homeData, error }: HomeProps) {
       <Review></Review>
       <HaveFun></HaveFun>
       <About></About>
+      <StickyBar/>
     </>
   );
 }

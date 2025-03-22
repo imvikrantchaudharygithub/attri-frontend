@@ -22,6 +22,7 @@ import '../styles/popup.css'
 import '../styles/product.css'
 import '../styles/review.css'
 import '../styles/thankyou.css'
+import "../styles/teams.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

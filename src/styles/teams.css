@@ -1,0 +1,61 @@
+.teams, .withdraw{padding-top: 40px;}
+.teams .attriheading, .withdraw .attriheading{color: var(--primary-color); font-weight: 700; text-transform: capitalize;}
+
+.team-card{padding: 15px 25px; border-radius: 50px; box-shadow: 0 0 10px #0003; margin-bottom: 20px; background-color: #0093E9;  background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);}
+.team-card .attrixsheading{color: var(--black-color); font-weight: 700;}
+.team-card .team-num{width: 50px; min-width: 50px; height: 50px; padding: 5px; background: var(--primary-color); border-radius: 50%; font-size: 18px; color: var(--white-color); font-weight: 600; display: flex; align-items: center; justify-content: center;}
+.team-card:last-child{margin-bottom: 0;}
+.team-card:nth-child(2n){background-color: #85FFBD; background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);}
+
+.myteams-card .team-num{width: auto; min-width: auto; height: auto; border-radius: 0; background: transparent;}
+
+.withdraw-table{border-radius: 10px; border: 1px solid #e7e7e7;}
+.withdraw-table .table_custom_wrap {border-spacing: 0;}
+.withdraw-table .table_custom_wrap tr {background-color: #f6f6f6;}
+.withdraw-table table tr td{border-bottom: 1px solid #e7e7e7;}
+.withdraw-table table tr td {font-weight: 500; white-space: nowrap; border-right: 1px solid #e7e7e7; padding: 15px;}
+.withdraw-table table thead tr td {font-weight: 700;}
+.withdraw-table table tr td:last-child{border-right: 0;}
+.withdraw-table tbody tr:last-child td{border-bottom: 0;}
+
+.withdraw-sec{}
+.withdraw-card{width: 49%; background: var(--white-color); box-shadow: 0 2px 5px rgba(0,0,0,.3); border-radius: 10px; padding: 30px;}
+.withdraw-left {height: 350px; overflow-y: auto;}
+.withdraw-left .withdraw-card-top{margin-bottom: 15px;}
+.withdraw-left .withdraw-card-top .attrixsheading{color: var(--black-color); font-weight: 700;}
+.withdraw-left .bank-btn{font-size: 14px; color: var(--green-color); font-weight: 700; text-transform: uppercase; border: none; background: transparent; cursor: pointer;}
+.withdraw-left .bank-btn .plus-icon{width: 14px;}
+.withdraw-left .bank-btn svg{margin-right: 10px;}
+.withdraw-left .bank-btn svg path{stroke: var(--green-color);}
+
+.withdraw-left .bank-list{grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px;}
+.withdraw-left .bank-item{padding: 20px; box-shadow: 0 0px 15px rgba(0,0,0,.1); border-radius: 20px; border: 2px solid transparent;}
+.withdraw-left .bank-item .radio-input{width: 20px; height: 20px; accent-color: green;}
+.withdraw-left .bank-item .bank-details{width: 100%; margin: 15px 0;}
+.withdraw-left .bank-item .bank-number{font-size: 16px; color: var(--gray-color); font-weight: 400; margin-bottom: 5px;}
+.withdraw-left .bank-item .bank-number:last-child{margin-bottom: 0;}
+.withdraw-left .bank-item .bank-number span{color: var(--black-color); font-weight: 500;}
+.withdraw-left .bank-item .bank-bottom{display: flex; align-items: center; border-top: 1px solid #ECECEC; padding-top: 5px;}
+.withdraw-left .bank-item .bank-bottom .bank-btn{font-weight: 500; padding: 8px 0; padding-right: 70px; margin-right: 70px; border-right: 1px solid #D9D9D9;}
+.withdraw-left .bank-item .bank-bottom .bank-btn:last-child{padding-right: 0; margin: 0; border: none;}
+.withdraw-left .bank-item:last-child{margin-bottom: 0;}
+.withdraw-left .bank-item.active{border-color: var(--green-color);}
+
+.withdraw-right p{margin-bottom: 10px;}
+.terms{padding: 30px; box-shadow: 0 2px 5px rgba(0,0,0,.3); border-radius: 10px; margin-top: 30px;}
+.terms .attrimdheading{color: var(--black-color); font-weight: 700; margin-bottom: 15px;}
+.terms p{color: var(--black-color); margin-bottom: 10px;}
+.terms ul{list-style: auto; padding-left: 20px;}
+.terms ul li{margin-bottom: 5px;}
+.terms ul li:last-child, .withdraw-right .form-group:last-child{margin-bottom: 0;}
+
+.addbank-popup{display: none;}
+@media only screen and (max-width: 1199px) {
+.withdraw-left .bank-list{grid-template-columns: repeat(1, minmax(0, 1fr));}
+}
+@media only screen and (max-width: 767px) {
+.withdraw-sec{gap: 30px 0;}
+.withdraw-card, .terms{width: 100%; padding: 20px;}
+.withdraw-left .bank-item .bank-number{font-size: 14px;}
+
+}

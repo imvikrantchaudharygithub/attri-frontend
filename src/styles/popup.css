@@ -20,7 +20,7 @@
 .login-step-one .attrismheading{margin-bottom: 20px;}
 .login-step-one .form-group label{font-size: 12px; color: var(--gray-color); cursor: pointer;}
 .login-step-one .form-group .checkbox{margin-right: 5px;}
-.login-step-one .ortxt{width: 100%; display: flex; flex-direction: row; color: var(--gray-color); margin-bottom: 10px;}
+.login-step-one .ortxt{width: 100%; display: flex; flex-direction: row; color: var(--gray-color); margin: 10px 0;}
 .login-step-one .ortxt::before, .login-step-one .ortxt::after{content: ''; flex: 1 1; border-bottom: 1px solid; border-color: var(--gray-color); margin: auto; max-width: 60px;}
 .login-step-one .ortxt::before{margin-right: 15px;}
 .login-step-one .ortxt::after{margin-left: 15px;}
@@ -31,8 +31,8 @@
 
 .login-step-two{display: flex; align-content: center; flex-wrap: wrap; align-items: center; justify-content: center; height: 100%;}
 .login-step-two .verifi{color: var(--gray-color); margin-bottom: 10px;}
-.login-step-two .verifi .verifi-number{font-size: 16px; font-weight: 700; display: flex; align-items: center;}
-.login-step-two .editbtn{font-size: 12px; color: var(--green-color); border: 1px solid var(--green-color); border-radius: 50px; padding: 2px 8px;}
+.login-step-two .verifi .verifi-number{font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 10px;}
+.login-step-two .editbtn{font-size: 12px; color: var(--green-color); border: 1px solid var(--green-color); border-radius: 50px; padding: 2px 8px; margin-left: 10px;}
 .login-step-two .otp-code{gap: 10px; margin:10px 0 20px;}
 .login-step-two .otp-input{width: 25%; height: 48px; font-size: 26px; border: 1px solid var(--gray-color); border-radius: 8px; text-align: center;}
 .login-step-two .resend{width: 100%; color: var(--green-color); display: flex; align-items: center; justify-content: center; gap: 5px;}
