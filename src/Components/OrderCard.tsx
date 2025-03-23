@@ -12,17 +12,13 @@ export default function OrderCard() {
                 </div>
                 <div className="ordercard-text">
                     <div className="attrixxsheading">HOPPUP Predator Xo3 Gaming Earbuds with</div>
+                    <div className="order-price-txt">
+                        ₹3,000
+                    </div>
                     <ul>
                         <li><span>Color:</span><span>Black</span></li>
                     </ul>
                 </div>
-            </div>
-            <div className="order-price-txt">
-                ₹3,000
-            </div>
-            <div className="order-status-right">
-                <div className="attrixxsheading"><span className="red"></span> Delivered on Nov 02, 2024</div>
-                <p>Your item has been delivered</p>
             </div>
         </Link>
     </div>
