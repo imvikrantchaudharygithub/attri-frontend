@@ -1,16 +1,48 @@
 "use client"
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SetStateAction} from "react";
 import { useAppSelector } from '@/hooks/hooks';
+import StickyBar from "./stickybar";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import router from "next/router";
 export default function Footer() {
   const [accordionState, setAccordionState] = useState(0);
   const accordion = (index: number) => {
     setAccordionState((prev) => (prev === index ? 0 : index));
   }
   const token = useAppSelector((state: any) => state.token.token);
+  const cartCount = useSelector((state: RootState) => state?.cartCount?.count);
+  const cartItems = useSelector((state: RootState) => state.cart.items);
+
+  console.log("cart",cartCount);
+  const [showStickyBar, setShowStickyBar] = useState(false);
+ 
+
+
+  useEffect(() => {
+    const handleRouteChange = (url: string) => {
+      console.log("url",url);
+      if (url === '/cart') {
+        setShowStickyBar(false);
+      } else {
+        setShowStickyBar(true);
+      }
+    };
+
+    // Check initial route on mount
+    handleRouteChange(window.location.pathname);
+    
+    router.events.on('routeChangeComplete', handleRouteChange);
+
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, []);
   return (
+    <>
     <footer className="footer bg-gray padding-tb">
       <div className="container d-flex">
         <div className="footer-left">
@@ -139,5 +171,7 @@ export default function Footer() {
 
       </div>
     </footer>
+    {showStickyBar && cartCount>0 && <StickyBar cartData={ token ? cartCount : cartItems?.length} />}
+    </>
   );
 }
