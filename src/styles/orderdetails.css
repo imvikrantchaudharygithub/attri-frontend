@@ -50,6 +50,9 @@
 .order-deliver-card .attrixsheading{width: 100%; color: var(--black-color); font-weight: 700;}
 .order-deliver-card .progress{width: 100%; height: 10px; display: flex; background: var(--white-color); border-radius: 50px; overflow: hidden;}
 .order-deliver-card .progress span{width: 100%; height: 100%; background: var(--green-color); display: inline-block;}
+.order-deliver-card .deliver-location{width: 100%; margin: 10px 0;}
+.order-deliver-card .deliver-tag{color: var(--black-color); border-radius: 50px; background: var(--white-color); padding: 8px 15px;}
+.order-deliver-card .deliver-tag svg{width: 20px; height: 20px; margin-right: 10px;}
 
 .order-timeline{margin: 30px -10px 0;}
 .order-timeline .item{width: 50%; padding: 0 10px;}
@@ -88,3 +91,25 @@
 .order-summarys-bottom{background: var(--bg-gray); border-radius: 0 0 20px 20px; padding: 20px; margin: 20px -20px 0;}
 .order-summarys-bottom .attrixxsheading{font-weight: 700;}
 .order-summarys-bottom .order-summarys-btn{gap: 20px;}
+@media only screen and (max-width: 991px) {
+.order-deliver-card .deliver-location {gap: 10px;}
+.order-deliver-card .deliver-tag {width: 100%;}
+}
+
+
+@media only screen and (max-width: 767px) {
+.order-deliver-card{height: auto;}
+.order-deliver, .order-timeline{gap: 20px 0;}
+.order-deliver .item.w50, .order-deliver .item, .order-timeline .item{width: 100%;}
+.order-list{grid-template-columns: repeat(1, minmax(0, 1fr));}
+.order-summary-text p{font-size: 14px;}
+.order-summary-text .total-price{font-size: 16px;}
+.order-summarys-bottom .attrixxsheading{margin-bottom: 10px;}
+.order-summarys .order-summary-top .order-summary-left{width: 50%;}
+
+}
+@media only screen and (max-width: 469px) {
+.order-summarys-bottom .order-summarys-btn{width: 100%; gap: 10px;}
+.order-summarys-bottom .order-summarys-btn .anchor-button{width: 100%;}
+.order-deliver-card .deliver-tag {width: 100%;}
+}
