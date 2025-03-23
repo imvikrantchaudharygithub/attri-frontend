@@ -51,7 +51,6 @@ export default function Home({ homeData, error }: HomeProps) {
       <Review></Review>
       <HaveFun></HaveFun>
       <About></About>
-      <StickyBar/>
     </>
   );
 }

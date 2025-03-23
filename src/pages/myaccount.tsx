@@ -7,9 +7,12 @@ import { useAppSelector } from "@/hooks/hooks";
 import { useRouter } from "next/router";
 import { getData, postData } from "@/services/apiServices";
 import { toast } from "react-toastify";
+import { setUser } from "@/slices/userSlice";
+import { useDispatch } from "react-redux";
 export default function MyAccount() {
 	const token = useAppSelector((state: any) => state.token.token);
 	const router = useRouter();
+	const dispatch = useDispatch();
 	if(!token){
 		router.push('/');
 	}
@@ -23,6 +26,12 @@ export default function MyAccount() {
 		await getData('user/profile').then((res:any)=>{
 			console.log(res);
 			setUserData(res?.data?.user);
+			dispatch(setUser({ 
+				id:res?.data?.user?._id,
+				name:res?.data?.user?.username,
+				balance:res?.data?.user?.balance,
+				phone:res?.data?.user?.phone,
+			  }));
 		}).catch((err:any)=>{
 			console.log(err);
 		})
@@ -86,8 +95,10 @@ export default function MyAccount() {
 						</div>
 						<div className="attrixsheading">{userData?.username}</div>
 						<p>{userData?.phone}</p>
+					
 						<div className="user-wallet d-flex">
-							<div className="wallet-card">
+						<Link href='/withdraw' className="wallet-card">
+							{/* <div className="wallet-card"> */}
 								<div className="wallet-left">
 									<div className="attrixsheading">₹{userData?.balance}</div>
 									<p>Total Balance</p>
@@ -97,7 +108,8 @@ export default function MyAccount() {
 										<path d="M16 6H3.5v-.5l11-.88v.88H16V4c0-1.1-.891-1.872-1.979-1.717L3.98 3.717C2.891 3.873 2 4.9 2 6v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2zm-1.5 7.006a1.5 1.5 0 1 1 .001-3.001 1.5 1.5 0 0 1-.001 3.001z"></path>
 									</svg>
 								</div>
-							</div>
+							{/* </div> */}
+							</Link>
 							<div className="wallet-card">
 								<div className="wallet-left">
 									<div className="attrixsheading">₹{userData?.cashback}</div>
@@ -112,6 +124,7 @@ export default function MyAccount() {
 								</div>
 							</div>
 						</div>
+					
 						<div className="referral-code">
 							<div className="referral-code-left">
 								<div className="attrixsheading">Referral Code</div>

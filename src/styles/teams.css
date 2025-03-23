@@ -49,7 +49,7 @@
 .terms ul li{margin-bottom: 5px;}
 .terms ul li:last-child, .withdraw-right .form-group:last-child{margin-bottom: 0;}
 
-.addbank-popup{display: none;}
+/* .addbank-popup{display: none;} */
 @media only screen and (max-width: 1199px) {
 .withdraw-left .bank-list{grid-template-columns: repeat(1, minmax(0, 1fr));}
 }
