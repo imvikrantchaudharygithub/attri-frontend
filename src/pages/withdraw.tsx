@@ -40,7 +40,8 @@ export default function Withdraw() {
             accountNumber: Yup.string()
                 .required('Account number is required')
                 .matches(/^\d+$/, 'Must be only digits')
-                .length(12, 'Must be 12 digits'),
+                .min(9, 'Must be between 9-18 digits')
+                .max(18, 'Must be between 9-18 digits'),
             ifscCode: Yup.string()
                 .required('IFSC code is required')
                 .matches(/^[A-Za-z]{4}0[A-Za-z0-9]{6}$/, 'Invalid IFSC format'),

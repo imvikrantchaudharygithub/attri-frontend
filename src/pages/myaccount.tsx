@@ -144,20 +144,20 @@ export default function MyAccount() {
 							<div className="attrixsheading">Level 1</div>
 							<div className="team-num">{userData?.referralFamily?.length}</div>
 						</div> */}
-						{teamData?.user?.referralsByLevel?.length > 0 && teamData?.user?.referralsByLevel?.map((item:any,index:number)=>{
+						{/* {teamData?.user?.referralsByLevel?.length > 0 && teamData?.user?.referralsByLevel?.map((item:any,index:number)=>{
 							return <div className="team-card d-flex align" key={index}>
 								<div className="attrixsheading">Level {item?.level}</div>
 								<div className="team-num">{item?.referrals?.length}</div>
 							</div>
-						})}
+						})} */}
 						
 						<div className="flex justify-center items-center">
-						<button className="spcl-button learn-more" onClick={()=>getTeamData()}>
+						<Link href='/teams' className="spcl-button learn-more">
 							<span className="circle" aria-hidden="true">
 								<span className="icon arrow"></span>
 							</span>
 							<span className="button-text">View Team</span>
-						</button>
+						</Link>
 						</div>
 
 						{/* <div className="team-card d-flex align">

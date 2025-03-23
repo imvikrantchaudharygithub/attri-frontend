@@ -50,13 +50,28 @@ export default function AccountSideBar() {
                     </Link>
                 </li>
                 <li>
-                    <Link href='/' className="hovertime">
+                    <Link href='/withdraw' className="hovertime">
+                        <span className="account-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 17L9 11L13 15L21 7M21 7H14M21 7V14" stroke="#636266" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                        Withdrawal
+                        <span className="account-arrow">
+                            <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.999998 1L11 11L1 21" stroke="#636266" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                    </Link>
+                </li>
+                <li>
+                    <Link href='/teams' className="hovertime">
                         <span className="account-icon">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M19.9214 13.0556L12.0088 20.8922L4.09622 13.0556C3.57432 12.5477 3.16322 11.9373 2.88882 11.2627C2.61442 10.5882 2.48265 9.86412 2.50183 9.13614C2.521 8.40817 2.6907 7.69205 3.00024 7.03288C3.30977 6.37371 3.75243 5.78577 4.30035 5.30609C4.84827 4.8264 5.48958 4.46536 6.18389 4.2457C6.8782 4.02604 7.61047 3.95252 8.33458 4.02976C9.0587 4.10701 9.75898 4.33335 10.3913 4.69453C11.0237 5.05571 11.5744 5.54391 12.0088 6.12838C12.4451 5.54815 12.9964 5.06422 13.6283 4.70687C14.2602 4.34952 14.9591 4.12645 15.6812 4.05162C16.4033 3.97679 17.1331 4.05181 17.8248 4.27198C18.5166 4.49215 19.1554 4.85274 19.7014 5.33118C20.2474 5.80962 20.6888 6.3956 20.9979 7.05246C21.307 7.70931 21.4772 8.4229 21.4979 9.14857C21.5185 9.87423 21.3891 10.5963 21.1179 11.2697C20.8466 11.9431 20.4393 12.5532 19.9214 13.0619" stroke="#636266" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </span>
-                        Wishlist
+                        Teams
                         <span className="account-arrow">
                             <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.999998 1L11 11L1 21" stroke="#636266" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -95,21 +110,7 @@ export default function AccountSideBar() {
                         </span>
                     </Link>
                 </li>
-                <li>
-                    <Link href='/' className="hovertime">
-                        <span className="account-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M3 17L9 11L13 15L21 7M21 7H14M21 7V14" stroke="#636266" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </span>
-                        Trending
-                        <span className="account-arrow">
-                            <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M0.999998 1L11 11L1 21" stroke="#636266" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </span>
-                    </Link>
-                </li>
+             
                 <li>
                     <Link href='/' className="hovertime">
                         <span className="account-icon">
