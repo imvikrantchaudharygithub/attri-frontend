@@ -182,7 +182,7 @@ export default function SignUp() {
                     <div className="signup-step-one">
                         <div className="sign-top">
                             <div className="attrilgheading">Sign Up </div>
-                           {(refrralby || signupFormik.values.referralCode) && <p>Your are join with <span>{refrralby?.username ? refrralby?.username : 'Laoding...'}</span></p>}
+                           {(refrralby || signupFormik.values.referralCode) && <p>Your are joining with <span>{refrralby?.username ? refrralby?.username : 'Laoding...'}</span></p>}
                         </div>
                         {!(refrralby || signupFormik.values.referralCode) &&   <div className="flex justify-center items-center overflow-y-scroll mb-2 gap-2">
                             <div className="text-sm ">Suggested Referrals</div>

@@ -9,6 +9,8 @@ import { getData, postData } from "@/services/apiServices";
 import { toast } from "react-toastify";
 import { setUser } from "@/slices/userSlice";
 import { useDispatch } from "react-redux";
+import QRCode from "react-qr-code";
+
 export default function MyAccount() {
 	const token = useAppSelector((state: any) => state.token.token);
 	const router = useRouter();
@@ -138,6 +140,17 @@ export default function MyAccount() {
 							</div>
 							
 						</div>
+					<div className="qr-code mt-2">
+						<div className="attrixsheading">Referral QR Code</div>
+						<div className="qr-code-container flex flex-col items-center justify-center">
+						<QRCode 
+							value={`https://attri-frontend.vercel.app/signup/${userData?.referral_code}`}
+							size={128}
+							style={{ margin: '10px 0' }}
+						/>
+						<p>Scan to share your referral code</p>
+						</div>
+					</div>
 					</div>
 					 <div className="team-list">
 						{/* <div className="team-card d-flex align">
