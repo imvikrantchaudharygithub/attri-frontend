@@ -28,6 +28,7 @@
 .login-box .login-footer{font-size: 12px; color: var(--gray-color); margin-top: 20px;}
 .login-box .login-footer a{font-weight: 700; margin: 0 2px; text-decoration: underline;}
 .login-box .login-footer p:last-child{margin-top: 15px;}
+.login-box .login-footer .sign-btn{font-size: 16px; display: block; width: 100%; margin-top: 10px;}
 
 .login-step-two{display: flex; align-content: center; flex-wrap: wrap; align-items: center; justify-content: center; height: 100%;}
 .login-step-two .verifi{color: var(--gray-color); margin-bottom: 10px;}

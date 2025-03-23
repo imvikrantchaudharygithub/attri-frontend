@@ -168,7 +168,7 @@ export default function LoginPopup() {
                       <p>I accept that I have read & understood Gokwik's</p>
                       <Link href='/'>Privacy Policy</Link>
                       <Link href='/'>and T&Cs.</Link>
-                      <button onClick={redirecttoSignup}>Sign Up</button>
+                      <button className="sign-btn" onClick={redirecttoSignup}>Sign Up</button>
                     </div>
                   </div>
                 ) : (
