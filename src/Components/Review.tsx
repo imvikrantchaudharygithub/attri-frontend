@@ -3,7 +3,7 @@ import Image from "next/image";
 import Slider from "react-slick";
 // import "@/styles/review.css";
 import ReviewCard from "./ReviewCard";
-export default function Review(){
+export default function Review({reviewData}:any){
     const reviewslider = {
 		dots: false,
 		arrows: true,
@@ -43,18 +43,12 @@ export default function Review(){
                 </div>
                 <div className="slider-btn slider-height slider-rl">
                     <Slider className="reviewslider" {...reviewslider}>
+                        {reviewData?.map((item:any)=>(
                         <div className="item">
-                            <ReviewCard></ReviewCard>
+                            <ReviewCard data={item}></ReviewCard>
                         </div>
-                        <div className="item">
-                            <ReviewCard></ReviewCard>
-                        </div>
-                        <div className="item">
-                            <ReviewCard></ReviewCard>
-                        </div>
-                        <div className="item">
-                            <ReviewCard></ReviewCard>
-                        </div>
+                        ))}
+                        
                     </Slider>
                 </div>
             </div>

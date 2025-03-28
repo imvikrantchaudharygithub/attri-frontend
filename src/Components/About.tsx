@@ -14,35 +14,32 @@ export default function About(){
                 <div className="container">
                     <div className="attriheading">About</div>
                     <p>
-                        Plix is one of India's most trusted brands in the Skincare & Wellness space. As a Clean-Label Project Certified brand, we strive to bring you non-GMO, vegan, toxin-free products that you can easily add to your daily lifestyle.
+                    Established with a vision to revolutionize the way people earn and thrive, Attri Industries is a dynamic and innovative company dedicated to delivering high-quality products and unparalleled opportunities for personal and financial growth. With a strong focus on integrity, transparency, and empowerment, we've built a community of like-minded individuals who are driven to succeed and make a positive impact in their lives and the lives of others.
+
                         <span className="readmore" onClick={toggleReadMore}>{isReadMore ? "Read Less" : "Read More"}</span>
                     </p>
                 </div>
             </div>
             <div className= {isReadMore ? "about-mib active padding-tb" : "about-mib padding-tb"}>
                 <div className="container">
-                    <div className="attriheading">About Product</div>
-                    <ol>
+                    <div className="attriheading">Our Products</div>
+                    <ul>
                         <li>
-                            <p><strong>Skincare</strong>- Our drinkable & topical skincare products address specific concerns like pigmentation, acne marks, active acne & dullness.</p>
-                            <p><strong>Skincare</strong>- Our drinkable & topical skincare products address specific concerns like pigmentation, acne marks, active acne & dullness.</p>
+                            <p> Discover a diverse range of premium products carefully curated to enhance your well-being and lifestyle. From cutting-edge health supplements to eco-friendly household essentials, our product line is designed to meet the diverse needs and preferences of our customers. We take pride in sourcing the finest ingredients and delivering exceptional quality that you can trust and rely on.</p>
                         </li>
-                        <li>
-                            <p><strong>Skincare</strong>- Our drinkable & topical skincare products address specific concerns like pigmentation, acne marks, active acne & dullness.</p>
-                        </li>
-                    </ol>
+                      
+                    </ul>
                 </div>
             </div>
             <div className={isReadMore ? "about-bottom active padding-tb" : "about-bottom padding-tb"}>
                 <div className="container">
-                    <div className="attriheading">Our Bestsellers</div>
+                    <div className="attriheading">Opportunity Awaits</div>
                     <ul>
                         <li>
-                            <p><strong>ACV - World’s First Apple Cider Vinegar Effervescent Tablets</strong>Plix ACV is an expert formula for weight loss, improved digestion, & enhanced immunity. It contains the “mother” which comprises beneficial bacterial strains that boost your metabolism & promote healthy weight management.</p>
+                            <p><strong>Joinig Attri Industries</strong> isn't just about selling products—it's about unlocking your full potential and building a thriving business on your terms. As an independent distributor, you'll have the opportunity to earn generous commissions, bonuses, and incentives while enjoying the flexibility and freedom to work on your own schedule. Whether you're a seasoned entrepreneur or new to the world of MLM, we provide the training, tools, and support you need to succeed and thrive.
+                            </p> 
                         </li>
-                        <li>
-                        <p><strong>ACV - World’s First Apple Cider Vinegar Effervescent Tablets</strong>Plix ACV is an expert formula for weight loss, improved digestion, & enhanced immunity. It contains the “mother” which comprises beneficial bacterial strains that boost your metabolism & promote healthy weight management.</p>
-                        </li>
+                       
                     </ul>
                 </div>
             </div>

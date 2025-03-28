@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useState, useEffect } from "react";
 // import "@/styles/popup.css";
 import { useAppDispatch } from "@/hooks/hooks";
 import { closeLoginPopup } from "@/slices/popupSlice";
@@ -17,6 +17,9 @@ export default function LoginPopup() {
   const [isLoginpopup,setIsLoginpopup] = useState(true);
   const [isOtpVerifying,setIsOtpVerifying] = useState(false);
   const router = useRouter();
+  const [resendTimer, setResendTimer] = useState<number>(120); // 2 minutes in seconds
+  const [resendDisabled, setResendDisabled] = useState<boolean>(true);
+
   const redirecttoSignup = () => {
     router.push('/signup');
     dispatch(closeLoginPopup());
@@ -106,6 +109,60 @@ export default function LoginPopup() {
     }
   };
 
+  const handleResendOtp = () => {
+    // Set disabled state immediately to prevent multiple rapid clicks
+    setResendDisabled(true);
+    setResendTimer(120); // Reset timer to 2 minutes immediately
+    
+    // Call your resend OTP API here
+    const data = {
+      phone: formik.values.mobileNumber,
+    };
+    
+    postData('send-otp', data).then((res:any) => {
+      console.log(res);
+      toast.success(res?.data?.message || "OTP sent successfully");
+    }).catch((err:any) => {
+      console.log(err);
+      toast.error(err?.response?.data?.message || "Failed to resend OTP");
+      // Even if the API fails, we still want the timer to be running
+      // so we don't modify the timer or disabled state here
+    });
+  };
+
+  // Updated useEffect with additional cleanup and reset
+  useEffect(() => {
+    let timer: NodeJS.Timeout | null = null;
+    
+    // Start countdown when OTP step is active (not login popup)
+    if (!isLoginpopup) {
+      timer = setInterval(() => {
+        setResendTimer((prevTime) => {
+          if (prevTime <= 1) {
+            setResendDisabled(false);
+            return 0;
+          }
+          return prevTime - 1;
+        });
+      }, 1000);
+    } else {
+      // Reset timer when going back to login step
+      setResendTimer(120);
+      setResendDisabled(true);
+    }
+
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [isLoginpopup]);
+
+  // Format time as mm:ss
+  const formatTime = (seconds: number): string => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  };
+
   return (
       <div className="attri-popup login-popup">
         <div className="attri-popup-overlay"></div>
@@ -113,7 +170,7 @@ export default function LoginPopup() {
           <button className="attri-popup-close" onClick={()=>dispatch(closeLoginPopup())}><svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.6654 4.3335L4.33203 21.6668M21.6654 21.6668L4.33203 4.3335L21.6654 21.6668Z" stroke="#8B8B8B" stroke-width="2" stroke-linecap="round"></path></svg></button>
           <div className="attri-popup-body d-flex align">
               <div className="login-left">
-                <Image width={676} height={548} className="w-full" src={'/assets/images/new-banner.jpg'} alt=""></Image>
+                <Image width={676} height={548} className="w-full" src={'https://res.cloudinary.com/doz4dnf0h/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1742919806/login_03_luywts.jpg'} alt=""></Image>
                 {/* <div className="login-content">
                   <div className="attrismheading">Access orders, track orders, redeem Plixlife cash!</div>
                 </div> */}
@@ -237,10 +294,26 @@ export default function LoginPopup() {
                     )}
 
                     <div className="form-group">
-                      <button type="button" className="resend" >
-                        {/* Resend SVG */}
-                        Resend OTP
-                      </button>
+                      {resendTimer > 0 ? (
+                        <div className="flex items-center justify-center space-x-2 text-sm text-gray-400 mt-2">
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 2.5V8L10.5 10.5" stroke="#9CA3AF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            <circle cx="8" cy="8" r="6" stroke="#9CA3AF" strokeWidth="1.5"/>
+                          </svg>
+                          <span className="font-medium">Request new code in {formatTime(resendTimer)}</span>
+                        </div>
+                      ) : (
+                        <button 
+                          type="button" 
+                          className="resend" 
+                          onClick={handleResendOtp}
+                        >
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15.1333 8.5L13.8004 7.16667L12.4666 8.5M14 7.5C14 10.8137 11.3137 13.5 8 13.5C4.68629 13.5 2 10.8137 2 7.5C2 4.18629 4.68629 1.5 8 1.5C10.2013 1.5 12.1257 2.68542 13.1697 4.45273M8 4.16667V7.5L10 8.83333" stroke="#dce9ff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                          Resend OTP
+                        </button>
+                      )}
                     </div>
                     
                     <div className="form-group">

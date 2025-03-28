@@ -36,9 +36,9 @@ export default function Order() {
 					{orderData?.map((item:any)=>(
 					<div className="cart-order-item d-flex">
 						<div className="shipped-order-top d-flex align">
-							<div className="shipped-tag">Order ID : <span>#HW374915036</span></div>
-							<div className="shipped-tag">Order ID : <span>#HW374915036</span></div>
-							<div className="shipped-tag">Order ID : <span>#HW374915036</span></div>
+							<div className="shipped-tag">Order ID : <span>#{item?._id}</span></div>
+							<div className="shipped-tag">Status : <span className={`${item?.status === 'pending' ? 'text-yellow-500' : item?.status === 'completed' ? 'text-green-500' : 'text-red-500'}`}>{item?.status}</span></div>
+							{/* <div className="shipped-tag">Order ID : <span>#HW374915036</span></div> */}
 						</div>
 					{item?.products?.map((prodetail:any)=>(
 							<div className="shipped-left d-flex align relative">
@@ -67,10 +67,10 @@ export default function Order() {
 							<div className="shipped-price-left">Total Order Price</div>
 							<div className="shipped-price-right">₹{item?.totalAmount}</div>
 						</div>
-						<div className="cart-order-btn cart-order-mobile d-flex">
+						{/* <div className="cart-order-btn cart-order-mobile d-flex">
                             <Link href='/' className="anchor-button anchor-button-line hovertime">View Details</Link>
                             <Link href='/' className="anchor-button hovertime">TRACK ORDER</Link>
-						</div>
+						</div> */}
 						
 					</div>
 					))}

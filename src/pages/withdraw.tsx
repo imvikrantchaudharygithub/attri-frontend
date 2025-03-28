@@ -6,9 +6,14 @@ import * as Yup from 'yup';
 import { getData, postData } from "../services/apiServices";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import { useAppSelector } from "@/hooks/hooks";
 export default function Withdraw() {
     const [toggleState, setToggleState] = useState(1);
     const user = useSelector((state: any) => state.user);
+    const token = useAppSelector((state: any) => state.token.token);
+    const router = useRouter();
+
     const toggleTab = (index: SetStateAction<number>) => {
         setToggleState(index);
     }
@@ -24,6 +29,11 @@ export default function Withdraw() {
         isBalanceSufficient: false,
         isTotalAmountValid: false
     });
+    useEffect(()=>{
+        if(!token){
+            router.push('/');
+        }
+    },[token])
 
     const formik = useFormik({
         initialValues: {
@@ -191,28 +201,69 @@ export default function Withdraw() {
                                         </div>
                                         {/* {`address-item ${addr;ess?.isDefault === true ? 'active' : ''} relative`} */}
                                         <div className="bank-list d-grid">
-                                            {bankDetails?.map((item: any) => (
-                                            <div className={`bank-item ${item?.isDefault === true ? 'active' : ''} relative`} key={item?._id}>
-                                                {/* checked={address?.isDefault === true} onChange={()=>defaultAddress(address?._id)} */}
-                                                <input className="radio-input" type="radio" id="html" name="fav_language" value="HTML" checked={item?.isDefault === true} onChange={()=>setDefaultBank(item?._id)}></input>
-                                                <label htmlFor="html">
-                                                <div className="bank-details">
-                                                    <p className="bank-number">Account Number: <span>{item?.accountNumber}</span></p>
-                                                    <p className="bank-number">Bank Name: <span>{item?.bankName}</span></p>
-                                                    <p className="bank-number">Ifsc : <span>{item?.ifscCode}</span></p>
-                                                    <p className="bank-number">Account Holder : <span>{item?.accountHolderName}</span></p>
-                                                </div>
-                                                <div className="bank-bottom">
-                                                    <button type="button" className="bank-btn align d-flex" onClick={()=>removeBank(item?._id)}>
-                                                        <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M14.6667 2.66666C14.8877 2.66666 15.0996 2.75445 15.2559 2.91073C15.4122 3.06701 15.5 3.27898 15.5 3.49999C15.5 3.721 15.4122 3.93296 15.2559 4.08925C15.0996 4.24553 14.8877 4.33332 14.6667 4.33332H13.8333L13.8308 4.39249L13.0533 15.285C13.0234 15.7055 12.8352 16.099 12.5268 16.3863C12.2183 16.6736 11.8124 16.8333 11.3908 16.8333H4.60833C4.18678 16.8333 3.78089 16.6736 3.4724 16.3863C3.16392 16.099 2.97576 15.7055 2.94583 15.285L2.16833 4.39332C2.16707 4.37335 2.16651 4.35334 2.16667 4.33332H1.33333C1.11232 4.33332 0.900358 4.24553 0.744078 4.08925C0.587797 3.93296 0.5 3.721 0.5 3.49999C0.5 3.27898 0.587797 3.06701 0.744078 2.91073C0.900358 2.75445 1.11232 2.66666 1.33333 2.66666H14.6667ZM12.1642 4.33332H3.83583L4.60917 15.1667H11.3908L12.1642 4.33332ZM9.66667 0.166656C9.88768 0.166656 10.0996 0.254454 10.2559 0.410734C10.4122 0.567014 10.5 0.778976 10.5 0.99999C10.5 1.221 10.4122 1.43297 10.2559 1.58925C10.0996 1.74553 9.88768 1.83332 9.66667 1.83332H6.33333C6.11232 1.83332 5.90036 1.74553 5.74408 1.58925C5.5878 1.43297 5.5 1.221 5.5 0.99999C5.5 0.778976 5.5878 0.567014 5.74408 0.410734C5.90036 0.254454 6.11232 0.166656 6.33333 0.166656H9.66667Z" fill="#D03438" />
+                                            {bankDetails?.length === 0 ? (
+                                                <div className="text-center p-8 border-2 border-dashed border-gray-200 rounded-xl">
+                                                    <div className="flex flex-col items-center justify-center space-y-4">
+                                                        <svg 
+                                                            className="w-16 h-16 text-gray-400" 
+                                                            fill="none" 
+                                                            stroke="currentColor" 
+                                                            viewBox="0 0 24 24"
+                                                        >
+                                                            <path 
+                                                                strokeLinecap="round" 
+                                                                strokeLinejoin="round" 
+                                                                strokeWidth={1.5} 
+                                                                d="M3 10h18M7 3v2m10-2v2M6 2h12a1 1 0 011 1v18a1 1 0 01-1 1H6a1 1 0 01-1-1V3a1 1 0 011-1zm6 15a3 3 0 01-6 0" 
+                                                            />
                                                         </svg>
-                                                        {removingBankId === item._id ? 'REMOVING...' : 'REMOVE'}
-                                                    </button>
+                                                        <h3 className="text-xl font-semibold text-gray-900">No Bank Accounts Added</h3>
+                                                        <p className="text-gray-500">You need to add a bank account to withdraw funds</p>
+                                                        <button
+                                                            onClick={() => setShowAddBank(true)}
+                                                            className="mt-4 px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors duration-200 flex items-center"
+                                                        >
+                                                            <svg 
+                                                                className="w-5 h-5 mr-2" 
+                                                                fill="none" 
+                                                                stroke="currentColor" 
+                                                                viewBox="0 0 24 24"
+                                                            >
+                                                                <path 
+                                                                    strokeLinecap="round" 
+                                                                    strokeLinejoin="round" 
+                                                                    strokeWidth={2} 
+                                                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6" 
+                                                                />
+                                                            </svg>
+                                                            Add Bank Account
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                                </label>
-                                            </div>
-                                            ))}
+                                            ) : (
+                                                bankDetails?.map((item: any) => (
+                                                    <div className={`bank-item ${item?.isDefault === true ? 'active' : ''} relative`} key={item?._id}>
+                                                        {/* checked={address?.isDefault === true} onChange={()=>defaultAddress(address?._id)} */}
+                                                        <input className="radio-input" type="radio" id="html" name="fav_language" value="HTML" checked={item?.isDefault === true} onChange={()=>setDefaultBank(item?._id)}></input>
+                                                        <label htmlFor="html">
+                                                        <div className="bank-details">
+                                                            <p className="bank-number">Account Number: <span>{item?.accountNumber}</span></p>
+                                                            <p className="bank-number">Bank Name: <span>{item?.bankName}</span></p>
+                                                            <p className="bank-number">Ifsc : <span>{item?.ifscCode}</span></p>
+                                                            <p className="bank-number">Account Holder : <span>{item?.accountHolderName}</span></p>
+                                                        </div>
+                                                        <div className="bank-bottom">
+                                                            <button type="button" className="bank-btn align d-flex" onClick={()=>removeBank(item?._id)}>
+                                                                <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M14.6667 2.66666C14.8877 2.66666 15.0996 2.75445 15.2559 2.91073C15.4122 3.06701 15.5 3.27898 15.5 3.49999C15.5 3.721 15.4122 3.93296 15.2559 4.08925C15.0996 4.24553 14.8877 4.33332 14.6667 4.33332H13.8333L13.8308 4.39249L13.0533 15.285C13.0234 15.7055 12.8352 16.099 12.5268 16.3863C12.2183 16.6736 11.8124 16.8333 11.3908 16.8333H4.60833C4.18678 16.8333 3.78089 16.6736 3.4724 16.3863C3.16392 16.099 2.97576 15.7055 2.94583 15.285L2.16833 4.39332C2.16707 4.37335 2.16651 4.35334 2.16667 4.33332H1.33333C1.11232 4.33332 0.900358 4.24553 0.744078 4.08925C0.587797 3.93296 0.5 3.721 0.5 3.49999C0.5 3.27898 0.587797 3.06701 0.744078 2.91073C0.900358 2.75445 1.11232 2.66666 1.33333 2.66666H14.6667ZM12.1642 4.33332H3.83583L4.60917 15.1667H11.3908L12.1642 4.33332ZM9.66667 0.166656C9.88768 0.166656 10.0996 0.254454 10.2559 0.410734C10.4122 0.567014 10.5 0.778976 10.5 0.99999C10.5 1.221 10.4122 1.43297 10.2559 1.58925C10.0996 1.74553 9.88768 1.83332 9.66667 1.83332H6.33333C6.11232 1.83332 5.90036 1.74553 5.74408 1.58925C5.5878 1.43297 5.5 1.221 5.5 0.99999C5.5 0.778976 5.5878 0.567014 5.74408 0.410734C5.90036 0.254454 6.11232 0.166656 6.33333 0.166656H9.66667Z" fill="#D03438" />
+                                                                </svg>
+                                                                {removingBankId === item._id ? 'REMOVING...' : 'REMOVE'}
+                                                            </button>
+                                                        </div>
+                                                        </label>
+                                                    </div>
+                                                ))
+                                            )}
                                         </div>
                                     </div>
                                     <div className="withdraw-card withdraw-right">

@@ -43,7 +43,7 @@
 .account-box .cart-order-item .cart-order-mobile{display: none;}
 .cart-order-item .shipped-order-top{width: 100%; padding-bottom: 20px; border-bottom: 1px solid #D9D9D9;}
 .cart-order-item .shipped-order-top .shipped-tag{font-size: 16px; color: var(--gray-color); border-right: 1px solid #D9D9D9; padding-right: 60px;} 
-.cart-order-item .shipped-order-top .shipped-tag span{color: var(--light-black); font-weight: 700;}
+.cart-order-item .shipped-order-top .shipped-tag span{ font-weight: 700;}
 .cart-order-item .shipped-order-top .shipped-tag:last-child{border: none; padding-right: 0;} 
 .cart-order-item .shipped-price{width: 100%; padding-top: 30px;}
 .cart-order-item .shipped-price .shipped-price-left{font-size: 16px; color: var(--gray-color); font-weight: 400; text-transform: capitalize;}

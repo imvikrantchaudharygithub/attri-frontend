@@ -48,7 +48,7 @@ export default function Home({ homeData, error }: HomeProps) {
         ))}
         {/* <NewProduct></NewProduct> */}
       </div>
-      <Review></Review>
+      <Review reviewData={homeData?.data?.testimonials}></Review>
       <HaveFun></HaveFun>
       <About></About>
     </>

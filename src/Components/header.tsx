@@ -15,6 +15,7 @@ import { clearUser } from '@/slices/userSlice';
 import { clearToken } from '@/slices/tokenSlice';
 import { resetCartCount } from '@/slices/loginUserSlice';
 import { clearCart } from '@/slices/cartSlice';
+import { Router } from "next/router";
 export default function Header() {
   const [isUserDropDown, setIsUserDropDown] = useState(false);
   const dispatch = useAppDispatch();
@@ -37,7 +38,12 @@ export default function Header() {
   const cartCount = useSelector((state: RootState) => state?.cartCount?.count);
   console.log(user)
   const { isLoginPopupOpen, closeLoginPopup } = useAppSelector((state: any) => state.popup);
-
+  const [searchQuery,setSearchQuery] = useState('')  
+const searchRedirect = ()=>{
+  if(searchQuery){
+    
+  }
+}
 
   const logout = () => {
     dispatch(clearUser());
@@ -67,12 +73,32 @@ export default function Header() {
                 </Link>
               </div>
               <div className="search">
-                <form>
+                <form onSubmit={(e) => {
+                  e.preventDefault();
+                  if (searchQuery.trim()) {
+                    window.location.href = `/search/${searchQuery}`;
+                  }
+                }}>
                   <div className="form-group relative">
-                    <input type="text" className="form-control" placeholder="Search Products"></input>
-                    <div className="search-icon">
-                      <Image width={32} height={32} className="w-full" src={'/assets/images/icon/search-icon.svg'} alt=""></Image>
-                    </div>
+                    <input 
+                      type="text" 
+                      className="form-control" 
+                      placeholder="Search Products" 
+                      onChange={(e)=>setSearchQuery(e.target.value)} 
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          e.preventDefault();
+                          if (searchQuery.trim()) {
+                            window.location.href = `/search/${searchQuery}`;
+                          }
+                        }
+                      }}
+                    ></input>
+                    <Link href={searchQuery.trim() ? `/search/${searchQuery}` : '#'}>
+                      <div className="search-icon">
+                        <Image width={32} height={32} className="w-full" src={'/assets/images/icon/search-icon.svg'} alt=""></Image>
+                      </div>
+                    </Link>
                   </div>
                 </form>
               </div>
@@ -138,9 +164,9 @@ export default function Header() {
                   </div>
                 </li>
                {!token && <li>
-                  <Link href='/signup' className="anchor-button hovertime">
-                    Sign Up
-                  </Link>
+                  <button className="anchor-button hovertime" onClick={() => dispatch(openLoginPopup())}>
+                    Login
+                  </button>
                 </li>}
               </ul>
             </div>
