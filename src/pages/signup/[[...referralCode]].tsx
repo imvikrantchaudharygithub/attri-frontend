@@ -121,7 +121,7 @@ export default function SignUp() {
             dateOfBirth: '',
         },
         validationSchema: Yup.object({
-            // referralCode: Yup.string().required('Referral code is required'),
+            referralCode: Yup.string().required('Referral code is required'),
             name: Yup.string()
                 .required('Name is required')
                 .min(2, 'Name must be at least 2 characters'),
