@@ -148,7 +148,7 @@ export default function MyAccount() {
 						<div className="attrixsheading">Referral QR Code</div>
 						<div className="qr-code-container flex flex-col items-center justify-center">
 						<QRCode 
-							value={`https://attri-frontend.vercel.app/signup/${userData?.referral_code}`}
+							value={`https://www.attriindustries.com/signup/${userData?.referral_code}`}
 							size={128}
 							style={{ margin: '10px 0' }}
 						/>
