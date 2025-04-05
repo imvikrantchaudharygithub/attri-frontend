@@ -66,7 +66,7 @@ export default function ProductCard({product , category}:any){
                     <span>pack of 4 tubes</span>
                 </div> */}
                 <div className="product-price">
-                    ₹{product?.price}<span>₹{product?.mrp}</span>
+                    ₹{product?.price.toFixed(2)}<span>₹{product?.mrp.toFixed(2)}</span>
                 </div>
                 <button className="anchor-button hovertime" onClick={() => handleAddToCart(product)}>
                     Add To Bag

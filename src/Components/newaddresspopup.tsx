@@ -12,6 +12,40 @@ import { useAppSelector } from "@/hooks/hooks";
 export default function NewAddressPopUp({closePopup}:{closePopup:()=>void}) {
 	const [isLoading,setIsLoading] = useState(false);
 	const user = useAppSelector((state: any) => state.user);
+	const indianStates = [
+		"Andhra Pradesh",
+		"Andaman and Nicobar Islands",
+		"Arunachal Pradesh",
+		"Assam",
+		"Bihar",
+		"Chhattisgarh",
+		"Delhi",
+		"Goa",
+		"Gujarat",
+		"Haryana",
+		"Himachal Pradesh",
+		"Jharkhand",
+		"Jammu and Kashmir",
+		"Karnataka",
+		"Kerala",
+		"Ladakh",
+		"Madhya Pradesh",
+		"Maharashtra",
+		"Manipur",
+		"Meghalaya",
+		"Mizoram",
+		"Nagaland",
+		"Odisha",
+		"Punjab",
+		"Rajasthan",
+		"Sikkim",
+		"Tamil Nadu",
+		"Telangana",
+		"Tripura",
+		"Uttar Pradesh",
+		"Uttarakhand",
+		"West Bengal"
+	];
 	console.log("user",user)
   const formik = useFormik({
     initialValues: {
@@ -135,8 +169,10 @@ export default function NewAddressPopUp({closePopup}:{closePopup:()=>void}) {
 									{...formik.getFieldProps('state')}
 								>
 									<option value="">Select</option>
-									<option value="Maharashtra">Maharashtra</option>
-									<option value="Delhi">Delhi</option>
+									{indianStates.map((state, index) => (
+										<option key={index} value={state}>{state}</option>
+									))}
+									
 								</select>
 								{formik.touched.state && formik.errors.state && (
 									<div className="error-message">{formik.errors.state}</div>

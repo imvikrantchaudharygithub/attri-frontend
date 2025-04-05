@@ -13,7 +13,7 @@ export default function Teams() {
     const userData = useSelector((state: any) => state.user);
     const getTeamData = async () => {
         setIsLoading(true);
-		await getData(`/get-user/${userData?.id}`).then((res:any)=>{
+		await getData(`get-user/${userData?.id}`).then((res:any)=>{
 			console.log(res);
 			setTeamData(res?.data);
 			// console.log(res?.data);

@@ -7,7 +7,7 @@ export default function WhyAttri({gallery , productname}:any){
             <section className="why-box bg-gray padding-tb">
                 <div className="container">
                     <div className="heading-top white-top">
-                        <h2 className="attriheading">Why {productname}</h2>
+                        <h2 className="attriheading">Why {productname} ?</h2>
                     </div>
                     <div className="why-main d-flex align">
                         {gallery?.map((item:any , index:number)=>(

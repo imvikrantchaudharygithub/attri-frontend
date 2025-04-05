@@ -7,9 +7,12 @@ import { useAppSelector } from "@/hooks/hooks";
 import { useRouter } from "next/router";
 import { getData, postData } from "@/services/apiServices";
 import { toast } from "react-toastify";
-import { setUser } from "@/slices/userSlice";
+import { clearUser, setUser } from "@/slices/userSlice";
 import { useDispatch } from "react-redux";
 import QRCode from "react-qr-code";
+import { clearToken } from "@/slices/tokenSlice";
+import { clearCart } from "@/slices/cartSlice";
+import { resetCartCount } from "@/slices/loginUserSlice";
 
 export default function MyAccount() {
 	const token = useAppSelector((state: any) => state.token.token);
@@ -23,6 +26,13 @@ export default function MyAccount() {
 	useEffect(()=>{
 		getUserData();
 	},[])
+	const logout = () => {
+		dispatch(clearUser());
+		dispatch(clearToken());
+		dispatch(resetCartCount());
+		dispatch(clearCart());
+		toast.success('Logged out successfully');
+		}
 
 	const getUserData = async () => {
 		await getData('user/profile').then((res:any)=>{
@@ -36,6 +46,10 @@ export default function MyAccount() {
 			  }));
 		}).catch((err:any)=>{
 			console.log(err);
+			
+			if(err.status === 401){
+				logout();
+			}
 		})
 	}
 	const copyReferralcode = () => {
@@ -106,7 +120,7 @@ export default function MyAccount() {
 						<Link href='/withdraw' className="wallet-card">
 							{/* <div className="wallet-card"> */}
 								<div className="wallet-left">
-									<div className="attrixsheading">₹{userData?.balance}</div>
+									<div className="attrixsheading">₹{userData?.balance.toFixed(2)}</div>
 									<p>Total Balance</p>
 								</div>
 								<div className="wallet-icon">
@@ -118,7 +132,7 @@ export default function MyAccount() {
 							</Link>
 							<div className="wallet-card">
 								<div className="wallet-left">
-									<div className="attrixsheading">₹{userData?.cashback}</div>
+									<div className="attrixsheading">₹{userData?.cashback.toFixed(2)}</div>
 									<p>Total Cashback</p>
 								</div>
 								<div className="wallet-icon">

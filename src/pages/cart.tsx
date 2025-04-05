@@ -224,7 +224,7 @@ const handlePayment = async () => {
         setIsPaymentLoading(true)
         // Step 3: Initialize Razorpay with response data
         const options = {
-            key: key,
+            key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
             amount: razorpayOrder.amount,
             currency: razorpayOrder.currency,
             name: "Your Store",
