@@ -120,7 +120,7 @@ export default function MyAccount() {
 						<Link href='/withdraw' className="wallet-card">
 							{/* <div className="wallet-card"> */}
 								<div className="wallet-left">
-									<div className="attrixsheading">₹{userData?.balance.toFixed(2)}</div>
+									<div className="attrixsheading">₹{userData?.balance?.toFixed(2)}</div>
 									<p>Total Balance</p>
 								</div>
 								<div className="wallet-icon">
@@ -132,7 +132,7 @@ export default function MyAccount() {
 							</Link>
 							<div className="wallet-card">
 								<div className="wallet-left">
-									<div className="attrixsheading">₹{userData?.cashback.toFixed(2)}</div>
+									<div className="attrixsheading">₹{userData?.cashback?.toFixed(2)}</div>
 									<p>Total Cashback</p>
 								</div>
 								<div className="wallet-icon">

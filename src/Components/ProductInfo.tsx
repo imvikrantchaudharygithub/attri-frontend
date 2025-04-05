@@ -54,8 +54,8 @@ export default function ProductInfo({ProductDetails}:any){
             <div className="product-price">
                 <div className="price-info dflex align">
                     <span>MRP:</span>
-                    <span>₹{ProductDetails?.mrp}</span>
-                    ₹{ProductDetails?.price.toFixed(2)}
+                    <span>₹{ProductDetails?.mrp?.toFixed(2)}</span>
+                    ₹{ProductDetails?.price?.toFixed(2)}
                     <span className="off-tag">{ProductDetails?.discount}% OFF</span>
                 </div>
                 <p>Inclusive of all taxes</p>
