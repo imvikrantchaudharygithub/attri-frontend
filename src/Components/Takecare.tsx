@@ -8,16 +8,16 @@ export default function TakeCare({data}:any){
                     <div className="take-left">
                         <h4 className="attriheading">{data?.title}</h4>
                         <p>{data?.description}</p>
-                        <Link href='/' className="anchor-button d-inline cursor-pointer hovertime">
+                        <Link href='/aboutus' className="anchor-button d-inline cursor-pointer hovertime">
                             Learn more
                         </Link>
                     </div>
                     <div className="take-right d-flex align justify-end">
                         {data?.gallery?.map((item: any, index: number) => (
                             <div className="take-card d-flex" key={index}>
-                                <div className="take-icon">
-                                    <Image width={50} height={50} className="w-full" src={item.image} alt={item.title} />
-                                </div>
+                                <span className="take-icon">
+                                    <Image width={50} height={50} src={item.image} alt={item.title} className="w-full"/>
+                                </span>
                                 <div className="attrixxsheading">{item.title}</div>
                             </div>
                         ))}

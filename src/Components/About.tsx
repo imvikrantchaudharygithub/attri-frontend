@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // import "@/styles/about.css";
 export default function About(){
     const [isReadMore, setIsReadMore] = useState(false);
@@ -8,6 +8,12 @@ export default function About(){
     const toggleReadMore = () => {
         setIsReadMore(!isReadMore);
     };
+    useEffect(() => {
+       const currentPage = window.location.pathname;
+       if(currentPage === "/aboutus"){
+       setIsReadMore(true);
+       }
+    }, []);
     return (
         <section className="about">
             <div className="about-top padding-tb">

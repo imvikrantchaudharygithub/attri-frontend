@@ -30,7 +30,7 @@ export default function OrderDetails() {
                 </svg>
               </div>
               <div className="attrilgheading">Thank you for your purchase</div>
-              <p className="thank-pra">We've received your order will ship in 5-7 business days. Your order number is #B6CT3</p>
+              <p className="thank-pra">We've received your order will ship in 2-3 business days. Your order number is #{orderData?.tracking_number}</p>
               <button className="anchor-button hovertime copy-btn">
                 {orderData?.user?.referral_code}
                 <div className="icon">
@@ -45,18 +45,28 @@ export default function OrderDetails() {
               <div className="order-summary">
                 <div className="attrixsheading">Order Summary</div>
                 {orderData?.products?.map((item:any,index:number)=>(
-                  <div className="order-summary-item dflex">
-                    <div className="order-summary-thumb" key={index}>
-                      <Image width={100} height={100} className="w-full" src={item?.product?.images[0]} alt=""></Image>
+                  <div key={index} className="flex items-center justify-between p-4 border-b border-gray-100 hover:bg-gray-50 rounded-lg transition-colors">
+                    <div className="flex-shrink-0 mr-4 w-20 h-20">
+                      <Image
+                        width={100}
+                        height={100}
+                        className="w-full h-full object-cover rounded-lg"
+                        src={item?.product?.images[0]}
+                        alt="Product image"
+                      />
                     </div>
-                  <div className="attrixxsheading">{item?.product?.name}</div>
-                  <div className="attrixxsheading">Quantity : {item?.quantity}</div>
-                  <p>₹{item?.product?.price}</p>
-                </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-lg font-medium text-gray-900 truncate">{item?.product?.name}</h3>
+                      <p className="mt-1 text-sm text-gray-600">Quantity: {item?.quantity}</p>
+                    </div>
+                    <div className="ml-4 text-lg font-medium text-gray-900">
+                      ₹{(item?.product?.price * item?.quantity)?.toFixed(2)}
+                    </div>
+                  </div>
                 ))}
                 <div className="order-total">
                   <div className="attrixxsheading">Total</div>
-                  <div className="attrixxsheading total-price">₹{orderData?.totalAmount}</div>
+                  <div className="attrixxsheading total-price">₹{orderData?.totalAmount?.toFixed(2)}</div>
                 </div>
               </div>
               <Link href={'/'} className="anchor-button hovertime">

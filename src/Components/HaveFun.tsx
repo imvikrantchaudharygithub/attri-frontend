@@ -6,7 +6,7 @@ export default function HaveFun(){
             <div className="container">
                 <div className="have-main text-center">
                     <div className="attrixxsheading">Hey, you made it to the end of the page!</div>
-                    <div className="attriheading">Don't forget to take care, have fun!</div>
+                    <div className="attriheading">Don't forget to share with your friends, have fun!</div>
                 </div>
             </div>
         </section>

@@ -222,8 +222,8 @@ export default function LoginPopup() {
                       Whatsapp Login
                     </button> */}
                     <div className="login-footer">
-                      <p>I accept that I have read & understood Gokwik's</p>
-                      <Link href='/'>Privacy Policy</Link>
+                      <p>I accept that I have read & understood Attri's</p>
+                      <Link href='/privacypolicy'>Privacy Policy</Link>
                       <Link href='/'>and T&Cs.</Link>
                       <button className="sign-btn" onClick={redirecttoSignup}>Sign Up</button>
                     </div>

@@ -39,16 +39,17 @@ export default function Review({reviewData}:any){
         <section className="review bg-gray padding-tb">
             <div className="container">
                 <div className="heading-top text-center">
-                    <h5 className="attriheading">Real People, Real Results</h5>
+                    <h5 className="attriheading">Real People, Real Reviews</h5>
                 </div>
                 <div className="slider-btn slider-height slider-rl">
                     <Slider className="reviewslider" {...reviewslider}>
-                        {reviewData?.map((item:any)=>(
-                        <div className="item">
-                            <ReviewCard data={item}></ReviewCard>
-                        </div>
-                        ))}
-                        
+                        {reviewData
+                            ?.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+                            ?.map((item: any) => (
+                                <div className="item" key={item._id}>
+                                    <ReviewCard data={item} />
+                                </div>
+                            ))}
                     </Slider>
                 </div>
             </div>

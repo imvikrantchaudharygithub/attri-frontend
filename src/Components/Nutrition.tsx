@@ -17,10 +17,7 @@ export default function Nutrition({data}:any){
                         </div>
                     ))}
 
-                    <div className="nutrition-card d-flex align justify-content">
-                        <span className="nutrition-icon"></span>
-                        <div className="attrixxsheading">Clean Label certified</div>
-                    </div>
+            
                   
                 </div>
             </div>

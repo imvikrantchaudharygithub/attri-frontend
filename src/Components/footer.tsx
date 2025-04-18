@@ -91,8 +91,8 @@ export default function Footer() {
                 </span>
               </h6>
               <ul className="footer-list">
-                {categories?.map((item: any) => (
-                  <li key={item?.id}>
+                {categories?.map((item: any,index:number) => (
+                  <li key={index}>
                     <Link href={`/category/${item?.slug}`} className="cursor-pointer">
                       {item?.name}
                     </Link>
@@ -103,10 +103,10 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* <div className="item">
+          <div className="item">
             <div className={accordionState === 2 ? "footer-col active" : "footer-col"}>
               <h6 onClick={() => accordion(2)} className={accordionState === 2 ? "attrixxsheading d-flex align" : "attrixxsheading d-flex align"}>
-                Learn
+                About Us
                 <span>
                   <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M8 9.49995L0.499998 1.99995L1.55 0.949951L8 7.39995L14.45 0.949951L15.5 1.99995L8 9.49995Z" fill="#B0D235" />
@@ -115,13 +115,23 @@ export default function Footer() {
               </h6>
               <ul className="footer-list">
                 <li>
-                  <Link href='/' className="cursor-pointer">
-                    Weight
+                  <Link href='/privacypolicy' className="cursor-pointer">
+                    Privacy Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link href='/vision' className="cursor-pointer">
+                    Vision
+                  </Link>
+                </li>
+                <li>
+                  <Link href='/aboutus' className="cursor-pointer">
+                    About Us
                   </Link>
                 </li>
               </ul>
             </div>
-            <div className={accordionState === 3 ? "footer-col active" : "footer-col"}>
+            {/* <div className={accordionState === 3 ? "footer-col active" : "footer-col"}>
               <h6 onClick={() => accordion(3)} className={accordionState === 3 ? "attrixxsheading d-flex align" : "attrixxsheading d-flex align"}>
                 Connect
                 <span>
@@ -137,8 +147,8 @@ export default function Footer() {
                   </Link>
                 </li>
               </ul>
-            </div>
-          </div> */}
+            </div> */}
+          </div>
 
           <div className="item">
             {/* <div className={accordionState === 4 ? "footer-col active" : "footer-col"}>
