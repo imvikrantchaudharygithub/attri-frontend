@@ -42,7 +42,7 @@ export default function About(){
                     <div className="attriheading">Opportunity Awaits</div>
                     <ul>
                         <li>
-                            <p><strong>Joinig Attri Industries</strong> isn't just about selling products—it's about unlocking your full potential and building a thriving business on your terms. As an independent distributor, you'll have the opportunity to earn generous commissions, bonuses, and incentives while enjoying the flexibility and freedom to work on your own schedule. Whether you're a seasoned entrepreneur or new to the world of MLM, we provide the training, tools, and support you need to succeed and thrive.
+                            <p><strong>Joinig Attri Industries</strong> isn't just about selling products—it's about unlocking your full potential and building a thriving business on your terms. As an independent distributor, you'll have the opportunity to earn generous commissions, bonuses, and incentives while enjoying the flexibility and freedom to work on your own schedule. 
                             </p> 
                         </li>
                        
