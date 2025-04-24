@@ -199,7 +199,7 @@ export default function Footer() {
 
       </div>
     </footer>
-    {showStickyBar && cartCount>0 && <StickyBar cartData={ token ? cartCount : cartItems?.length} />}
+    {showStickyBar && cartItems.length>0 && <StickyBar cartData={ token ? cartCount : cartItems?.length} />}
     </>
   );
 }
