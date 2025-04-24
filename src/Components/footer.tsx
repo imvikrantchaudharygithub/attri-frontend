@@ -48,7 +48,7 @@ export default function Footer() {
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
-  }, []);
+  }, [cartCount]);
   return (
     <>
     <footer className="footer bg-gray padding-tb">

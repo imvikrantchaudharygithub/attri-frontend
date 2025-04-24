@@ -19,6 +19,7 @@ export default function ProductCard({product , category}:any){
             product: productitem, 
             quantity: 1 
         }));
+        dispatch(setCartCount(cartCount + 1));
         toast.success('Item added to cart');
     }else{
        const data = {
