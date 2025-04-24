@@ -43,7 +43,15 @@ const makeDefaultAddress = async (addressId: string) => {
     })
   
 };
-
+const deleteAddress = async (addressId: string) => {
+    const payload = {
+        id: addressId
+    }
+    await postData(`delete-address`, payload).then((res:any)=>{
+        console.log(res);
+        getaddressData();
+    })
+}
 if(isLoading){
     return <div className="flex justify-center items-center h-screen">
           <div className="line-loader">
@@ -73,7 +81,7 @@ if(isLoading){
                             </button>
                         </div>
                         { addressData?.length > 0 && addressData?.map((item:any)=>(
-                            <SaveAddress key={item?.id} address={item} defaultAddress={makeDefaultAddress}/>
+                            <SaveAddress key={item?.id} address={item} defaultAddress={makeDefaultAddress} deleteAddress={deleteAddress}/>
                         ))}
                         { addressData?.length === 0 && (
                             <div className="flex flex-col items-center justify-center p-8 my-6 bg-gray-50 rounded-lg border border-gray-200 shadow-sm">

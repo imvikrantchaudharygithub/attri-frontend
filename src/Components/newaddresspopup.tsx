@@ -46,7 +46,7 @@ export default function NewAddressPopUp({closePopup}:{closePopup:()=>void}) {
 		"Uttarakhand",
 		"West Bengal"
 	];
-	console.log("user",user)
+	// console.log("user",user)
   const formik = useFormik({
     initialValues: {
       name: '',
