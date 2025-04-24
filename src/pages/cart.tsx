@@ -16,6 +16,12 @@ import { getData, postData } from "@/services/apiServices";
 import { setCartCount } from "@/slices/loginUserSlice";
 import router from "next/router";
 import { openLoginPopup } from "@/slices/popupSlice";
+import Razorpay from 'razorpay';
+
+// const razorpay = new Razorpay({
+//   key_id: process.env.RAZORPAY_LIVE_KEY_ID,
+//   key_secret: process.env.RAZORPAY_LIVE_KEY_SECRET
+// });
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -220,17 +226,19 @@ const handlePayment = async () => {
         });
         console.log("razorpayResponse",razorpayResponse)
         
-        if (!razorpayResponse?.data?.order?.id) {
+        if (!razorpayResponse?.data?.id) {
             toast.error("Failed to create Razorpay order");
             throw new Error("Failed to create Razorpay order");
         }
         
-        const { order: razorpayOrder, key } = razorpayResponse.data;
+        const razorpayOrder= razorpayResponse.data;
+        console.log("razorpayOrder",razorpayOrder)
         setIsPaymentLoading(false)
         setIscheckoutLoading(false)
         // Step 3: Initialize Razorpay with response data
         const options = {
             key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+            key_secret: process.env.NEXT_PUBLIC_RAZORPAY_KEY_SECRET,
             amount: razorpayOrder.amount,
             currency: razorpayOrder.currency,
             name: "ATTRI INDUSTRIES",
