@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux";
 import QRCode from "react-qr-code";
 import { clearToken } from "@/slices/tokenSlice";
 import { clearCart } from "@/slices/cartSlice";
-import { resetCartCount } from "@/slices/loginUserSlice";
+import { resetCartCount, setCartCount } from "@/slices/loginUserSlice";
 
 export default function MyAccount() {
 	const token = useAppSelector((state: any) => state.token.token);
@@ -31,6 +31,7 @@ export default function MyAccount() {
 		dispatch(clearToken());
 		dispatch(resetCartCount());
 		dispatch(clearCart());
+		dispatch(setCartCount(0));
 		toast.success('Logged out successfully');
 		}
 

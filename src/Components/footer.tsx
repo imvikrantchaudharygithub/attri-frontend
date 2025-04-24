@@ -31,6 +31,7 @@ export default function Footer() {
 
 
   useEffect(() => {
+
     const handleRouteChange = (url: string) => {
       console.log("url",url);
       if (url === '/cart') {
@@ -49,6 +50,7 @@ export default function Footer() {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
   }, [cartCount]);
+
   return (
     <>
     <footer className="footer bg-gray padding-tb">
@@ -199,7 +201,7 @@ export default function Footer() {
 
       </div>
     </footer>
-    {showStickyBar && cartItems.length>0 && <StickyBar cartData={ token ? cartCount : cartItems?.length} />}
+    {showStickyBar && (cartCount > 0 || cartItems?.length > 0) && <StickyBar cartData={token ? cartCount : cartItems?.length} />}
     </>
   );
 }
