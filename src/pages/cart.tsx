@@ -121,7 +121,7 @@ export default function Cart() {
    
   }, [token]);
   useEffect(() => {
-    if(!token && cartItems.length > 0){
+    if(!token ){
         setUserCartItems(cartItems);
         console.log("cart items",cartItems)
         setIsCartLoading(false)
