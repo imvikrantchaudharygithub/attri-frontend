@@ -58,7 +58,7 @@ export default function MyAccount() {
 		toast.success('Referral code copied to clipboard');
 	}
 	const shareWhatsapp = () => {
-		const text = `🚀 I’m using Attri Products & Earning Money from it — and I’m LOVING it! 💸✨\n
+		const text = `🚀 I’m using Attri Products & Earning Money from it — and I’m LOVING it! 💸✨
 Wanna try it too? Use my referral code 👉 “${userData?.referral_code}”
 Join here 🔗 https://www.attriindustries.com/signup/${userData?.referral_code}
 Let’s grow & earn together! 💼💰🔥`;
