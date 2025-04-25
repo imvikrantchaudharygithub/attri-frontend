@@ -58,7 +58,10 @@ export default function MyAccount() {
 		toast.success('Referral code copied to clipboard');
 	}
 	const shareWhatsapp = () => {
-		const text = `Hey, I'm using Attrixs app and I'm loving it! Get 10% off on your first purchase using my referral code: ${userData?.referral_code}`;
+		const text = `🚀 I’m using Attri Products & Earning Money from it — and I’m LOVING it! 💸✨\n
+Wanna try it too? Use my referral code 👉 “${userData?.referral_code}”
+Join here 🔗 https://www.attriindustries.com/signup/${userData?.referral_code}
+Let’s grow & earn together! 💼💰🔥 ${userData?.referral_code}`;
 		window.open(`https://wa.me/?text=${text}`, '_blank');
 	}
 	const getTeamData = async () => {
