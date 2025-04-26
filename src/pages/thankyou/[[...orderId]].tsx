@@ -69,16 +69,16 @@ export default function OrderDetails() {
                   <div className="attrixxsheading total-price">₹{orderData?.totalAmount?.toFixed(2)}</div>
                 </div>
               </div>
-              <Link href={'/'} className="anchor-button hovertime">
-                Back To Home
+              <Link href={'/order'} className="anchor-button hovertime">
+                Check Orders
               </Link>
-              <div className="thank-video">
+              {/* <div className="thank-video">
                 <iframe width="1022" height="380" 
                     src="https://www.youtube.com/embed/9ao4FEaDGhQ?rel=0&autoplay=1&mute=1" 
                     title="Bella Ciao - La Casa de Papel"  
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share">
                 </iframe>
-              </div>
+              </div> */}
             </div>
         </div>
     </section>
