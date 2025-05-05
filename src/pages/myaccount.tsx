@@ -131,7 +131,7 @@ export default function MyAccount() {
 								</div>
 							{/* </div> */}
 							</Link>
-							<div className="wallet-card">
+							<div className="wallet-card" onClick={()=>toast.error('Cashback usage will be added soon')}>
 								<div className="wallet-left">
 									<div className="attrixsheading">₹{userData?.cashback?.toFixed(2)}</div>
 									<p>Total Cashback</p>

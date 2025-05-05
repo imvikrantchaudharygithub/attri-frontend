@@ -198,6 +198,19 @@ export default function Cart() {
 //       console.log(err)
 //     })
 //   }
+const handleEmptyCart = async() => {
+  await postData('/empty-cart',{
+    userId: user?.id
+  })
+  .then((res:any)=>{
+    console.log(res)
+    getusercart()
+  })
+  .catch((err:any)=>{
+    console.log(err)
+  })
+}
+
 const handlePayment = async () => {
     if(!token){
     dispatch(openLoginPopup())
@@ -263,6 +276,7 @@ const handlePayment = async () => {
                         toast.success("Payment successful!");
                         dispatch(clearCart());
                         dispatch(setCartCount(0))
+                        handleEmptyCart()
                         // Add navigation to success page
                         setIsPaymentLoading(false)
                         setIscheckoutLoading(false)
@@ -272,6 +286,7 @@ const handlePayment = async () => {
                     toast.error("Payment verification failed");
                     setIsPaymentLoading(false)  
                     setIscheckoutLoading(false)
+                    handleEmptyCart()
                 }
             },
             theme: {
