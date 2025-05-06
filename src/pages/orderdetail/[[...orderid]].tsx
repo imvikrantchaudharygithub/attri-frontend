@@ -510,14 +510,14 @@ export default function OrderDetails() {
                 <div className="order-summary-text mb-4">
                     {orderData?.products?.map((item:any,index:number)=>(
                         <div className="order-summary-text-item" key={index}>
-                            <p>{item?.product?.name} <span>₹{item?.priceAtPurchase?.toFixed(2)}</span></p>
+                            <p>{item?.product?.name} <span>₹{item?.priceAtPurchase?.toFixed(2) *item?.quantity}</span></p>
                             <p>Quantity: {item?.quantity}</p>
                             <hr className="my-4"/>
                         </div>
                     ))}
                     <p className="total-price font-semibold text-lg mt-4 mb-3">
                         Total <span className="ml-2 text-xl text-gray-900">
-                            ₹{orderData?.products?.reduce((acc: number, item: any) => acc + (+item.priceAtPurchase), 0)?.toFixed(2)}
+                            ₹{orderData?.totalAmount.toFixed(2)}
                         </span>
                     </p>
                 </div>
