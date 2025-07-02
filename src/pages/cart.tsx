@@ -62,10 +62,10 @@ export default function Cart() {
       
       return postData('add-bulk-items', {
         userId: user?.id,
-        items: cartItems.map(item => ({
-          productId: item.product._id,
-          quantity: item.quantity,
-          price: item.product.price
+        items: cartItems?.map((item:any) => ({
+          productId: item?.product?._id,
+          quantity: item?.quantity,
+          price: item?.product?.price
         }))
       })
         .then(() => {

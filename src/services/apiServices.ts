@@ -1,9 +1,9 @@
 import axios from 'axios';
 // import { store } from '@/store';
 import { getToken } from '@/utils/auth';
-
+// https://api.attriindustries.com/api
 const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api',
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'https://api.attriindustries.com/api',
   // withCredentials: true,
   xsrfHeaderName: 'X-XSRF-TOKEN',
   xsrfCookieName: 'XSRF-TOKEN',
