@@ -1,9 +1,9 @@
 .header{background: var(--green-color); padding: 15px 0;}
 .header-left{gap: 25px;}
 .header-left .menu-bar{cursor: pointer;}
-.header-left .search{width: 300px;}
+.header-left .search{width: 100%;}
 .header-left .search .form-group{margin-bottom: 0;}
-.header-left .search .form-control{background: rgba(255, 255, 255, 0.5); border: 1px solid #fff; padding-right: 60px;}
+.header-left .search .form-control{background: rgba(213, 213, 213, 0.5); border: 1px solid #00cb33; padding-right: 60px;}
 .header-left .form-group .search-icon{height: 32px; position: absolute; top: 0; bottom: 0; right: 15px; margin: auto;}
 
 .header-right ul{padding: 0; margin: 0; list-style: none;}
@@ -49,7 +49,7 @@
 .header-left .logo{width: 70px;}
 .header-left .logo svg{width: 100%;}
 .header-right ul li{margin-left: 10px;}
-.header-right ul li:last-child{margin-left: 0}
+/* .header-right ul li:last-child{margin-left: 0} */
 .menu-sticky{width: 300px;}
-.header-right .anchor-button, .header-left .search{display: none;}
+/* .header-right .anchor-button, .header-left .search{display: none;} */
 }

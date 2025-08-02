@@ -302,6 +302,12 @@ tbody, td, tfoot, th, thead, tr {
   border-radius: inherit;
   animation: loading2_713 3.5s ease both infinite;
 }
+/* Add this to your existing globals.css file */
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
 
 @keyframes text_713 {
   0% {

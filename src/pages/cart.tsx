@@ -125,6 +125,7 @@ export default function Cart() {
         setUserCartItems(cartItems);
         console.log("cart items",cartItems)
         setIsCartLoading(false)
+        dispatch(setCartCount(cartItems.reduce((acc:any, item:any) => acc + item?.quantity, 0)))
       }
     console.log("cart items",cartItems)
   }, [cartItems])
@@ -454,17 +455,18 @@ if(isPaymentLoading){
                     </div>
                     {usercartItems?.length > 0 && (
                     <div className="cart-right">
+                       {token && useraddress !== null && ( 
                         <div className="cart-right-card">
                             <div className="attrixxsheading">Select Address</div>
-                       {token && useraddress !== null && ( 
                             <div className="address-details">
                                 <div className="attrixxsheading"> {useraddress?.name}</div>
                                 <p>{useraddress?.street}, {useraddress?.city}, {useraddress?.state} - {useraddress?.pincode}</p>
                                 <div className="address-number">Mobile Number : <span>+91{useraddress?.contact}</span></div>
                             </div>
-                        )}
                             <Link href={'/myaddress'} className="anchor-button hovertime">{useraddress !== null ? "Change Address" : "Add Address"}</Link>
-                        </div>
+                            </div>
+                        )}
+                          
                       
                         <div className="cart-right-card">
                             <div className="attrixxsheading">Price Details <span>( {usercartItems?.length ? usercartItems?.length : 0} items)</span></div>

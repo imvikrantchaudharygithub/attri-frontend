@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 // import "@/styles/header.css";
 import { useSelector } from 'react-redux';
 import { RootState } from '@/slices/rootReduces';
@@ -23,6 +23,7 @@ export default function Header() {
     setIsUserDropDown(!isUserDropDown);
   };
   const [isOpen, setIsOpen] = useState(false);
+  const [showSearch,setShowSearch]=useState(false)
   const toggleIsOpen = () => {
     setIsUserDropDown(false); // Close the dropdown
     setIsOpen(!isOpen); // Toggle the isOpen state
@@ -44,6 +45,7 @@ const searchRedirect = ()=>{
     
   }
 }
+useEffect
 
   const logout = () => {
     dispatch(clearUser());
@@ -72,7 +74,7 @@ const searchRedirect = ()=>{
                   <Image width={86} height={28} src={'/assets/images/logo.png'} alt="logo"></Image>
                 </Link>
               </div>
-              <div className="search">
+              {/* <div className="search">
                 <form onSubmit={(e) => {
                   e.preventDefault();
                   if (searchQuery.trim()) {
@@ -101,7 +103,7 @@ const searchRedirect = ()=>{
                     </Link>
                   </div>
                 </form>
-              </div>
+              </div> */}
               {/* <div><p>{token ? 'true' : 'false'} - {user ? user.name : ''}</p></div> */}
             </div>
             <div className="header-right">
@@ -111,6 +113,11 @@ const searchRedirect = ()=>{
                     <svg width="28" height="28" viewBox="0 0 30 22" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_2184_8414)"><path d="M2.17498 11.1072C2.17498 10.6354 2.55744 10.2529 3.02923 10.2529H13.1266C13.5984 10.2529 13.9809 10.6354 13.9809 11.1072C13.9809 11.5789 13.5984 11.9614 13.1266 11.9614H3.02923C2.55744 11.9614 2.17498 11.5789 2.17498 11.1072ZM0.155501 6.05845C0.155501 5.58666 0.537958 5.20421 1.00974 5.20421H9.08768C9.55946 5.20421 9.94192 5.58666 9.94192 6.05845C9.94192 6.53023 9.55946 6.91269 9.08768 6.91269H1.00974C0.537959 6.91269 0.155501 6.53023 0.155501 6.05845Z" fill="#CCF0CA" stroke="#5DD37C" stroke-width="0.311001"></path><path d="M28.0457 10.7706L28.0457 10.7707C28.0914 10.877 28.1149 10.9914 28.1149 11.1071V11.1072V18.1754C28.1149 18.4019 28.0249 18.6192 27.8647 18.7794C27.7045 18.9396 27.4872 19.0296 27.2607 19.0296H25.0978H24.9768L24.9471 19.1469C24.7359 19.98 24.253 20.7188 23.5747 21.2466C22.8965 21.7744 22.0616 22.061 21.2022 22.061C20.3428 22.061 19.5079 21.7744 18.8297 21.2466C18.1514 20.7188 17.6685 19.98 17.4574 19.1469L17.4276 19.0296H17.3066H10.9614H10.841L10.8108 19.1462C10.5745 20.0614 10.0126 20.859 9.23026 21.3895C8.44796 21.92 7.49903 22.147 6.56135 22.0279C5.62368 21.9088 4.76163 21.4518 4.13679 20.7426C3.51195 20.0333 3.16722 19.1206 3.16722 18.1754C3.16722 17.2301 3.51195 16.3174 4.13679 15.6082C4.76163 14.8989 5.62368 14.4419 6.56135 14.3228C7.49903 14.2037 8.44796 14.4307 9.23026 14.9612C10.0126 15.4917 10.5745 16.2893 10.8108 17.2045L10.841 17.3211H10.9614H17.3066H17.4267L17.4571 17.2049C17.5863 16.7099 17.8122 16.2455 18.1217 15.8383C18.4313 15.431 18.8184 15.0891 19.2608 14.8323L19.3382 14.7873V14.6978V2.01948V1.86398H19.1827H5.04633C4.57455 1.86398 4.19209 1.48153 4.19209 1.00974C4.19209 0.537957 4.57455 0.155501 5.04633 0.155501H20.1925C20.419 0.155501 20.6363 0.245501 20.7965 0.405702C20.9567 0.565904 21.0467 0.783183 21.0467 1.00974V3.02923V3.18473H21.2022H24.2314H24.2315C24.3987 3.18464 24.5622 3.23364 24.7017 3.32565C24.8412 3.41766 24.9507 3.54863 25.0164 3.7023L25.0165 3.70238L28.0457 10.7706ZM7.06582 20.3503H7.06597C7.6426 20.3498 8.19544 20.1205 8.60317 19.7127C9.01091 19.305 9.24023 18.7521 9.2408 18.1755V18.1754C9.2408 17.7452 9.11324 17.3247 8.87425 16.967C8.63526 16.6093 8.29557 16.3306 7.89815 16.1659C7.50072 16.0013 7.0634 15.9582 6.6415 16.0422C6.21959 16.1261 5.83205 16.3332 5.52787 16.6374C5.22369 16.9416 5.01655 17.3291 4.93262 17.751C4.8487 18.1729 4.89177 18.6103 5.05639 19.0077C5.22101 19.4051 5.49979 19.7448 5.85746 19.9838C6.21513 20.2228 6.63565 20.3503 7.06582 20.3503ZM21.2022 4.89321H21.0467V5.04871V10.0974V10.2529H21.2022H25.7299H25.9658L25.8728 10.0361L23.7079 4.98743L23.6675 4.89321H23.565H21.2022ZM23.3772 18.1755V18.1754C23.3772 17.7452 23.2496 17.3247 23.0106 16.967C22.7716 16.6093 22.432 16.3306 22.0345 16.1659C21.6371 16.0013 21.1998 15.9582 20.7779 16.0422C20.356 16.1261 19.9684 16.3332 19.6643 16.6374C19.3601 16.9416 19.1529 17.3291 19.069 17.751C18.9851 18.1729 19.0282 18.6103 19.1928 19.0077C19.3574 19.4051 19.6362 19.7448 19.9939 19.9838C20.3515 20.2228 20.772 20.3503 21.2022 20.3503H21.2024C21.779 20.3498 22.3318 20.1205 22.7396 19.7127C23.1473 19.305 23.3766 18.7521 23.3772 18.1755ZM26.2509 17.3211H26.4064V17.1656V12.1169V11.9614H26.2509H21.2022H21.0467V12.1169V14.1364V14.2915L21.2018 14.2919C22.0604 14.2943 22.894 14.5815 23.5718 15.1086C24.2496 15.6357 24.7333 16.3728 24.9472 17.2043L24.9772 17.3211H25.0978H26.2509Z" fill="#CCF0CA" stroke="#5DD37C" stroke-width="0.311001"></path></g><defs><clipPath id="clip0_2184_8414"><rect width="30" height="22" fill="white"></rect></clipPath></defs></svg>
                   </Link>
                 </li> */}
+                <li onClick={() => setShowSearch(!showSearch)}>
+                <div className="search-icon border-2 border-white rounded-full">
+                        <Image width={32} height={32} className="w-full" src={'/assets/images/icon/search-icon.svg'} alt=""></Image>
+                      </div>
+                </li>
                 <Link href='/cart'>
                 <li>
                     <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.9375 21.9375C9.38623 21.9375 9.75 21.5737 9.75 21.125C9.75 20.6763 9.38623 20.3125 8.9375 20.3125C8.48877 20.3125 8.125 20.6763 8.125 21.125C8.125 21.5737 8.48877 21.9375 8.9375 21.9375Z" stroke="#FCFCEC" stroke-width="1.68304" stroke-linecap="round" stroke-linejoin="round"></path><path d="M20.3125 21.9375C20.7612 21.9375 21.125 21.5737 21.125 21.125C21.125 20.6763 20.7612 20.3125 20.3125 20.3125C19.8638 20.3125 19.5 20.6763 19.5 21.125C19.5 21.5737 19.8638 21.9375 20.3125 21.9375Z" stroke="#FCFCEC" stroke-width="1.68304" stroke-linecap="round" stroke-linejoin="round"></path><path d="M2.4375 4.0625H5.6875L8.125 17.875H21.125" stroke="#FCFCEC" stroke-width="1.68304" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.125 14.625H20.7919C20.8858 14.6251 20.9769 14.5926 21.0496 14.533C21.1223 14.4735 21.1721 14.3906 21.1905 14.2985L22.653 6.98598C22.6648 6.92701 22.6634 6.86616 22.6488 6.80782C22.6342 6.74948 22.6069 6.6951 22.5688 6.6486C22.5306 6.60211 22.4826 6.56466 22.4283 6.53896C22.3739 6.51327 22.3145 6.49996 22.2544 6.5H6.5" stroke="#FCFCEC" stroke-width="1.68304" stroke-linecap="round" stroke-linejoin="round"></path></svg>
@@ -274,6 +281,43 @@ const searchRedirect = ()=>{
           </div> */}
         </div>
       </div>
+      {showSearch&&
+      <div className="w-full header-left d-flex justify-content-center"> 
+      <div className="w-full search  p-2">
+                <form onSubmit={(e) => {
+                  e.preventDefault();
+                  if (searchQuery.trim()) {
+                    window.location.href = `/search/${searchQuery}`;
+                    setShowSearch(false)
+                  }
+                }}>
+                  <div className="form-group relative">
+                    <input 
+                      type="text" 
+                      className="form-control" 
+                      placeholder="Search Products" 
+                      onChange={(e)=>setSearchQuery(e.target.value)} 
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          e.preventDefault();
+                          if (searchQuery.trim()) {
+                            window.location.href = `/search/${searchQuery}`;
+                            setShowSearch(false)
+
+                          }
+                        }
+                      }}
+                    ></input>
+                    <Link href={searchQuery.trim() ? `/search/${searchQuery}` : '#'}>
+                      <div className="search-icon">
+                        <Image width={32} height={32} className="w-full" src={'/assets/images/icon/search-icon.svg'} alt=""></Image>
+                      </div>
+                    </Link>
+                  </div>
+                </form>
+              </div>
+       </div>
+      }
       {isLoginPopupOpen && <LoginPopup />}
      
 
