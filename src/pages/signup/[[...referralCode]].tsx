@@ -22,6 +22,7 @@ export default function SignUp() {
     const user = useAppSelector((state: any) => state.user); 
     const [refrralby,setRefrralby] = useState<any>();
     const [signuploading,setSignuploading] = useState<boolean>(false);
+    const [refrralLoading,setRefrralLoading] = useState<boolean>(false);
     // Log to debug
     // console.log('Router query:', router.query);
     // console.log('Current path:', router.asPath);
@@ -92,12 +93,18 @@ export default function SignUp() {
     const [showreferral,setShowreferral] = useState<boolean>(false);
 
     const fetchReferralData = async (code: string) => {
+        setRefrralLoading(true);
         getData(`/user/referral/${code}`).then((res:any)=>{
             console.log(res);
             setRefrralby(res?.data?.user)
             setShowreferral(true);
         }).catch((err:any)=>{
             console.log(err);
+            setShowreferral(false);
+            setRefrralby(null)
+
+        }).finally(()=>{
+            setRefrralLoading(false);
         })
     };
     const resentOtp = async ()=>{
@@ -145,6 +152,11 @@ export default function SignUp() {
         }),
         onSubmit: async (values) => {
             setSignuploading(true);
+            if(refrralby === null){
+                toast.error("Referral code is not valid");
+                setSignuploading(false);
+                return;
+            }
             // toast.success('OTP sent to your mobile number');
         //   console.log('Form submitted:', values);
        
@@ -245,7 +257,10 @@ export default function SignUp() {
                         <div className="signup-step-one">
                             <div className="sign-top">
                                 <div className="attrilgheading">Sign Up </div>
-                                {(refrralby || signupFormik.values.referralCode) && <p>Your are joining with <span>{refrralby?.username ? refrralby?.username : 'Laoding...'}</span></p>}
+
+                                {(refrralby || signupFormik.values.referralCode ) && <p>Your are joining with <span className={`transition-colors duration-500 ease-in-out ${refrralby === null ? 'bg-red-500' : 'bg-green-500'}`}>{refrralby?.username ? refrralby?.username : 'Not Found'}</span></p>}
+                                {/* {(refrralLoading ) && <p>Your are joining with <span className={`transition-colors duration-500 ease-in-out bg-yellow-500`}>Loading...</span></p>} */}
+
                             </div>
                             {!(refrralby || signupFormik.values.referralCode) &&  recommendedUsers?.length > 0 && <div className="flex justify-center items-center overflow-y-scroll mb-2 gap-2">
                                 <div className="text-sm ">Suggested Referrals</div>
