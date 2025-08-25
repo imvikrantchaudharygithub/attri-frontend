@@ -35,6 +35,12 @@ export default function Cart() {
   const [ischeckoutLoading, setIscheckoutLoading] = useState(false);
   const [showFreeDelivery, setShowFreeDelivery] = useState(false);
   const [isCartLoading, setIsCartLoading] = useState(true);
+  const [isCashbackModalOpen, setIsCashbackModalOpen] = useState(false);
+  const [cashbackInput, setCashbackInput] = useState<number>(0);
+  const [appliedCashback, setAppliedCashback] = useState<number>(0);
+  const [userCashbackBalance,setUserCashbackBalance] = useState<number>(0); // TODO: replace with real balance
+  const [userData, setUserData] = useState<any>(null);
+  
   const handleRemoveFromCart = async(item: any) => {
     if(!token){
       dispatch(removeFromCart(item));
@@ -92,8 +98,11 @@ export default function Cart() {
       
         setUserCartItems(res?.data?.cart?.items);
         dispatch(setCartCount(res?.data?.cart?.items?.length));
-        console.log("cart items",cartItems)
-        console.log("user cart items",res?.data?.cart?.items)
+        setUserData(res?.data?.userDetails);
+        setUserCashbackBalance(res?.data?.userDetails?.cashback);
+        // console.log("cart items",cartItems)
+        // console.log("user cart items",res?.data?.cart?.items)
+        console.log("user cashback balance",res?.data?.userDetails?.cashback)
 
       })
       
@@ -225,11 +234,15 @@ const handlePayment = async () => {
             user: user?.id,
             address: useraddress?._id,
             products: usercartItems,
-            paymentMethod: "online"
-        });
+            paymentMethod: "online",
+            cashback: appliedCashback
+        }).catch((err:any)=>{
+        toast.error(err?.response?.data?.message);
+        })
         
         if (!orderResponse?.data?._id) {
             throw new Error("Failed to create order");
+            
         }
         console.log("orderResponse",orderResponse)
         
@@ -298,7 +311,7 @@ const handlePayment = async () => {
         const rzp = new (window as any).Razorpay(options);
         rzp.open();
         
-    } catch (error) {
+    } catch (error:any) {
         console.error('Payment failed:', error);
         toast.error('Payment initialization failed');
         setIsPaymentLoading(false)
@@ -314,6 +327,7 @@ const [orderdetails, setOrderDetails] = useState(() => ({
     discount: usercartItems?.reduce((acc:any, item:any) => acc + item?.product?.mrp * item?.quantity, 0) || 0,
     tax: usercartItems?.reduce((acc:any, item:any) => acc + item?.product?.tax * item?.quantity, 0) || 0,
     shipping: (usercartItems?.reduce((acc:any, item:any) => acc + item?.product?.price * item?.quantity, 0) || 0) > 699 ? 0 : 55,
+    cashback: 0,
     grandtotal: 0
 }));
 
@@ -323,14 +337,22 @@ useEffect(() => {
     const newShipping = newOrdertotal > 699 ? 0 : 55;
     
     setOrderDetails(prev => ({
+       cashback: appliedCashback,
         ordermrptotal: usercartItems?.reduce((acc:any, item:any) => acc + item?.product?.mrp * item?.quantity, 0) || 0,
         ordertotal: newOrdertotal,
         discount: usercartItems?.reduce((acc:any, item:any) => acc + item?.product?.mrp * item?.quantity, 0) || 0,
         tax: usercartItems?.reduce((acc:any, item:any) => acc + item?.product?.tax * item?.quantity, 0) || 0,
         shipping: newShipping,
-        grandtotal: newOrdertotal + newShipping
+        grandtotal: (newOrdertotal-appliedCashback) + newShipping
     }));
-}, [usercartItems]);
+}, [usercartItems,appliedCashback]);
+
+// Keep cashbackInput as user's balance but clamped to max applicable value
+useEffect(() => {
+  if (!isCashbackModalOpen) return;
+  const maxApplicable = Math.max(0, Math.min(userCashbackBalance, (orderdetails?.grandtotal || 0) / 2));
+  setCashbackInput(maxApplicable);
+}, [isCashbackModalOpen, userCashbackBalance, orderdetails?.grandtotal]);
 
 // Add this useEffect to handle GIF display
 // useEffect(() => {
@@ -352,7 +374,10 @@ useEffect(() => {
       console.log(res)
     })
 }
-
+const shareWhatsapp = () => {
+  const text = `🚀 I’m using *Attri Products* and *Earning Money* from it — and I’m LOVING it! 💸✨ \n\nWanna try it too? Use my referral code 👉 *“${userData?.referral_code}”* \n\n  Join here 🔗 https://www.attriindustries.com/signup/${userData?.referral_code}   \n\n  -Let’s grow & earn together! 💼💰🔥`;
+  window.open(`https://wa.me/?text=${text}`, '_blank');
+}
 if(isPaymentLoading){
     return <div className="flex justify-center items-center h-screen">
       
@@ -479,14 +504,23 @@ if(isPaymentLoading){
                                     <div className="order-name">Discount on MRP</div>
                                     <div className="order-price">-₹{(orderdetails?.discount - orderdetails?.ordertotal).toFixed(2)}</div>
                                 </div>
-                                <div className="order-item d-flex">
+                                {/* <div className="order-item d-flex">
                                     <div className="order-name">Tax</div>
                                     <div className="order-price">₹{orderdetails?.tax}</div>
-                                </div>
-                                {/* <div className="order-item order-red d-flex">
-                                    <div className="order-name">Coupon Discount</div>
-                                    <div className="order-price">Apply Coupon</div>
                                 </div> */}
+                                {token && ( <>
+                                {appliedCashback > 0 ? (
+                                  <div className="order-item d-flex">
+                                    <div className="order-name">Cashback Applied</div>
+                                    <div className="order-price">-₹{appliedCashback.toFixed(2)}</div>
+                                  </div>
+                                ) :( <div className="order-item d-flex align">
+                                  <div className="order-name">Cashback</div>
+                                  <div className="order-price" onClick={() => setIsCashbackModalOpen(true)}> Apply
+                                 
+                                  </div>
+                              </div>) }
+                              </>)}
                                 <div className="order-item order-red d-flex">
                                     <div className="order-name">Shipping</div>
                                     <div className="order-price"> {orderdetails?.shipping === 0 ? "FREE" : `₹${orderdetails?.shipping}`}</div>
@@ -536,6 +570,7 @@ if(isPaymentLoading){
                     <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-pink-400 mx-4">
                       FREE DELIVERY!
                     </span>
+
                     <span className="inline-block animate-truckBounce">🎁</span>
                   </div>
                   <p className="text-white/90 mt-4 text-xl animate-smoothBounce">
@@ -551,6 +586,99 @@ if(isPaymentLoading){
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        )}
+
+        {isCashbackModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+            <div className="mx-4 w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden">
+              <div className="bg-gradient-to-r from-green-700 to-green-500 p-5 text-white">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xl font-semibold">Apply Cashback</h3>
+                  <button
+                    aria-label="Close"
+                    className="rounded-full p-1 hover:bg-white/20 transition-colors"
+                    onClick={() => setIsCashbackModalOpen(false)}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+                      <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </button>
+                </div>
+                <p className="text-white/90 text-sm mt-1">You can apply up to half of your grand total.</p>
+              </div>
+         {userCashbackBalance > 0  ?(
+              <div className="bg-white p-6">
+                {(() => {
+                  const maxApplicableCashback = Math.max(0, Math.min(userCashbackBalance, (orderdetails?.grandtotal || 0) / 2));
+                  return (
+                    <>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="rounded-xl border border-gray-200 p-4">
+                          <div className="text-xs text-gray-500">Max Applicable</div>
+                          <div className="mt-1 text-lg font-semibold">₹{maxApplicableCashback.toFixed(2)}</div>
+                        </div>
+                        <div className="rounded-xl border border-gray-200 p-4">
+                          <div className="text-xs text-gray-500">Your Cashback</div>
+                          <div className="mt-1 text-lg font-semibold">₹{userCashbackBalance.toFixed(2)}</div>
+                        </div>
+                      </div>
+
+                      <div className="mt-6 flex items-center justify-between rounded-xl bg-gray-50 p-4">
+                        <div className="text-sm text-gray-600">Selected Cashback</div>
+                        <div className="text-lg font-semibold">₹{cashbackInput.toFixed(2)}</div>
+                      </div>
+
+                      <div className="mt-6 flex items-center justify-end gap-3">
+                        <button
+                          type="button"
+                          className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors"
+                          onClick={() => setIsCashbackModalOpen(false)}
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          type="button"
+                          className="px-5 py-2 rounded-lg text-white bg-gradient-to-r from-green-700 to-green-500 hover:from-green-700 hover:to-green-600 transition-colors"
+                          onClick={() => { setAppliedCashback(Number(cashbackInput.toFixed(2))); setIsCashbackModalOpen(false); }}
+                        >
+                          Apply
+                        </button>
+                      </div>
+                    </>
+                  );
+                })()}
+              </div>
+              ):(
+                <div className="bg-white p-6">
+                  <div className="flex flex-col items-center text-center">
+                    <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-green-50 px-3 py-1 text-green-700">
+                      <span className="h-2 w-2 rounded-full bg-green-500"></span>
+                      <span className="text-xs font-semibold">Earn ₹10</span>
+                    </div>
+                    <div className="text-lg font-semibold text-gray-800">No cashback available yet</div>
+                    <p className="mt-2 max-w-md text-sm text-gray-600">
+                      Refer a friend and get <span className="font-semibold text-green-700">₹10 cashback</span> when they sign up using your referral.
+                    </p>
+                    <div className="mt-5 flex items-center gap-3">
+                      <button
+                        type="button"
+                        className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors"
+                        onClick={() => setIsCashbackModalOpen(false)}
+                      >
+                        Close
+                      </button>
+                      <button
+                        onClick={() => shareWhatsapp()}
+                        className="px-5 py-2 rounded-lg text-white bg-gradient-to-r from-green-700 to-green-500 hover:from-green-700 hover:to-green-600 transition-colors"
+                      >
+                        Invite a Friend
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ) }
             </div>
           </div>
         )}
