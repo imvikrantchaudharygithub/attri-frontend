@@ -515,9 +515,48 @@ export default function OrderDetails() {
                             <hr className="my-4"/>
                         </div>
                     ))}
+
+                    <div>
+                    {orderData?.coupon?.code && (
+                      <div className="flex justify-between items-center py-2 bg-green-50 rounded-lg px-4">
+                        <div className="flex items-center">
+                          <span className="text-green-600 font-medium">🎟️ Coupon Applied</span>
+                          <span className="ml-2 text-sm text-gray-600">({orderData?.coupon?.code})</span>
+                        </div>
+                        <span className="text-green-600 font-bold">
+                          -₹{orderData?.coupon?.discountAmount?.toFixed(2)}
+                        </span>
+                      </div>
+                    )}
+
+                    {/* Cashback */}
+                    {orderData?.cashback > 0 && (
+                      <div className="flex justify-between items-center py-2 bg-blue-50 rounded-lg px-4">
+                        <div className="flex items-center">
+                          <span className="text-blue-600 font-medium">💰 Cashback Applied</span>
+                        </div>
+                        <span className="text-blue-600 font-bold">
+                          -₹{orderData?.cashback?.toFixed(2)}
+                        </span>
+                      </div>
+                    )}
+
+                    {/* Shipping */}
+                    <div className="flex justify-between items-center py-2">
+                      <span className="text-gray-600">Shipping</span>
+                      <span className="font-semibold">
+                      {/* orderData?.totalAmount > 699 ? 0 : 55; */}
+                        {orderData?.totalAmount > 699 ? (
+                          <span className="text-green-600">FREE</span>
+                        ) : (
+                          `₹ 55`
+                        )}
+                      </span>
+                    </div>
+                    </div>
                     <p className="total-price font-semibold text-lg mt-4 mb-3">
                         Total <span className="ml-2 text-xl text-gray-900">
-                            ₹{orderData?.totalAmount.toFixed(2)}
+                            ₹{(orderData?.totalAmount + (orderData?.totalAmount > 699 ? 0 : 55)).toFixed(2)}
                         </span>
                     </p>
                 </div>

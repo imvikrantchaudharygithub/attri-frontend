@@ -84,7 +84,7 @@ export default function Order() {
 							<div className="cart-order-item d-flex">
 								<div className="shipped-order-top d-flex align">
 									<div className="shipped-tag">Order ID : <span>#{item?._id}</span></div>
-									<div className="shipped-tag">Status : <span className={`${item?.status === 'pending' ? 'text-yellow-500' :item?.status === 'confirmed' ? 'text-green-500'  : item?.status === 'delivered' ? 'text-green-500' : 'text-red-500'}`}>{item?.status.toUpperCase()}</span></div>
+									<div className="shipped-tag">Status : <span className={`${item?.status === 'pending' ? 'text-yellow-500' :item?.status === 'confirmed' ? 'text-green-500'  : item?.status === 'delivered' ? 'text-green-500' : 'text-yellow-500'}`}>{item?.status.toUpperCase()}</span></div>
 									{/* <div className="shipped-tag">Order ID : <span>#HW374915036</span></div> */}
 								</div>
 							{item?.products?.map((prodetail:any)=>(
@@ -112,7 +112,8 @@ export default function Order() {
 								))}
 								<div className="shipped-price d-flex align">
 									<div className="shipped-price-left">Total Order Price</div>
-									<div className="shipped-price-right">₹{item?.totalAmount?.toFixed(2)}</div>
+									<div className="shipped-price-right"> ₹{(item?.totalAmount + (item?.totalAmount > 699 ? 0 : 55)).toFixed(2)}
+									</div>
 								</div>
 								<div className="cart-order-btn cart-order-mobile d-flex">
 									<Link href={`/orderdetail/${item?._id}`} className="anchor-button anchor-button-line hovertime">View Details</Link>
