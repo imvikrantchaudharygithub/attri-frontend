@@ -51,6 +51,8 @@ export default function Cart() {
   const [cart, setCart] = useState<any>(null);
   const [couponList, setCouponList] = useState<any>([]);
   const [selectedCoupon, setSelectedCoupon] = useState<string>('');
+
+  const [freeCartItem, setFreeCartItem] = useState<string | null>(null);
   const handleRemoveFromCart = async(item: any) => {
     if(!token){
       dispatch(removeFromCart(item));
@@ -65,6 +67,8 @@ export default function Cart() {
     .then((res:any)=>{
         getusercart()
       toast.success('Item removed from cart');
+      setFreeCartItem(null);
+      setAppliedCoupon(null);
     })
     .catch((err:any)=>{
       toast.error('Item not removed from cart');
@@ -198,6 +202,8 @@ export default function Cart() {
       .then((res:any)=>{
         console.log(res)
         getusercart()
+        setFreeCartItem(null);
+        setAppliedCoupon(null);
       })
       .catch((err:any)=>{
         console.log(err)
@@ -430,10 +436,16 @@ const validateCoupon = async (code: string) => {
       setAppliedCoupon(response.data.coupon);
       setCouponDiscount(discount);
       setCouponError('');
+
       // Clear cashback when coupon is applied
       setAppliedCashback(0);
       toast.success(`Coupon applied! You saved ₹${discount}`);
       setIsCouponModalOpen(false);
+      if(response.data.lowestPricedItem ){
+        setFreeCartItem(response.data.lowestPricedItem.product._id);
+      }else{
+        setFreeCartItem(null);
+      }
       return true;
     } else {
       setCouponError(response?.data?.message || 'Invalid coupon code');
@@ -519,21 +531,33 @@ if(isPaymentLoading){
                         ) : (
                      <>
                           {usercartItems?.length > 0 ? usercartItems?.map((item: any) => (  
-                          <div className="cart-order-item d-flex align relative" key={item?.product?._id}>
+                          <div className="cart-order-item d-flex align relative" key={item?.product?._id} style={{border: freeCartItem === item?.product?._id ? '2px solid green ' : 'none'}}>
                             <div className="cart-order-left relative">
                               <Image width={600} height={600} className="w-full hovertime" src={item?.product?.images[0]} alt=""></Image>
                             </div>
                             <div className="cart-order-right">
-                              <div className="attrixxsheading">category</div>
+                              {/* <div className="attrixxsheading">category</div> */}
                               <h3 className="attrixsheading">{item?.product?.name}</h3>
-                              <div className="product-price d-flex align">
-                                <div className="product-bottom-left attrixxsheading">
-                                  ₹{item?.product?.price?.toFixed(2)}<span>₹{item?.product?.mrp?.toFixed(2)}</span>
-                                </div>
-                                <div className="product-bottom-right">
-                                  ({item?.product?.discount}%off)
-                                </div>
-                              </div>
+                             {freeCartItem === item?.product?._id && item.quantity == 1 ?( 
+                           <div className="product-price d-flex align">
+                           <div className=" attrixxsheading text-green-600 font-bold">
+                           <span className="text-green-600 font-bold">FREE</span>
+                           </div>
+                         </div> 
+                              ):
+                              (
+
+                            <div className="product-price d-flex align">
+                            <div className="product-bottom-left attrixxsheading">
+                              ₹{item?.product?.price?.toFixed(2)}<span>₹{item?.product?.mrp?.toFixed(2)}</span>
+                            </div>
+                            <div className="product-bottom-right">
+                              ({item?.product?.discount}%off)
+                            </div>
+                            {freeCartItem === item?.product?._id && item.quantity > 1 && <span className="text-green-600 font-bold border border-green-600 rounded-md px-1 py-[1px] mx-2"> 1 FREE</span>}
+                            </div> 
+                              )
+                              }
                               <p className="tax-text">Inclusive of all Taxes</p>
                               <div className="quantity-box">
                                 <div className="attrixxsheading">Quantity :</div>
