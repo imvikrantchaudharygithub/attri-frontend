@@ -5,7 +5,7 @@ import { SetStateAction, useState, useEffect } from "react";
 // import "@/styles/popup.css";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { toast, ToastContainer } from 'react-toastify';
+import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { useAppDispatch, useAppSelector } from '@/hooks/hooks';
 import { setUser } from "@/slices/userSlice";
@@ -244,248 +244,193 @@ export default function SignUp() {
         getrecommended();
     },[])
 
+    const inputClass = (touched: boolean, error: string | undefined) =>
+        `w-full h-12 px-4 rounded-xl border text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#8B35B8]/20 ${
+            touched && error ? "border-red-400 bg-red-50" : "border-[#E5E7EB] focus:border-[#8B35B8] bg-white"
+        }`;
+
     return (
-        <div className="sign-box padding-tb">
+        <section className="bg-[#FAF9FF] min-h-screen py-8 md:py-12">
             <div className="container">
-                <div className="sign-main d-flex align">
-                    <div className="sign-left">
-                        <Image width={676} height={548} className="w-full" src={'https://res.cloudinary.com/doz4dnf0h/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1742919806/login_03_luywts.jpg'} alt=""></Image>
-                    </div>
-                    <div className="sign-right">
-                        {/* signup css globals 311*/}
-                        {otpStep ? (
-                        <div className="signup-step-one">
-                            <div className="sign-top">
-                                <div className="attrilgheading">Sign Up </div>
-
-                                {(refrralby || signupFormik.values.referralCode ) && <p>Your are joining with <span className={`transition-colors duration-500 ease-in-out ${refrralby === null ? 'bg-red-500' : 'bg-green-500'}`}>{refrralby?.username ? refrralby?.username : 'Not Found'}</span></p>}
-                                {/* {(refrralLoading ) && <p>Your are joining with <span className={`transition-colors duration-500 ease-in-out bg-yellow-500`}>Loading...</span></p>} */}
-
-                            </div>
-                            {!(refrralby || signupFormik.values.referralCode) &&  recommendedUsers?.length > 0 && <div className="flex justify-center items-center overflow-y-scroll mb-2 gap-2">
-                                <div className="text-sm ">Suggested Referrals</div>
-                           {recommendedUsers?.map((item:any)=>(
-                            <div 
-                              key={item._id}
-                              className="flex items-center rounded-full bg-[#282936] px-2 py-1 text-xs text-white whitespace-nowrap cursor-pointer hover:bg-[#3a3b4a] transition-colors"
-                              onClick={() => {
-                                signupFormik.setFieldValue('referralCode', item.referral_code);
-                                fetchReferralData(item.referral_code);
-                              }}
-                            >
-                              <svg width="10" height="10" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8 1V15M1 8H15" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                              </svg>
-                              <span className="ml-2">{item?.referral_code}</span>
-                            </div>
-                           ))}
-                          
-                            
-                            
-
-                            </div>
-                            }
-                                <form onSubmit={signupFormik.handleSubmit}>
-                                    <div className="form-group">
-                                    <input
-                                        type="text"
-                                        // name="referralCode"
-                                        className={`form-control ${
-                                            signupFormik.touched.referralCode && signupFormik.errors.referralCode ? 'error' : ''
-                                        }`}
-                                        placeholder="Referral Code"
-                                        {...signupFormik.getFieldProps('referralCode')}
-                                    />
-                                    {signupFormik.touched.referralCode && signupFormik.errors.referralCode && (
-                                        <div className="error-message" style={{ color: 'red', fontSize: '12px', marginTop: '5px' }}>
-                                            {signupFormik.errors.referralCode}
-                                        </div>
-                                    )}
-                                </div>
-                                <div className="form-group">
-                                    <input
-                                        type="text"
-                                        // name="name"
-                                        className={`form-control ${
-                                            signupFormik.touched.name && signupFormik.errors.name ? 'error' : ''
-                                        }`}
-                                        placeholder="Name"
-                                        {...signupFormik.getFieldProps('name')}
-                                    />
-                                    {signupFormik.touched.name && signupFormik.errors.name && (
-                                        <div className="error-message" style={{ color: 'red', fontSize: '12px', marginTop: '5px' }}>
-                                            {signupFormik.errors.name}
-                                        </div>
-                                    )}
-                                </div>
-                                <div className="form-group">
-                                    <input
-                                        type="text"
-                                        className={`form-control ${
-                                            signupFormik.touched.mobileNumber && signupFormik.errors.mobileNumber ? 'error' : ''
-                                        }`}
-                                        placeholder="Enter Mobile Number"
-                                        {...signupFormik.getFieldProps('mobileNumber')}
-                                    />
-                                    {signupFormik.touched.mobileNumber && signupFormik.errors.mobileNumber && (
-                                        <div className="error-message" style={{ color: 'red', fontSize: '12px', marginTop: '5px' }}>
-                                            {signupFormik.errors.mobileNumber}
-                                        </div>
-                                    )}
-                                </div>
-                                
-                                {/* Date of Birth Field - Modern UI */}
-                                <div className="form-group mt-2">
-                                    <div className="relative">
-                                        <div className="flex items-center">
-                                            <input
-                                                type="date"
-                                                id="dateOfBirth"
-                                                className={`form-control pr-10 ${
-                                                    signupFormik.touched.dateOfBirth && signupFormik.errors.dateOfBirth ? 'error' : ''
-                                                }`}
-                                                placeholder="Date of Birth"
-                                                max={format(new Date(), 'yyyy-MM-dd')}
-                                                {...signupFormik.getFieldProps('dateOfBirth')}
-                                            />
-                                            <label 
-                                                htmlFor="dateOfBirth" 
-                                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer"
-                                            >
-                                                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" 
-                                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" 
-                                                    />
-                                                </svg>
-                                            </label>
-                                        </div>
-                                        <div className="absolute -top-6 left-2 text-xs font-medium text-gray-500 transition-all mt-2">
-                                            Date of Birth
-                                        </div>
-                                    </div>
-                                    {signupFormik.touched.dateOfBirth && signupFormik.errors.dateOfBirth && (
-                                        <div className="error-message" style={{ color: 'red', fontSize: '12px', marginTop: '5px' }}>
-                                            {typeof signupFormik.errors.dateOfBirth === 'string' ? signupFormik.errors.dateOfBirth : 'Invalid date'}
-                                        </div>
-                                    )}
-                                </div>
-                                
-                                <div className="form-group">
-                                    <button 
-                                        disabled={signuploading}
-                                        type="submit" 
-                                        className="w-full anchor-button hovertime"
-                                    >
-                                        {signuploading ? 'Signing Up...' : 'Sign Up'}
-                                    </button>
-                                </div>
-                            </form>
-                        </div>  
-                        ) : (
-                        <div className="signup-step-two">
-                            <div className="attrismheading">OTP Verification</div>
-                            <div className="verifi">
-                                <p>We have sent verification code to</p>
-                                <div className="verifi-number">
-                                +91{signupFormik.values.mobileNumber}
-                                <button type="button" className="editbtn" onClick={() => setOtpStep(true)}>Edit</button>
-                                </div>
-                            </div>
-                            <form onSubmit={otpFormik.handleSubmit}>
-                                <div className="otp-code dflex">
-                                {[0, 1, 2, 3].map((index) => (
-                                    <input
-                                    key={index}
-                                    type="number"
-                                    maxLength={1}
-                                    name={`otp[${index}]`}
-                                    className={`otp-input ${
-                                        otpFormik.touched.otp && otpFormik.errors.otp ? 'error' : ''
-                                    }`}
-                                    value={otpFormik.values.otp[index]}
-                                    onChange={(e) => handleOtpChange(index, e.target.value)}
-                                    onKeyDown={(e) => {
-                                        if (e.key === 'Backspace' && !otpFormik.values.otp[index] && index > 0) {
-                                        const prevInput = document.querySelector(
-                                            `input[name="otp[${index - 1}]"]`
-                                        ) as HTMLInputElement;
-                                        if (prevInput) prevInput.focus();
-                                        }
-                                    }}
-                                    onPaste={(e) => {
-                                        // Prevent default paste behavior
-                                        e.preventDefault();
-                                        
-                                        // Get pasted data
-                                        const pastedData = e.clipboardData.getData('text');
-                                        
-                                        // Extract digits only
-                                        const digits = pastedData.replace(/[^0-9]/g, '').substring(0, 4);
-                                        
-                                        // Only proceed if we have digits
-                                        if (digits.length > 0) {
-                                            // Create new OTP array
-                                            const newOtp = [...otpFormik.values.otp];
-                                            
-                                            // Fill in the digits
-                                            for (let i = 0; i < digits.length; i++) {
-                                                if (index + i < 4) {
-                                                    newOtp[index + i] = digits[i];
-                                                }
-                                            }
-                                            
-                                            // Update formik state
-                                            otpFormik.setFieldValue('otp', newOtp);
-                                            
-                                            // Focus on next empty field or last field
-                                            const nextEmptyIndex = newOtp.findIndex(val => !val);
-                                            const nextInput = document.querySelector(
-                                                `input[name="otp[${nextEmptyIndex !== -1 ? nextEmptyIndex : 3}]"]`
-                                            ) as HTMLInputElement;
-                                            if (nextInput) nextInput.focus();
-                                        }
-                                    }}
-                                    />
-                                ))}
-                                </div>
-                                {otpFormik.touched.otp && otpFormik.errors.otp && (
-                                    <div className="error-message" style={{ color: 'red', fontSize: '12px', marginTop: '5px' }}>
-                                        {typeof otpFormik.errors.otp === 'string' 
-                                            ? otpFormik.errors.otp 
-                                            : 'Please enter a valid OTP'}
-                                    </div>
-                                )}
-                                <div className="form-group">
-                                {resendDisabled ? (
-                                    <div className="flex items-center justify-center space-x-2 text-sm text-gray-400 mt-2">
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M8 2.5V8L10.5 10.5" stroke="#9CA3AF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                                            <circle cx="8" cy="8" r="6" stroke="#9CA3AF" strokeWidth="1.5"/>
-                                        </svg>
-                                        <span className="font-medium">Request new code in {formatTime(resendTimer)}</span>
-                                    </div>
-                                ) : (
-                                    <button 
-                                        type="button" 
-                                        className="resend" 
-                                        onClick={handleResendOtp}
-                                    >
-                                        <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M15.1333 9.5L13.8004 8.16667L12.4666 9.5M14 8.5C14 11.8137 11.3137 14.5 8 14.5C4.68629 14.5 2 11.8137 2 8.5C2 5.18629 4.68629 2.5 8 2.5C10.2013 2.5 12.1257 3.68542 13.1697 5.45273M8 5.16667V8.5L10 9.83333" stroke="#dce9ff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-                                        </svg>
-                                        Resend OTP
-                                    </button>
-                                )}
-                                </div>
-                                <div className="form-group">
-                                <button type="submit" className="w-full anchor-button hovertime">Verify</button>
-                                </div>
-                            </form>
+                <div className="max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.12)] flex flex-col md:flex-row bg-white">
+                    {/* Left image */}
+                    <div className="hidden md:block md:w-2/5 relative">
+                        <Image
+                            width={480}
+                            height={600}
+                            className="w-full h-full object-cover"
+                            src="https://res.cloudinary.com/doz4dnf0h/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1742919806/login_03_luywts.jpg"
+                            alt="Sign up"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#8B35B8]/20" />
+                        <div className="absolute bottom-8 left-6 right-6">
+                            <h3 className="text-white text-2xl font-bold font-heading italic leading-tight">
+                                Join the Attri Family
+                            </h3>
+                            <p className="text-white/70 text-sm mt-1">Natural products. Real earnings.</p>
                         </div>
-                        )} 
+                    </div>
+
+                    {/* Right form */}
+                    <div className="flex-1 p-6 md:p-8">
+                        {/* Brand */}
+                        <div className="flex items-center gap-2 mb-6">
+                            <div className="w-8 h-8 rounded-full bg-[#8B35B8] flex items-center justify-center">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                </svg>
+                            </div>
+                            <span className="font-bold text-[#8B35B8] font-heading text-sm">Attri Industries</span>
+                        </div>
+
+                        {otpStep ? (
+                            <div>
+                                <h1 className="text-2xl font-bold text-[#8B35B8] font-heading italic mb-1">Create Account</h1>
+                                <p className="text-[#6B7280] text-sm mb-5">Fill in your details to get started</p>
+
+                                {/* Referral status */}
+                                {(refrralby || signupFormik.values.referralCode) && (
+                                    <div className={`flex items-center gap-2 text-xs font-medium px-3 py-2 rounded-xl mb-4 ${refrralby ? 'bg-[#f0fdf4] text-[#16A34A] border border-[#bbf7d0]' : 'bg-red-50 text-red-500 border border-red-200'}`}>
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            {refrralby ? <path d="M20 6L9 17l-5-5" /> : <path d="M18 6 6 18M6 6l12 12" />}
+                                        </svg>
+                                        Joining with: <strong>{refrralby?.username || 'Not Found'}</strong>
+                                    </div>
+                                )}
+
+                                {/* Suggested referrals */}
+                                {!(refrralby || signupFormik.values.referralCode) && recommendedUsers?.length > 0 && (
+                                    <div className="mb-4">
+                                        <p className="text-xs text-[#6B7280] mb-2">Suggested referrals:</p>
+                                        <div className="flex flex-wrap gap-2">
+                                            {recommendedUsers.map((item: any) => (
+                                                <button
+                                                    key={item._id}
+                                                    type="button"
+                                                    className="flex items-center gap-1 rounded-full bg-[#8B35B8] px-3 py-1 text-xs text-white hover:bg-[#5C1F82] transition-colors cursor-pointer"
+                                                    onClick={() => {
+                                                        signupFormik.setFieldValue("referralCode", item.referral_code);
+                                                        fetchReferralData(item.referral_code);
+                                                    }}
+                                                >
+                                                    <svg width="8" height="8" viewBox="0 0 16 16" fill="none"><path d="M8 1v14M1 8h14" stroke="white" strokeWidth="2" strokeLinecap="round" /></svg>
+                                                    {item?.referral_code}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                <form onSubmit={signupFormik.handleSubmit} className="space-y-3.5">
+                                    <div>
+                                        <label className="block text-xs font-semibold text-[#6B7280] mb-1.5 uppercase tracking-wide">Referral Code *</label>
+                                        <input type="text" className={inputClass(!!signupFormik.touched.referralCode, signupFormik.errors.referralCode)} placeholder="Enter referral code" {...signupFormik.getFieldProps("referralCode")} />
+                                        {signupFormik.touched.referralCode && signupFormik.errors.referralCode && (
+                                            <p className="text-red-500 text-xs mt-1">{signupFormik.errors.referralCode}</p>
+                                        )}
+                                    </div>
+                                    <div>
+                                        <label className="block text-xs font-semibold text-[#6B7280] mb-1.5 uppercase tracking-wide">Full Name *</label>
+                                        <input type="text" className={inputClass(!!signupFormik.touched.name, signupFormik.errors.name)} placeholder="Enter your full name" {...signupFormik.getFieldProps("name")} />
+                                        {signupFormik.touched.name && signupFormik.errors.name && (
+                                            <p className="text-red-500 text-xs mt-1">{signupFormik.errors.name}</p>
+                                        )}
+                                    </div>
+                                    <div>
+                                        <label className="block text-xs font-semibold text-[#6B7280] mb-1.5 uppercase tracking-wide">Mobile Number *</label>
+                                        <div className="relative">
+                                            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm font-semibold text-[#6B7280]">+91</span>
+                                            <input type="text" className={`${inputClass(!!signupFormik.touched.mobileNumber, signupFormik.errors.mobileNumber)} pl-11`} placeholder="10-digit number" maxLength={10} {...signupFormik.getFieldProps("mobileNumber")} />
+                                        </div>
+                                        {signupFormik.touched.mobileNumber && signupFormik.errors.mobileNumber && (
+                                            <p className="text-red-500 text-xs mt-1">{signupFormik.errors.mobileNumber}</p>
+                                        )}
+                                    </div>
+                                    <div>
+                                        <label htmlFor="dateOfBirth" className="block text-xs font-semibold text-[#6B7280] mb-1.5 uppercase tracking-wide">Date of Birth *</label>
+                                        <input type="date" id="dateOfBirth" className={inputClass(!!signupFormik.touched.dateOfBirth, signupFormik.errors.dateOfBirth as string)} max={format(new Date(), "yyyy-MM-dd")} {...signupFormik.getFieldProps("dateOfBirth")} />
+                                        {signupFormik.touched.dateOfBirth && signupFormik.errors.dateOfBirth && (
+                                            <p className="text-red-500 text-xs mt-1">{typeof signupFormik.errors.dateOfBirth === "string" ? signupFormik.errors.dateOfBirth : "Invalid date"}</p>
+                                        )}
+                                    </div>
+                                    <button
+                                        type="submit"
+                                        disabled={signuploading}
+                                        className="w-full h-12 bg-[#8B35B8] text-white rounded-xl font-semibold text-sm hover:bg-[#5C1F82] transition-all duration-200 active:scale-[0.98] disabled:opacity-60 cursor-pointer flex items-center justify-center gap-2"
+                                    >
+                                        {signuploading ? (
+                                            <>
+                                                <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeDasharray="30 70" /></svg>
+                                                Signing Up...
+                                            </>
+                                        ) : "Sign Up"}
+                                    </button>
+                                </form>
+
+                                <p className="text-center text-sm mt-4 text-[#6B7280]">
+                                    Already have an account? <Link href="/" className="text-[#D4A847] font-semibold hover:text-[#A07810] transition-colors">Login</Link>
+                                </p>
+                            </div>
+                        ) : (
+                            <div>
+                                <h1 className="text-2xl font-bold text-[#8B35B8] font-heading italic mb-1">OTP Verification</h1>
+                                <p className="text-[#6B7280] text-sm mb-2">Code sent to</p>
+                                <div className="flex items-center gap-2 mb-6">
+                                    <span className="font-semibold text-[#1A1A1A]">+91 {signupFormik.values.mobileNumber}</span>
+                                    <button type="button" className="text-xs text-[#D4A847] border border-[#D4A847] px-2 py-0.5 rounded-full hover:bg-[#D4A847] hover:text-white transition-colors cursor-pointer" onClick={() => setOtpStep(true)}>Edit</button>
+                                </div>
+
+                                <form onSubmit={otpFormik.handleSubmit} className="space-y-5">
+                                    <div className="flex gap-3 justify-center">
+                                        {[0, 1, 2, 3].map((index) => (
+                                            <input
+                                                key={index}
+                                                type="number"
+                                                maxLength={1}
+                                                name={`otp[${index}]`}
+                                                className="w-14 h-14 text-center text-xl font-bold border-2 border-[#E5E7EB] rounded-xl focus:outline-none focus:border-[#8B35B8] focus:ring-2 focus:ring-[#8B35B8]/20 transition-all duration-200"
+                                                value={otpFormik.values.otp[index]}
+                                                onChange={(e) => handleOtpChange(index, e.target.value)}
+                                                onKeyDown={(e) => {
+                                                    if (e.key === "Backspace" && !otpFormik.values.otp[index] && index > 0) {
+                                                        const prev = document.querySelector(`input[name="otp[${index - 1}]"]`) as HTMLInputElement;
+                                                        if (prev) prev.focus();
+                                                    }
+                                                }}
+                                                onPaste={(e) => {
+                                                    e.preventDefault();
+                                                    const digits = e.clipboardData.getData("text").replace(/\D/g, "").substring(0, 4);
+                                                    if (digits) {
+                                                        const newOtp = [...otpFormik.values.otp];
+                                                        for (let i = 0; i < digits.length; i++) {
+                                                            if (index + i < 4) newOtp[index + i] = digits[i];
+                                                        }
+                                                        otpFormik.setFieldValue("otp", newOtp);
+                                                    }
+                                                }}
+                                            />
+                                        ))}
+                                    </div>
+
+                                    <div className="text-center text-sm text-[#9CA3AF]">
+                                        {resendDisabled ? (
+                                            <span>Resend code in <span className="font-semibold text-[#8B35B8]">{formatTime(resendTimer)}</span></span>
+                                        ) : (
+                                            <button type="button" className="text-[#D4A847] font-semibold cursor-pointer hover:text-[#A07810]" onClick={handleResendOtp}>
+                                                Resend OTP
+                                            </button>
+                                        )}
+                                    </div>
+
+                                    <button type="submit" className="w-full h-12 bg-[#8B35B8] text-white rounded-xl font-semibold text-sm hover:bg-[#5C1F82] transition-all duration-200 active:scale-[0.98] cursor-pointer">
+                                        Verify &amp; Sign Up
+                                    </button>
+                                </form>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     );
 }

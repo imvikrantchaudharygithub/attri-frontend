@@ -1,3 +1,8 @@
+/* PDP: ensure only one "Add to Bag" is visible (hide any duplicate on mobile) */
+.pdp-product-main .pdp-info button:not(.pdp-add-to-bag-only) {
+  display: none !important;
+}
+
 /* product-card */
 .product-card{background: var(--text-color); border-radius: 20px; overflow: hidden; height: 100%;}
 .product-card .product-thumb{padding-bottom: 100%; line-height: 0; overflow: hidden; margin-top: 0;}

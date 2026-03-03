@@ -6,7 +6,7 @@ import OrderFilter from "@/Components/OrderFilter";
 import OrderCard from "@/Components/OrderCard";
 import { useRouter } from "next/router";
 import { getData,postData } from "@/services/apiServices";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 export default function OrderDetails() {
     const router = useRouter();

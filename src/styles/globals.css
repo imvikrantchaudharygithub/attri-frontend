@@ -1,19 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 :root {
+  /* Legacy — backward compatibility */
   --steps: 5;
-  --primary-color:#095933;
-  --black-color:#000;
-  --white-color:#fff;
-  --bg-gray:#f1f5f9;
-  --red-color:#820906;
-  --green-color:#5dd37c;
-  --light-green:#d1ffd9;
-  --text-color:#e7e7e7;
-  --gray-color:#808080;
-  --light-blue:#9edcf2;
-  --dark-blue:#002863;
+  --primary-color: #8B35B8;
+  --black-color: #1A1A1A;
+  --white-color: #FFFFFF;
+  --bg-gray: #FAF9FF;
+  --red-color: #EF4444;
+  --green-color: #16A34A;
+  --light-green: #dcfce7;
+  --text-color: #1A1A1A;
+  --gray-color: #6B7280;
+  --light-blue: #E0F2FE;
+  --dark-blue: #0C4A6E;
+
+  /* Brand palette — Source of truth (cursor-color-placement-plan) */
+  --color-primary: #8B35B8;
+  --color-primary-dark: #5C1F82;
+  --color-primary-light: #E9D5FF;
+  --color-primary-glow: #8B35B820;
+  --color-charcoal: #3D3C3C;
+  --color-accent-gold: #D4A847;
+  --color-accent-saffron: #F4821A;
+  --color-bg: #FAF9FF;
+  --color-surface: #FFFFFF;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #6B7280;
+  --color-text-muted: #9CA3AF;
+  --color-success: #16A34A;
+  --color-error: #DC2626;
+  --color-warning: #F59E0B;
+  --color-border: #E5E7EB;
+  --color-border-purple: #D8B4FE;
+  /* Aliases */
+  --color-secondary: #5C1F82;
+  --color-accent: #D4A847;
+  --color-warm-accent: #F4821A;
+  --color-text: #1A1A1A;
+  --color-muted: #6B7280;
+
+  /* Typography — single font for cohesive e‑com look */
+  --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+  /* Shadows */
+  --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(139, 53, 184, 0.04);
+  --shadow-card-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(139, 53, 184, 0.08);
+  --shadow-glass: 0 8px 32px rgba(139, 53, 184, 0.1);
+
+  /* Z-index scale */
+  --z-base: 1;
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-overlay: 30;
+  --z-modal: 40;
+  --z-toast: 50;
+  --z-top: 100;
 }
 
 
@@ -50,6 +97,16 @@ input[type="number"] {-moz-appearance: textfield;}
 .form-control:focus {outline: 0px solid var(--gray-color);border: 1px solid var(--gray-color); box-shadow: 0 0 0; color: var(--gray-color);}
 .form-control::placeholder {color: var(--gray-color); opacity: 1;}
 .form-control::-ms-input-placeholder {color: var(--gray-color);}
+
+/* Prevent mobile browser auto-zoom on input focus (iOS Safari zooms when font-size < 16px) — applies to all popups and forms */
+@media screen and (max-width: 768px) {
+  input:not([type="radio"]):not([type="checkbox"]),
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
 .form-check{display: flex; align-items: center; gap: 10px; margin-bottom: 15px;}
 .form-check .checkbox{width: 20px; height: 20px; margin: 0;}
 .form-check label{font-size: 14px; color: var(--gray-color); font-weight: 400;}
@@ -121,7 +178,7 @@ tbody, td, tfoot, th, thead, tr {
 .bg-gray{background: var(--primary-color);}
 .white-bg{background: var(--white-color);}
 
-.w-full{width: 100% !important; height: auto;}
+.w-full{width: 100% !important;}
 .full-box{width: 100% !important;}
 .card-shadow{box-shadow: 0 4px 70px rgba(200, 234, 244, 0.5);}
 .one-line{overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;}
@@ -139,16 +196,76 @@ tbody, td, tfoot, th, thead, tr {
 .slick-dots li.slick-active {width: 30px; background-color: var(--bg-gray);}
 .slick-dots li button {display: none;}
 /* .slick-dotted.slick-slider { margin-bottom: 30px;} */
-.slick-next, .slick-prev {font-size: 0; color: transparent !important; border: 0; width: 40px; height: 40px; border-radius: 50%; position: absolute; top: 50%; left: 0; margin-top: -20px; background-color: transparent; z-index: 12; cursor: pointer;}
-.slick-next::after, .slick-prev::after {content: ""; width: 100%; height: 100%; position: absolute; top: 50%; left: 42%; transform: translate(-40%, -50%); margin: auto; background: url(../../public/assets/images/icon/slider-left-arrow.svg) no-repeat; background-size: 100%; border-radius: 50%; transition: ease-in-out 0.5s; -webkit-transition: all 0.6s ease-in-out; -moz-transition: ease-in-out 0.5s; -o-transition: ease-in-out 0.5s;}
-.slick-next::after {background: url(../../public/assets/images/icon/slider-right-arrow.svg) no-repeat; background-size: 100%;}
-.slick-next {left: auto; right: 0;}
-.slick-prev:hover::after {background: url(../../public/assets/images/icon/slider-left-arrow-hover.svg) no-repeat;  background-size: 100%;}
-.slick-next:hover::after {background: url(../../public/assets/images/icon/slider-right-arrow-hover.svg) no-repeat; background-size: 100%;}
-.slider-center-arrow .slick-next,.slider-center-arrow .slick-prev {top: 50%;left: -5px;right: auto; margin-top: -30px;}
-.slider-center-arrow .slick-next {left: auto; right: -5px; background-position: 0 -190px;}
-.slider-lr .slick-prev {right: 60px;}
-.slider-lr .slick-next {right: 0px;}
+/* Slider prev/next — single icon per button, left/right arrows, theme-aligned */
+.slick-prev::before,
+.slick-next::before {
+  content: none !important;
+  display: none !important;
+}
+.slick-next,
+.slick-prev {
+  font-size: 0;
+  color: transparent !important;
+  border: 1px solid var(--color-border);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  margin-top: -18px;
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  z-index: 12;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.slick-next:hover,
+.slick-prev:hover {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 14px rgba(139, 53, 184, 0.25);
+}
+/* Single arrow icon: CSS triangle (left-pointing for prev, right-pointing for next) */
+.slick-prev::after,
+.slick-next::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  transition: border-color 0.2s ease;
+}
+.slick-prev::after {
+  margin-left: -2px;
+  border-width: 5px 8px 5px 0;
+  border-color: transparent var(--color-primary) transparent transparent;
+  transform: translate(-50%, -50%);
+}
+.slick-next::after {
+  margin-left: 2px;
+  border-width: 5px 0 5px 8px;
+  border-color: transparent transparent transparent var(--color-primary);
+  transform: translate(-50%, -50%);
+}
+.slick-next:hover::after {
+  border-left-color: var(--color-surface);
+}
+.slick-prev:hover::after {
+  border-right-color: var(--color-surface);
+}
+.slick-next { left: auto; right: 0; }
+.slider-center-arrow .slick-next,
+.slider-center-arrow .slick-prev { top: 50%; left: -5px; right: auto; margin-top: -18px; }
+.slider-center-arrow .slick-next { left: auto; right: -5px; }
+.slider-btn.slider-rl .slick-prev,
+.slider-lr .slick-prev { left: 0; right: auto; }
+.slider-btn.slider-rl .slick-next,
+.slider-lr .slick-next { right: 0; left: auto; }
+.slider-lr .slick-prev { right: 60px; left: auto; }
+.slider-lr .slick-next { right: 0; }
 .discover-slider.slick-initialized .slick-slide {transition: ease-in-out 0.5s;}
 .slider-rl {margin: 0px -15px;}
 .slider-rl .item{padding: 0px 15px;}
@@ -761,3 +878,107 @@ tbody, td, tfoot, th, thead, tr {
 .sign-left{width: 100%; order: 2;}
 .sign-right{width: 100%; padding: 20px;}
 }
+
+/* =============================================
+   NEW DESIGN SYSTEM — Skeleton & Shimmer
+   ============================================= */
+@keyframes shimmerSweep {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f0ede8 25%, #e8e3dc 50%, #f0ede8 75%);
+  background-size: 200% 100%;
+  animation: shimmerSweep 1.5s infinite;
+  border-radius: 8px;
+}
+
+/* Updated shimmer keyframe for Tailwind */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Body font override */
+html, body {
+  font-family: var(--font-body, 'Plus Jakarta Sans', system-ui, sans-serif);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading, 'Plus Jakarta Sans', system-ui, sans-serif);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Bottom nav body padding on mobile */
+@media (max-width: 767px) {
+  .has-bottom-nav {
+    padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Backdrop blur utility */
+.backdrop-blur-nav {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Glass card effect */
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+/* Reduced motion guard */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =============================================
+   GLOBAL POLISH — Toast overrides
+   ============================================= */
+.Toastify__toast {
+  border-radius: 12px !important;
+  font-family: var(--font-body) !important;
+  font-size: 13px !important;
+  box-shadow: 0 8px 32px rgba(27, 67, 50, 0.15) !important;
+  border: 1px solid #E5E7EB !important;
+}
+.Toastify__toast--success .Toastify__toast-icon svg { fill: #16A34A; }
+.Toastify__toast--error .Toastify__toast-icon svg { fill: #DC2626; }
+.Toastify__progress-bar { background: #8B35B8 !important; }
+.Toastify__progress-bar--error { background: #EF4444 !important; }
+.Toastify__close-button { color: #6B7280; }
+
+/* =============================================
+   GLOBAL POLISH — Focus ring
+   ============================================= */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* =============================================
+   GLOBAL POLISH — Scrollbar
+   ============================================= */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #FAF9FF; }
+::-webkit-scrollbar-thumb { background: #D4B8EB; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #8B35B8; }
+
+/* =============================================
+   GLOBAL POLISH — Selection
+   ============================================= */
+::selection { background: rgba(139, 53, 184, 0.15); color: #5C1F82; }

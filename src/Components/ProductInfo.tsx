@@ -1,87 +1,108 @@
-import Link from "next/link";
-import Image from "next/image";
-import Slider from "react-slick";
-import OfferSection from "./OfferSection";
-export default function ProductInfo({ProductDetails,handleAddToCart}:any){
-    return (
-        <div className="pdp-info">
-            <h1 className="attrimdheading">{ProductDetails?.name}</h1>
-            <div className="info-tags-list d-flex justify-content">
-                {ProductDetails?.tags && ProductDetails?.tags?.length > 0 && ProductDetails?.tags.map((item: any) => (
-                <div className="info-tag dflex align">
-                    <span className="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 14 14"><path fill="#000" d="M7 14A7 7 0 107 0a7 7 0 000 14z"></path><path stroke="#fff" stroke-width="1.4" d="M3.01 6.694l1.92 2.398 5.642-4.422"></path></svg>
-                    </span>
-                    {item}
-                </div>
-                ))}
-               
-            </div>
-            <div className="addcartinfo dflex">
-                <div className="product-star d-flex align">
-                    {ProductDetails?.rating ? ProductDetails?.rating : 5}
-                    <span className="filledicon">
-                        <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                        </svg>
-                    </span>
-                    <span className="filledicon">
-                        <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                        </svg>
-                    </span>
-                    <span className="filledicon">
-                        <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                        </svg>
-                    </span>
-                    <span className="filledicon">
-                        <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                        </svg>
-                    </span>
-                    <span className="filledicon">
-                        <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                        </svg>
-                    </span>    
-                </div>
-                {/* <div className="product-stories">
-                    3571 Customer Stories
-                </div>
-                <div className="productSold">5L+ Units Sold</div> */}
-            </div>
-            <div className="product-price">
-                <div className="price-info dflex align">
-                    <span>MRP:</span>
-                    <span>₹{ProductDetails?.mrp?.toFixed(2)}</span>
-                    ₹{ProductDetails?.price?.toFixed(2)}
-                    <span className="off-tag">{ProductDetails?.discount}% OFF</span>
-                </div>
-                <p>Inclusive of all taxes</p>
-            </div>
-            <button className="anchor-button hovertime" onClick={() => handleAddToCart(ProductDetails)}>Add To Bag</button>
-            {/* <div className="service-list dflex align justify-center">
-                <div className="service-card dflex align justify-content">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="41" height="41" fill="none" viewBox="0 0 41 41"><path fill="#F1F2DA" d="M.003 20.79V16.9C.12 12.792 2.31 9.687 4.93 6.902c2.97-3.16 6.606-5.311 10.78-6.46C16.776.15 17.882.097 18.97.062c3.905-.127 7.804-.231 11.462 1.611 4.662 2.348 8.27 5.671 10.022 10.8.396 1.158.329 2.377.46 3.57.018.17-.046.355.086.505v5.126c-.18.89-.205 1.804-.228 2.702-.052 2.015-.808 3.733-2.034 5.235-2.308 2.829-4.542 5.79-7.74 7.643-3.746 2.175-7.725 3.58-12.144 3.736-5.71.2-10.177-2.241-14.023-6.197C2.7 32.6 1.617 29.822.851 26.868.33 24.862.272 22.816 0 20.788l.003.002z"></path><path fill="#095933" d="M10.973 24.133c.74.53 1.746-.124 1.561-1.016l-.417-2.009a1 1 0 01.776-1.182l9.35-1.94a1 1 0 00.779-1.168l-.156-.806a1 1 0 00-1.185-.79l-9.36 1.942a1 1 0 01-1.183-.776l-.413-1.995c-.185-.892-1.369-1.092-1.837-.311l-3.116 5.196a1 1 0 00.276 1.327l4.925 3.528zM31.986 27.281c-.468.781-1.652.58-1.837-.311l-.417-2.009a1 1 0 00-1.182-.776l-9.35 1.94a1 1 0 01-1.179-.763l-.177-.801a1 1 0 01.773-1.196l9.36-1.941a1 1 0 00.776-1.183l-.413-1.995c-.185-.891.82-1.546 1.561-1.016l4.925 3.528a1 1 0 01.275 1.327l-3.115 5.196z"></path></svg>
-                    <div className="attrixxsheading">Easy Returns</div>
-                </div>
-                <div className="service-card dflex align justify-content">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="41" height="42" fill="none" viewBox="0 0 41 42"><path fill="#F1F2DA" d="M.003 21.29V17.4C.12 13.292 2.31 10.187 4.93 7.402c2.97-3.16 6.606-5.311 10.78-6.46C16.776.65 17.882.597 18.97.562 22.875.434 26.774.33 30.432 2.172c4.662 2.348 8.27 5.671 10.022 10.8.396 1.158.329 2.377.46 3.57.018.17-.046.355.086.505v5.126c-.18.89-.205 1.804-.228 2.702-.052 2.015-.808 3.733-2.034 5.235-2.308 2.829-4.542 5.79-7.74 7.643-3.746 2.175-7.725 3.58-12.144 3.736-5.71.2-10.177-2.241-14.023-6.197C2.7 33.1 1.617 30.322.851 27.368.33 25.362.272 23.316 0 21.288l.003.002z"></path><path fill="#095933" d="M13.747 13.843a2 2 0 012.187-1.794l13.932 1.37a2 2 0 011.795 2.187l-.784 7.962a2 2 0 01-2.186 1.794l-13.933-1.37a2 2 0 01-1.794-2.187l.783-7.962zm8.859 1.877a3 3 0 11-.588 5.971 3 3 0 01.588-5.971zm-3.315-1.331c-.863-.085-1.614.646-2.285 1.196-.67.55-1.533 1.144-1.618 2.008l-.084.854c-.085.864.646 1.614 1.196 2.285.55.67 1.144 1.534 2.008 1.618l6.825.672c.864.085 1.614-.646 2.285-1.196.67-.55 1.534-1.144 1.619-2.008l.084-.854c.085-.863-.646-1.614-1.197-2.285-.55-.67-1.144-1.533-2.007-1.618l-6.826-.672zm-9.818 2.048a1 1 0 011.99.196l-.685 6.966a2 2 0 001.794 2.187l12.938 1.273a1 1 0 11-.196 1.99L10.386 27.58a2 2 0 01-1.795-2.186l.882-8.957z"></path></svg>
-                    <div className="attrixxsheading">COD Available</div>
-                </div>
-                <div className="service-card dflex align justify-content">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="39" height="39" fill="none" viewBox="0 0 39 39"><path fill="#F1F2DA" d="M38.561 21.605c.665 14.213-16.442 20.436-27.025 14.872-11.984-6.3-13.418-18.239-7.075-29.091C7.747 1.76 17.381-.738 23.724 1.092c9.738 2.819 16.239 11.913 14.837 20.513z"></path><path fill="#095933" d="M11.033 23.592a.654.654 0 01-.656-.244l-.075-.1a.85.85 0 01.5-1.344l2.975-.63a.85.85 0 00-.352-1.663l-4.02.852a.85.85 0 01-.352-1.662l5.64-1.195a.85.85 0 10-.353-1.663l-6.601 1.4a.85.85 0 01-.352-1.663l1.546-.328c.54-.114.863-.66.98-1.2a2.27 2.27 0 01.279-.704 2.077 2.077 0 011.34-.963l11.565-2.45a1 1 0 011.185.772l.525 2.476a1 1 0 001.185.77l1.651-.349a1 1 0 01.887.244l3.461 3.201a1 1 0 01.3.527l.9 4.252a1 1 0 01-.77 1.185l-.135.029c-.54.114-.87.65-.909 1.201a3.443 3.443 0 01-.49 1.552 3.115 3.115 0 01-2.01 1.443 3.116 3.116 0 01-2.424-.504 3.444 3.444 0 01-1.076-1.22c-.26-.487-.778-.844-1.319-.729l-2.224.471c-.54.115-.87.65-.909 1.202a3.444 3.444 0 01-.49 1.55 3.116 3.116 0 01-2.01 1.444A3.116 3.116 0 0116 29.048a3.443 3.443 0 01-1.076-1.219c-.26-.488-.778-.844-1.319-.73l-.133.029a1 1 0 01-1.186-.771l-.479-2.261a.654.654 0 00-.775-.504zm17.492 2.084a1.558 1.558 0 001.005-.722c.228-.374.304-.832.21-1.273a1.753 1.753 0 00-.708-1.078c-.36-.25-.796-.34-1.212-.252a1.557 1.557 0 00-1.005.722 1.752 1.752 0 00-.21 1.273c.093.44.348.828.708 1.078.36.25.796.34 1.212.252zm-.168-9.972a1 1 0 00-.871-.23l-1.141.242a1 1 0 00-.771 1.186l.172.814a1 1 0 001.186.77l1.743-.369a1 1 0 00.456-1.726l-.774-.687zM18.073 27.89a1.558 1.558 0 001.005-.722c.228-.374.304-.831.21-1.272a1.752 1.752 0 00-.708-1.079c-.36-.249-.796-.34-1.212-.252a1.558 1.558 0 00-1.005.722 1.753 1.753 0 00-.21 1.273c.093.44.348.829.708 1.078.36.25.796.34 1.212.252z"></path></svg>
-                    <div className="attrixxsheading">Delivery in 3 Days</div>
-                </div>
-            </div> */}
-            {/* <OfferSection></OfferSection> */}
-            {ProductDetails?.description && (
-            <div className="pdp-info-text">
-                <h2 className="attrimdheading">Product Description</h2>
-                <p>{ProductDetails?.description}</p>
-            </div>
-            )}
+import { motion } from "framer-motion";
+import { fadeInUp, viewportOnce } from "@/utils/animations";
+
+export default function ProductInfo({ ProductDetails, handleAddToCart, isAdding = false }: any) {
+  const discount = ProductDetails?.discount;
+  const rating = ProductDetails?.rating || 5;
+
+  return (
+    <motion.div
+      variants={fadeInUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewportOnce}
+      className="pdp-info space-y-5 pb-6"
+    >
+      {/* Product name — dark text on light, no card background */}
+      <h1 className="text-2xl md:text-3xl font-bold text-[#1A1A1A] font-heading leading-snug">
+        {ProductDetails?.name}
+      </h1>
+
+      {/* Rating */}
+      <div className="flex items-center gap-2">
+        <div className="flex items-center gap-0.5">
+          {Array.from({ length: 5 }, (_, i) => (
+            <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill={i < rating ? "#D4A847" : "none"} stroke={i < rating ? "#D4A847" : "#D6D3D1"} strokeWidth="1.5">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+            </svg>
+          ))}
         </div>
-    );
+        <span className="text-sm font-semibold text-[#1A1A1A]">{rating}</span>
+        <span className="text-sm text-[#6B7280]">/ 5.0</span>
+      </div>
+
+      {/* Feature tags — light background, dark text */}
+      {ProductDetails?.tags && ProductDetails.tags.length > 0 && (
+        <div className="flex flex-wrap gap-2">
+          {ProductDetails.tags.map((tag: string, i: number) => (
+            <span
+              key={i}
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-[#5C1F82] bg-[#F5EEFA] border border-[#EADCF5] px-3 py-1.5 rounded-full"
+            >
+              <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+                <path fill="#8B35B8" d="M7 14A7 7 0 107 0a7 7 0 000 14z" />
+                <path stroke="#fff" strokeWidth="1.4" d="M3.01 6.694l1.92 2.398 5.642-4.422" />
+              </svg>
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+
+      {/* Price block — light surface, accent for price */}
+      <div className="bg-white rounded-2xl p-4 border border-[#E5E7EB] shadow-sm">
+        <div className="flex items-baseline gap-3 mb-1 flex-wrap">
+          <span className="text-3xl font-bold text-[#D4A847]">
+            ₹{ProductDetails?.price?.toFixed(0)}
+          </span>
+          {ProductDetails?.mrp > ProductDetails?.price && (
+            <span className="text-lg text-[#6B7280] line-through">
+              ₹{ProductDetails?.mrp?.toFixed(0)}
+            </span>
+          )}
+          {discount > 0 && (
+            <span className="text-sm font-bold text-white bg-[#F4821A] px-2.5 py-1 rounded-full">
+              {discount}% OFF
+            </span>
+          )}
+        </div>
+        <p className="text-xs text-[#6B7280]">Inclusive of all taxes</p>
+      </div>
+
+      {/* Single Add to Bag — one button for mobile and desktop (class ensures no duplicate on PDP) */}
+      <button
+        type="button"
+        className="pdp-add-to-bag-only w-full flex items-center justify-center gap-2 py-4 bg-[#8B35B8] text-white rounded-xl font-semibold text-sm hover:bg-[#5C1F82] transition-all duration-200 active:scale-[0.98] shadow-[0_4px_16px_rgba(139,53,184,0.35)] cursor-pointer disabled:opacity-60"
+        onClick={() => handleAddToCart(ProductDetails)}
+        disabled={isAdding}
+      >
+        {isAdding ? (
+          <>
+            <svg className="animate-spin w-5 h-5" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeDasharray="30 70" />
+            </svg>
+            Adding...
+          </>
+        ) : (
+          <>
+            <svg width="18" height="18" viewBox="0 0 26 26" fill="none">
+              <path d="M2.4375 4.0625H5.6875L8.125 17.875H21.125" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M8.125 14.625H20.7919C21.1905 14.6251 21.4721 14.4013 21.544 14.0138L22.6 6.5H6.5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+              <circle cx="8.9375" cy="21.125" r="1.625" stroke="currentColor" strokeWidth="1.7" />
+              <circle cx="20.3125" cy="21.125" r="1.625" stroke="currentColor" strokeWidth="1.7" />
+            </svg>
+            Add To Bag
+          </>
+        )}
+      </button>
+
+      {/* Description */}
+      {ProductDetails?.description && (
+        <div className="pt-2 border-t border-[#E5E7EB]">
+          <h2 className="text-lg font-bold text-[#1A1A1A] font-heading mb-2">Product Description</h2>
+          <p className="text-[#6B7280] text-sm leading-relaxed">{ProductDetails?.description}</p>
+        </div>
+      )}
+    </motion.div>
+  );
 }

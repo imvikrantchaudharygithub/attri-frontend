@@ -11,7 +11,7 @@ import About from "@/Components/About";
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/slices/rootReduces';
 import { removeFromCart, clearCart, addToCart, decrementQuantity, incrementQuantity } from '@/slices/cartSlice';
-import { toast, ToastContainer } from 'react-toastify';
+import toast from 'react-hot-toast';
 import { getData, postData } from "@/services/apiServices";
 import { setCartCount } from "@/slices/loginUserSlice";
 import router from "next/router";
@@ -36,6 +36,8 @@ export default function Cart() {
   const [showFreeDelivery, setShowFreeDelivery] = useState(false);
   const [isCartLoading, setIsCartLoading] = useState(true);
   const [isCashbackModalOpen, setIsCashbackModalOpen] = useState(false);
+  const [isCashbackClosing, setIsCashbackClosing] = useState(false);
+  const [cashbackEntered, setCashbackEntered] = useState(false);
   const [cashbackInput, setCashbackInput] = useState<number>(0);
   const [appliedCashback, setAppliedCashback] = useState<number>(0);
   const [userCashbackBalance,setUserCashbackBalance] = useState<number>(0); // TODO: replace with real balance
@@ -43,6 +45,8 @@ export default function Cart() {
   
   // Coupon states
   const [isCouponModalOpen, setIsCouponModalOpen] = useState(false);
+  const [isCouponClosing, setIsCouponClosing] = useState(false);
+  const [couponEntered, setCouponEntered] = useState(false);
   const [couponCode, setCouponCode] = useState<string>('');
   const [appliedCoupon, setAppliedCoupon] = useState<any>(null);
   const [couponDiscount, setCouponDiscount] = useState<number>(0);
@@ -376,6 +380,53 @@ useEffect(() => {
   setCashbackInput(maxApplicable);
 }, [isCashbackModalOpen, userCashbackBalance, orderdetails?.grandtotal]);
 
+// Cashback modal: enter animation + exit delay
+useEffect(() => {
+  if (isCashbackModalOpen) {
+    setCashbackEntered(false);
+    const t = requestAnimationFrame(() => {
+      requestAnimationFrame(() => setCashbackEntered(true));
+    });
+    return () => cancelAnimationFrame(t);
+  } else {
+    setCashbackEntered(false);
+  }
+}, [isCashbackModalOpen]);
+useEffect(() => {
+  if (!isCashbackClosing) return;
+  const t = setTimeout(() => {
+    setIsCashbackModalOpen(false);
+    setIsCashbackClosing(false);
+    setCashbackEntered(false);
+  }, 200);
+  return () => clearTimeout(t);
+}, [isCashbackClosing]);
+
+// Coupon modal: enter animation + exit delay
+useEffect(() => {
+  if (isCouponModalOpen) {
+    setCouponEntered(false);
+    const t = requestAnimationFrame(() => {
+      requestAnimationFrame(() => setCouponEntered(true));
+    });
+    return () => cancelAnimationFrame(t);
+  } else {
+    setCouponEntered(false);
+  }
+}, [isCouponModalOpen]);
+useEffect(() => {
+  if (!isCouponClosing) return;
+  const t = setTimeout(() => {
+    setIsCouponModalOpen(false);
+    setIsCouponClosing(false);
+    setCouponEntered(false);
+    setCouponError("");
+    setCouponCode("");
+    setSelectedCoupon("");
+  }, 200);
+  return () => clearTimeout(t);
+}, [isCouponClosing]);
+
 // Add this useEffect to handle GIF display
 // useEffect(() => {
 //   if (orderdetails.shipping === 0) {
@@ -440,7 +491,7 @@ const validateCoupon = async (code: string) => {
       // Clear cashback when coupon is applied
       setAppliedCashback(0);
       toast.success(`Coupon applied! You saved ₹${discount}`);
-      setIsCouponModalOpen(false);
+      setIsCouponClosing(true);
       if(response.data.lowestPricedItem ){
         setFreeCartItem(response.data.lowestPricedItem.product._id);
       }else{
@@ -476,195 +527,183 @@ const handleCouponSubmit = async (e: React.FormEvent) => {
   await validateCoupon(couponCode);
 };
 if(isPaymentLoading){
-    return <div className="flex justify-center items-center h-screen">
-      
-<div className="loader">
-  <p className="text">
-    loading...
-  </p>
-</div>
-
-  
-    </div>
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-[#FAF9FF] gap-6">
+        <div className="w-16 h-16 rounded-full border-4 border-[#8B35B8] border-t-transparent animate-spin" />
+        <p className="text-[#8B35B8] font-semibold text-lg font-heading">Processing Payment...</p>
+      </div>
+    );
 }
   return (
     <>
-            {/* <ToastContainer position="top-right" autoClose={3000} /> */}
-
-        <section className="cart-box">
+        <section className={`bg-[#FAF9FF] py-8 md:py-12 ${usercartItems?.length ? "pb-28 md:pb-12" : ""}`}>
             <div className="container">
-                <h1 className="attriheading">Cart</h1>
-                <div className="cart-main d-flex">
-                    <div className="cart-left">
+                <h1 className="text-2xl md:text-3xl font-bold text-[#8B35B8] font-heading italic mb-6">My Cart</h1>
+                <div className="flex flex-col lg:flex-row gap-6">
+                    <div className="flex-1 min-w-0">
                         {isCartLoading ? (
-                          
-                            <div className="cart-order-item d-flex align relative">
-                              <div className="cart-order-left relative animate-pulse 
-                                            md:w-[230px] md:h-[230px] 
-                                            w-full h-auto aspect-square">
-                                <div className="w-full h-full bg-gray-200 rounded-lg"></div>
-                              </div>
-                              <div className="cart-order-right md:pl-4 md:w-[55%] w-full mt-4 md:mt-0">
-                                <div className="attrixxsheading bg-gray-200 w-1/2 h-4 mb-2 rounded md:w-20"></div>
-                                <h3 className="attrixsheading bg-gray-200 w-full h-6 mb-4 rounded md:w-3/4"></h3>
-                                <div className="product-price d-flex align flex-col md:flex-row">
-                                  <div className="product-bottom-left attrixxsheading bg-gray-200 w-32 h-6 rounded mb-2 md:mb-0 md:mr-4"></div>
-                                  <div className="product-bottom-right bg-gray-200 w-24 h-4 rounded"></div>
-                                </div>
-                                <p className="tax-text bg-gray-200 w-40 h-4 mt-2 rounded md:w-32"></p>
-                                <div className="quantity-box mt-4">
-                                  <div className="attrixxsheading bg-gray-200 w-24 h-4 mb-2 rounded md:w-16"></div>
-                                  <div className="wrap d-flex animate-pulse w-full md:w-48">
-                                    <div className="bg-gray-200 w-10 h-10 rounded md:w-8 md:h-8"></div>
-                                    <div className="bg-gray-200 w-20 h-10 mx-2 rounded md:w-16 md:h-8"></div>
-                                    <div className="bg-gray-200 w-10 h-10 rounded md:w-8 md:h-8"></div>
-                                  </div>
+                          <div className="space-y-4">
+                            {[1,2].map(i => (
+                              <div key={i} className="bg-white rounded-2xl p-4 flex gap-4">
+                                <div className="skeleton w-24 h-24 md:w-28 md:h-28 rounded-xl flex-shrink-0" />
+                                <div className="flex-1 space-y-2">
+                                  <div className="skeleton h-4 w-3/4 rounded-lg" />
+                                  <div className="skeleton h-4 w-1/3 rounded-lg" />
+                                  <div className="skeleton h-8 w-28 rounded-xl mt-4" />
                                 </div>
                               </div>
-                              <div className="cart-close bg-gray-200 animate-pulse md:top-4 md:right-4 top-2 right-2">
-                                <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M21.6654 4.3335L4.33203 21.6668M21.6654 21.6668L4.33203 4.3335L21.6654 21.6668Z" 
-                                        stroke="#e5e7eb" strokeWidth="2" strokeLinecap="round"/>
-                                </svg>
-                              </div>
-                            </div>
-                        ) : (
-                     <>
-                          {usercartItems?.length > 0 ? usercartItems?.map((item: any) => (  
-                          <div className="cart-order-item d-flex align relative" key={item?.product?._id} style={{border: freeCartItem === item?.product?._id ? '2px solid green ' : 'none'}}>
-                            <div className="cart-order-left relative">
-                              <Image width={600} height={600} className="w-full hovertime" src={item?.product?.images[0]} alt=""></Image>
-                            </div>
-                            <div className="cart-order-right">
-                              {/* <div className="attrixxsheading">category</div> */}
-                              <h3 className="attrixsheading">{item?.product?.name}</h3>
-                             {freeCartItem === item?.product?._id && item.quantity == 1 ?( 
-                           <div className="product-price d-flex align">
-                           <div className=" attrixxsheading text-green-600 font-bold">
-                           <span className="text-green-600 font-bold">FREE</span>
-                           </div>
-                         </div> 
-                              ):
-                              (
-
-                            <div className="product-price d-flex align">
-                            <div className="product-bottom-left attrixxsheading">
-                              ₹{item?.product?.price?.toFixed(2)}<span>₹{item?.product?.mrp?.toFixed(2)}</span>
-                            </div>
-                            <div className="product-bottom-right">
-                              ({item?.product?.discount}%off)
-                            </div>
-                            {freeCartItem === item?.product?._id && item.quantity > 1 && <span className="text-green-600 font-bold border border-green-600 rounded-md px-1 py-[1px] mx-2"> 1 FREE</span>}
-                            </div> 
-                              )
-                              }
-                              <p className="tax-text">Inclusive of all Taxes</p>
-                              <div className="quantity-box">
-                                <div className="attrixxsheading">Quantity :</div>
-                                <div className="wrap d-flex">
-                                  <button type="button" id="sub" className="sub quantity-btn" onClick={() => decrementproductQuantity(item?.product?._id)}>
-                                    <Image width={16} height={16} src={'/assets/images/icon/minus-icon.png'} alt=""></Image>
-                                  </button>
-                                  <input className="count" type="text" id="1" value={item?.quantity} min="1" max="100"/>
-                                  <button type="button" id="add" className="add quantity-btn" onClick={() => incrementproductQuantity(item?.product?._id)}>
-                                    <Image width={16} height={16} src={'/assets/images/icon/plus-icon.png'} alt=""></Image>
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                            <button className="cart-close" onClick={() => handleRemoveFromCart(item)}><svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.6654 4.3335L4.33203 21.6668M21.6654 21.6668L4.33203 4.3335L21.6654 21.6668Z" stroke="#8B8B8B" stroke-width="2" stroke-linecap="round"></path></svg></button>
+                            ))}
                           </div>
-                          )
-                        ):(
-                          <div className="cart-order-item cart-empty text-center">
-                            <div className="cart-empty-left relative">
-                                <Image width={600} height={600} className="w-full hovertime" src={'/assets/images/empty-cart.jpg'} alt=""></Image>
-                                <h4 className="attrixsheading">Cart is empty</h4>
+                        ) : (
+                          <>
+                          {usercartItems?.length > 0 ? usercartItems.map((item: any) => (  
+                          <div key={item?.product?._id} className={`bg-white rounded-2xl p-4 mb-3 flex gap-4 relative transition-all duration-200 ${freeCartItem === item?.product?._id ? 'ring-2 ring-[#16A34A] shadow-[0_0_0_2px_rgba(22,163,74,0.2)]' : 'shadow-card'}`}>
+                            {freeCartItem === item?.product?._id && (
+                              <div className="absolute -top-2 left-4 bg-[#16A34A] text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full">FREE ITEM</div>
+                            )}
+                            <div className="w-24 h-24 md:w-28 md:h-28 flex-shrink-0 rounded-xl overflow-hidden bg-[#FAF9FF]">
+                              <Image width={112} height={112} className="w-full h-full object-cover" src={item?.product?.images?.[0] || '/assets/images/product.jpg'} alt={item?.product?.name} />
                             </div>
-                                <Link href={'/'} className="anchor-button hovertime">Add Items</Link>
+                            <div className="flex-1 min-w-0">
+                              <h3 className="font-semibold text-[#1A1A1A] text-sm md:text-base leading-snug mb-1 pr-6">{item?.product?.name}</h3>
+                              {freeCartItem === item?.product?._id && item.quantity === 1 ? (
+                                <div className="text-[#16A34A] font-bold text-lg">FREE</div>
+                              ) : (
+                                <div className="flex items-baseline gap-2 mb-0.5">
+                                  <span className="font-bold text-[#8B35B8] text-base">₹{item?.product?.price?.toFixed(0)}</span>
+                                  {item?.product?.mrp > item?.product?.price && <span className="text-xs text-[#9CA3AF] line-through">₹{item?.product?.mrp?.toFixed(0)}</span>}
+                                  <span className="text-xs text-[#D4A847] font-semibold">{item?.product?.discount}% off</span>
+                                  {freeCartItem === item?.product?._id && item.quantity > 1 && <span className="text-xs text-[#16A34A] font-bold border border-[#16A34A] rounded-full px-1.5 py-0.5">1 FREE</span>}
+                                </div>
+                              )}
+                              <p className="text-xs text-[#9CA3AF] mb-3">Incl. all taxes</p>
+                              <div className="flex items-center gap-1">
+                                <button type="button" className="w-8 h-8 rounded-full border border-[#E5E7EB] flex items-center justify-center hover:border-[#8B35B8] transition-colors cursor-pointer active:scale-95" onClick={() => decrementproductQuantity(item?.product?._id)}>
+                                  <svg width="10" height="2" viewBox="0 0 10 2" fill="none"><path d="M1 1h8" stroke="#8B35B8" strokeWidth="2" strokeLinecap="round"/></svg>
+                                </button>
+                                <span className="w-8 text-center font-semibold text-sm">{item?.quantity}</span>
+                                <button type="button" className="w-8 h-8 rounded-full border border-[#E5E7EB] flex items-center justify-center hover:border-[#8B35B8] transition-colors cursor-pointer active:scale-95" onClick={() => incrementproductQuantity(item?.product?._id)}>
+                                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#8B35B8" strokeWidth="2" strokeLinecap="round"/></svg>
+                                </button>
+                              </div>
+                            </div>
+                            <button className="absolute top-3 right-3 w-7 h-7 rounded-full flex items-center justify-center text-[#9CA3AF] hover:text-red-500 hover:bg-red-50 transition-all duration-150 cursor-pointer" onClick={() => handleRemoveFromCart(item)} aria-label="Remove item">
+                              <svg width="14" height="14" viewBox="0 0 26 26" fill="none"><path d="M21.665 4.334L4.332 21.667M21.665 21.667L4.332 4.334" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
+                            </button>
+                          </div>
+                          )) : (
+                          <div className="flex flex-col items-center justify-center py-16 text-center bg-white rounded-2xl shadow-card">
+                            <div className="w-20 h-20 rounded-full bg-[#f0fdf4] flex items-center justify-center mb-4">
+                              <svg width="36" height="36" viewBox="0 0 26 26" fill="none" stroke="#8B35B8" strokeWidth="1.5">
+                                <path d="M2.4375 4.0625H5.6875L8.125 17.875H21.125" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M8.125 14.625H20.7919L22.6 6.5H6.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                <circle cx="8.9375" cy="21.125" r="1.625"/>
+                                <circle cx="20.3125" cy="21.125" r="1.625"/>
+                              </svg>
+                            </div>
+                            <h3 className="text-lg font-bold text-[#8B35B8] font-heading mb-2">Cart is Empty</h3>
+                            <p className="text-[#6B7280] text-sm mb-5">Add some products to get started</p>
+                            <Link href="/" className="inline-flex items-center gap-2 px-6 py-3 bg-[#8B35B8] text-white rounded-xl text-sm font-semibold hover:bg-[#5C1F82] transition-colors duration-200 cursor-pointer">
+                              Browse Products
+                            </Link>
                           </div>
                         )} 
-                        </>
+                          </>
                         )}
                     </div>
                     {usercartItems?.length > 0 && (
-                    <div className="cart-right">
+                    <div className="lg:w-80 xl:w-96 flex-shrink-0 space-y-4">
                        {token && useraddress !== null && ( 
-                        <div className="cart-right-card">
-                            <div className="attrixxsheading">Select Address</div>
-                            <div className="address-details">
-                                <div className="attrixxsheading"> {useraddress?.name}</div>
-                                <p>{useraddress?.street}, {useraddress?.city}, {useraddress?.state} - {useraddress?.pincode}</p>
-                                <div className="address-number">Mobile Number : <span>+91{useraddress?.contact}</span></div>
-                            </div>
-                            <Link href={'/myaddress'} className="anchor-button hovertime">{useraddress !== null ? "Change Address" : "Add Address"}</Link>
-                            </div>
+                        <div className="bg-white rounded-2xl p-4 shadow-card">
+                          <div className="flex items-center justify-between mb-3">
+                            <h3 className="font-semibold text-[#8B35B8] text-sm">Delivery Address</h3>
+                            <Link href="/myaddress" className="text-xs text-[#D4A847] font-semibold hover:text-[#A07810] transition-colors">Change</Link>
+                          </div>
+                          <div className="bg-[#FAF9FF] rounded-xl p-3 border border-[#E5E7EB]">
+                            <div className="font-semibold text-sm text-[#1A1A1A] mb-1">{useraddress?.name}</div>
+                            <p className="text-xs text-[#6B7280] leading-relaxed">{useraddress?.street}, {useraddress?.city}, {useraddress?.state} - {useraddress?.pincode}</p>
+                            <p className="text-xs text-[#6B7280] mt-1">+91 {useraddress?.contact}</p>
+                          </div>
+                        </div>
                         )}
-                          
                       
-                        <div className="cart-right-card">
-                            <div className="attrixxsheading">Price Details <span>( {usercartItems?.length ? usercartItems?.length : 0} items)</span></div>
-                            <div className="cart-order-box">
-                                <div className="order-item d-flex">
-                                    <div className="order-name">Order Total</div>
-                                    <div className="order-price">₹{orderdetails?.ordermrptotal}</div>
+                        <div className="bg-white rounded-2xl p-4 shadow-card">
+                          <h3 className="font-semibold text-[#8B35B8] text-sm mb-4">
+                            Price Details <span className="text-[#9CA3AF] font-normal">({usercartItems?.length || 0} items)</span>
+                          </h3>
+                          <div className="space-y-2.5 mb-4">
+                            <div className="flex items-center justify-between text-sm">
+                              <span className="text-[#6B7280]">Order Total</span>
+                              <span className="font-medium text-[#1A1A1A]">₹{orderdetails?.ordermrptotal?.toFixed(0)}</span>
+                            </div>
+                            <div className="flex items-center justify-between text-sm">
+                              <span className="text-[#6B7280]">Discount on MRP</span>
+                              <span className="font-semibold text-[#16A34A]">-₹{(orderdetails?.discount - orderdetails?.ordertotal).toFixed(0)}</span>
+                            </div>
+                            {token && (<>
+                              {appliedCashback > 0 ? (
+                                <div className="flex items-center justify-between text-sm">
+                                  <span className="text-[#6B7280]">Cashback Applied</span>
+                                  <span className="font-semibold text-[#16A34A]">-₹{appliedCashback.toFixed(0)}</span>
                                 </div>
-                                <div className="order-item order-blue d-flex">
-                                    <div className="order-name">Discount on MRP</div>
-                                    <div className="order-price">-₹{(orderdetails?.discount - orderdetails?.ordertotal).toFixed(2)}</div>
-                                </div>
-                                {/* <div className="order-item d-flex">
-                                    <div className="order-name">Tax</div>
-                                    <div className="order-price">₹{orderdetails?.tax}</div>
-                                </div> */}
-                                {token && ( <>
-                                {appliedCashback > 0 ? (
-                                  <div className="order-item d-flex">
-                                    <div className="order-name">Cashback Applied</div>
-                                    <div className="order-price">-₹{appliedCashback.toFixed(2)}</div>
-                                  </div>
-                                ) : !appliedCoupon && ( <div className="order-item d-flex align">
-                                  <div className="order-name">Cashback</div>
-                                  <div className="order-price" onClick={() => setIsCashbackModalOpen(true)}> Apply
-                                 
-                                  </div>
-                              </div>) }
-                              </>)}
-                              
-                              {/* Coupon Section */}
-                              {token && ( <>
-                              {appliedCoupon ? (
-                                <div className="order-item d-flex">
-                                  <div className="order-name">
-                                    <span className="text-green-600">🎟️ {appliedCoupon.code}</span>
-                                    <button 
-                                      onClick={removeCoupon}
-                                      className="ml-2 text-red-500 hover:text-red-700 text-xs"
-                                    >
-                                      Remove
-                                    </button>
-                                  </div>
-                                  <div className="order-price text-green-600">-₹{couponDiscount.toFixed(2)}</div>
-                                </div>
-                              ) : appliedCashback === 0 && (
-                                <div className="order-item d-flex align">
-                                  <div className="order-name">Coupon</div>
-                                  <div className="order-price" onClick={() => setIsCouponModalOpen(true)}>
-                                    Apply
-                                  </div>
+                              ) : !appliedCoupon && (
+                                <div className="flex items-center justify-between text-sm">
+                                  <span className="text-[#6B7280]">Cashback</span>
+                                  <button onClick={() => setIsCashbackModalOpen(true)} className="text-[#D4A847] font-semibold hover:text-[#A07810] transition-colors cursor-pointer text-xs">Apply</button>
                                 </div>
                               )}
-                              </>)}
-                                <div className="order-item order-red d-flex">
-                                    <div className="order-name">Shipping</div>
-                                    <div className="order-price"> {orderdetails?.shipping === 0 ? "FREE" : `₹${orderdetails?.shipping}`}</div>
+                              {appliedCoupon ? (
+                                <div className="flex items-center justify-between text-sm">
+                                  <span className="flex items-center gap-1 text-[#6B7280]">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#16A34A" strokeWidth="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                                    <span className="text-[#16A34A] font-semibold">{appliedCoupon.code}</span>
+                                  </span>
+                                  <div className="flex items-center gap-2">
+                                    <span className="font-semibold text-[#16A34A]">-₹{couponDiscount.toFixed(0)}</span>
+                                    <button onClick={removeCoupon} className="text-xs text-red-400 hover:text-red-600 cursor-pointer">Remove</button>
+                                  </div>
                                 </div>
-                                <div className="order-item d-flex">
-                                    <div className="order-name">Grand Total</div>
-                                    <div className="order-price">₹{orderdetails?.grandtotal?.toFixed(2)}</div>
+                              ) : appliedCashback === 0 && (
+                                <div className="flex items-center justify-between text-sm">
+                                  <span className="text-[#6B7280]">Coupon</span>
+                                  <button onClick={() => setIsCouponModalOpen(true)} className="text-[#D4A847] font-semibold hover:text-[#A07810] transition-colors cursor-pointer text-xs">Apply</button>
                                 </div>
+                              )}
+                            </>)}
+                            <div className="flex items-center justify-between text-sm">
+                              <span className="text-[#6B7280]">Shipping</span>
+                              <span className={`font-semibold ${orderdetails?.shipping === 0 ? 'text-[#16A34A]' : 'text-[#1A1A1A]'}`}>
+                                {orderdetails?.shipping === 0 ? 'FREE' : `₹${orderdetails?.shipping}`}
+                              </span>
                             </div>
-                            <button onClick={()=>handlePayment()} type="button" className="anchor-button hovertime" disabled={ischeckoutLoading}>{ischeckoutLoading ? "CHECKING OUT..." : "CHECKOUT"}</button>
+                          </div>
+                          <div className="border-t border-[#E5E7EB] pt-3 mb-4">
+                            <div className="flex items-center justify-between">
+                              <span className="font-bold text-[#1A1A1A]">Grand Total</span>
+                              <span className="font-bold text-xl text-[#8B35B8]">₹{orderdetails?.grandtotal?.toFixed(0)}</span>
+                            </div>
+                          </div>
+                          <button
+                            onClick={handlePayment}
+                            type="button"
+                            disabled={ischeckoutLoading}
+                            className="w-full py-4 bg-[#8B35B8] text-white rounded-xl font-semibold text-sm hover:bg-[#5C1F82] transition-all duration-200 active:scale-[0.98] disabled:opacity-60 shadow-[0_4px_16px_rgba(0,0,0,0.25)] cursor-pointer flex items-center justify-center gap-2"
+                          >
+                            {ischeckoutLoading ? (
+                              <>
+                                <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
+                                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeDasharray="30 70"/>
+                                </svg>
+                                Processing...
+                              </>
+                            ) : (
+                              <>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                                Proceed to Checkout
+                              </>
+                            )}
+                          </button>
+                          {!token && <p className="text-xs text-[#9CA3AF] text-center mt-2">You&apos;ll be prompted to login</p>}
                         </div>
                     </div>
                     )}
@@ -672,7 +711,46 @@ if(isPaymentLoading){
                 </div>
             </div>
         </section>
-        <About></About>
+
+        {/* Sticky checkout CTA (mobile only, above bottom nav) */}
+        {usercartItems?.length > 0 && (
+          <div
+            className="fixed inset-x-0 md:hidden"
+            style={{
+              bottom: "calc(64px + 10px + env(safe-area-inset-bottom, 0px))",
+              zIndex: "var(--z-overlay)",
+            }}
+          >
+            <div className="mx-auto w-full max-w-[480px]">
+              <div className="rounded-2xl p-2 bg-white/92 backdrop-blur-md shadow-[0_10px_28px_rgba(139,53,184,0.16)]">
+              <button
+                type="button"
+                onClick={handlePayment}
+                disabled={ischeckoutLoading}
+                className="w-full min-h-[56px] px-5 rounded-[14px] font-semibold text-[16px] leading-none text-white bg-gradient-to-r from-[#8B35B8] via-[#7A2FA3] to-[#5C1F82] hover:from-[#7A2FA3] hover:via-[#6D2A8F] hover:to-[#4F1A70] active:scale-[0.99] transition-all duration-200 disabled:opacity-60 disabled:pointer-events-none shadow-[0_10px_24px_rgba(139,53,184,0.34)] cursor-pointer flex items-center justify-center gap-2.5"
+              >
+                {ischeckoutLoading ? (
+                  <>
+                    <svg className="animate-spin w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeDasharray="30 70" />
+                    </svg>
+                    <span>Processing...</span>
+                  </>
+                ) : (
+                  <>
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0">
+                      <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                      <line x1="1" y1="10" x2="23" y2="10" />
+                    </svg>
+                    <span className="tracking-[0.01em]">Pay ₹{orderdetails?.grandtotal?.toFixed(0)}</span>
+                  </>
+                )}
+              </button>
+            </div>
+            </div>
+          </div>
+        )}
+
         {showFreeDelivery && (
           <div className="fixed inset-0 bg-gradient-to-br from-black/60 to-purple-900/30 flex items-center justify-center z-50 backdrop-blur-md">
             {/* Confetti elements with enhanced animation */}
@@ -725,15 +803,35 @@ if(isPaymentLoading){
         )}
 
         {isCashbackModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-            <div className="mx-4 w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden">
-              <div className="bg-gradient-to-r from-green-700 to-green-500 p-5 text-white">
+          <div
+            className="fixed inset-0 z-50 flex items-end md:items-center justify-center p-0 md:p-4"
+            style={{ zIndex: "var(--z-modal)" }}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="cashback-modal-title"
+          >
+            <div
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-200 ease-out"
+              style={{ opacity: cashbackEntered && !isCashbackClosing ? 1 : 0 }}
+              aria-hidden="true"
+              onClick={() => setIsCashbackClosing(true)}
+            />
+            <div
+              className="relative mx-0 w-full max-w-lg rounded-t-2xl md:rounded-2xl shadow-2xl overflow-hidden mb-0 md:mb-0 transition-all duration-200 ease-out md:transition-transform"
+              style={{
+                opacity: cashbackEntered && !isCashbackClosing ? 1 : 0,
+                transform: cashbackEntered && !isCashbackClosing ? "scale(1)" : "scale(0.96)",
+                transformOrigin: "center center",
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="bg-[#8B35B8] p-5 text-white">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-xl font-semibold">Apply Cashback</h3>
+                  <h3 id="cashback-modal-title" className="text-xl font-semibold">Apply Cashback</h3>
                   <button
                     aria-label="Close"
                     className="rounded-full p-1 hover:bg-white/20 transition-colors"
-                    onClick={() => setIsCashbackModalOpen(false)}
+                    onClick={() => setIsCashbackClosing(true)}
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
                       <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -768,19 +866,18 @@ if(isPaymentLoading){
                         <button
                           type="button"
                           className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors"
-                          onClick={() => setIsCashbackModalOpen(false)}
+                          onClick={() => setIsCashbackClosing(true)}
                         >
                           Cancel
                         </button>
                         <button
                           type="button"
-                          className="px-5 py-2 rounded-lg text-white bg-gradient-to-r from-green-700 to-green-500 hover:from-green-700 hover:to-green-600 transition-colors"
-                          onClick={() => { 
-                            setAppliedCashback(Number(cashbackInput.toFixed(2))); 
-                            // Clear coupon when cashback is applied
+                          className="px-5 py-2 rounded-xl text-white bg-[#8B35B8] hover:bg-[#5C1F82] transition-colors cursor-pointer"
+                          onClick={() => {
+                            setAppliedCashback(Number(cashbackInput.toFixed(2)));
                             setAppliedCoupon(null);
                             setCouponDiscount(0);
-                            setIsCashbackModalOpen(false); 
+                            setIsCashbackClosing(true);
                           }}
                         >
                           Apply
@@ -805,7 +902,7 @@ if(isPaymentLoading){
                       <button
                         type="button"
                         className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors"
-                        onClick={() => setIsCashbackModalOpen(false)}
+                        onClick={() => setIsCashbackClosing(true)}
                       >
                         Close
                       </button>
@@ -825,20 +922,35 @@ if(isPaymentLoading){
 
         {/* Coupon Modal */}
         {isCouponModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-            <div className="mx-4 w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden">
-              <div className="bg-gradient-to-r from-green-700 to-green-500  p-5 text-white">
+          <div
+            className="fixed inset-0 z-50 flex items-end md:items-center justify-center p-0 md:p-4"
+            style={{ zIndex: "var(--z-modal)" }}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="coupon-modal-title"
+          >
+            <div
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-200 ease-out"
+              style={{ opacity: couponEntered && !isCouponClosing ? 1 : 0 }}
+              aria-hidden="true"
+              onClick={() => setIsCouponClosing(true)}
+            />
+            <div
+              className="relative mx-0 w-full max-w-lg rounded-t-2xl md:rounded-2xl shadow-2xl overflow-hidden mb-0 md:mb-0 transition-all duration-200 ease-out"
+              style={{
+                opacity: couponEntered && !isCouponClosing ? 1 : 0,
+                transform: couponEntered && !isCouponClosing ? "scale(1)" : "scale(0.96)",
+                transformOrigin: "center center",
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="bg-[#8B35B8] p-5 text-white">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-xl font-semibold">Apply Coupon</h3>
+                  <h3 id="coupon-modal-title" className="text-xl font-semibold">Apply Coupon</h3>
                   <button
                     aria-label="Close"
                     className="rounded-full p-1 hover:bg-white/20 transition-colors"
-                    onClick={() => {
-                      setIsCouponModalOpen(false);
-                      setCouponError('');
-                      setCouponCode('');
-                      setSelectedCoupon(''); // Deselect all coupons
-                    }}
+                    onClick={() => setIsCouponClosing(true)}
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
                       <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -1047,20 +1159,15 @@ if(isPaymentLoading){
                     <button
                       type="button"
                       className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors"
-                      onClick={() => {
-                        setIsCouponModalOpen(false);
-                        setCouponError('');
-                        setCouponCode('');
-                        setSelectedCoupon(''); // Deselect all coupons
-                      }}
+                      onClick={() => setIsCouponClosing(true)}
                     >
                       Cancel
                     </button>
-                    <button
-                      type="submit"
-                      disabled={isCouponLoading || !couponCode.trim()}
-                      className="px-6 py-2 rounded-lg text-white bg-gradient-to-r from-green-700 to-green-500 hover:from-green-700 hover:to-green-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-                    >
+                      <button
+                        type="submit"
+                        disabled={isCouponLoading || !couponCode.trim()}
+                        className="px-6 py-2 rounded-xl text-white bg-[#8B35B8] hover:bg-[#5C1F82] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 cursor-pointer"
+                      >
                       {isCouponLoading ? (
                         <>
                           <svg className="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">

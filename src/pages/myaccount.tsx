@@ -1,12 +1,10 @@
 import Link from "next/link";
-import Image from "next/image";
-import { SetStateAction, useEffect, useState } from "react";
-// import "@/styles/account.css";
+import { useEffect, useState } from "react";
 import AccountSideBar from "@/Components/accountsidebar";
-import { useAppSelector } from "@/hooks/hooks";	
+import { useAppSelector } from "@/hooks/hooks";
 import { useRouter } from "next/router";
-import { getData, postData } from "@/services/apiServices";
-import { toast } from "react-toastify";
+import { getData } from "@/services/apiServices";
+import toast from "react-hot-toast";
 import { clearUser, setUser } from "@/slices/userSlice";
 import { useDispatch } from "react-redux";
 import QRCode from "react-qr-code";
@@ -71,135 +69,191 @@ export default function MyAccount() {
 		})
 	}
   return (
-    <section className="account-box">
-		<div className="container">
-			<h1 className="attriheading">My Account</h1>
-			<div className="account-main d-flex padding-tb">
-				<div className="account-left">
-					<AccountSideBar/>
-				</div>
-				<div className="account-right">
-					{/* <div className="account-form">
-						<form>
-							<div className="form-row d-flex">
-								<div className="form-group">
-									<label className="form-label">Name</label>
-									<input type="text" className="form-control" placeholder="Name"/>
-								</div>
-								<div className="form-group">
-									<label className="form-label">Last Name</label>
-									<input type="text" className="form-control" placeholder="Last Name"/>
-								</div>
-								<div className="form-group">
-									<label className="form-label">Mobile Number</label>
-									<input type="number" className="form-control" placeholder="Mobile Number"/>
-								</div>
-								<div className="form-group">
-									<label className="form-label">Email</label>
-									<input type="email" className="form-control" placeholder="Email"/>
-								</div>
-							</div>
-						</form>
-					</div> */}
-					<div className="account-form text-center">
-						<div className="user-profile-icon relative flex justify-center items-center">
-							<div className="relative group">
-								<div className="w-[120px] h-[120px] rounded-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center text-4xl font-bold text-gray-100 shadow-lg border-2 border-gray-700">
-									{userData?.username?.charAt(0).toUpperCase()}
-								</div>
-								{/* <div className="profile-edit-icon">
-								<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 30 30">
-									<path d="M 22.828125 3 C 22.316375 3 21.804562 3.1954375 21.414062 3.5859375 L 19 6 L 24 11 L 26.414062 8.5859375 C 27.195062 7.8049375 27.195062 6.5388125 26.414062 5.7578125 L 24.242188 3.5859375 C 23.851688 3.1954375 23.339875 3 22.828125 3 z M 17 8 L 5.2597656 19.740234 C 5.2597656 19.740234 6.1775313 19.658 6.5195312 20 C 6.8615312 20.342 6.58 22.58 7 23 C 7.42 23.42 9.6438906 23.124359 9.9628906 23.443359 C 10.281891 23.762359 10.259766 24.740234 10.259766 24.740234 L 22 13 L 17 8 z M 4 23 L 3.0566406 25.671875 A 1 1 0 0 0 3 26 A 1 1 0 0 0 4 27 A 1 1 0 0 0 4.328125 26.943359 A 1 1 0 0 0 4.3378906 26.939453 L 4.3632812 26.931641 A 1 1 0 0 0 4.3691406 26.927734 L 7 26 L 5.5 24.5 L 4 23 z"></path>
-								</svg>
-							</div> */}
-							</div>
-						</div>
-						<div className="attrixsheading">{userData?.username}</div>
-						<p>{userData?.phone}</p>
-					
-						<div className="user-wallet d-flex">
-						<Link href='/withdraw' className="wallet-card">
-							{/* <div className="wallet-card"> */}
-								<div className="wallet-left">
-									<div className="attrixsheading">₹{userData?.balance?.toFixed(2)}</div>
-									<p>Total Balance</p>
-								</div>
-								<div className="wallet-icon">
-									<svg xmlns="http://www.w3.org/2000/svg" id="wallet" x="0" y="0" version="1.1" viewBox="0 0 20 20">
-										<path d="M16 6H3.5v-.5l11-.88v.88H16V4c0-1.1-.891-1.872-1.979-1.717L3.98 3.717C2.891 3.873 2 4.9 2 6v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2zm-1.5 7.006a1.5 1.5 0 1 1 .001-3.001 1.5 1.5 0 0 1-.001 3.001z"></path>
-									</svg>
-								</div>
-							{/* </div> */}
-							</Link>
-							<div className="wallet-card" onClick={()=>toast.error('Cashback usage will be added soon')}>
-								<div className="wallet-left">
-									<div className="attrixsheading">₹{userData?.cashback?.toFixed(2)}</div>
-									<p>Total Cashback</p>
-								</div>
-								<div className="wallet-icon">
-									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="money">
-										<path d="M16 17c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8zm0-14c-3.309 0-6 2.691-6 6s2.691 6 6 6 6-2.691 6-6-2.691-6-6-6z"></path>
-										<path d="M16.4 13.2h-.8a2.613 2.613 0 0 1-2.493-1.864 1 1 0 1 1 1.918-.565c.075.253.312.43.575.43h.8a.6.6 0 0 0 0-1.201h-.8C14.166 10 13 8.833 13 7.4s1.166-2.6 2.6-2.6h.8c1.121 0 2.111.714 2.466 1.778a1 1 0 1 1-1.897.633.598.598 0 0 0-.569-.411h-.8a.6.6 0 0 0 0 1.2h.8c1.434 0 2.6 1.167 2.6 2.6s-1.166 2.6-2.6 2.6z"></path>
-										<path d="M16 6c-.271 0-.521-.11-.71-.29-.04-.05-.09-.1-.12-.16a.556.556 0 0 1-.09-.17.672.672 0 0 1-.061-.18C15.01 5.13 15 5.07 15 5c0-.26.109-.52.29-.71.37-.37 1.04-.37 1.42 0 .18.19.29.45.29.71 0 .07-.01.13-.021.2a.606.606 0 0 1-.06.18.578.578 0 0 1-.09.17c-.04.06-.08.11-.12.16-.189.18-.449.29-.709.29zm0 8c-.271 0-.521-.11-.71-.29-.04-.05-.09-.1-.12-.16a.556.556 0 0 1-.09-.17.672.672 0 0 1-.061-.18c-.009-.07-.019-.13-.019-.2 0-.26.109-.52.29-.71.37-.37 1.04-.37 1.42 0 .18.19.29.45.29.71 0 .07-.01.13-.021.2a.606.606 0 0 1-.06.18.578.578 0 0 1-.09.17c-.04.06-.08.11-.12.16-.189.18-.449.29-.709.29zm2 17H2a1 1 0 0 1-1-1v-9c0-.265.105-.52.293-.707C1.527 20.058 3.653 18 6 18c1.944 0 4.452 1.469 5.295 2H16a3.004 3.004 0 0 1 2.955 3.519l7.891-3.288a2.995 2.995 0 0 1 2.818.273A2.993 2.993 0 0 1 31 23a1 1 0 0 1-.496.864l-12 7A1.003 1.003 0 0 1 18 31zM3 29h14.729l11.14-6.498a1.01 1.01 0 0 0-.314-.334.984.984 0 0 0-.939-.091l-9.23 3.846A1.007 1.007 0 0 1 18 26h-8a1 1 0 1 1 0-2h6a1.001 1.001 0 0 0 0-2h-5c-.197 0-.391-.059-.555-.167C9.68 21.323 7.387 20 6 20c-1.09 0-2.347.88-3 1.439V29z"></path>
-									</svg>
-								</div>
-							</div>
-						</div>
-					
-						<div className="referral-code">
-							<div className="referral-code-left">
-								<div className="attrixsheading">Referral Code</div>
-								<p className="anchor-button hovertime copy-btn">
-									{userData?.referral_code}
-									<div className="icon">
-										<button onClick={shareWhatsapp}><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 30 30"><path d="M 23 3 A 4 4 0 0 0 19 7 A 4 4 0 0 0 19.09375 7.8359375 L 10.011719 12.376953 A 4 4 0 0 0 7 11 A 4 4 0 0 0 3 15 A 4 4 0 0 0 7 19 A 4 4 0 0 0 10.013672 17.625 L 19.089844 22.164062 A 4 4 0 0 0 19 23 A 4 4 0 0 0 23 27 A 4 4 0 0 0 27 23 A 4 4 0 0 0 23 19 A 4 4 0 0 0 19.986328 20.375 L 10.910156 15.835938 A 4 4 0 0 0 11 15 A 4 4 0 0 0 10.90625 14.166016 L 19.988281 9.625 A 4 4 0 0 0 23 11 A 4 4 0 0 0 27 7 A 4 4 0 0 0 23 3 z"></path></svg></button>
-									<button onClick={()=>copyReferralcode()}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" id="copy"><path fill="#212121" d="M4.00029246,4.08524952 L4,10.5 C4,11.8254834 5.03153594,12.9100387 6.33562431,12.9946823 L6.5,13 L10.9143985,13.000703 C10.7082819,13.5829319 10.1528467,14 9.5,14 L6,14 C4.34314575,14 3,12.6568542 3,11 L3,5.5 C3,4.84678131 3.41754351,4.29108512 4.00029246,4.08524952 Z M11.5,2 C12.3284271,2 13,2.67157288 13,3.5 L13,10.5 C13,11.3284271 12.3284271,12 11.5,12 L6.5,12 C5.67157288,12 5,11.3284271 5,10.5 L5,3.5 C5,2.67157288 5.67157288,2 6.5,2 L11.5,2 Z"></path></svg></button>
-									</div>
-								</p>
-							</div>
-							
-						</div>
-					<div className="qr-code mt-2">
-						<div className="attrixsheading">Referral QR Code</div>
-						<div className="qr-code-container flex flex-col items-center justify-center">
-						<QRCode 
-							value={`https://www.attriindustries.com/signup/${userData?.referral_code}`}
-							size={128}
-							style={{ margin: '10px 0' }}
-						/>
-						<p>Scan to share your referral code</p>
-						</div>
-					</div>
-					</div>
-					 <div className="team-list">
-						{/* <div className="team-card d-flex align">
-							<div className="attrixsheading">Level 1</div>
-							<div className="team-num">{userData?.referralFamily?.length}</div>
-						</div> */}
-						{/* {teamData?.user?.referralsByLevel?.length > 0 && teamData?.user?.referralsByLevel?.map((item:any,index:number)=>{
-							return <div className="team-card d-flex align" key={index}>
-								<div className="attrixsheading">Level {item?.level}</div>
-								<div className="team-num">{item?.referrals?.length}</div>
-							</div>
-						})} */}
-						
-						<div className="flex justify-center items-center">
-						<Link href='/teams' className="spcl-button learn-more">
-							<span className="circle" aria-hidden="true">
-								<span className="icon arrow"></span>
-							</span>
-							<span className="button-text">View Team</span>
-						</Link>
-						</div>
+    <section className="account-box min-h-screen" style={{ background: "var(--color-bg)" }}>
+      <div className="container">
+        <div className="account-main d-flex padding-tb">
+          <div className="account-left hidden md:block" style={{ background: "transparent" }}>
+            <AccountSideBar />
+          </div>
+          <div className="account-right flex flex-col gap-8">
+            {/* Hero: welcome + profile */}
+            <header
+              className="relative overflow-hidden rounded-3xl px-6 py-8 md:px-10 md:py-10"
+              style={{
+                background: "linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-surface) 60%)",
+                boxShadow: "var(--shadow-card)",
+              }}
+            >
+              <div className="relative flex flex-col sm:flex-row sm:items-center gap-6">
+                <div
+                  className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl text-3xl font-bold text-white"
+                  style={{
+                    background: "linear-gradient(145deg, var(--color-primary) 0%, var(--color-primary-dark) 100%)",
+                    boxShadow: "0 8px 24px rgba(139, 53, 184, 0.35)",
+                  }}
+                >
+                  {userData?.username?.charAt(0).toUpperCase()}
+                </div>
+                <div>
+                  <p className="text-sm font-medium uppercase tracking-wider" style={{ color: "var(--color-text-muted)" }}>
+                    Welcome back
+                  </p>
+                  <h1 className="mt-0.5 font-bold text-2xl tracking-tight md:text-3xl" style={{ color: "var(--color-charcoal)", fontFamily: "var(--font-heading)" }}>
+                    {userData?.username}
+                  </h1>
+                  <p className="mt-1 text-base" style={{ color: "var(--color-text-secondary)" }}>
+                    {userData?.phone}
+                  </p>
+                </div>
+              </div>
+            </header>
 
-						{/* <div className="team-card d-flex align">
-							<div className="attrixsheading">Level 1</div>
-							<div className="team-num">30</div>
-						</div> */}
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+            {/* Wallet: balance + cashback */}
+            <section aria-label="Wallet">
+              <h2 className="mb-4 text-lg font-semibold" style={{ color: "var(--color-charcoal)" }}>
+                Wallet
+              </h2>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <Link
+                  href="/withdraw"
+                  className="group flex min-h-[100px] items-center justify-between rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] px-6 py-5 transition-all duration-200 hover:border-[var(--color-primary)]/30 hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/40"
+                  style={{ boxShadow: "var(--shadow-card)" }}
+                >
+                  <div>
+                    <p className="text-sm font-medium" style={{ color: "var(--color-text-secondary)" }}>
+                      Total Balance
+                    </p>
+                    <p className="mt-1 text-2xl font-bold tabular-nums" style={{ color: "var(--color-charcoal)" }}>
+                      ₹{userData?.balance?.toFixed(2)}
+                    </p>
+                    <span className="mt-2 inline-block text-sm font-medium" style={{ color: "var(--color-primary)" }}>
+                      Withdraw →
+                    </span>
+                  </div>
+                  <div
+                    className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl transition-transform duration-200 group-hover:scale-105"
+                    style={{ background: "var(--color-primary-light)" }}
+                  >
+                    <svg className="h-7 w-7" style={{ color: "var(--color-primary)" }} viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M16 6H3.5v-.5l11-.88v.88H16V4c0-1.1-.891-1.872-1.979-1.717L3.98 3.717C2.891 3.873 2 4.9 2 6v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2zm-1.5 7.006a1.5 1.5 0 1 1 .001-3.001 1.5 1.5 0 0 1-.001 3.001z" />
+                    </svg>
+                  </div>
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => toast.error("Cashback usage will be added soon")}
+                  className="flex min-h-[100px] w-full cursor-pointer items-center justify-between rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] px-6 py-5 text-left transition-all duration-200 hover:border-[var(--color-accent-gold)]/40 focus:outline-none focus:ring-2 focus:ring-[var(--color-accent-gold)]/30"
+                  style={{ boxShadow: "var(--shadow-card)" }}
+                >
+                  <div>
+                    <p className="text-sm font-medium" style={{ color: "var(--color-text-secondary)" }}>
+                      Total Cashback
+                    </p>
+                    <p className="mt-1 text-2xl font-bold tabular-nums" style={{ color: "var(--color-charcoal)" }}>
+                      ₹{userData?.cashback?.toFixed(2)}
+                    </p>
+                  </div>
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl" style={{ background: "#FEF3C7" }}>
+                    <svg className="h-7 w-7 text-[var(--color-accent-gold)]" viewBox="0 0 32 32" fill="currentColor">
+                      <path d="M16 17c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8zm0-14c-3.309 0-6 2.691-6 6s2.691 6 6 6 6-2.691 6-6-2.691-6-6-6z" />
+                      <path d="M16.4 13.2h-.8a2.613 2.613 0 0 1-2.493-1.864 1 1 0 1 1 1.918-.565c.075.253.312.43.575.43h.8a.6.6 0 0 0 0-1.201h-.8C14.166 10 13 8.833 13 7.4s1.166-2.6 2.6-2.6h.8c1.121 0 2.111.714 2.466 1.778a1 1 0 1 1-1.897.633.598.598 0 0 0-.569-.411h-.8a.6.6 0 0 0 0 1.2h.8c1.434 0 2.6 1.167 2.6 2.6s-1.166 2.6-2.6 2.6z" />
+                    </svg>
+                  </div>
+                </button>
+              </div>
+            </section>
+
+            {/* Referral: code + actions + QR in one card */}
+            <section aria-label="Referral">
+              <h2 className="mb-4 text-lg font-semibold" style={{ color: "var(--color-charcoal)" }}>
+                Share & earn
+              </h2>
+              <div
+                className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 md:p-8"
+                style={{ boxShadow: "var(--shadow-card)" }}
+              >
+                <div className="grid gap-8 md:grid-cols-[1fr,auto] md:items-start">
+                  <div>
+                    <p className="text-sm font-medium" style={{ color: "var(--color-text-secondary)" }}>
+                      Referral Code
+                    </p>
+                    <p className="mt-2 font-mono text-xl font-semibold tracking-wide" style={{ color: "var(--color-charcoal)" }}>
+                      {userData?.referral_code}
+                    </p>
+                    <div className="mt-4 flex flex-wrap items-center gap-3">
+                      <button
+                        type="button"
+                        onClick={() => copyReferralcode()}
+                        className="inline-flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium text-white transition-opacity duration-200 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2"
+                        style={{ background: "var(--color-primary)" }}
+                        aria-label="Copy referral code"
+                      >
+                        <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden>
+                          <path d="M4.00029246,4.08524952 L4,10.5 C4,11.8254834 5.03153594,12.9100387 6.33562431,12.9946823 L6.5,13 L10.9143985,13.000703 C10.7082819,13.5829319 10.1528467,14 9.5,14 L6,14 C4.34314575,14 3,12.6568542 3,11 L3,5.5 C3,4.84678131 3.41754351,4.29108512 4.00029246,4.08524952 Z M11.5,2 C12.3284271,2 13,2.67157288 13,3.5 L13,10.5 C13,11.3284271 12.3284271,12 11.5,12 L6.5,12 C5.67157288,12 5,11.3284271 5,10.5 L5,3.5 C5,2.67157288 5.67157288,2 6.5,2 L11.5,2 Z" />
+                        </svg>
+                        Copy
+                      </button>
+                      <button
+                        type="button"
+                        onClick={shareWhatsapp}
+                        className="inline-flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#25D366] px-4 py-2.5 text-sm font-medium text-white transition-opacity duration-200 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[#25D366] focus:ring-offset-2"
+                        aria-label="Share on WhatsApp"
+                      >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                        </svg>
+                        Share on WhatsApp
+                      </button>
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-center border-t border-[var(--color-border)] pt-6 md:border-t-0 md:border-l md:border-[var(--color-border)] md:pl-8 md:pt-0">
+                    <p className="mb-3 text-sm font-medium" style={{ color: "var(--color-text-secondary)" }}>
+                      Referral QR Code
+                    </p>
+                    <div className="rounded-xl border border-[var(--color-border)] bg-white p-3">
+                      <QRCode
+                        value={`https://www.attriindustries.com/signup/${userData?.referral_code}`}
+                        size={128}
+                        style={{ margin: 0 }}
+                      />
+                    </div>
+                    <p className="mt-3 text-center text-sm" style={{ color: "var(--color-text-muted)" }}>
+                      Scan to share your referral code
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Team CTA */}
+            <section aria-label="Team">
+              <div
+                className="flex flex-col items-center justify-center gap-4 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] px-6 py-8 text-center sm:flex-row sm:justify-between sm:text-left"
+                style={{ boxShadow: "var(--shadow-card)" }}
+              >
+                <div>
+                  <h2 className="text-lg font-semibold" style={{ color: "var(--color-charcoal)" }}>
+                    Your team
+                  </h2>
+                  <p className="mt-1 text-sm" style={{ color: "var(--color-text-secondary)" }}>
+                    Invite friends and grow together
+                  </p>
+                </div>
+                <Link
+                  href="/teams"
+                  className="spcl-button learn-more inline-flex min-h-[48px] min-w-[160px] cursor-pointer items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:ring-offset-2"
+                  aria-label="View team"
+                >
+                  <span className="circle" aria-hidden="true">
+                    <span className="icon arrow" />
+                  </span>
+                  <span className="button-text">View Team</span>
+                </Link>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
