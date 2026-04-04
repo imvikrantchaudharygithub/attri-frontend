@@ -1,10 +1,9 @@
 import axios from 'axios';
 // import { store } from '@/store';
 import { getToken } from '@/utils/auth';
-// https://api.attriindustries.com/api
+/** Set in .env.local (dev) or .env.production (deploy). Never hardcode — breaks prod or local. */
 const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'https://api.attriindustries.com/api',
-  // baseURL: 'http://localhost:4000/api',
+  baseURL: process.env.NEXT_PUBLIC_API_URL || "https://api.attriindustries.com/api",
 
   // withCredentials: true,
   xsrfHeaderName: 'X-XSRF-TOKEN',
@@ -111,5 +110,4 @@ export const postData = async (endpoint: string, data: any, config?: any): Promi
 //     },
 // });
  
-
 // };
