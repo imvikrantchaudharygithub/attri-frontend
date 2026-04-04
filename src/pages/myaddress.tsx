@@ -34,6 +34,7 @@ function AddressCardSkeleton() {
 export default function MyAddress() {
   const router = useRouter();
   const [showAddAddressPopup, setShowAddAddressPopup] = useState(false);
+  const [editingAddress, setEditingAddress] = useState<any | null>(null);
   const [addressData, setAddressData] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const user = useAppSelector((state: any) => state.user);
@@ -132,6 +133,7 @@ export default function MyAddress() {
                           address={item}
                           defaultAddress={makeDefaultAddress}
                           deleteAddress={deleteAddress}
+                          editAddress={(addr) => setEditingAddress(addr)}
                         />
                       </li>
                     ))}
@@ -173,7 +175,13 @@ export default function MyAddress() {
       </section>
 
       {showAddAddressPopup && <NewAddressPopUp closePopup={() => setShowAddAddressPopup(false)} />}
-      <EditAddressPopUp />
+      {editingAddress && (
+        <EditAddressPopUp
+          address={editingAddress}
+          onClose={() => setEditingAddress(null)}
+          onSaved={() => { setEditingAddress(null); getaddressData(); }}
+        />
+      )}
     </>
   );
 }

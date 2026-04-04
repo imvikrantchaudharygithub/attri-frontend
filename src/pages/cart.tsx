@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { SetStateAction, useEffect, useState } from "react";
+import { SetStateAction, useEffect, useMemo, useState } from "react";
 // import "@/styles/account.css";
 // import "@/styles/cart.css";
 import About from "@/Components/About";
@@ -16,23 +16,32 @@ import { getData, postData } from "@/services/apiServices";
 import { setCartCount } from "@/slices/loginUserSlice";
 import router from "next/router";
 import { openLoginPopup } from "@/slices/popupSlice";
-import Razorpay from 'razorpay';
-
-// const razorpay = new Razorpay({
-//   key_id: process.env.RAZORPAY_LIVE_KEY_ID,
-//   key_secret: process.env.RAZORPAY_LIVE_KEY_SECRET
-// });
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Cart() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const token = useSelector((state: RootState) => state.token.token);
   const user = useSelector((state: RootState) => state.user);
- 
+
   const [usercartItems, setUserCartItems] = useState<any[]>([]);
   const [useraddress, setUseraddress] = useState<any>({});
   const [isPaymentLoading, setIsPaymentLoading] = useState(false);
   const [ischeckoutLoading, setIscheckoutLoading] = useState(false);
+  const [paymentProcessingState, setPaymentProcessingState] = useState<'processing' | 'success' | null>(null);
+  const [processingOrderId, setProcessingOrderId] = useState<string | null>(null);
+
+  // Pre-generate random values for modal particles so they don't jump on re-render
+  const bgParticles = useMemo(() => Array.from({ length: 20 }, (_, i) => ({
+    w: Math.random() * 8 + 4, h: Math.random() * 8 + 4,
+    left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%`,
+    dur: Math.random() * 3 + 2, delay: Math.random() * 2, colorIdx: i % 3,
+  })), []);
+  const confettiParticles = useMemo(() => Array.from({ length: 12 }, (_, i) => ({
+    w: Math.random() * 8 + 4, h: Math.random() * 8 + 4,
+    x: (Math.random() - 0.5) * 300, y: (Math.random() - 0.5) * 300,
+    colorIdx: i % 2, delay: 0.3 + i * 0.05,
+  })), []);
   const [showFreeDelivery, setShowFreeDelivery] = useState(false);
   const [isCartLoading, setIsCartLoading] = useState(true);
   const [isCashbackModalOpen, setIsCashbackModalOpen] = useState(false);
@@ -290,7 +299,6 @@ const handlePayment = async () => {
         // Step 3: Initialize Razorpay with response data
         const options = {
             key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-            key_secret: process.env.NEXT_PUBLIC_RAZORPAY_KEY_SECRET,
             amount: razorpayOrder.amount,
             currency: razorpayOrder.currency,
             name: "ATTRI INDUSTRIES",
@@ -302,6 +310,12 @@ const handlePayment = async () => {
                 contact: useraddress?.contact || ""
             },
             handler: async function(response:any) {
+                // Show processing modal instantly - user sees feedback immediately
+                setPaymentProcessingState('processing');
+                setProcessingOrderId(orderId);
+                setIsPaymentLoading(false);
+                setIscheckoutLoading(false);
+
                 try {
                    const verifyPayment = await postData('/verify-payment', {
                         razorpay_payment_id: response.razorpay_payment_id,
@@ -310,25 +324,38 @@ const handlePayment = async () => {
                         orderId: orderId
                     });
                     console.log("verifyPayment",verifyPayment)
-                    
-                        toast.success("Payment successful!");
-                        dispatch(clearCart());
-                        dispatch(setCartCount(0))
-                        handleEmptyCart()
-                        // Add navigation to success page
-                        setIsPaymentLoading(false)
-                        setIscheckoutLoading(false)
+
+                    // Show success state briefly then redirect
+                    setPaymentProcessingState('success');
+                    dispatch(clearCart());
+                    dispatch(setCartCount(0));
+                    handleEmptyCart();
+
+                    setTimeout(() => {
                         router.push(`/thankyou/${orderId}`);
-                    
+                    }, 2000);
+
                 } catch (err) {
-                    toast.error("Payment verification failed");
-                    setIsPaymentLoading(false)  
-                    setIscheckoutLoading(false)
-                    handleEmptyCart()
+                    // Payment went through on Razorpay but verify failed
+                    // Webhook will handle it - still show success and redirect
+                    setPaymentProcessingState('success');
+                    dispatch(clearCart());
+                    dispatch(setCartCount(0));
+
+                    setTimeout(() => {
+                        router.push(`/thankyou/${orderId}`);
+                    }, 2000);
+                }
+            },
+            modal: {
+                ondismiss: function() {
+                    toast.error("Payment cancelled. Your cart is still saved.");
+                    setIsPaymentLoading(false);
+                    setIscheckoutLoading(false);
                 }
             },
             theme: {
-                color: "#3399cc"
+                color: "#8B35B8"
             }
         };
         
@@ -530,7 +557,248 @@ if(isPaymentLoading){
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-[#FAF9FF] gap-6">
         <div className="w-16 h-16 rounded-full border-4 border-[#8B35B8] border-t-transparent animate-spin" />
-        <p className="text-[#8B35B8] font-semibold text-lg font-heading">Processing Payment...</p>
+        <p className="text-[#8B35B8] font-semibold text-lg font-heading">Preparing checkout...</p>
+      </div>
+    );
+}
+
+if(paymentProcessingState){
+    return (
+      <div className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden" style={{ background: 'linear-gradient(135deg, #FAF9FF 0%, #E9D5FF 50%, #FAF9FF 100%)' }}>
+        {/* Animated background particles */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {bgParticles.map((p, i) => (
+            <motion.div
+              key={i}
+              className="absolute rounded-full"
+              style={{
+                width: p.w,
+                height: p.h,
+                background: p.colorIdx === 0 ? '#8B35B8' : p.colorIdx === 1 ? '#D4A847' : '#E9D5FF',
+                opacity: 0.3,
+                left: p.left,
+                top: p.top,
+              }}
+              animate={{
+                y: [0, -30, 0],
+                opacity: [0.2, 0.5, 0.2],
+                scale: [1, 1.3, 1],
+              }}
+              transition={{
+                duration: p.dur,
+                repeat: Infinity,
+                delay: p.delay,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </div>
+
+        <div className="relative z-10 flex flex-col items-center px-6 max-w-sm w-full">
+          <AnimatePresence mode="wait">
+            {paymentProcessingState === 'processing' && (
+              <motion.div
+                key="processing"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="flex flex-col items-center"
+              >
+                {/* Animated rings */}
+                <div className="relative w-32 h-32 mb-8">
+                  <motion.div
+                    className="absolute inset-0 rounded-full border-4 border-[#8B35B8]/20"
+                    animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.1, 0.3] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  />
+                  <motion.div
+                    className="absolute inset-2 rounded-full border-4 border-[#D4A847]/30"
+                    animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.15, 0.4] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+                  />
+                  <motion.div
+                    className="absolute inset-4 rounded-full border-[3px] border-transparent"
+                    style={{ borderTopColor: '#8B35B8', borderRightColor: '#D4A847' }}
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <motion.div
+                      animate={{ scale: [1, 1.1, 1] }}
+                      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 14V6C19 4.89543 18.1046 4 17 4H3C1.89543 4 1 4.89543 1 6V14C1 15.1046 1.89543 16 3 16H17C18.1046 16 19 15.1046 19 14Z" stroke="#8B35B8" strokeWidth="1.5" strokeLinecap="round"/>
+                        <path d="M23 10V18C23 19.1046 22.1046 20 21 20H7C5.89543 20 5 19.1046 5 18V16" stroke="#D4A847" strokeWidth="1.5" strokeLinecap="round"/>
+                        <circle cx="10" cy="10" r="2.5" stroke="#8B35B8" strokeWidth="1.5"/>
+                      </svg>
+                    </motion.div>
+                  </div>
+                </div>
+
+                {/* Text */}
+                <motion.h2
+                  className="text-2xl font-bold text-[#1A1A1A] font-heading mb-3 text-center"
+                  animate={{ opacity: [0.7, 1, 0.7] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  Confirming Your Payment
+                </motion.h2>
+                <p className="text-[#6B7280] text-center text-sm mb-8 leading-relaxed">
+                  Please wait while we securely verify your payment. <br/>This will only take a moment.
+                </p>
+
+                {/* Progress steps */}
+                <div className="w-full space-y-3">
+                  {[
+                    { label: 'Payment received', delay: 0 },
+                    { label: 'Verifying transaction', delay: 0.8 },
+                    { label: 'Preparing your order', delay: 1.6 },
+                  ].map((step, i) => (
+                    <motion.div
+                      key={step.label}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: step.delay, duration: 0.4 }}
+                      className="flex items-center gap-3 bg-white/70 backdrop-blur-sm rounded-xl px-4 py-3 shadow-sm"
+                    >
+                      <motion.div
+                        className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
+                        initial={{ background: '#E9D5FF' }}
+                        animate={{ background: ['#E9D5FF', '#8B35B8', '#E9D5FF'] }}
+                        transition={{ duration: 1.5, repeat: Infinity, delay: step.delay + 0.5 }}
+                      >
+                        <motion.div
+                          className="w-2 h-2 bg-white rounded-full"
+                          animate={{ scale: [0.8, 1.2, 0.8] }}
+                          transition={{ duration: 1.5, repeat: Infinity, delay: step.delay + 0.5 }}
+                        />
+                      </motion.div>
+                      <span className="text-sm text-[#3D3C3C] font-medium">{step.label}</span>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Security badge */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 2.5 }}
+                  className="mt-8 flex items-center gap-2 text-xs text-[#6B7280]"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8B35B8" strokeWidth="2" strokeLinecap="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                  </svg>
+                  Secured by Razorpay
+                </motion.div>
+              </motion.div>
+            )}
+
+            {paymentProcessingState === 'success' && (
+              <motion.div
+                key="success"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, ease: [0.34, 1.56, 0.64, 1] }}
+                className="flex flex-col items-center"
+              >
+                {/* Success checkmark */}
+                <div className="relative w-28 h-28 mb-6">
+                  <motion.div
+                    className="absolute inset-0 rounded-full"
+                    style={{ background: 'linear-gradient(135deg, #8B35B8, #D4A847)' }}
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
+                  />
+                  <motion.div
+                    className="absolute inset-0 rounded-full"
+                    style={{ background: 'linear-gradient(135deg, #8B35B8, #D4A847)' }}
+                    initial={{ scale: 1, opacity: 0.4 }}
+                    animate={{ scale: 1.5, opacity: 0 }}
+                    transition={{ duration: 0.8, delay: 0.3 }}
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <motion.svg
+                      width="48" height="48" viewBox="0 0 24 24" fill="none"
+                      initial={{ pathLength: 0 }}
+                      animate={{ pathLength: 1 }}
+                    >
+                      <motion.path
+                        d="M5 13l4 4L19 7"
+                        stroke="white"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
+                      />
+                    </motion.svg>
+                  </div>
+                </div>
+
+                <motion.h2
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                  className="text-2xl font-bold text-[#1A1A1A] font-heading mb-2 text-center"
+                >
+                  Payment Successful!
+                </motion.h2>
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.7 }}
+                  className="text-[#6B7280] text-center text-sm mb-6"
+                >
+                  Your order has been placed successfully.
+                </motion.p>
+
+                {/* Confetti dots */}
+                {confettiParticles.map((p, i) => (
+                  <motion.div
+                    key={`confetti-${i}`}
+                    className="absolute rounded-full"
+                    style={{
+                      width: p.w,
+                      height: p.h,
+                      background: p.colorIdx === 0 ? '#8B35B8' : '#D4A847',
+                    }}
+                    initial={{
+                      x: 0,
+                      y: 0,
+                      opacity: 1,
+                      scale: 0,
+                    }}
+                    animate={{
+                      x: p.x,
+                      y: p.y,
+                      opacity: 0,
+                      scale: [0, 1.5, 0],
+                    }}
+                    transition={{
+                      duration: 1.2,
+                      delay: p.delay,
+                      ease: "easeOut",
+                    }}
+                  />
+                ))}
+
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1 }}
+                  className="text-xs text-[#9CA3AF]"
+                >
+                  Redirecting to order details...
+                </motion.p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     );
 }

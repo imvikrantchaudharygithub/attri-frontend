@@ -1,24 +1,112 @@
 import Link from "next/link";
 import Image from "next/image";
-import { SetStateAction, useEffect, useState } from "react";
-// import "@/styles/thankyou.css";
+import { useEffect, useCallback, useState, useMemo } from "react";
 import { useRouter } from "next/router";
 import { getData } from "@/services/apiServices";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
+import confetti from "canvas-confetti";
+
+/** Normalize optional catch-all `orderId` from router.query */
+function orderIdFromQuery(orderId: string | string[] | undefined): string {
+  if (orderId == null) return "";
+  return Array.isArray(orderId) ? orderId[0] ?? "" : orderId;
+}
+
+/** Order id shown in API responses varies; tracking_number is often missing. */
+function resolveOrderDisplayId(orderData: any, routeId: string): string {
+  const id = orderData?._id;
+  const idStr =
+    typeof id === "string" ? id : id != null && typeof id === "object" && "$oid" in id ? String((id as { $oid: string }).$oid) : id != null ? String(id) : "";
+
+  return (
+    orderData?.tracking_number ??
+    orderData?.trackingNumber ??
+    orderData?.order_number ??
+    orderData?.orderNumber ??
+    orderData?.order_id ??
+    orderData?.orderId ??
+    idStr ??
+    routeId ??
+    ""
+  );
+}
 
 export default function OrderDetails() {
   const router = useRouter();
   const { orderId } = router.query;
+  const routeOrderId = orderIdFromQuery(orderId);
   const [orderData, setOrderData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [copiedReferral, setCopiedReferral] = useState(false);
+  const [animationDone, setAnimationDone] = useState(false);
+
+  // Fire premium confetti burst
+  const fireConfetti = useCallback(() => {
+    const colors = ["#8B35B8", "#D4A847", "#E9D5FF", "#F5D780", "#6B21A8"];
+
+    // First burst — center explosion
+    confetti({
+      particleCount: 80,
+      spread: 100,
+      origin: { y: 0.35 },
+      colors,
+      startVelocity: 45,
+      gravity: 0.8,
+      ticks: 300,
+      shapes: ["circle", "square"],
+      scalar: 1.1,
+    });
+
+    // Second burst — left cannon (delayed)
+    setTimeout(() => {
+      confetti({
+        particleCount: 40,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0, y: 0.5 },
+        colors,
+        startVelocity: 55,
+        gravity: 0.9,
+        ticks: 250,
+      });
+    }, 200);
+
+    // Third burst — right cannon (delayed)
+    setTimeout(() => {
+      confetti({
+        particleCount: 40,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1, y: 0.5 },
+        colors,
+        startVelocity: 55,
+        gravity: 0.9,
+        ticks: 250,
+      });
+    }, 400);
+
+    // Gold sparkle rain
+    setTimeout(() => {
+      confetti({
+        particleCount: 30,
+        spread: 160,
+        origin: { y: 0 },
+        colors: ["#D4A847", "#F5D780", "#FEF3C7"],
+        startVelocity: 20,
+        gravity: 0.4,
+        ticks: 400,
+        shapes: ["circle"],
+        scalar: 0.7,
+      });
+    }, 600);
+  }, []);
 
   const getOrder = async () => {
     try {
       setIsLoading(true);
-      const response = await getData(`/get-order/${orderId}`);
-      console.log("orderResponse", response);
+      if (!routeOrderId) return;
+      const response = await getData(`/get-order/${routeOrderId}`);
       setOrderData(response?.data);
     } catch (error) {
       console.log("error", error);
@@ -38,16 +126,38 @@ export default function OrderDetails() {
       toast.error("Failed to copy referral code");
     }
   };
+
   const shareWhatsapp = () => {
-		const text = `🚀 I’m using *Attri Products* and *Earning Money* from it — and I’m LOVING it! 💸✨ \n\nWanna try it too? Use my referral code 👉 *“${orderData?.user?.referral_code}”* \n\n  Join here 🔗 https://www.attriindustries.com/signup/${orderData?.user?.referral_code}   \n\n  -Let’s grow & earn together! 💼💰🔥`;
-		window.open(`https://wa.me/?text=${text}`, '_blank');
-	}
+    const text = `🚀 I'm using *Attri Products* and *Earning Money* from it — and I'm LOVING it! 💸✨ \n\nWanna try it too? Use my referral code 👉 *"${orderData?.user?.referral_code}"* \n\n  Join here 🔗 https://www.attriindustries.com/signup/${orderData?.user?.referral_code}   \n\n  -Let's grow & earn together! 💼💰🔥`;
+    window.open(`https://wa.me/?text=${text}`, "_blank");
+  };
 
   useEffect(() => {
-    if (orderId) {
-      getOrder();
+    if (!router.isReady) return;
+    if (!routeOrderId) {
+      setIsLoading(false);
+      setOrderData(null);
+      return;
     }
-  }, [orderId]);
+    getOrder();
+  }, [router.isReady, routeOrderId]);
+
+  const displayOrderId = useMemo(
+    () => resolveOrderDisplayId(orderData, routeOrderId),
+    [orderData, routeOrderId]
+  );
+
+  // Fire confetti when order data loads
+  useEffect(() => {
+    if (orderData && !animationDone) {
+      const timer = setTimeout(() => {
+        fireConfetti();
+        setAnimationDone(true);
+      }, 800);
+      return () => clearTimeout(timer);
+    }
+  }, [orderData, animationDone, fireConfetti]);
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-[#FAF9FF] flex items-center justify-center">
@@ -80,77 +190,166 @@ export default function OrderDetails() {
 
   return (
     <section className="min-h-screen bg-[#FAF9FF] py-8">
+      {/* CSS Animations */}
+      <style jsx>{`
+        @keyframes checkmark-circle {
+          0% { stroke-dashoffset: 166; }
+          100% { stroke-dashoffset: 0; }
+        }
+        @keyframes checkmark-tick {
+          0% { stroke-dashoffset: 48; }
+          100% { stroke-dashoffset: 0; }
+        }
+        @keyframes badge-scale {
+          0% { transform: scale(0); }
+          60% { transform: scale(1.15); }
+          100% { transform: scale(1); }
+        }
+        @keyframes badge-glow {
+          0%, 100% { box-shadow: 0 0 20px rgba(139,53,184,0.3), 0 0 60px rgba(139,53,184,0.1); }
+          50% { box-shadow: 0 0 40px rgba(139,53,184,0.5), 0 0 100px rgba(212,168,71,0.25); }
+        }
+        @keyframes shimmer {
+          0% { transform: translateX(-150%); }
+          100% { transform: translateX(150%); }
+        }
+        @keyframes ring-expand {
+          0% { transform: scale(0.8); opacity: 0.6; }
+          100% { transform: scale(2.5); opacity: 0; }
+        }
+        .success-badge {
+          animation: badge-scale 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both;
+        }
+        .success-badge-glow {
+          animation: badge-glow 3s ease-in-out 2s infinite;
+        }
+        .checkmark-circle-anim {
+          stroke-dasharray: 166;
+          stroke-dashoffset: 166;
+          animation: checkmark-circle 0.6s cubic-bezier(0.65, 0, 0.45, 1) 0.3s forwards;
+        }
+        .checkmark-tick-anim {
+          stroke-dasharray: 48;
+          stroke-dashoffset: 48;
+          animation: checkmark-tick 0.4s cubic-bezier(0.65, 0, 0.45, 1) 0.7s forwards;
+        }
+        .shimmer-sweep {
+          animation: shimmer 0.8s ease-in-out 1.2s both;
+        }
+        .ring-1 { animation: ring-expand 1.2s ease-out 0.6s both; }
+        .ring-2 { animation: ring-expand 1.2s ease-out 0.8s both; }
+        .ring-3 { animation: ring-expand 1.2s ease-out 1.0s both; }
+      `}</style>
+
       <div className="container mx-auto px-4 py-8">
         {/* Success Header */}
-        <motion.div
-          className="text-center mb-10"
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="relative inline-block mb-6">
-            <motion.div
-              className="w-24 h-24 bg-[#8B35B8] rounded-full flex items-center justify-center mx-auto shadow-[0_8px_30px_rgba(0,0,0,0.3)]"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.2 }}
+        <div className="text-center mb-10">
+          {/* Badge + Checkmark + Rings */}
+          <div className="relative inline-flex items-center justify-center mb-6" style={{ width: 140, height: 140 }}>
+            {/* Expanding rings */}
+            <div className="absolute inset-0 rounded-full border-2 border-[#D4A847] ring-1" />
+            <div className="absolute inset-0 rounded-full border-[1.5px] border-[#8B35B8] ring-2" />
+            <div className="absolute inset-0 rounded-full border border-[#E9D5FF] ring-3" />
+
+            {/* Main circle badge */}
+            <div className="success-badge success-badge-glow relative w-28 h-28 rounded-full flex items-center justify-center overflow-hidden"
+              style={{ background: "linear-gradient(135deg, #8B35B8 0%, #7928CA 40%, #D4A847 100%)" }}
             >
-              <motion.svg
-                className="w-12 h-12 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-              >
-                <motion.path
+              {/* SVG checkmark with draw animation */}
+              <svg viewBox="0 0 52 52" width={60} height={60} className="relative z-10">
+                <circle
+                  className="checkmark-circle-anim"
+                  cx="26" cy="26" r="25"
+                  fill="none"
+                  stroke="rgba(255,255,255,0.25)"
+                  strokeWidth="1.5"
+                />
+                <path
+                  className="checkmark-tick-anim"
+                  fill="none"
+                  stroke="white"
+                  strokeWidth="3.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokeWidth={3}
-                  d="M5 13l4 4L19 7"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
+                  d="M14.1 27.2l7.1 7.2 16.7-16.8"
                 />
-              </motion.svg>
-            </motion.div>
+              </svg>
+
+              {/* Shimmer light sweep */}
+              <div className="absolute inset-0 overflow-hidden rounded-full" style={{ zIndex: 20 }}>
+                <div
+                  className="shimmer-sweep absolute inset-0"
+                  style={{
+                    background: "linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.4) 50%, transparent 65%)",
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Gold star badge */}
             <motion.div
-              className="absolute -top-1 -right-1 w-8 h-8 bg-[#D4A847] rounded-full flex items-center justify-center"
+              className="absolute -top-1 -right-1 w-10 h-10 rounded-full flex items-center justify-center z-30 shadow-lg"
+              style={{ background: "linear-gradient(135deg, #D4A847, #F5D780)" }}
               initial={{ scale: 0 }}
-              animate={{ scale: [0, 1.2, 1] }}
-              transition={{ delay: 0.8, duration: 0.4 }}
+              animate={{ scale: [0, 1.3, 1] }}
+              transition={{ delay: 1.0, duration: 0.5, ease: [0.34, 1.56, 0.64, 1] }}
             >
-              <span className="text-sm">🎉</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
             </motion.div>
           </div>
 
+          {/* Title */}
           <motion.h1
             className="text-3xl md:text-4xl font-bold text-[#8B35B8] font-heading italic mb-3"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9, duration: 0.5, ease: "easeOut" }}
           >
             Order Confirmed!
           </motion.h1>
-          <p className="text-lg text-[#6B7280] mb-1">
-            Thank you, <span className="font-semibold text-[#1A1A1A]">{orderData?.user?.name}</span>
-          </p>
-          <p className="text-[#6B7280] text-sm mb-6">Your order will be shipped within 2-3 business days</p>
 
-          <div className="inline-flex items-center bg-white rounded-full px-5 py-2.5 shadow-card border border-[#E5E7EB]">
+          <motion.p
+            className="text-lg text-[#6B7280] mb-1"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.1, duration: 0.4 }}
+          >
+            Thank you, <span className="font-semibold text-[#1A1A1A]">{orderData?.user?.name}</span>
+          </motion.p>
+          <motion.p
+            className="text-[#6B7280] text-sm mb-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.3, duration: 0.4 }}
+          >
+            Your order will be shipped within 2-3 business days
+          </motion.p>
+
+          <motion.div
+            className="inline-flex items-center bg-white rounded-full px-5 py-2.5 shadow-card border border-[#E5E7EB]"
+            initial={{ opacity: 0, y: 16, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ delay: 1.5, duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
+          >
             <span className="text-[#6B7280] text-sm mr-2">Order #</span>
-            <span className="font-mono font-bold text-[#1A1A1A]">{orderData?.tracking_number}</span>
+            <span className="font-mono font-bold text-[#1A1A1A]">{displayOrderId}</span>
             <button
-              onClick={() => navigator.clipboard.writeText(orderData?.tracking_number)}
-              className="ml-3 p-1 hover:bg-[#FAF9FF] rounded-full transition-colors"
+              onClick={() => {
+                if (!displayOrderId) return;
+                navigator.clipboard.writeText(displayOrderId);
+                toast.success("Order number copied!");
+              }}
+              className="ml-3 p-1 hover:bg-[#FAF9FF] rounded-full transition-colors cursor-pointer"
+              aria-label="Copy order number"
             >
               <svg className="w-3.5 h-3.5 text-[#9CA3AF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
               </svg>
             </button>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
 
         <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Order Summary Card */}
@@ -268,7 +467,7 @@ export default function OrderDetails() {
                     className="py-2.5 px-3 bg-[#25D366] text-white rounded-xl text-sm font-semibold hover:bg-[#1ebe59] transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
                   >
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" />
                     </svg>
                     Share
                   </button>

@@ -293,7 +293,23 @@ export default function ProductListing({
   );
 }
 
-export async function getServerSideProps(context: any) {
+export async function getStaticPaths() {
+  try {
+    const res = await getData("/get-product-categories");
+    const categories = res?.data?.categories ?? [];
+    const paths = [
+      { params: { category: [] } },
+      ...categories
+        .filter((cat: any) => cat?.slug)
+        .map((cat: any) => ({ params: { category: [cat.slug] } })),
+    ];
+    return { paths, fallback: "blocking" };
+  } catch {
+    return { paths: [{ params: { category: [] } }], fallback: "blocking" };
+  }
+}
+
+export async function getStaticProps(context: any) {
   try {
     const res = await getData("/get-product-categories");
     const categories = res?.data?.categories ?? [];
@@ -305,6 +321,7 @@ export async function getServerSideProps(context: any) {
         categories,
         initialSlug,
       },
+      revalidate: 300, // ISR: regenerate in background every 5 minutes
     };
   } catch (error) {
     console.error("Error fetching categories for category page:", error);
@@ -313,6 +330,7 @@ export async function getServerSideProps(context: any) {
         categories: [],
         initialSlug: null,
       },
+      revalidate: 60,
     };
   }
 }

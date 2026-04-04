@@ -15,9 +15,10 @@ type SaveAddressProps = {
   };
   defaultAddress: (addressId: string) => void;
   deleteAddress: (addressId: string) => void;
+  editAddress?: (address: SaveAddressProps["address"]) => void;
 };
 
-export default function SaveAddress({ address, defaultAddress, deleteAddress }: SaveAddressProps) {
+export default function SaveAddress({ address, defaultAddress, deleteAddress, editAddress }: SaveAddressProps) {
   const [isDeleting, setIsDeleting] = useState(false);
   const addressId = address?._id ?? address?.id;
 
@@ -80,7 +81,21 @@ export default function SaveAddress({ address, defaultAddress, deleteAddress }: 
         </label>
       </div>
 
-      <div className="mt-5 flex items-center border-t pt-4" style={{ borderColor: "var(--color-border)" }}>
+      <div className="mt-5 flex items-center gap-3 border-t pt-4" style={{ borderColor: "var(--color-border)" }}>
+        {editAddress && (
+          <button
+            type="button"
+            onClick={() => editAddress(address)}
+            className="inline-flex min-h-[40px] min-w-[44px] cursor-pointer items-center justify-center gap-2 rounded-xl border px-4 py-2 text-sm font-medium transition-colors hover:bg-[var(--color-bg)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:ring-offset-2"
+            style={{ borderColor: "var(--color-border)", color: "var(--color-charcoal)" }}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
+              <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
+              <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
+            </svg>
+            Edit
+          </button>
+        )}
         <button
           type="button"
           onClick={() => addressId && deleteAddressHandler(addressId)}

@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { SetStateAction, useState, useEffect } from "react";
+import { SetStateAction, useState, useEffect, useRef } from "react";
 import Slider from "react-slick";
 import ProductCard from "./ProductCard";
 import { motion } from "framer-motion";
@@ -10,6 +10,11 @@ export default function BestSeller({ data }: any) {
   const [toggleState, setToggleState] = useState<any>(null);
   const [activeProducts, setActiveProducts] = useState([]);
   const [activeCategoryName, setActiveCategoryName] = useState("");
+  const [isPaused, setIsPaused] = useState(false);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const tabsContainerRef = useRef<HTMLDivElement>(null);
+  const tabRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
 
   useEffect(() => {
     if (data && data.length > 0) {
@@ -20,7 +25,44 @@ export default function BestSeller({ data }: any) {
     }
   }, [data]);
 
+  // Scroll active tab into view within the tabs container
+  const scrollActiveTabIntoView = (categoryId: string) => {
+    const button = tabRefs.current.get(categoryId);
+    const container = tabsContainerRef.current;
+    if (!button || !container) return;
+
+    const containerRect = container.getBoundingClientRect();
+    const buttonRect = button.getBoundingClientRect();
+
+    // Check if button is outside visible area of the container
+    if (buttonRect.left < containerRect.left || buttonRect.right > containerRect.right) {
+      button.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    }
+  };
+
+  // Auto-cycle categories every 4 seconds
+  useEffect(() => {
+    if (!data || data.length <= 1 || isPaused) return;
+
+    intervalRef.current = setInterval(() => {
+      setToggleState((current: any) => {
+        const currentIndex = data.findIndex((item: any) => item._id === current);
+        const nextIndex = (currentIndex + 1) % data.length;
+        const next = data[nextIndex];
+        setActiveCategoryName(next.name || "");
+        setActiveProducts(next.products || []);
+        scrollActiveTabIntoView(next._id);
+        return next._id;
+      });
+    }, 4000);
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [data, isPaused]);
+
   const toggleTab = (index: SetStateAction<any>) => {
+    setIsPaused(true);
     setToggleState(index);
     const selected = data.find((item: any) => item._id === index);
     setActiveCategoryName(selected?.name || "");
@@ -44,7 +86,13 @@ export default function BestSeller({ data }: any) {
   if (!data || data.length === 0) return null;
 
   return (
-    <section className="bg-[#FAF9FF] py-12 md:py-16">
+    <section
+      ref={sectionRef}
+      className="bg-[#FAF9FF] py-12 md:py-16"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={() => setIsPaused(true)}
+    >
       <div className="container">
         {/* Section header */}
         <motion.div
@@ -77,12 +125,16 @@ export default function BestSeller({ data }: any) {
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
+          ref={tabsContainerRef}
           className="flex gap-2 overflow-x-auto pb-3 mb-6 scrollbar-none"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {data?.map((item: any) => (
             <button
               key={item?._id}
+              ref={(el) => {
+                if (el) tabRefs.current.set(item._id, el);
+              }}
               className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 cursor-pointer whitespace-nowrap ${
                 toggleState === item?._id
                   ? "bg-[#8B35B8] text-white shadow-[0_4px_12px_rgba(0,0,0,0.3)]"

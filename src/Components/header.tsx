@@ -96,6 +96,7 @@ export default function Header() {
                   src="/assets/images/logo.png"
                   alt="Attri Industries"
                   className="h-8 w-auto object-contain"
+                  style={{ width: 'auto' }}
                   priority
                 />
               </Link>

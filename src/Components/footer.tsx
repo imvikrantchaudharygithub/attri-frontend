@@ -81,6 +81,7 @@ export default function Footer() {
                   src="/assets/images/logo.png"
                   alt="Attri Industries"
                   className="h-10 w-auto object-contain brightness-0 invert"
+                  style={{ width: 'auto' }}
                 />
               </Link>
               <p className="text-[#D1D5DB] text-sm leading-relaxed mb-5">
@@ -154,6 +155,7 @@ export default function Footer() {
                   src="/assets/images/logo.png"
                   alt="Attri Industries"
                   className="h-8 w-auto object-contain brightness-0 invert"
+                  style={{ width: 'auto' }}
                 />
               </Link>
               <p className="text-white/55 text-sm leading-relaxed">

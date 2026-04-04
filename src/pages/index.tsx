@@ -36,13 +36,19 @@ export default function Home({ homeData, error }: HomeProps) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   try {
     const homeData = await getData("/home-pagedata");
+    if (homeData?.data?.data?.categories) {
+      homeData.data.data.categories = [...homeData.data.data.categories].sort((a: any, b: any) =>
+        (b.name ?? "").localeCompare(a.name ?? "")
+      );
+    }
     return {
       props: {
         homeData: homeData?.data,
       },
+      revalidate: 300, // ISR: regenerate in background every 5 minutes
     };
   } catch (error) {
     console.error("Error fetching home data:", error);
@@ -51,6 +57,7 @@ export async function getServerSideProps() {
         homeData: null,
         error: "Failed to fetch home data",
       },
+      revalidate: 60,
     };
   }
 }

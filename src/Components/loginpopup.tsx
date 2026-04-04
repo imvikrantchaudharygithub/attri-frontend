@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useAppDispatch } from "@/hooks/hooks";
 import { closeLoginPopup } from "@/slices/popupSlice";
 import { useRouter } from "next/router";
@@ -19,6 +19,7 @@ export default function LoginPopup() {
   const dispatch = useAppDispatch();
   const [isLoginpopup, setIsLoginpopup] = useState(true);
   const [isOtpVerifying, setIsOtpVerifying] = useState(false);
+  const lastAutoSubmittedOtpRef = useRef<string>("");
   const router = useRouter();
   const [resendTimer, setResendTimer] = useState<number>(120);
   const [resendDisabled, setResendDisabled] = useState<boolean>(true);
@@ -114,6 +115,20 @@ export default function LoginPopup() {
     `${Math.floor(s / 60).toString().padStart(2, "0")}:${(s % 60).toString().padStart(2, "0")}`;
 
   const otpHasError = otpFormik.submitCount > 0 && otpFormik.values.otp.join("").length < 4;
+
+  // Auto-verify once all 4 digits are entered (no extra click)
+  useEffect(() => {
+    if (isLoginpopup) return; // only on OTP step
+    if (isOtpVerifying) return;
+
+    const otp = otpFormik.values.otp.join("");
+    if (otp.length !== 4) return;
+    if (!/^\d{4}$/.test(otp)) return;
+    if (lastAutoSubmittedOtpRef.current === otp) return;
+
+    lastAutoSubmittedOtpRef.current = otp;
+    otpFormik.submitForm();
+  }, [isLoginpopup, isOtpVerifying, otpFormik.values.otp]);
 
   return (
     <AuthModalShell

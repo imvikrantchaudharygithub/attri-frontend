@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
+import { Noto_Sans } from 'next/font/google';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Footer from "@/Components/footer";
 import Header from "@/Components/header";
+import HomeVideoPopup from "@/Components/HomeVideoPopup";
 import { RouteSkeleton } from "@/Components/RouteSkeletons";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
@@ -25,6 +27,13 @@ import '../styles/review.css';
 import '../styles/thankyou.css';
 import "../styles/teams.css";
 import '../styles/orderdetails.css';
+
+const notoSans = Noto_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-noto-sans',
+});
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -51,6 +60,8 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
+        <div className={notoSans.className}>
+        <HomeVideoPopup />
         <Toaster
           position="top-center"
           toastOptions={{
@@ -92,6 +103,7 @@ export default function App({ Component, pageProps }: AppProps) {
           </AnimatePresence>
         </main>
         <Footer />
+        </div>
       </PersistGate>
     </Provider>
   );

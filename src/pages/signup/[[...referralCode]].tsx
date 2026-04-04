@@ -1,7 +1,6 @@
 import Link from "next/link";
 import React from 'react';
-import Image from "next/image";
-import { SetStateAction, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 // import "@/styles/popup.css";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -32,6 +31,7 @@ export default function SignUp() {
     const [resendDisabled, setResendDisabled] = useState<boolean>(true);
 
     const [recommendedUsers,setRecommendedUsers] = useState<any[]>([]);
+    const [isMuted, setIsMuted] = useState(true); // start muted so autoplay works; user can unmute
 
     const otpFormik = useFormik({
         initialValues: {
@@ -249,18 +249,56 @@ export default function SignUp() {
             touched && error ? "border-red-400 bg-red-50" : "border-[#E5E7EB] focus:border-[#8B35B8] bg-white"
         }`;
 
+    const VIDEO_SRC = "https://res.cloudinary.com/doz4dnf0h/video/upload/v1773567061/attri-industries-v2_i7wyno.mp4";
+
     return (
-        <section className="bg-[#FAF9FF] min-h-screen py-8 md:py-12">
-            <div className="container">
-                <div className="max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.12)] flex flex-col md:flex-row bg-white">
-                    {/* Left image */}
-                    <div className="hidden md:block md:w-2/5 relative">
-                        <Image
-                            width={480}
-                            height={600}
-                            className="w-full h-full object-cover"
-                            src="https://res.cloudinary.com/doz4dnf0h/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1742919806/login_03_luywts.jpg"
-                            alt="Sign up"
+        <section className="bg-[#FAF9FF] min-h-screen py-6 md:py-12">
+            <div className="container max-w-4xl mx-auto">
+                {/* Mobile: video at top, full width (like brand signup pages) */}
+                <div className="md:hidden rounded-2xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.12)] mb-6">
+                    <div className="relative aspect-video w-full bg-black">
+                        <video
+                            autoPlay
+                            muted={isMuted}
+                            loop
+                            playsInline
+                            className="absolute inset-0 w-full h-full object-cover"
+                            src={VIDEO_SRC}
+                            aria-label="Attri Industries"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                        <div className="absolute bottom-4 left-4 right-14">
+                            <h3 className="text-white text-xl font-bold font-heading italic leading-tight">
+                                Join the Attri Family
+                            </h3>
+                            <p className="text-white/80 text-xs mt-0.5">Natural products. Real earnings.</p>
+                        </div>
+                        <button
+                            type="button"
+                            onClick={() => setIsMuted((m) => !m)}
+                            className="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/30 transition-colors cursor-pointer border border-white/30"
+                            aria-label={isMuted ? "Unmute video" : "Mute video"}
+                        >
+                            {isMuted ? (
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /></svg>
+                            ) : (
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
+                            )}
+                        </button>
+                    </div>
+                </div>
+
+                <div className="rounded-2xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.12)] flex flex-col md:flex-row bg-white">
+                    {/* Desktop: left video */}
+                    <div className="hidden md:block md:w-2/5 relative min-h-[400px]">
+                        <video
+                            autoPlay
+                            muted={isMuted}
+                            loop
+                            playsInline
+                            className="absolute inset-0 w-full h-full object-cover"
+                            src={VIDEO_SRC}
+                            aria-label="Attri Industries"
                         />
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#8B35B8]/20" />
                         <div className="absolute bottom-8 left-6 right-6">
@@ -269,6 +307,18 @@ export default function SignUp() {
                             </h3>
                             <p className="text-white/70 text-sm mt-1">Natural products. Real earnings.</p>
                         </div>
+                        <button
+                            type="button"
+                            onClick={() => setIsMuted((m) => !m)}
+                            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/30 transition-colors cursor-pointer border border-white/30"
+                            aria-label={isMuted ? "Unmute video" : "Mute video"}
+                        >
+                            {isMuted ? (
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /></svg>
+                            ) : (
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
+                            )}
+                        </button>
                     </div>
 
                     {/* Right form */}

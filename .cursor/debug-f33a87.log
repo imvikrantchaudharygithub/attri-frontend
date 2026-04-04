@@ -1,0 +1,22 @@
+{"sessionId":"f33a87","hypothesisId":"A","location":"HomeVideoPopup.tsx:effect-entry","message":"effect run","data":{"pathname":"/","windowDefined":true,"dismissed":true},"timestamp":1773569633762}
+{"sessionId":"f33a87","hypothesisId":"B","location":"HomeVideoPopup.tsx:early-exit-dismissed","message":"early exit already dismissed","data":{},"timestamp":1773569633762}
+{"sessionId":"f33a87","hypothesisId":"A","location":"HomeVideoPopup.tsx:effect-entry","message":"effect run","data":{"pathname":"/","windowDefined":true,"dismissed":true},"timestamp":1773569633769}
+{"sessionId":"f33a87","hypothesisId":"B","location":"HomeVideoPopup.tsx:early-exit-dismissed","message":"early exit already dismissed","data":{},"timestamp":1773569633770}
+{"sessionId":"f33a87","hypothesisId":"A","location":"HomeVideoPopup.tsx:effect-entry","message":"effect run","data":{"pathname":"/","windowDefined":true,"dismissed":true},"timestamp":1773569638231}
+{"sessionId":"f33a87","hypothesisId":"B","location":"HomeVideoPopup.tsx:early-exit-dismissed","message":"early exit already dismissed","data":{},"timestamp":1773569638232}
+{"sessionId":"f33a87","hypothesisId":"A","location":"HomeVideoPopup.tsx:effect-entry","message":"effect run","data":{"pathname":"/","windowDefined":true,"dismissed":true},"timestamp":1773569638261}
+{"sessionId":"f33a87","hypothesisId":"B","location":"HomeVideoPopup.tsx:early-exit-dismissed","message":"early exit already dismissed","data":{},"timestamp":1773569638261}
+{"sessionId":"f33a87","hypothesisId":"A","location":"HomeVideoPopup.tsx:effect-entry","message":"effect run","data":{"pathname":"/","windowDefined":true,"dismissed":true},"timestamp":1773569725695}
+{"sessionId":"f33a87","hypothesisId":"C","location":"HomeVideoPopup.tsx:cleanup","message":"effect cleanup","data":{"pathname":"/"},"timestamp":1773569725701}
+{"sessionId":"f33a87","hypothesisId":"C","location":"HomeVideoPopup.tsx:timer-scheduled","message":"startIdleTimer called","data":{"delayMs":4000},"timestamp":1773569725695}
+{"sessionId":"f33a87","hypothesisId":"A","location":"HomeVideoPopup.tsx:effect-entry","message":"effect run","data":{"pathname":"/","windowDefined":true,"dismissed":true},"timestamp":1773569725704}
+{"sessionId":"f33a87","hypothesisId":"C","location":"HomeVideoPopup.tsx:timer-scheduled","message":"startIdleTimer called","data":{"delayMs":4000},"timestamp":1773569725705}
+{"sessionId":"f33a87","hypothesisId":"A","location":"HomeVideoPopup.tsx:effect-entry","message":"effect run","data":{"pathname":"/","windowDefined":true,"dismissed":true},"timestamp":1773569729363}
+{"sessionId":"f33a87","hypothesisId":"C","location":"HomeVideoPopup.tsx:timer-scheduled","message":"startIdleTimer called","data":{"delayMs":4000},"timestamp":1773569729364}
+{"sessionId":"f33a87","hypothesisId":"C","location":"HomeVideoPopup.tsx:cleanup","message":"effect cleanup","data":{"pathname":"/"},"timestamp":1773569729391}
+{"sessionId":"f33a87","hypothesisId":"A","location":"HomeVideoPopup.tsx:effect-entry","message":"effect run","data":{"pathname":"/","windowDefined":true,"dismissed":true},"timestamp":1773569729394}
+{"sessionId":"f33a87","hypothesisId":"C","location":"HomeVideoPopup.tsx:timer-scheduled","message":"startIdleTimer called","data":{"delayMs":4000},"timestamp":1773569729394}
+{"sessionId":"f33a87","hypothesisId":"E","location":"HomeVideoPopup.tsx:timeout-fired","message":"4s timeout fired setIsVisible(true)","data":{},"timestamp":1773569733396}
+{"sessionId":"f33a87","hypothesisId":"C","location":"HomeVideoPopup.tsx:cleanup","message":"effect cleanup","data":{"pathname":"/"},"timestamp":1773569752914}
+{"sessionId":"f33a87","hypothesisId":"A","location":"HomeVideoPopup.tsx:effect-entry","message":"effect run","data":{"pathname":"/signup/[[...referralCode]]","windowDefined":true,"dismissed":true},"timestamp":1773569752914}
+{"sessionId":"f33a87","hypothesisId":"A","location":"HomeVideoPopup.tsx:early-exit-not-home","message":"early exit not home","data":{"pathname":"/signup/[[...referralCode]]"},"timestamp":1773569752915}
