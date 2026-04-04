@@ -8,6 +8,17 @@ const IDLE_DELAY_MS = 4000;
 const ACTIVITY_THROTTLE_MS = 400;
 const STORAGE_KEY = "attri_video_popup_dismissed";
 
+function readDismissed(): boolean {
+  if (typeof window === "undefined") return false;
+  if (localStorage.getItem(STORAGE_KEY) === "true") return true;
+  // Migrate older sessionStorage-only dismiss
+  if (sessionStorage.getItem(STORAGE_KEY) === "true") {
+    localStorage.setItem(STORAGE_KEY, "true");
+    return true;
+  }
+  return false;
+}
+
 export default function HomeVideoPopup() {
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
@@ -19,7 +30,7 @@ export default function HomeVideoPopup() {
   const dismiss = useCallback(() => {
     setIsVisible(false);
     if (typeof window !== "undefined") {
-      sessionStorage.setItem(STORAGE_KEY, "true");
+      localStorage.setItem(STORAGE_KEY, "true");
     }
   }, []);
 
@@ -36,7 +47,16 @@ export default function HomeVideoPopup() {
         clearTimeout(idleTimerRef.current);
         idleTimerRef.current = null;
       }
-      hasShownRef.current = false;
+      // Allow popup to schedule again on a future home visit if user did not dismiss
+      if (!readDismissed()) {
+        hasShownRef.current = false;
+      }
+      return;
+    }
+
+    // User closed the popup before — do not show again (survives route changes & new visits)
+    if (readDismissed()) {
+      hasShownRef.current = true;
       return;
     }
 
