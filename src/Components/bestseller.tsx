@@ -34,10 +34,14 @@ export default function BestSeller({ data }: any) {
     const containerRect = container.getBoundingClientRect();
     const buttonRect = button.getBoundingClientRect();
 
-    // Check if button is outside visible area of the container
-    if (buttonRect.left < containerRect.left || buttonRect.right > containerRect.right) {
-      button.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
-    }
+    // Scroll only the horizontal tabs container — never the page
+    const buttonCenter = buttonRect.left + buttonRect.width / 2;
+    const containerCenter = containerRect.left + containerRect.width / 2;
+    const scrollOffset = buttonCenter - containerCenter;
+    container.scrollTo({
+      left: container.scrollLeft + scrollOffset,
+      behavior: "smooth",
+    });
   };
 
   // Auto-cycle categories every 4 seconds
