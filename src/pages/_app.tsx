@@ -4,7 +4,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Footer from "@/Components/footer";
 import Header from "@/Components/header";
-import HomeVideoPopup from "@/Components/HomeVideoPopup";
 import { RouteSkeleton } from "@/Components/RouteSkeletons";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
@@ -61,7 +60,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <div className={notoSans.className}>
-        <HomeVideoPopup />
+        {/* <HomeVideoPopup /> */}
         <Toaster
           position="top-center"
           toastOptions={{
