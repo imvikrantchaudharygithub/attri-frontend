@@ -161,8 +161,11 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
       props: { initialProduct: product, slug, seo: JSON.parse(JSON.stringify(seo)) },
     };
-  } catch {
-    // Never 500 — let the client useEffect retry the fetch.
+  } catch (err: any) {
+    // A real 404 from the API means the product doesn't exist → return a proper
+    // 404 (avoids soft-404s that Google penalises).
+    if (err?.response?.status === 404) return { notFound: true };
+    // Other errors (API down, network) → render the shell and let the client retry.
     return { props: { initialProduct: null, slug } };
   }
 };
