@@ -3,7 +3,6 @@ import Image from "next/image";
 import { SetStateAction, useEffect, useState } from "react";
 import { getData } from "@/services/apiServices";
 import { useSelector } from "react-redux";
-import Seo from "@/Components/Seo";
 export default function Teams() {
     const [toggleState, setToggleState] = useState(1);
     const [teamData, setTeamData] = useState<any>(null);
@@ -29,7 +28,6 @@ export default function Teams() {
 	}, []);
 	return (
         <section className="bg-[#FAF9FF] min-h-screen py-8">
-            <Seo title="My Teams" path="/teams" noindex />
             <div className="container mx-auto px-4 max-w-2xl">
                 <h1 className="text-2xl font-bold text-[#8B35B8] font-heading italic mb-6">My Teams</h1>
 

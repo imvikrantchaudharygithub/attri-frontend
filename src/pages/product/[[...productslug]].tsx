@@ -8,8 +8,6 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { getData, postData } from "@/services/apiServices";
 import toast from "react-hot-toast";
-import Seo from "@/Components/Seo";
-import JsonLd from "@/Components/seo/JsonLd";
 import { productSchema, breadcrumbSchema, faqSchema } from "@/lib/seo/schema";
 import type { GetServerSideProps } from "next";
 import { setCartCount } from "@/slices/loginUserSlice";
@@ -98,26 +96,6 @@ export default function ProductDetails({ initialProduct, slug }: ProductPageProp
 
   return (
     <>
-      {productData?.name && (
-        <>
-          <Seo
-            type="product"
-            title={productData.name}
-            description={(productData?.description || "").toString().slice(0, 300) || undefined}
-            path={`/product/${slug}`}
-            image={Array.isArray(productData?.images) ? productData.images[0] : undefined}
-          />
-          <JsonLd data={productSchema(productData, slug)} />
-          <JsonLd
-            data={breadcrumbSchema([
-              { name: "Home", url: "/" },
-              { name: productData?.category?.name || "Shop", url: "/category" },
-              { name: productData.name, url: `/product/${slug}` },
-            ])}
-          />
-          <JsonLd data={faqSchema(productData?.faqs || [])} />
-        </>
-      )}
       {/* Product main — single Add to Bag only (no duplicate on mobile) */}
       <section className="pdp-product-main bg-[#FAF9FF] py-6 md:py-10" data-page="product-detail">
         <div className="container">
@@ -164,7 +142,25 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const res: any = await getData(`/get-product/${slug}`);
     const product = res?.data?.product ?? null;
     if (!product) return { notFound: true };
-    return { props: { initialProduct: product, slug } };
+    const seo = {
+      type: "product",
+      title: product.name,
+      description: (product?.description || "").toString().slice(0, 300),
+      path: `/product/${slug}`,
+      image: Array.isArray(product?.images) ? product.images[0] : undefined,
+      jsonLd: [
+        productSchema(product, slug),
+        breadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: product?.category?.name || "Shop", url: "/category" },
+          { name: product.name, url: `/product/${slug}` },
+        ]),
+        faqSchema(product?.faqs || []),
+      ],
+    };
+    return {
+      props: { initialProduct: product, slug, seo: JSON.parse(JSON.stringify(seo)) },
+    };
   } catch {
     // Never 500 — let the client useEffect retry the fetch.
     return { props: { initialProduct: null, slug } };

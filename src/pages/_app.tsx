@@ -5,12 +5,15 @@ import 'slick-carousel/slick/slick-theme.css';
 import Footer from "@/Components/footer";
 import Header from "@/Components/header";
 import { RouteSkeleton } from "@/Components/RouteSkeletons";
-import Head from "next/head";
-import JsonLd from "@/Components/seo/JsonLd";
+import SeoHead from "@/Components/seo/SeoHead";
 import { organizationSchema, websiteSchema } from "@/lib/seo/schema";
 
-// Private / utility routes kept out of the search index. Robots tag is applied
-// centrally here so it covers every render branch of these pages.
+// All SEO <head> tags are rendered here in _app, OUTSIDE PersistGate. PersistGate
+// renders null on the server (it only rehydrates after mount on the client), so
+// anything inside it is NOT in the server-rendered HTML. Keeping SEO out here is
+// what makes titles/meta/JSON-LD reach crawlers, social scrapers and AI bots.
+
+// Private / utility routes kept out of the search index.
 const NOINDEX_PREFIXES = [
   "/cart",
   "/myaccount",
@@ -20,7 +23,42 @@ const NOINDEX_PREFIXES = [
   "/thankyou",
   "/signup",
   "/search",
+  "/teams",
+  "/offers",
 ];
+
+type PageSeo = {
+  title?: string;
+  description?: string;
+  path?: string;
+  image?: string;
+  type?: "website" | "product" | "article";
+  noindex?: boolean;
+  jsonLd?: any[];
+};
+
+// SEO for static pages that have no data fetcher. Data-driven pages (home,
+// category, product) supply `pageProps.seo` instead. Keyed by router.pathname.
+const PAGE_SEO: Record<string, PageSeo> = {
+  "/": { path: "/" },
+  "/aboutus": {
+    title: "About Attri Industries",
+    description:
+      "Learn about Attri Industries — our mission for 100% natural, Ayurvedic personal care and the direct-selling opportunity we offer across India.",
+    path: "/aboutus",
+  },
+  "/vision": {
+    title: "Our Vision",
+    description:
+      "Attri Industries' vision: bring pure, affordable Ayurvedic wellness to every Indian home while creating a real earning opportunity for distributors.",
+    path: "/vision",
+  },
+  "/privacypolicy": {
+    title: "Privacy Policy",
+    description: "How Attri Industries collects, uses and protects your personal information.",
+    path: "/privacypolicy",
+  },
+};
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { Provider } from 'react-redux';
@@ -52,7 +90,10 @@ const notoSans = Noto_Sans({
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  const isNoindex = NOINDEX_PREFIXES.some((p) => router.pathname.startsWith(p));
+  const pageSeo: PageSeo = (pageProps && pageProps.seo) || PAGE_SEO[router.pathname] || {};
+  const routeNoindex = NOINDEX_PREFIXES.some((p) => router.pathname.startsWith(p));
+  const noindex = routeNoindex || !!pageSeo.noindex;
+  const seoPath = pageSeo.path || (router.asPath || "/").split("?")[0];
   const [routeSkeleton, setRouteSkeleton] = useState<'home' | 'category' | null>(null);
 
   useEffect(() => {
@@ -75,13 +116,19 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <Provider store={store}>
-      <JsonLd data={organizationSchema()} />
-      <JsonLd data={websiteSchema()} />
-      {isNoindex && (
-        <Head>
-          <meta name="robots" content="noindex, nofollow" />
-        </Head>
-      )}
+      <SeoHead
+        title={pageSeo.title}
+        description={pageSeo.description}
+        path={seoPath}
+        image={pageSeo.image}
+        type={pageSeo.type || "website"}
+        noindex={noindex}
+        jsonLd={[
+          organizationSchema(),
+          websiteSchema(),
+          ...(noindex ? [] : pageSeo.jsonLd || []),
+        ]}
+      />
       <PersistGate loading={null} persistor={persistor}>
         <div className={notoSans.className}>
         {/* <HomeVideoPopup /> */}

@@ -6,8 +6,6 @@ import { useRouter } from "next/router";
 import { getData } from "@/services/apiServices";
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer, staggerItem, viewportOnce } from "@/utils/animations";
-import Seo from "@/Components/Seo";
-import JsonLd from "@/Components/seo/JsonLd";
 import { breadcrumbSchema } from "@/lib/seo/schema";
 
 function ProductGridSkeleton() {
@@ -54,24 +52,10 @@ export default function ProductListing({
       )
     : null;
 
-  const catName = currentCategory?.name || "Shop";
-  const catPath = slug ? `/category/${slug}` : "/category";
-
   // —— Category index: /category ———
   if (!isDetailView) {
     return (
       <>
-        <Seo
-          title="Shop All Products"
-          description="Shop all Attri Industries products — 100% natural, Ayurvedic, paraben-free personal care, wellness and kitchen masale. Genuine products, pan-India delivery."
-          path="/category"
-        />
-        <JsonLd
-          data={breadcrumbSchema([
-            { name: "Home", url: "/" },
-            { name: "Shop", url: "/category" },
-          ])}
-        />
         <div className="relative overflow-hidden bg-[#FAF9FF] border-b border-[#E5E7EB]">
           <div className="container pt-10 pb-8 sm:pt-12 sm:pb-10 md:pt-16 md:pb-14">
             <motion.div
@@ -181,7 +165,6 @@ export default function ProductListing({
   if (!currentCategory) {
     return (
       <>
-        <Seo title="Category not found" path={catPath} noindex />
         <div className="relative overflow-hidden bg-[#3D3C3C] h-40 md:h-60 flex items-center justify-center">
           <div className="absolute inset-0 bg-gradient-to-r from-[#3D3C3C]/90 to-[#3D3C3C]/50" />
           <div className="container relative text-center py-12">
@@ -220,17 +203,6 @@ export default function ProductListing({
 
   return (
     <>
-      <Seo
-        title={`${catName} — Ayurvedic Products`}
-        description={`Shop ${catName.toLowerCase()} from Attri Industries — 100% natural, Ayurvedic, paraben-free. Genuine products, pan-India delivery.`}
-        path={catPath}
-      />
-      <JsonLd
-        data={breadcrumbSchema([
-          { name: "Home", url: "/" },
-          { name: catName, url: catPath },
-        ])}
-      />
       {/* Category banner */}
       <div className="relative overflow-hidden bg-[#3D3C3C] h-40 md:h-60">
         {categoryData?.banner || categoryData?.image ? (
@@ -345,10 +317,52 @@ export async function getStaticProps(context: any) {
     const paramCategory = context.params?.category;
     const initialSlug =
       Array.isArray(paramCategory) && paramCategory.length === 1 ? paramCategory[0] : null;
+
+    const activeCat = initialSlug
+      ? categories.find(
+          (c: any) =>
+            (c?.slug && String(c.slug).toLowerCase() === String(initialSlug).toLowerCase()) ||
+            c?._id === initialSlug
+        )
+      : null;
+
+    let seo: any;
+    if (!initialSlug) {
+      seo = {
+        title: "Shop All Products",
+        description:
+          "Shop all Attri Industries products — 100% natural, Ayurvedic, paraben-free personal care, wellness and kitchen masale. Genuine products, pan-India delivery.",
+        path: "/category",
+        jsonLd: [
+          breadcrumbSchema([
+            { name: "Home", url: "/" },
+            { name: "Shop", url: "/category" },
+          ]),
+        ],
+      };
+    } else if (activeCat) {
+      const name = activeCat.name || "Shop";
+      seo = {
+        title: `${name} — Ayurvedic Products`,
+        description: `Shop ${String(name).toLowerCase()} from Attri Industries — 100% natural, Ayurvedic, paraben-free. Genuine products, pan-India delivery.`,
+        path: `/category/${initialSlug}`,
+        jsonLd: [
+          breadcrumbSchema([
+            { name: "Home", url: "/" },
+            { name, url: `/category/${initialSlug}` },
+          ]),
+        ],
+      };
+    } else {
+      // Unknown slug → in-page "not found" view; keep it out of the index.
+      seo = { title: "Category not found", path: `/category/${initialSlug}`, noindex: true };
+    }
+
     return {
       props: {
         categories,
         initialSlug,
+        seo: JSON.parse(JSON.stringify(seo)),
       },
       revalidate: 300, // ISR: regenerate in background every 5 minutes
     };
