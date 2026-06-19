@@ -5,8 +5,22 @@ import 'slick-carousel/slick/slick-theme.css';
 import Footer from "@/Components/footer";
 import Header from "@/Components/header";
 import { RouteSkeleton } from "@/Components/RouteSkeletons";
+import Head from "next/head";
 import JsonLd from "@/Components/seo/JsonLd";
 import { organizationSchema, websiteSchema } from "@/lib/seo/schema";
+
+// Private / utility routes kept out of the search index. Robots tag is applied
+// centrally here so it covers every render branch of these pages.
+const NOINDEX_PREFIXES = [
+  "/cart",
+  "/myaccount",
+  "/myaddress",
+  "/order", // also covers /orderdetail
+  "/withdraw",
+  "/thankyou",
+  "/signup",
+  "/search",
+];
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { Provider } from 'react-redux';
@@ -38,6 +52,7 @@ const notoSans = Noto_Sans({
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  const isNoindex = NOINDEX_PREFIXES.some((p) => router.pathname.startsWith(p));
   const [routeSkeleton, setRouteSkeleton] = useState<'home' | 'category' | null>(null);
 
   useEffect(() => {
@@ -62,6 +77,11 @@ export default function App({ Component, pageProps }: AppProps) {
     <Provider store={store}>
       <JsonLd data={organizationSchema()} />
       <JsonLd data={websiteSchema()} />
+      {isNoindex && (
+        <Head>
+          <meta name="robots" content="noindex, nofollow" />
+        </Head>
+      )}
       <PersistGate loading={null} persistor={persistor}>
         <div className={notoSans.className}>
         {/* <HomeVideoPopup /> */}

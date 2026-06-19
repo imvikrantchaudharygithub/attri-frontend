@@ -7,6 +7,7 @@ import Review from "@/Components/Review";
 import HaveFun from "@/Components/HaveFun";
 import About from "@/Components/About";
 import { getData } from "@/services/apiServices";
+import Seo from "@/Components/Seo";
 
 interface HomeProps {
   homeData: any;
@@ -20,6 +21,7 @@ export default function Home({ homeData, error }: HomeProps) {
 
   return (
     <>
+      <Seo path="/" />
       <HomeBanner bannerdata={homeData?.data?.banners} />
       <Nutrition data={homeData?.data?.sectionsData?.[0]} />
       <BestSeller data={homeData?.data?.categories} />

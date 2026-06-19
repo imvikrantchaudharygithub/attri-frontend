@@ -4,6 +4,7 @@ import AccountSideBar from "@/Components/accountsidebar";
 import { getData } from "@/services/apiServices";
 import toast from "react-hot-toast";
 import { useAppSelector } from "@/hooks/hooks";
+import Seo from "@/Components/Seo";
 import { useRouter } from "next/router";
 
 const COUPON_GRADIENTS = [
@@ -80,6 +81,7 @@ export default function Offers() {
 
   return (
     <section className="account-box min-h-screen" style={{ background: "var(--color-bg)" }}>
+      <Seo title="Offers & Coupons" path="/offers" noindex />
       <div className="container">
         <div className="account-main d-flex padding-tb">
           <div className="account-left hidden md:block" style={{ background: "transparent" }}>

@@ -1,3 +1,5 @@
+import Seo from "@/Components/Seo";
+
 export default function PrivacyPolicy() {
     const sections = [
         {
@@ -56,6 +58,11 @@ export default function PrivacyPolicy() {
 
     return (
         <div className="bg-[#FAF9FF] min-h-screen">
+            <Seo
+              title="Privacy Policy"
+              description="How Attri Industries collects, uses and protects your personal information."
+              path="/privacypolicy"
+            />
             {/* Hero */}
             <div className="bg-[#8B35B8] py-14 md:py-20 text-center px-4">
                 <p className="text-[#D4A847] text-xs font-semibold uppercase tracking-widest mb-3">Legal</p>

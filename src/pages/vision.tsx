@@ -1,8 +1,14 @@
 import Link from "next/link";
+import Seo from "@/Components/Seo";
 
 export default function Vision() {
     return (
         <div className="bg-[#FAF9FF] min-h-screen">
+            <Seo
+              title="Our Vision"
+              description="Attri Industries' vision: bring pure, affordable Ayurvedic wellness to every Indian home while creating a real earning opportunity for distributors."
+              path="/vision"
+            />
             {/* Hero */}
             <div className="bg-[#8B35B8] py-16 md:py-24 text-center px-4">
                 <p className="text-[#D4A847] text-sm font-semibold uppercase tracking-widest mb-3">Our Purpose</p>
