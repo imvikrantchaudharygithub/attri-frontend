@@ -8,6 +8,10 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { getData, postData } from "@/services/apiServices";
 import toast from "react-hot-toast";
+import Seo from "@/Components/Seo";
+import JsonLd from "@/Components/seo/JsonLd";
+import { productSchema, breadcrumbSchema, faqSchema } from "@/lib/seo/schema";
+import type { GetServerSideProps } from "next";
 import { setCartCount } from "@/slices/loginUserSlice";
 import { addToCart } from "@/slices/cartSlice";
 import { useSelector } from "react-redux";
@@ -15,14 +19,19 @@ import { RootState } from "@/slices/rootReduces";
 import { useAppSelector } from "@/store/hooks";
 import { useDispatch } from "react-redux";
 
-export default function ProductDetails() {
+interface ProductPageProps {
+  initialProduct: any | null;
+  slug: string;
+}
+
+export default function ProductDetails({ initialProduct, slug }: ProductPageProps) {
   const router = useRouter();
   const dispatch = useDispatch();
   const token = useSelector((state: RootState) => state?.token?.token);
   const user = useAppSelector((state: any) => state.user);
   const cartCount = useSelector((state: RootState) => state?.cartCount?.count);
   const { productslug } = router.query;
-  const [productData, setProductData] = useState<any>({});
+  const [productData, setProductData] = useState<any>(initialProduct || {});
   const [isLoading, setIsLoading] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
 
@@ -63,7 +72,9 @@ export default function ProductDetails() {
   };
 
   useEffect(() => {
-    if (Array.isArray(productslug) && productslug.length > 0) {
+    // Server already provided the product (getServerSideProps). Only fetch on the
+    // client as a fallback when the server fetch failed.
+    if (!initialProduct && Array.isArray(productslug) && productslug.length > 0) {
       fetchProductData();
     }
   }, [productslug]);
@@ -87,6 +98,26 @@ export default function ProductDetails() {
 
   return (
     <>
+      {productData?.name && (
+        <>
+          <Seo
+            type="product"
+            title={productData.name}
+            description={(productData?.description || "").toString().slice(0, 300) || undefined}
+            path={`/product/${slug}`}
+            image={Array.isArray(productData?.images) ? productData.images[0] : undefined}
+          />
+          <JsonLd data={productSchema(productData, slug)} />
+          <JsonLd
+            data={breadcrumbSchema([
+              { name: "Home", url: "/" },
+              { name: productData?.category?.name || "Shop", url: "/category" },
+              { name: productData.name, url: `/product/${slug}` },
+            ])}
+          />
+          <JsonLd data={faqSchema(productData?.faqs || [])} />
+        </>
+      )}
       {/* Product main — single Add to Bag only (no duplicate on mobile) */}
       <section className="pdp-product-main bg-[#FAF9FF] py-6 md:py-10" data-page="product-detail">
         <div className="container">
@@ -124,3 +155,18 @@ export default function ProductDetails() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const param = ctx.params?.productslug;
+  const slug = Array.isArray(param) ? param[0] : ((param as string) || "");
+  if (!slug) return { notFound: true };
+  try {
+    const res: any = await getData(`/get-product/${slug}`);
+    const product = res?.data?.product ?? null;
+    if (!product) return { notFound: true };
+    return { props: { initialProduct: product, slug } };
+  } catch {
+    // Never 500 — let the client useEffect retry the fetch.
+    return { props: { initialProduct: null, slug } };
+  }
+};

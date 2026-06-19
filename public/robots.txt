@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+Disallow: /cart
+Disallow: /myaccount
+Disallow: /myaddress
+Disallow: /order
+Disallow: /orderdetail
+Disallow: /withdraw
+Disallow: /thankyou
+Disallow: /signup
+Disallow: /search
+Disallow: /teams
+Disallow: /offers
+Disallow: /api/
+
+Sitemap: https://attriindustries.com/sitemap.xml

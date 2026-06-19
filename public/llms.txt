@@ -1,0 +1,17 @@
+# Attri Industries
+
+> Attri Industries is an Indian direct-selling company making 100% natural, Ayurvedic personal care, wellness and kitchen products — onion shampoo & hair oil, herbal face wash, glutathione cream, herbal toothpaste, Tulsi drops, sanitary pads, and pure kitchen masale. Paraben-free, made in India. We also offer a referral-based earning opportunity for distributors across India.
+
+## Shop by category
+- [Hair care](https://attriindustries.com/category/hair): Onion shampoo, hair oils and natural hair care.
+- [Skin care](https://attriindustries.com/category/attri-skin): Face washes, glutathione glow cream and Ayurvedic skin care.
+- [Wellness](https://attriindustries.com/category/wellness): Supplements, herbal toothpaste, Tulsi drops and sanitary care.
+- [Kitchen Masale](https://attriindustries.com/category/kitchen-masale): Pure spice blends and powders.
+- [All products](https://attriindustries.com/category)
+
+## About
+- [About Attri Industries](https://attriindustries.com/aboutus)
+- [Our vision](https://attriindustries.com/vision)
+
+## Policies
+- [Privacy policy](https://attriindustries.com/privacypolicy)
