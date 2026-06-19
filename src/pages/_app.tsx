@@ -5,6 +5,8 @@ import 'slick-carousel/slick/slick-theme.css';
 import Footer from "@/Components/footer";
 import Header from "@/Components/header";
 import { RouteSkeleton } from "@/Components/RouteSkeletons";
+import JsonLd from "@/Components/seo/JsonLd";
+import { organizationSchema, websiteSchema } from "@/lib/seo/schema";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { Provider } from 'react-redux';
@@ -58,6 +60,8 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <Provider store={store}>
+      <JsonLd data={organizationSchema()} />
+      <JsonLd data={websiteSchema()} />
       <PersistGate loading={null} persistor={persistor}>
         <div className={notoSans.className}>
         {/* <HomeVideoPopup /> */}
