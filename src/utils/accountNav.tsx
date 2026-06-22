@@ -7,7 +7,7 @@ export const accountNavLinks = [
   { href: "/teams", label: "Teams" },
   { href: "/myaddress", label: "Addresses" },
   { href: "/offers", label: "Offers & Coupons" },
-  { href: "/", label: "Help Center" },
+  { href: "/help-center", label: "Help Center" },
 ] as const;
 
 const iconClass = "h-5 w-5 shrink-0";
