@@ -148,7 +148,7 @@ export default function Footer() {
           <div className="md:hidden">
             {/* Brand */}
             <div className="mb-6 pb-6 border-b border-white/10">
-              <Link href="/" className="block mb-3">
+              <Link href="/" className="block mb-3 pt-4">
                 <Image
                   width={100}
                   height={33}

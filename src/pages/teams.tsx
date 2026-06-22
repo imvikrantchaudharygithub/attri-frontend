@@ -26,10 +26,46 @@ export default function Teams() {
 	useEffect(() => {
 		getTeamData();
 	}, []);
+
+	// Total downline across all 7 levels — derived from data already fetched (no extra call).
+	const levels = teamData?.user?.referralsByLevel || [];
+	const totalTeam = levels.reduce((sum: number, lvl: any) => sum + (lvl?.referrals?.length || 0), 0);
+	const directCount = levels.find((l: any) => l?.level === 1)?.referrals?.length || 0;
+	const activeLevels = levels.filter((l: any) => (l?.referrals?.length || 0) > 0).length;
+
 	return (
         <section className="bg-[#FAF9FF] min-h-screen py-8">
             <div className="container mx-auto px-4 max-w-2xl">
                 <h1 className="text-2xl font-bold text-[#8B35B8] font-heading italic mb-6">My Teams</h1>
+
+                {/* Total team summary — always visible above the tabs */}
+                {isLoading ? (
+                    <div className="h-[88px] rounded-2xl skeleton mb-6" />
+                ) : (
+                    <div className="relative overflow-hidden rounded-2xl mb-6 p-5 bg-gradient-to-br from-[#8B35B8] to-[#5C1F82] shadow-[0_8px_24px_rgba(139,53,184,0.25)]">
+                        <div className="absolute -right-6 -top-8 w-28 h-28 rounded-full bg-white/10" />
+                        <div className="absolute right-10 -bottom-10 w-24 h-24 rounded-full bg-[#D4A847]/20" />
+                        <div className="relative flex items-center justify-between gap-4">
+                            <div>
+                                <p className="text-[11px] font-semibold uppercase tracking-wide text-white/70">Total Team Members</p>
+                                <div className="flex items-end gap-2 mt-1">
+                                    <span className="text-4xl font-extrabold text-white leading-none">{totalTeam}</span>
+                                    <span className="text-xs text-white/70 mb-0.5">across 7 levels</span>
+                                </div>
+                            </div>
+                            <div className="flex gap-2">
+                                <div className="text-center bg-white/15 backdrop-blur-sm rounded-xl px-3 py-2 min-w-[64px]">
+                                    <div className="text-lg font-bold text-white leading-none">{directCount}</div>
+                                    <div className="text-[10px] text-white/70 mt-1">Direct</div>
+                                </div>
+                                <div className="text-center bg-white/15 backdrop-blur-sm rounded-xl px-3 py-2 min-w-[64px]">
+                                    <div className="text-lg font-bold text-[#F2D98D] leading-none">{activeLevels}<span className="text-white/60 text-xs font-semibold">/7</span></div>
+                                    <div className="text-[10px] text-white/70 mt-1">Active Levels</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
 
                 {/* Tabs */}
                 <div className="flex bg-white rounded-xl p-1 shadow-card border border-[#E5E7EB] mb-6">

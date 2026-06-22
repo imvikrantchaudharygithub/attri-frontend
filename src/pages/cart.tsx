@@ -17,6 +17,9 @@ import { setCartCount } from "@/slices/loginUserSlice";
 import router from "next/router";
 import { openLoginPopup } from "@/slices/popupSlice";
 import { motion, AnimatePresence } from 'framer-motion';
+import RewardsBar from "@/Components/RewardsBar";
+import CartRecommendations from "@/Components/CartRecommendations";
+import { FREE_DELIVERY_THRESHOLD, FLAT_SHIPPING } from "@/lib/cartConfig";
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -377,7 +380,7 @@ const [orderdetails, setOrderDetails] = useState(() => ({
     ordertotal: usercartItems?.reduce((acc:any, item:any) => acc + item?.product?.price * item?.quantity, 0) || 0,
     discount: usercartItems?.reduce((acc:any, item:any) => acc + item?.product?.mrp * item?.quantity, 0) || 0,
     tax: usercartItems?.reduce((acc:any, item:any) => acc + item?.product?.tax * item?.quantity, 0) || 0,
-    shipping: (usercartItems?.reduce((acc:any, item:any) => acc + item?.product?.price * item?.quantity, 0) || 0) > 699 ? 0 : 55,
+    shipping: (usercartItems?.reduce((acc:any, item:any) => acc + item?.product?.price * item?.quantity, 0) || 0) >= FREE_DELIVERY_THRESHOLD ? 0 : FLAT_SHIPPING,
     cashback: 0,
     couponDiscount: 0,
     grandtotal: 0
@@ -386,7 +389,7 @@ const [orderdetails, setOrderDetails] = useState(() => ({
 // Update whenever usercartItems changes
 useEffect(() => {
     const newOrdertotal = usercartItems?.reduce((acc:any, item:any) => acc + item?.product?.price * item?.quantity, 0) || 0;
-    const newShipping = newOrdertotal > 699 ? 0 : 55;
+    const newShipping = newOrdertotal >= FREE_DELIVERY_THRESHOLD ? 0 : FLAT_SHIPPING;
     
     setOrderDetails(prev => ({
        cashback: appliedCashback,
@@ -475,7 +478,7 @@ useEffect(() => {
     })
 }
 const shareWhatsapp = () => {
-  const text = `🚀 I'm using *Attri Products* and *Earning Money* from it — and I'm LOVING it! 💸✨ \n\nWanna try it too? Use my referral code 👉 *"${userData?.referral_code}"* \n\n  Join here 🔗 https://www.attriindustries.com/signup/${userData?.referral_code}   \n\n  -Let's grow & earn together! 💼💰🔥`;
+  const text = `🚀 I'm using *Attri Products* and *Earning Money* from it — and I'm LOVING it! 💸✨ \n\nJoin with my referral code 👉 *"${userData?.referral_code}"* and get *₹200 cashback* on your first order! 🎁 \n\n  Join here 🔗 https://www.attriindustries.com/signup/${userData?.referral_code}   \n\n  -Let's grow & earn together! 💼💰🔥`;
   window.open(`https://wa.me/?text=${text}`, '_blank');
 }
 
@@ -809,6 +812,12 @@ if(paymentProcessingState){
                 <h1 className="text-2xl md:text-3xl font-bold text-[#8B35B8] font-heading italic mb-6">My Cart</h1>
                 <div className="flex flex-col lg:flex-row gap-6">
                     <div className="flex-1 min-w-0">
+                        {usercartItems?.length > 0 && (
+                          <>
+                            <RewardsBar orderTotal={orderdetails?.ordertotal || 0} />
+                            <CartRecommendations cartItems={usercartItems} onAdded={getusercart} />
+                          </>
+                        )}
                         {isCartLoading ? (
                           <div className="space-y-4">
                             {[1,2].map(i => (
@@ -1160,11 +1169,11 @@ if(paymentProcessingState){
                   <div className="flex flex-col items-center text-center">
                     <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-green-50 px-3 py-1 text-green-700">
                       <span className="h-2 w-2 rounded-full bg-green-500"></span>
-                      <span className="text-xs font-semibold">Earn ₹10</span>
+                      <span className="text-xs font-semibold">Earn ₹10 cash</span>
                     </div>
                     <div className="text-lg font-semibold text-gray-800">No cashback available yet</div>
                     <p className="mt-2 max-w-md text-sm text-gray-600">
-                      Refer a friend and get <span className="font-semibold text-green-700">₹10 cashback</span> when they sign up using your referral.
+                      Refer a friend — you get <span className="font-semibold text-green-700">₹10 in your wallet</span> and they get <span className="font-semibold text-[#8B35B8]">₹200 cashback</span> when they join with your code.
                     </p>
                     <div className="mt-5 flex items-center gap-3">
                       <button

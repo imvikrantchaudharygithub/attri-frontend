@@ -273,6 +273,11 @@ export default function SignUp() {
                                 <h1 className="text-2xl font-bold text-[#8B35B8] font-heading italic mb-1">Create Account</h1>
                                 <p className="text-[#6B7280] text-sm mb-5">Fill in your details to get started</p>
 
+                                <div className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#8B35B8] to-[#5C1F82] text-white px-3.5 py-2.5 mb-4">
+                                    <span className="text-base" aria-hidden>🎉</span>
+                                    <p className="text-xs font-semibold">Join with a referral code and get <span className="text-[#F2D98D]">₹200 cashback</span> on your first order!</p>
+                                </div>
+
                                 {/* Referral status */}
                                 {(refrralby || signupFormik.values.referralCode) && (
                                     <div className={`flex items-center gap-2 text-xs font-medium px-3 py-2 rounded-xl mb-4 ${refrralby ? 'bg-[#f0fdf4] text-[#16A34A] border border-[#bbf7d0]' : 'bg-red-50 text-red-500 border border-red-200'}`}>
