@@ -4,7 +4,6 @@ import { getToken } from '@/utils/auth';
 /** Set in .env.local (dev) or .env.production (deploy). Never hardcode — breaks prod or local. */
 const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL || "https://api.attriindustries.com/api",
-
   // withCredentials: true,
   xsrfHeaderName: 'X-XSRF-TOKEN',
   xsrfCookieName: 'XSRF-TOKEN',
@@ -29,6 +28,27 @@ apiClient.interceptors.request.use(
     return config;
   },
   (error) => {
+    return Promise.reject(error);
+  }
+);
+
+/**
+ * A password change bumps the user's tokenVersion server-side, which kills every
+ * token minted before it. Those requests come back 401 "Session expired", and
+ * without this the app would sit on a dead token showing broken pages.
+ *
+ * Scoped to that specific message on purpose: a wrong password at login is also
+ * a 401, and clearing state there would be wrong.
+ */
+apiClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const status = error?.response?.status;
+    const message = error?.response?.data?.message ?? '';
+
+    if (status === 401 && /session expired/i.test(message) && typeof window !== 'undefined') {
+      localStorage.removeItem('token');
+    }
     return Promise.reject(error);
   }
 );
