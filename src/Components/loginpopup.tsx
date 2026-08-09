@@ -15,17 +15,19 @@ import AuthHeader from "@/Components/auth/AuthHeader";
 import AuthField from "@/Components/auth/AuthField";
 import PasswordField from "@/Components/auth/PasswordField";
 import OtpInputGroup from "@/Components/auth/OtpInputGroup";
+import SetPasswordForm from "@/Components/auth/SetPasswordForm";
 
 /**
- * password   — the default. Phone + password on one step.
- * otp-phone  — the fallback: collect the number to text a code to.
- * otp-code   — enter that code.
+ * password     — the default. Phone + password on one step.
+ * otp-phone    — the fallback: collect the number to text a code to.
+ * otp-code     — enter that code.
+ * set-password — the soft gate shown to a legacy user after an OTP login.
  *
  * Deliberately NOT a "check whether this phone has a password" step: an
  * endpoint answering that question is an account-enumeration oracle, letting
  * anyone walk the 10-digit space and map which numbers are Attri customers.
  */
-type Mode = "password" | "otp-phone" | "otp-code";
+type Mode = "password" | "otp-phone" | "otp-code" | "set-password";
 
 const RESEND_SECONDS = 120;
 
@@ -36,6 +38,7 @@ export default function LoginPopup() {
   const [mode, setMode] = useState<Mode>("password");
   const [authError, setAuthError] = useState<string>("");
   const [isOtpVerifying, setIsOtpVerifying] = useState(false);
+  const [skipsRemaining, setSkipsRemaining] = useState<number>(0);
   const [resendTimer, setResendTimer] = useState<number>(RESEND_SECONDS);
   const lastAutoSubmittedOtpRef = useRef<string>("");
 
@@ -44,7 +47,9 @@ export default function LoginPopup() {
     dispatch(closeLoginPopup());
   };
 
-  const finishLogin = (token: string, user: any, phone: string) => {
+  /** Stores the session without closing the modal — the soft gate needs the
+   *  token in place before it can call /auth/password/set. */
+  const applySession = (token: string, user: any, phone: string) => {
     dispatch(setReduxToken(token));
     dispatch(
       setUser({
@@ -54,6 +59,10 @@ export default function LoginPopup() {
         phone,
       })
     );
+  };
+
+  const finishLogin = (token: string, user: any, phone: string) => {
+    applySession(token, user, phone);
     dispatch(closeLoginPopup());
   };
 
@@ -127,7 +136,16 @@ export default function LoginPopup() {
         .then((res: any) => {
           toast.success(res?.data?.message);
           otpFormik.resetForm();
-          finishLogin(res?.data?.token, res?.data?.user, otpPhoneFormik.values.mobileNumber);
+          // Apply the session first: the gate authenticates with this token,
+          // which is what lets it set a password without spending a second SMS.
+          applySession(res?.data?.token, res?.data?.user, otpPhoneFormik.values.mobileNumber);
+
+          if (res?.data?.passwordSetRequired) {
+            setSkipsRemaining(res?.data?.skipsRemaining ?? 0);
+            setMode("set-password");
+          } else {
+            dispatch(closeLoginPopup());
+          }
         })
         .catch((err: any) => {
           toast.error(err?.response?.data?.message || "Something went wrong");
@@ -306,6 +324,65 @@ export default function LoginPopup() {
               </button>
             </div>
           </motion.div>
+        ) : mode === "set-password" ? (
+          <motion.div key="set-password" initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -10 }} transition={{ duration: 0.18 }}>
+            <AuthHeader
+              badge={skipsRemaining > 0 ? "One last thing" : "Required"}
+              title="Set your password"
+              subtitle="You're logged in. Set a password so next time you can skip the SMS entirely."
+            />
+
+            <SetPasswordForm
+              onSubmit={async (password) => {
+                // No OTP here: the user proved phone ownership by logging in
+                // seconds ago, and the backend accepts that session as proof
+                // for a FIRST password. Costs zero extra SMS.
+                try {
+                  const res: any = await postData("auth/password/set", { password });
+                  if (res?.data?.token) dispatch(setReduxToken(res.data.token));
+                  toast.success("Password saved");
+                  dispatch(closeLoginPopup());
+                } catch (err: any) {
+                  toast.error(err?.response?.data?.message || "Could not save password");
+                }
+              }}
+            />
+
+            {skipsRemaining > 0 ? (
+              <>
+                <button
+                  type="button"
+                  className="mt-2.5 flex h-11 w-full cursor-pointer items-center justify-center rounded-xl border border-[var(--color-border)] text-sm font-semibold text-[var(--color-text-secondary)] transition-colors hover:border-[var(--color-primary-light)] hover:text-[var(--color-primary)]"
+                  onClick={() => {
+                    // Fire-and-forget: the counter lives on the server, and a
+                    // failed increment must not trap the user in the modal.
+                    postData("auth/password/skip", {}).catch(() => undefined);
+                    dispatch(closeLoginPopup());
+                  }}
+                >
+                  Skip for now
+                </button>
+
+                <div className="mt-3 flex items-center justify-center gap-2 text-[11px] text-[var(--color-text-muted)]">
+                  <span className="flex gap-1" aria-hidden="true">
+                    {[0, 1, 2].map((i) => (
+                      <span
+                        key={i}
+                        className={`h-1.5 w-1.5 rounded-full ${i < skipsRemaining ? "bg-[var(--color-accent-gold)]" : "bg-[var(--color-border)]"}`}
+                      />
+                    ))}
+                  </span>
+                  <span>
+                    {skipsRemaining} skip{skipsRemaining > 1 ? "s" : ""} left
+                  </span>
+                </div>
+              </>
+            ) : (
+              <p className="mt-3 text-center text-[11px] text-[var(--color-text-muted)]">
+                No skips left — a password is required to continue.
+              </p>
+            )}
+          </motion.div>
         ) : mode === "otp-phone" ? (
           <motion.div key="otp-phone" initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -10 }} transition={{ duration: 0.18 }}>
             <AuthHeader
@@ -317,6 +394,7 @@ export default function LoginPopup() {
             <form onSubmit={otpPhoneFormik.handleSubmit} className="space-y-4">
               <AuthField
                 id="otpMobileNumber"
+                name="mobileNumber"
                 type="tel"
                 inputMode="numeric"
                 autoComplete="tel"

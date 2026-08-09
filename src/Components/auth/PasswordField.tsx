@@ -3,6 +3,8 @@ import { scorePassword, PASSWORD_MIN } from "@/utils/passwordPolicy";
 
 type PasswordFieldProps = {
   id: string;
+  /** Form field key. Defaults to `id`. See AuthField. */
+  name?: string;
   label: string;
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -16,6 +18,7 @@ type PasswordFieldProps = {
 /** Mirrors AuthField's styling so the two sit together without seams. */
 export default function PasswordField({
   id,
+  name,
   label,
   value,
   onChange,
@@ -41,7 +44,7 @@ export default function PasswordField({
       <div className="relative">
         <input
           id={id}
-          name={id}
+          name={name ?? id}
           type={visible ? "text" : "password"}
           value={value}
           onChange={onChange}
