@@ -8,7 +8,9 @@ import toast from "react-hot-toast";
 import { clearUser, setUser } from "@/slices/userSlice";
 import { useDispatch } from "react-redux";
 import QRCode from "react-qr-code";
-import { clearToken } from "@/slices/tokenSlice";
+import { clearToken, setReduxToken } from "@/slices/tokenSlice";
+import AuthModalShell from "@/Components/auth/AuthModalShell";
+import ForgotPasswordFlow from "@/Components/auth/ForgotPasswordFlow";
 import { clearCart } from "@/slices/cartSlice";
 import { resetCartCount, setCartCount } from "@/slices/loginUserSlice";
 
@@ -21,6 +23,9 @@ export default function MyAccount() {
 	}
 	const [userData,setUserData] = useState<any>({});
 	const [teamData,setTeamData] = useState<any>([]);
+	const [securityOpen, setSecurityOpen] = useState(false);
+	/** passwordSetAt is not select:false — only the hash itself is hidden. */
+	const hasPassword = Boolean(userData?.passwordSetAt);
 	useEffect(()=>{
 		getUserData();
 	},[])
@@ -180,6 +185,57 @@ export default function MyAccount() {
               </div>
             </section>
 
+            {/* Login & security */}
+            <section aria-label="Login and security">
+              <h2 className="mb-4 text-lg font-semibold" style={{ color: "var(--color-charcoal)" }}>
+                Login &amp; security
+              </h2>
+              <div
+                className="rounded-2xl border bg-[var(--color-surface)] px-6 py-5"
+                style={{ borderColor: "var(--color-border)", boxShadow: "var(--shadow-card)" }}
+              >
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-semibold" style={{ color: "var(--color-charcoal)" }}>Password</span>
+                      <span
+                        className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
+                          hasPassword
+                            ? "bg-[#F0FDF4] text-[var(--color-success)]"
+                            : "bg-[#FEF2F2] text-[var(--color-error)]"
+                        }`}
+                      >
+                        {hasPassword ? "PASSWORD SET" : "NOT SET"}
+                      </span>
+                    </div>
+                    <p className="mt-1 text-xs" style={{ color: "var(--color-text-secondary)" }}>
+                      {hasPassword
+                        ? `Last changed ${new Date(userData.passwordSetAt).toLocaleDateString("en-IN", {
+                            day: "numeric",
+                            month: "short",
+                            year: "numeric",
+                          })}`
+                        : "You currently log in with an OTP every time"}
+                    </p>
+                  </div>
+
+                  <button
+                    onClick={() => setSecurityOpen(true)}
+                    className="cursor-pointer whitespace-nowrap rounded-xl border-[1.5px] border-[var(--color-primary)] px-3.5 py-2 text-xs font-bold text-[var(--color-primary)] transition-colors hover:bg-[var(--color-primary)] hover:text-white"
+                  >
+                    {hasPassword ? "Change password" : "Set password"}
+                  </button>
+                </div>
+
+                <div className="mt-4 border-t pt-4" style={{ borderColor: "var(--color-border)" }}>
+                  <p className="text-sm font-semibold" style={{ color: "var(--color-charcoal)" }}>Mobile number</p>
+                  <p className="mt-1 text-xs" style={{ color: "var(--color-text-secondary)" }}>
+                    +91 {userData?.phone} · verified
+                  </p>
+                </div>
+              </div>
+            </section>
+
             {/* Share & earn */}
             <section aria-label="Referral">
               <h2 className="mb-4 text-lg font-semibold" style={{ color: "var(--color-charcoal)" }}>
@@ -265,6 +321,24 @@ export default function MyAccount() {
           </div>
         </div>
       </div>
+
+      {securityOpen ? (
+        <AuthModalShell onClose={() => setSecurityOpen(false)}>
+          {/* Both set and change go through OTP verification. Phone possession
+              is the trust anchor OTP login already relies on, and it means a
+              user who forgot their password can still change it from in-app. */}
+          <ForgotPasswordFlow
+            context="profile"
+            initialPhone={String(userData?.phone ?? "")}
+            onBack={() => setSecurityOpen(false)}
+            onDone={(newToken) => {
+              if (newToken) dispatch(setReduxToken(newToken));
+              setSecurityOpen(false);
+              getUserData();
+            }}
+          />
+        </AuthModalShell>
+      ) : null}
     </section>
   );
 }

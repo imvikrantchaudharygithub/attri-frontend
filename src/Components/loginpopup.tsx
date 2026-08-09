@@ -16,18 +16,20 @@ import AuthField from "@/Components/auth/AuthField";
 import PasswordField from "@/Components/auth/PasswordField";
 import OtpInputGroup from "@/Components/auth/OtpInputGroup";
 import SetPasswordForm from "@/Components/auth/SetPasswordForm";
+import ForgotPasswordFlow from "@/Components/auth/ForgotPasswordFlow";
 
 /**
  * password     — the default. Phone + password on one step.
  * otp-phone    — the fallback: collect the number to text a code to.
  * otp-code     — enter that code.
  * set-password — the soft gate shown to a legacy user after an OTP login.
+ * forgot       — phone → code → new password, for a forgotten password.
  *
  * Deliberately NOT a "check whether this phone has a password" step: an
  * endpoint answering that question is an account-enumeration oracle, letting
  * anyone walk the 10-digit space and map which numbers are Attri customers.
  */
-type Mode = "password" | "otp-phone" | "otp-code" | "set-password";
+type Mode = "password" | "otp-phone" | "otp-code" | "set-password" | "forgot";
 
 const RESEND_SECONDS = 120;
 
@@ -300,7 +302,11 @@ export default function LoginPopup() {
             </form>
 
             <div className="mt-4 flex flex-wrap items-center justify-center gap-2.5 text-xs">
-              <button type="button" className="cursor-pointer font-semibold text-[var(--color-primary)] hover:underline" onClick={goToOtp}>
+              <button
+                type="button"
+                className="cursor-pointer font-semibold text-[var(--color-primary)] hover:underline"
+                onClick={() => { setAuthError(""); setMode("forgot"); }}
+              >
                 Forgot password?
               </button>
               <span className="text-[var(--color-border)]">·</span>
@@ -323,6 +329,18 @@ export default function LoginPopup() {
                 Sign up
               </button>
             </div>
+          </motion.div>
+        ) : mode === "forgot" ? (
+          <motion.div key="forgot" initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -10 }} transition={{ duration: 0.18 }}>
+            <ForgotPasswordFlow
+              initialPhone={passwordFormik.values.mobileNumber}
+              onBack={() => setMode("password")}
+              onDone={(token, user) => {
+                // The reset returns a fresh token, so the user lands logged in
+                // rather than being bounced back to type what they just chose.
+                finishLogin(token, user, String(user?.phone ?? passwordFormik.values.mobileNumber));
+              }}
+            />
           </motion.div>
         ) : mode === "set-password" ? (
           <motion.div key="set-password" initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -10 }} transition={{ duration: 0.18 }}>
