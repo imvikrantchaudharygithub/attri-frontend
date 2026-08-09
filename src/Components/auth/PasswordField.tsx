@@ -13,6 +13,9 @@ type PasswordFieldProps = {
   autoComplete?: string;
   error?: string;
   showStrength?: boolean;
+  /** Override when the host page's label convention differs from the auth
+   *  modal's — the signup form uses uppercase tracked labels. */
+  labelClassName?: string;
 };
 
 /** Mirrors AuthField's styling so the two sit together without seams. */
@@ -27,6 +30,7 @@ export default function PasswordField({
   autoComplete = "current-password",
   error,
   showStrength = false,
+  labelClassName = "mb-1.5 block text-sm font-semibold text-[var(--color-text-primary)]",
 }: PasswordFieldProps) {
   const [visible, setVisible] = useState(false);
   const hasError = Boolean(error);
@@ -37,7 +41,7 @@ export default function PasswordField({
 
   return (
     <div>
-      <label htmlFor={id} className="mb-1.5 block text-sm font-semibold text-[var(--color-text-primary)]">
+      <label htmlFor={id} className={labelClassName}>
         {label}
       </label>
 
