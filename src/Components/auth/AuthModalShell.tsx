@@ -92,7 +92,12 @@ export default function AuthModalShell({
         exit={{ opacity: 0, y: 12, scale: 0.98 }}
         transition={{ duration: 0.22, ease: "easeOut" }}
         onKeyDown={handleKeyDown}
-        className="relative z-10 w-full max-w-[390px] overflow-hidden rounded-3xl border border-white/60 bg-white shadow-[0_28px_80px_rgba(26,26,26,0.28)] md:max-w-[880px] md:grid md:grid-cols-[340px_1fr]"
+        // The two-column grid only applies when there is actually a side image.
+        // Without this guard the content lands in the empty 340px column and
+        // leaves half the modal blank.
+        className={`relative z-10 w-full max-w-[390px] overflow-hidden rounded-3xl border border-white/60 bg-white shadow-[0_28px_80px_rgba(26,26,26,0.28)] ${
+          sideImageSrc ? "md:grid md:max-w-[880px] md:grid-cols-[340px_1fr]" : "md:max-w-[440px]"
+        }`}
       >
         {sideImageSrc ? (
           <div className="relative hidden md:block">

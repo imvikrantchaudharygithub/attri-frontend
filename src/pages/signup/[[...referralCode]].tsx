@@ -11,6 +11,8 @@ import { setUser } from "@/slices/userSlice";
 import { setReduxToken } from "@/slices/tokenSlice";
 import { getData, postData } from '@/services/apiServices';
 import { format } from 'date-fns';
+import PasswordField from '@/Components/auth/PasswordField';
+import { passwordYupSchema, confirmPasswordYupSchema } from '@/utils/passwordPolicy';
 
 export default function SignUp() {
     const router = useRouter();
@@ -52,7 +54,11 @@ export default function SignUp() {
                 phone:signupFormik.values.mobileNumber,
                 username:signupFormik.values.name,
                 referralcode:signupFormik.values.referralCode,
-                dateofbirth:signupFormik.values.dateOfBirth
+                dateofbirth:signupFormik.values.dateOfBirth,
+                // New accounts are born with a password, which is what stops
+                // the legacy pool growing. Hashed inside the same transaction
+                // that distributes referral rewards.
+                password:signupFormik.values.password
             }
             await postData('verify-otp',data).then((res:any)=>{
                 console.log(res);
@@ -125,6 +131,8 @@ export default function SignUp() {
             name: '',
             mobileNumber: '',
             dateOfBirth: '',
+            password: '',
+            confirmPassword: '',
         },
         validationSchema: Yup.object({
             referralCode: Yup.string().required('Referral code is required'),
@@ -148,6 +156,8 @@ export default function SignUp() {
                     }
                     return age >= 18;
                 }),
+            password: passwordYupSchema,
+            confirmPassword: confirmPasswordYupSchema('password'),
         }),
         onSubmit: async (values) => {
             setSignuploading(true);
@@ -343,6 +353,29 @@ export default function SignUp() {
                                             <p className="text-red-500 text-xs mt-1">{typeof signupFormik.errors.dateOfBirth === "string" ? signupFormik.errors.dateOfBirth : "Invalid date"}</p>
                                         )}
                                     </div>
+                                    <PasswordField
+                                        id="password"
+                                        labelClassName="block text-xs font-semibold text-[#6B7280] mb-1.5 uppercase tracking-wide"
+                                        label="Create Password *"
+                                        placeholder="At least 8 characters"
+                                        autoComplete="new-password"
+                                        showStrength
+                                        value={signupFormik.values.password}
+                                        onChange={signupFormik.handleChange}
+                                        onBlur={signupFormik.handleBlur}
+                                        error={signupFormik.touched.password ? signupFormik.errors.password : undefined}
+                                    />
+                                    <PasswordField
+                                        id="confirmPassword"
+                                        labelClassName="block text-xs font-semibold text-[#6B7280] mb-1.5 uppercase tracking-wide"
+                                        label="Confirm Password *"
+                                        placeholder="Re-enter password"
+                                        autoComplete="new-password"
+                                        value={signupFormik.values.confirmPassword}
+                                        onChange={signupFormik.handleChange}
+                                        onBlur={signupFormik.handleBlur}
+                                        error={signupFormik.touched.confirmPassword ? signupFormik.errors.confirmPassword : undefined}
+                                    />
                                     <button
                                         type="submit"
                                         disabled={signuploading}

@@ -2,6 +2,10 @@ import { ReactNode } from "react";
 
 type AuthFieldProps = {
   id: string;
+  /** Form field key. Defaults to `id`. Set this when the DOM id has to differ
+   *  from the Formik field name — Formik's handleChange keys off `name`, so a
+   *  mismatch silently discards every keystroke. */
+  name?: string;
   label: string;
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -17,6 +21,7 @@ type AuthFieldProps = {
 
 export default function AuthField({
   id,
+  name,
   label,
   value,
   onChange,
@@ -44,7 +49,7 @@ export default function AuthField({
         ) : null}
         <input
           id={id}
-          name={id}
+          name={name ?? id}
           type={type}
           value={value}
           onChange={onChange}
