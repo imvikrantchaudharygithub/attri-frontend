@@ -74,14 +74,19 @@ export default function Footer() {
           <div className="hidden md:grid md:grid-cols-4 gap-10">
             {/* Brand column */}
             <div className="col-span-1 ">
-              <Link href="/" className="block mb-5">
+              <Link
+                href="/"
+                className="mb-5 flex items-center"
+                aria-label="Attri Industries — home"
+              >
+                {/* Reversed mark: ink -> white, violet lifted to #B57BE0 so both
+                    halves stay legible on the #3D3C3C footer. */}
                 <Image
-                  width={120}
-                  height={40}
-                  src="/assets/images/logo.png"
+                  width={44}
+                  height={44}
+                  src="/assets/images/attri-mark-light.png"
                   alt="Attri Industries"
-                  className="h-10 w-auto object-contain brightness-0 invert"
-                  style={{ width: 'auto' }}
+                  className="h-[44px] w-[44px] shrink-0 object-contain"
                 />
               </Link>
               <p className="text-[#D1D5DB] text-sm leading-relaxed mb-5">
@@ -148,14 +153,17 @@ export default function Footer() {
           <div className="md:hidden">
             {/* Brand */}
             <div className="mb-6 pb-6 border-b border-white/10">
-              <Link href="/" className="block mb-3 pt-4">
+              <Link
+                href="/"
+                className="mb-3 flex items-center pt-4"
+                aria-label="Attri Industries — home"
+              >
                 <Image
-                  width={100}
-                  height={33}
-                  src="/assets/images/logo.png"
+                  width={40}
+                  height={40}
+                  src="/assets/images/attri-mark-light.png"
                   alt="Attri Industries"
-                  className="h-8 w-auto object-contain brightness-0 invert"
-                  style={{ width: 'auto' }}
+                  className="h-[40px] w-[40px] shrink-0 object-contain"
                 />
               </Link>
               <p className="text-white/55 text-sm leading-relaxed">

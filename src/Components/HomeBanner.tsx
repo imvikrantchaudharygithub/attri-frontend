@@ -40,14 +40,21 @@ export default function HomeBanner({ bannerdata }: any) {
                   media="(min-width: 768px)"
                   srcSet={item.image || "/assets/images/home-banner.jpg"}
                 />
+                {/* The width/height attrs below only supply a *fallback* ratio:
+                    once a <source> loads, the browser uses that file's natural
+                    ratio instead — and the uploads vary (1.50 / 1.75 / 1.77 on
+                    desktop, 1.00 on mobile), so the banner height used to swing
+                    with whichever slide was showing. The explicit aspect-ratio
+                    below pins it, and object-cover finally has something to crop
+                    to. 40% anchors the crop slightly high, which keeps every
+                    slide's logo and headline in frame. */}
                 <Image
-                  className="w-full object-cover"
+                  className="block w-full aspect-[6/5] max-h-[440px] object-cover object-[center_40%] md:aspect-[12/5] md:min-h-[360px] md:max-h-[640px]"
                   width={1920}
-                  height={500}
+                  height={800}
                   src={item.image || "/assets/images/home-banner.jpg"}
                   alt={item.title || "Attri Industries banner"}
                   priority={index === 0}
-                  style={{ display: "block" }}
                 />
               </picture>
             </Link>
@@ -55,7 +62,7 @@ export default function HomeBanner({ bannerdata }: any) {
         ))}
         {sorted.length === 0 && (
           <div className="item">
-            <div className="w-full h-[360px] md:h-[500px] bg-gradient-to-br from-[#8B35B8] to-[#5C1F82] flex items-center justify-center">
+            <div className="w-full aspect-[6/5] max-h-[440px] md:aspect-[12/5] md:min-h-[360px] md:max-h-[640px] bg-gradient-to-br from-[#8B35B8] to-[#5C1F82] flex items-center justify-center">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

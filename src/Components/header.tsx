@@ -88,15 +88,22 @@ export default function Header() {
                 </svg>
               </button>
 
-              {/* Logo — dark on light purple */}
-              <Link href="/" className="flex items-center">
+              {/* Logo — Ai mark + ATTRI wordmark lockup, dark on light purple */}
+              <Link
+                href="/"
+                className="flex items-center"
+                aria-label="Attri Industries — home"
+              >
+                {/* Sizes pinned in px, not rem: this site sets a 14px root, so
+                    Tailwind's rem scale would render them at 87.5%. The -1px lift
+                    optically centres the mark against the hamburger — its violet
+                    bar puts the mass 12% below the geometric centre. */}
                 <Image
-                  width={86}
-                  height={28}
-                  src="/assets/images/logo.png"
+                  width={38}
+                  height={38}
+                  src="/assets/images/attri-mark.png"
                   alt="Attri Industries"
-                  className="h-8 w-auto object-contain"
-                  style={{ width: 'auto' }}
+                  className="-mt-[1px] h-[34px] w-[34px] shrink-0 object-contain sm:h-[38px] sm:w-[38px]"
                   priority
                 />
               </Link>
