@@ -130,6 +130,7 @@ export default function Withdraw() {
         getBankDetails();
       })
       .catch((err: any) => {
+        toast.error(err?.response?.data?.message ?? "Failed to remove bank");
         setRemovingBankId("");
       });
   };
