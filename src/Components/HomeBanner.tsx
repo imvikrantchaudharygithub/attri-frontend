@@ -30,7 +30,7 @@ export default function HomeBanner({ bannerdata }: any) {
       <Slider className="homebannerslider" {...settings}>
         {sorted.map((item: any, index: number) => (
           <div className="item" key={index}>
-            <Link href="/" className="block">
+            <Link href={item.link || "/"} className="block">
               <picture>
                 <source
                   media="(max-width: 767px)"
