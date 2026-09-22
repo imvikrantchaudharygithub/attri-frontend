@@ -3,10 +3,57 @@ import Link from "next/link";
 import Image from "next/image";
 import Slider from "react-slick";
 import { motion } from "framer-motion";
+import { useAppSelector } from "@/hooks/hooks";
+import { SITE_URL } from "@/lib/seo/siteConfig";
 
-export default function HomeBanner({ bannerdata }: any) {
+type Banner = {
+  _id?: string;
+  title?: string;
+  image?: string;
+  mob_image?: string;
+  link?: string;
+  priority?: number;
+  createdAt?: string;
+};
+
+/** Admin-set order: higher priority first; banners without a numeric priority sort after
+ *  every numbered one; ties (and legacy banners) fall back to newest upload first. */
+function compareBanners(a: Banner, b: Banner): number {
+  const pa = typeof a?.priority === "number" && Number.isFinite(a.priority) ? a.priority : null;
+  const pb = typeof b?.priority === "number" && Number.isFinite(b.priority) ? b.priority : null;
+  if (pa !== null && pb !== null && pa !== pb) return pb - pa;
+  if (pa !== null && pb === null) return -1;
+  if (pa === null && pb !== null) return 1;
+  const ta = new Date(a.createdAt ?? 0).getTime() || 0;
+  const tb = new Date(b.createdAt ?? 0).getTime() || 0;
+  return tb - ta;
+}
+
+/** Banner destinations that only make sense for visitors without an account. A banner
+ *  linking here is hidden once the visitor is logged in (the offer no longer applies). */
+const GUEST_ONLY_PATHS = ["/signup"];
+
+/** True when the banner link points at one of GUEST_ONLY_PATHS on this site, whether written
+ *  as a path ("/signup", "/signup/CODE?x=1") or as a full https URL to attriindustries.com. */
+export function isGuestOnlyLink(link: unknown): boolean {
+  if (typeof link !== "string" || !link.trim()) return false;
+  try {
+    const url = new URL(link.trim(), SITE_URL);
+    const siteHost = new URL(SITE_URL).host.replace(/^www\./, "");
+    if (/^https?:/i.test(link.trim()) && url.host.replace(/^www\./, "") !== siteHost) return false;
+    const path = url.pathname.replace(/\/+$/, "") || "/";
+    return GUEST_ONLY_PATHS.some((p) => path === p || path.startsWith(p + "/"));
+  } catch {
+    return false;
+  }
+}
+
+export default function HomeBanner({ bannerdata }: { bannerdata?: Banner[] }) {
+  // Logged-in visitors never see sign-up banners. The home body only renders after the
+  // persisted store has rehydrated (PersistGate), so the token is known on first render.
+  const token = useAppSelector((s) => s.token.token);
   const settings = {
-    dots: true,
+    dots: false,
     arrows: false,
     infinite: true,
     autoplay: true,
@@ -18,17 +65,15 @@ export default function HomeBanner({ bannerdata }: any) {
     cssEase: "ease-in-out",
   };
 
-  const sorted = bannerdata
-    ? [...bannerdata].sort(
-        (a: any, b: any) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      )
-    : [];
+  // The backend already returns banners in admin order (priority desc, then newest first).
+  // The client re-sorts with the same key so the page is correct whichever of backend/frontend deploys first.
+  const sorted = bannerdata ? [...bannerdata].sort(compareBanners) : [];
+  const visible = token ? sorted.filter((item) => !isGuestOnlyLink(item.link)) : sorted;
 
   return (
     <section className="relative overflow-hidden bg-[#FAF9FF]" style={{ lineHeight: 0 }}>
       <Slider className="homebannerslider" {...settings}>
-        {sorted.map((item: any, index: number) => (
+        {visible.map((item, index) => (
           <div className="item" key={index}>
             <Link href={item.link || "/"} className="block">
               <picture>
@@ -60,7 +105,7 @@ export default function HomeBanner({ bannerdata }: any) {
             </Link>
           </div>
         ))}
-        {sorted.length === 0 && (
+        {visible.length === 0 && (
           <div className="item">
             <div className="w-full aspect-[6/5] max-h-[440px] md:aspect-[12/5] md:min-h-[360px] md:max-h-[640px] bg-gradient-to-br from-[#8B35B8] to-[#5C1F82] flex items-center justify-center">
               <motion.div
