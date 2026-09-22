@@ -293,8 +293,6 @@ tbody, td, tfoot, th, thead, tr {
 .bottom-sticky .attrixsheading{color: var(--black-color); font-weight: 700;}
 /* home-banner start */
 .home-banner{line-height: 0;}
-.homebannerslider .slick-dots{bottom: 20px;}
-.homebannerslider .slick-dots li{background-color: var(--green-color);}
 .slick-dots li.slick-active{background-color: var(--primary-color);}
 .home-banner{height: auto;}
 
