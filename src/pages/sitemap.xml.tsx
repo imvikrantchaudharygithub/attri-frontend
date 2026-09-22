@@ -3,7 +3,7 @@ import { getData } from "@/services/apiServices";
 import { SITE_URL } from "@/lib/seo/siteConfig";
 
 // Public, indexable routes only. Account/utility routes are excluded (noindex).
-const STATIC_PATHS = ["/", "/category", "/aboutus", "/vision", "/privacypolicy"];
+const STATIC_PATHS = ["/", "/category", "/aboutus", "/vision", "/earn-from-instagram", "/privacypolicy"];
 
 function urlTag(loc: string, lastmod?: string) {
   return `<url><loc>${SITE_URL}${loc}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ""}</url>`;

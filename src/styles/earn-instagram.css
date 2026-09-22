@@ -1,0 +1,628 @@
+/* Devanagari face for Hindi mode. Loaded here (not in _app) so the request only
+   happens on this page; the font files themselves download only when Hindi
+   glyphs are on screen. */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap");
+
+/* /earn-from-instagram — page-scoped styles. Every selector is prefixed .ei- so
+   nothing here can leak into the rest of the storefront. */
+
+:root {
+  /* Instagram's story-ring gradient. Used as ONE accent device on this page:
+     the avatar ring, the phone frame glow and the hairline under the H1.
+     Its purple end (#6228D7) sits next to Attri purple (#8B35B8), which is
+     why the two palettes can share a page without fighting. */
+  --ig-gradient: linear-gradient(45deg, #f9ce34 0%, #ee2a7b 50%, #6228d7 100%);
+}
+
+.ei-page {
+  color: #1a1a1a;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ---- Type scale (Plus Jakarta Sans for display, Noto Sans body via _app) ---- */
+.ei-h1 {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+  font-size: clamp(2.125rem, 5vw, 3.5rem);
+  text-wrap: balance;
+}
+.ei-h2 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  font-size: clamp(1.625rem, 3vw, 2.25rem);
+  text-wrap: balance;
+}
+.ei-h3 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  font-size: 1.125rem;
+}
+.ei-lead {
+  font-size: clamp(1.0625rem, 1.3vw, 1.2rem);
+  line-height: 1.6;
+  color: #4b5563;
+  max-width: 34em;
+}
+.ei-measure {
+  max-width: 66ch;
+}
+.ei-hairline {
+  height: 4px;
+  width: 88px;
+  border-radius: 9999px;
+  background: var(--ig-gradient);
+}
+
+/* ---- Story phone (the one bold element on the page) ---- */
+.ei-phone {
+  width: min(280px, 74vw);
+  aspect-ratio: 9 / 19;
+  border-radius: 44px;
+  background: #000;
+  padding: 10px;
+  position: relative;
+  box-shadow:
+    0 40px 90px rgba(92, 31, 130, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+}
+.ei-phone::before {
+  /* soft gradient halo behind the phone */
+  content: "";
+  position: absolute;
+  inset: -14px;
+  border-radius: 56px;
+  background: var(--ig-gradient);
+  opacity: 0.28;
+  filter: blur(28px);
+  z-index: -1;
+}
+.ei-phone-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 36px;
+  overflow: hidden;
+  background: #1a1a1a;
+  isolation: isolate;
+}
+.ei-phone-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ei-phone-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0) 28%,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+.ei-story-bars {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  gap: 4px;
+}
+.ei-story-bar {
+  flex: 1;
+  height: 2.5px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.35);
+  overflow: hidden;
+}
+.ei-story-bar.is-done {
+  background: #fff;
+}
+.ei-story-bar.is-live::after {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 0;
+  background: #fff;
+  animation: ei-story 7s linear infinite;
+}
+@keyframes ei-story {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+.ei-ring {
+  padding: 2px;
+  border-radius: 9999px;
+  background: var(--ig-gradient);
+  display: inline-flex;
+}
+.ei-ring > * {
+  border-radius: 9999px;
+  border: 2px solid #000;
+}
+.ei-sticker {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  transform: rotate(-3deg);
+}
+.ei-link-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.94);
+  color: #1a1a1a;
+  border-radius: 9999px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ei-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.08em;
+}
+
+/* ---- Trust row ---- */
+.ei-trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #3d3c3c;
+}
+.ei-trust li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ---- Steps timeline ---- */
+.ei-steps {
+  counter-reset: step;
+  display: grid;
+  gap: 20px;
+}
+@media (min-width: 768px) {
+  .ei-steps {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.ei-step {
+  position: relative;
+  padding-top: 14px;
+}
+.ei-step::before {
+  counter-increment: step;
+  content: counter(step);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: #8b35b8;
+  color: #fff;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 18px;
+  margin-bottom: 14px;
+}
+@media (min-width: 768px) {
+  .ei-step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 34px;
+    left: 52px;
+    right: -8px;
+    height: 2px;
+    background: repeating-linear-gradient(90deg, #d8b4fe 0 8px, transparent 8px 14px);
+  }
+}
+
+/* ---- Ladder (7 levels) ---- */
+.ei-ladder {
+  display: grid;
+  gap: 10px;
+}
+.ei-ladder-row {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr auto;
+  align-items: center;
+  gap: 12px;
+}
+@media (min-width: 640px) {
+  .ei-ladder-row {
+    grid-template-columns: 5.5rem 1fr 8rem;
+  }
+}
+.ei-ladder-bar {
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #8b35b8, #5c1f82);
+  min-width: 3.25rem;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+}
+.ei-ladder-row.is-you .ei-ladder-bar {
+  background: linear-gradient(90deg, #d4a847, #b88a2e);
+  color: #1a1a1a;
+}
+.ei-ladder-amount {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+/* ---- Calculator ---- */
+.ei-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 9999px;
+  background: #e9d5ff;
+  outline: none;
+}
+.ei-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #8b35b8;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(139, 53, 184, 0.4);
+  cursor: pointer;
+}
+.ei-range::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #8b35b8;
+  border: 3px solid #fff;
+  cursor: pointer;
+}
+.ei-range:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 4px rgba(139, 53, 184, 0.3);
+}
+.ei-select {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid #d8b4fe;
+  border-radius: 12px;
+  background: #fff;
+  padding: 0 14px;
+  font-size: 15px;
+  color: #1a1a1a;
+}
+.ei-money {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Comparison table ---- */
+.ei-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  background: #fff;
+}
+.ei-table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 14px;
+}
+.ei-table th,
+.ei-table td {
+  text-align: left;
+  padding: 14px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  vertical-align: top;
+  line-height: 1.5;
+}
+.ei-table th {
+  font-weight: 600;
+  color: #6b7280;
+  background: #f5eefa;
+}
+.ei-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+.ei-table tr.is-highlight td {
+  background: #fff8e6;
+  font-weight: 500;
+}
+.ei-table td:first-child {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+/* ---- Story templates ---- */
+.ei-template {
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  background: #fff;
+  overflow: hidden;
+}
+.ei-template-preview {
+  aspect-ratio: 16 / 9;
+  position: relative;
+  color: #fff;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+@media (min-width: 768px) {
+  .ei-template-preview {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* ---- FAQ (native details, works without JS) ---- */
+.ei-faq details {
+  border-bottom: 1px solid #e5e7eb;
+}
+.ei-faq summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 0;
+  font-weight: 600;
+  font-size: 16px;
+  color: #1a1a1a;
+}
+.ei-faq summary::-webkit-details-marker {
+  display: none;
+}
+.ei-faq summary::after {
+  content: "+";
+  flex: none;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: #f3e8ff;
+  color: #8b35b8;
+  font-size: 20px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+.ei-faq details[open] summary::after {
+  transform: rotate(45deg);
+}
+.ei-faq details > div {
+  padding: 0 0 18px;
+  color: #4b5563;
+  line-height: 1.65;
+  max-width: 66ch;
+}
+
+/* ---- Contact rows (one card per channel, WhatsApp leads) ---- */
+.ei-contact {
+  display: grid;
+  gap: 10px;
+}
+.ei-contact-row {
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  color: #1a1a1a;
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.ei-contact-row:hover {
+  transform: translateY(-2px);
+  border-color: #d8b4fe;
+  box-shadow: 0 10px 24px rgba(139, 53, 184, 0.1);
+}
+.ei-contact-row.is-primary {
+  border-color: #bbf7d0;
+  background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 70%);
+}
+.ei-contact-row.is-primary:hover {
+  border-color: #86efac;
+  box-shadow: 0 10px 24px rgba(31, 168, 85, 0.14);
+}
+.ei-contact-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.ei-contact-text {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.ei-contact-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+}
+.ei-contact-value {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+.ei-contact-action {
+  font-size: 14px;
+  font-weight: 700;
+  color: #8b35b8;
+  white-space: nowrap;
+}
+.ei-contact-row.is-primary .ei-contact-action {
+  color: #1fa855;
+}
+@media (max-width: 420px) {
+  .ei-contact-row {
+    grid-template-columns: 44px 1fr;
+  }
+  .ei-contact-action {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ei-contact-row {
+    transition: none;
+  }
+}
+
+/* ---- Language toggle (breadcrumb row) ---- */
+.ei-lang {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: 9999px;
+  background: #fff;
+  border: 1px solid #d8b4fe;
+  box-shadow: 0 2px 10px rgba(139, 53, 184, 0.08);
+}
+.ei-lang-btn {
+  min-height: 36px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 9999px;
+  background: transparent;
+  color: #5c1f82;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+.ei-lang-btn:hover {
+  background: #f3e8ff;
+}
+.ei-lang-btn.is-active,
+.ei-lang-btn.is-active:hover {
+  background: #8b35b8;
+  color: #fff;
+}
+.ei-lang-btn[lang="hi"] {
+  font-family: "Noto Sans Devanagari", var(--font-body);
+  font-size: 14px;
+}
+
+/* ---- Hindi mode: Devanagari needs its own face, no negative tracking and
+   taller lines (matras sit above and below the baseline) ---- */
+.ei-page[lang="hi"] {
+  font-family: "Noto Sans Devanagari", var(--font-body);
+}
+.ei-page[lang="hi"] .ei-h1,
+.ei-page[lang="hi"] .ei-h2,
+.ei-page[lang="hi"] .ei-h3,
+.ei-page[lang="hi"] .ei-money,
+.ei-page[lang="hi"] .ei-ladder-amount,
+.ei-page[lang="hi"] .ei-contact-value {
+  font-family: "Noto Sans Devanagari", var(--font-heading);
+  letter-spacing: 0;
+}
+.ei-page[lang="hi"] .ei-h1 {
+  font-size: clamp(1.9rem, 4.4vw, 3.1rem);
+  line-height: 1.2;
+}
+.ei-page[lang="hi"] .ei-h2 {
+  line-height: 1.3;
+}
+.ei-page[lang="hi"] .ei-h3 {
+  line-height: 1.4;
+}
+.ei-page[lang="hi"] .ei-lead,
+.ei-page[lang="hi"] .ei-measure,
+.ei-page[lang="hi"] .ei-faq details > div {
+  line-height: 1.8;
+}
+.ei-page[lang="hi"] .ei-table th,
+.ei-page[lang="hi"] .ei-table td {
+  line-height: 1.6;
+}
+
+/* ---- Sticky mobile CTA, parked above the bottom nav ---- */
+.ei-sticky-cta {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+  z-index: var(--z-sticky);
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+.ei-sticky-cta[data-hidden="true"] {
+  transform: translateY(20px);
+  opacity: 0;
+  pointer-events: none;
+}
+@media (min-width: 768px) {
+  .ei-sticky-cta {
+    display: none;
+  }
+}
+
+/* ---- Focus + motion ---- */
+.ei-page a:focus-visible,
+.ei-page button:focus-visible,
+.ei-page select:focus-visible,
+.ei-page summary:focus-visible {
+  outline: 3px solid rgba(139, 53, 184, 0.45);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ei-story-bar.is-live::after {
+    animation: none;
+    width: 60%;
+  }
+  .ei-sticky-cta {
+    transition: none;
+  }
+}

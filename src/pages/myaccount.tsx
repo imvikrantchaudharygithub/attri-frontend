@@ -274,6 +274,13 @@ export default function MyAccount() {
                         </svg>
                         Share on WhatsApp
                       </button>
+                      <Link
+                        href="/earn-from-instagram"
+                        className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border px-5 py-2.5 text-sm font-semibold transition-colors duration-200 hover:bg-[var(--color-primary-light)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/40"
+                        style={{ borderColor: "var(--color-border-purple)", color: "var(--color-primary-dark)" }}
+                      >
+                        How to earn from Instagram
+                      </Link>
                     </div>
                   </div>
 

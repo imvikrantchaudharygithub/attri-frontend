@@ -349,6 +349,7 @@ export default function Header() {
                   { href: '/', label: 'Home' },
                   { href: '/aboutus', label: 'About Us' },
                   { href: '/vision', label: 'Our Vision' },
+                  { href: '/earn-from-instagram', label: 'Earn from Instagram' },
                   { href: '/privacypolicy', label: 'Privacy Policy' },
                 ].map((item) => (
                   <Link key={item.href} href={item.href} onClick={() => setIsOpen(false)}>

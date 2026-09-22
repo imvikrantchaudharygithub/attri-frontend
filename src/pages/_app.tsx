@@ -13,6 +13,15 @@ import { organizationSchema, websiteSchema } from "@/lib/seo/schema";
 // anything inside it is NOT in the server-rendered HTML. Keeping SEO out here is
 // what makes titles/meta/JSON-LD reach crawlers, social scrapers and AI bots.
 
+// Routes whose BODY must be in the server HTML. PersistGate renders null on
+// the server, so everything inside it is invisible to crawlers — verified on
+// the live site (the About page ships ~5 KB with no <h1>, header or footer).
+// Public, SEO-critical routes render Header/Component/Footer directly instead.
+// Safe because the store is rehydrated manually after mount (store.ts), so
+// server HTML and the first client render both use the initial (logged-out)
+// state; the header switches to the logged-in view after rehydration.
+const SSR_BODY_ROUTES = ["/earn-from-instagram"];
+
 // Private / utility routes kept out of the search index.
 const NOINDEX_PREFIXES = [
   "/cart",
@@ -80,6 +89,7 @@ import '../styles/review.css';
 import '../styles/thankyou.css';
 import "../styles/teams.css";
 import '../styles/orderdetails.css';
+import '../styles/earn-instagram.css';
 
 const notoSans = Noto_Sans({
   subsets: ['latin'],
@@ -95,6 +105,14 @@ export default function App({ Component, pageProps }: AppProps) {
   const noindex = routeNoindex || !!pageSeo.noindex;
   const seoPath = pageSeo.path || (router.asPath || "/").split("?")[0];
   const [routeSkeleton, setRouteSkeleton] = useState<'home' | 'category' | null>(null);
+  const ssrBody = SSR_BODY_ROUTES.includes(router.pathname);
+
+  // Start rehydrating persisted redux state (token, cart) only after mount.
+  // PersistGate keeps waiting for `bootstrapped` exactly as before; this just
+  // moves the start of that work past React hydration.
+  useEffect(() => {
+    persistor.persist();
+  }, []);
 
   useEffect(() => {
     const handleStart = (url: string) => {
@@ -114,6 +132,56 @@ export default function App({ Component, pageProps }: AppProps) {
     };
   }, [router.events]);
 
+  // The visible app. Rendered inside PersistGate on normal routes (so
+  // persisted state is ready before anything mounts) and directly on
+  // SSR_BODY_ROUTES, where the crawler-visible HTML matters more.
+  const shell = (
+    <div className={notoSans.className}>
+    {/* <HomeVideoPopup /> */}
+    <Toaster
+      position="top-center"
+      toastOptions={{
+        duration: 3000,
+        style: {
+          borderRadius: '12px',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
+          border: '1px solid #E5E7EB',
+          fontSize: '14px',
+        },
+        success: { iconTheme: { primary: '#10B981', secondary: '#FFFFFF' } },
+        error: { iconTheme: { primary: '#EF4444', secondary: '#FFFFFF' } },
+      }}
+    />
+    <Header />
+    <main className="has-bottom-nav min-h-screen bg-[#FAF9FF]">
+      <AnimatePresence mode="wait" initial={false}>
+        {routeSkeleton ? (
+          <motion.div
+            key="skeleton"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+          >
+            <RouteSkeleton type={routeSkeleton} />
+          </motion.div>
+        ) : (
+          <motion.div
+            key={router.pathname}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+          >
+            <Component {...pageProps} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </main>
+    <Footer />
+    </div>
+  );
+
   return (
     <Provider store={store}>
       <SeoHead
@@ -129,52 +197,11 @@ export default function App({ Component, pageProps }: AppProps) {
           ...(noindex ? [] : pageSeo.jsonLd || []),
         ]}
       />
-      <PersistGate loading={null} persistor={persistor}>
-        <div className={notoSans.className}>
-        {/* <HomeVideoPopup /> */}
-        <Toaster
-          position="top-center"
-          toastOptions={{
-            duration: 3000,
-            style: {
-              borderRadius: '12px',
-              boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
-              border: '1px solid #E5E7EB',
-              fontSize: '14px',
-            },
-            success: { iconTheme: { primary: '#10B981', secondary: '#FFFFFF' } },
-            error: { iconTheme: { primary: '#EF4444', secondary: '#FFFFFF' } },
-          }}
-        />
-        <Header />
-        <main className="has-bottom-nav min-h-screen bg-[#FAF9FF]">
-          <AnimatePresence mode="wait" initial={false}>
-            {routeSkeleton ? (
-              <motion.div
-                key="skeleton"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.15 }}
-              >
-                <RouteSkeleton type={routeSkeleton} />
-              </motion.div>
-            ) : (
-              <motion.div
-                key={router.pathname}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-              >
-                <Component {...pageProps} />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </main>
-        <Footer />
-        </div>
-      </PersistGate>
+      {ssrBody ? shell : (
+        <PersistGate loading={null} persistor={persistor}>
+          {shell}
+        </PersistGate>
+      )}
     </Provider>
   );
 }
