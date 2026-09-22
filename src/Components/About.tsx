@@ -127,6 +127,12 @@ export default function About() {
                     independent distributor, you&apos;ll earn generous commissions, bonuses, and incentives
                     while enjoying the flexibility to work on your own schedule.
                   </p>
+                  <Link
+                    href="/earn-from-instagram"
+                    className="mt-3 inline-flex text-sm font-semibold text-[#8B35B8] transition-colors duration-200 hover:text-[#D4A847]"
+                  >
+                    See how creators earn from Instagram with Attri
+                  </Link>
                 </div>
               </motion.div>
             )}

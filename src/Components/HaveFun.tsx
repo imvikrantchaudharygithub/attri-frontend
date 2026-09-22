@@ -36,6 +36,12 @@ export default function HaveFun() {
               Join & Earn
             </Link>
           </div>
+          <Link
+            href="/earn-from-instagram"
+            className="mt-4 inline-block text-sm font-semibold underline underline-offset-4 opacity-90 transition-opacity duration-200 hover:opacity-100"
+          >
+            How creators earn from Instagram with Attri
+          </Link>
         </motion.div>
       </div>
     </section>

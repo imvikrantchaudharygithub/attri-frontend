@@ -48,6 +48,7 @@ export default function Footer() {
   const footerLinks = [
     { href: "/aboutus", label: "About Us" },
     { href: "/vision", label: "Our Vision" },
+    { href: "/earn-from-instagram", label: "Earn from Instagram" },
     { href: "/privacypolicy", label: "Privacy Policy" },
   ];
 

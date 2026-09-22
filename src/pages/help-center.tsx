@@ -1,15 +1,6 @@
 import Head from "next/head";
+import { PHONE_DISPLAY, PHONE_TEL, WHATSAPP, EMAIL, ADDRESS_LINES } from "@/lib/contact";
 
-const PHONE_DISPLAY = "+91 8433443886";
-const PHONE_TEL = "+918433443886";
-const WHATSAPP = "918433443886";
-const EMAIL = "attrilaboratories@gmail.com";
-const ADDRESS_LINES = [
-  "Marketed By: Attri Industries",
-  "D-239, F Floor, Flat No.-06, Street-10",
-  "Near Metro Gate No. 01, Laxmi Nagar",
-  "Delhi - 110092",
-];
 const ADDRESS_QUERY = encodeURIComponent(
   "Attri Industries, D-239, Street 10, Laxmi Nagar, Delhi 110092"
 );
