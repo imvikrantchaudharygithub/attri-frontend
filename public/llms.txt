@@ -1,21 +1,636 @@
 # Attri Industries
 
-> Attri Industries is an Indian direct-selling company making 100% natural, Ayurvedic personal care, wellness and kitchen products — onion shampoo & hair oil, herbal face wash, glutathione cream, herbal toothpaste, Tulsi drops, sanitary pads, and pure kitchen masale. Paraben-free, made in India. We also offer a referral-based earning opportunity for distributors across India.
+> Attri Industries (attriindustries.com) is an Indian direct-selling company based in Laxmi Nagar, Delhi. It sells 100% natural and Ayurvedic personal care, wellness, kitchen spice, tea and pooja products: onion shampoo and onion hair oil, papaya, aloe vera and glutathione skin care, herbal toothpaste, Tulsi drops, UT-Syrup, Realdays sanitary pads, kids protein powder, berry and green juices, neem haldi, moringa and triphala supplements, Annapurna masale, Chaah tea and Neeko dhoopvati. Anyone in India can also join free and earn commission when people buy through their referral code or QR code. The commission runs 7 levels deep (25%, 21%, 18%, 12%, 9%, 7% and 5% of each product's distribution value). It works well on Instagram stories, even for small accounts.
 
-## Shop by category
-- [Hair care](https://attriindustries.com/category/hair): Onion shampoo, hair oils and natural hair care.
-- [Skin care](https://attriindustries.com/category/attri-skin): Face washes, glutathione glow cream and Ayurvedic skin care.
-- [Wellness](https://attriindustries.com/category/wellness): Supplements, herbal toothpaste, Tulsi drops and sanitary care.
-- [Kitchen Masale](https://attriindustries.com/category/kitchen-masale): Pure spice blends and powders.
-- [All products](https://attriindustries.com/category)
+This file is a guide to the site for AI assistants and search tools. It covers every product in the live catalogue, with price, size, ingredients, usage, FAQs and how much a recommender earns on each one. It also explains the Attri earning plan in full and gives the step-by-step guide to earning money from Instagram with Attri. All prices are in Indian rupees (₹) and include the listed discount. Catalogue snapshot: 2026-09-26. Live prices on the product pages always take precedence.
 
-## About
+## Key facts
+
+- Brand: Attri Industries (also "Attri", "ATTRI"). Sub-brands: Annapurna (spices), Realdays (sanitary pads), Chaah (tea), Neeko (dhoopvati).
+- What we sell: natural and Ayurvedic personal care, wellness supplements, women's hygiene, kitchen masale, tea and pooja products. Made in India. Personal care is paraben-free.
+- Where we ship: across India.
+- Delivery: free on orders of ₹699 or more. A flat ₹55 shipping charge applies below ₹699.
+- Cashback: 10% store-credit cashback on orders with a subtotal of ₹299 or more.
+- Welcome offer: new members who sign up with a referral code get ₹200 welcome cashback (store credit) for their orders.
+- Earning opportunity: free to join, no starter kit, no stock to buy, no follower minimum. Members earn commission on real purchases across 7 levels. See "Earn with Attri" below.
+- Contact: phone and WhatsApp +91 8433443886, email attrilaboratories@gmail.com. Replies in English and Hindi.
+- Address: Attri Industries, D-239, F Floor, Flat No. 06, Street 10, near Metro Gate No. 1, Laxmi Nagar, Delhi 110092, India.
+- Instagram: https://www.instagram.com/attriindustries. Facebook: https://www.facebook.com/attriindustries
+
+## Main pages
+
+- [Home](https://attriindustries.com/): Featured products, offers and categories.
+- [All products](https://attriindustries.com/category): The full catalogue.
+- [How to earn money from Instagram in India](https://attriindustries.com/earn-from-instagram): The complete creator guide, with an earnings calculator, the 7-level plan, story templates and FAQs. A Hindi version is at https://attriindustries.com/earn-from-instagram?lang=hi
+- [Create a free account / join with a referral code](https://attriindustries.com/signup): Sign up with a phone number. Links of the form https://attriindustries.com/signup/REFERRALCODE pre-fill a member's code.
+- [Help Center](https://attriindustries.com/help-center): Call, WhatsApp, email and the office address with a map.
 - [About Attri Industries](https://attriindustries.com/aboutus)
 - [Our vision](https://attriindustries.com/vision)
+- [Privacy policy](https://attriindustries.com/privacypolicy)
+- [Sitemap](https://attriindustries.com/sitemap.xml)
 
-## Earn with Attri
-- [How to earn money from Instagram in India](https://attriindustries.com/earn-from-instagram): Free creator programme — post your Attri QR code and referral code in stories, earn 25% of a product's distribution value on direct sales and 21/18/12/9/7/5% on levels 2–7 of your team. No follower minimum, no joining fee.
-- [Create a free account](https://attriindustries.com/signup)
+## Shop by category
 
-## Policies
+- [All products](https://attriindustries.com/category): 25 products across 7 categories.
+- [Hair care](https://attriindustries.com/category/hair): Onion Shampoo, Attri Onion Oil.
+- [Skin care](https://attriindustries.com/category/attri-skin): Papaya Face Wash, Glutathione Skin Glowing Cream, ATTRI Aloe Vera Face Wash.
+- [Wellness & supplements](https://attriindustries.com/category/wellness): Tulsi Drops, Herbal Toothpaste, Realdays Sanitary Pads – Premium Cotton Feel, Realdays Sanitary Pads – Premium Cotton Feel (7+1 FREE), Attri UT-Syrup, ATTRI Kids Protein Powder – Chocolate Flavour, 200 g, ATTRI Immunity Booster Multi Berry Juice – 500 ml, ATTRI Green Energy Green Juice – 500 ml, ATTRI Neem Haldi Dietary Supplement – 30 N, ATTRI Moringa Dietary Supplement – 30 N, ATTRI Triphala Dietary Supplement – 30 N.
+- [Kitchen masale (spices)](https://attriindustries.com/category/kitchen-masale): ATTRI Kitchen Masala Combo, Annapurna Jeera (Cumin) Seeds - 100g, Annapurna Turmeric Powder – 200g, Annapurna Red Chilli Powder – 200g, Annapurna Dhaniya Powder – 200g, Annapurna Garam Masala – 100g.
+- [Beverages](https://attriindustries.com/category/beverages): Chaah: Premium Tea — 200 GM.
+- [Spiritual wellness](https://attriindustries.com/category/spiritual-wellness): Neeko Premium Dhoopvati — 100 GM.
+- [Combos](https://attriindustries.com/category/attri-combos): ATTRI 10 Products Mega Combo.
+
+## Product catalogue at a glance
+
+Prices in Indian rupees (₹), inclusive of the listed discount. "You earn" = level-1 commission on one direct sale (25% of the product's distribution value).
+
+| Product | Category | Size | Price | MRP | You earn per direct sale | Link |
+|---|---|---|---|---|---|---|
+| Onion Shampoo | Hair care | 200ml | ₹299.25 | ₹399 | ₹25 | https://attriindustries.com/product/onion-shampoo |
+| Attri Onion Oil | Hair care | 200ml | ₹295.26 | ₹399 | ₹24.50 | https://attriindustries.com/product/attri-onion-oil |
+| Papaya Face Wash | Skin care | 100ml | ₹149.25 | ₹199 | ₹12.50 | https://attriindustries.com/product/papaya-face-wash |
+| Glutathione Skin Glowing Cream | Skin care | 30gm | ₹401.33 | ₹599 | ₹37.50 | https://attriindustries.com/product/glutathione-skin-glowing-cream |
+| ATTRI Aloe Vera Face Wash | Skin care | 100ml | ₹149.25 | ₹199 | ₹12.50 | https://attriindustries.com/product/attri-aloe-vera-face-wash |
+| Tulsi Drops | Wellness & supplements | 30ml | ₹200.33 | ₹299 | ₹18.75 | https://attriindustries.com/product/tulsi-drops |
+| Herbal Toothpaste | Wellness & supplements | 100gm | ₹99 | ₹150 | ₹8.75 | https://attriindustries.com/product/herbal-toothpaste |
+| Realdays Sanitary Pads – Premium Cotton Feel | Wellness & supplements | — | ₹55.30 | ₹79 | ₹2.50 | https://attriindustries.com/product/realdays-sanitary-pads-premium-cotton-feel |
+| Realdays Sanitary Pads – Premium Cotton Feel (7+1 FREE) | Wellness & supplements | — | ₹79.20 | ₹99 | ₹6.25 | https://attriindustries.com/product/realdays-sanitary-pads-premium-cotton-feel-71-free |
+| Attri UT-Syrup | Wellness & supplements | 200 ml | ₹230.23 | ₹299 | ₹25 | https://attriindustries.com/product/attri-ut-syrup |
+| ATTRI Kids Protein Powder – Chocolate Flavour, 200 g | Wellness & supplements | 200 g | ₹349.30 | ₹499 | ₹37.50 | https://attriindustries.com/product/attri-kids-protein-powder-chocolate-flavour-200-g |
+| ATTRI Immunity Booster Multi Berry Juice – 500 ml | Wellness & supplements | 500 ml | ₹549.45 | ₹999 | ₹75 | https://attriindustries.com/product/attri-immunity-booster-multi-berry-juice-500-ml |
+| ATTRI Green Energy Green Juice – 500 ml | Wellness & supplements | 500 ml | ₹499.50 | ₹999 | ₹65 | https://attriindustries.com/product/attri-green-energy-green-juice-500-ml |
+| ATTRI Neem Haldi Dietary Supplement – 30 N | Wellness & supplements | 30 N | ₹299.25 | ₹399 | ₹30 | https://attriindustries.com/product/attri-neem-haldi-dietary-supplement-30-n |
+| ATTRI Moringa Dietary Supplement – 30 N | Wellness & supplements | 30 N | ₹299.25 | ₹399 | ₹30 | https://attriindustries.com/product/attri-moringa-dietary-supplement-30-n |
+| ATTRI Triphala Dietary Supplement – 30 N | Wellness & supplements | 30 N | ₹299.25 | ₹399 | ₹30 | https://attriindustries.com/product/attri-triphala-dietary-supplement-30-n |
+| ATTRI Kitchen Masala Combo | Kitchen masale (spices) | — | ₹463.73 | ₹587 | ₹7.50 | https://attriindustries.com/product/attri-kitchen-masala-combo |
+| Annapurna Jeera (Cumin) Seeds - 100g | Kitchen masale (spices) | 100g | ₹85.14 | ₹99 | ₹3.50 | https://attriindustries.com/product/annapurna-jeera-cumin-seeds-100g |
+| Annapurna Turmeric Powder – 200g | Kitchen masale (spices) | 200g | ₹89.10 | ₹99 | ₹3.75 | https://attriindustries.com/product/annapurna-turmeric-powder-200g |
+| Annapurna Red Chilli Powder – 200g | Kitchen masale (spices) | 200g | ₹89.10 | ₹99 | ₹3.75 | https://attriindustries.com/product/annapurna-red-chilli-powder-200g |
+| Annapurna Dhaniya Powder – 200g | Kitchen masale (spices) | 200g | ₹67.15 | ₹79 | ₹4.50 | https://attriindustries.com/product/annapurna-dhaniya-powder-200g |
+| Annapurna Garam Masala – 100g | Kitchen masale (spices) | 100g | ₹92.07 | ₹99 | ₹3.75 | https://attriindustries.com/product/annapurna-garam-masala-100g |
+| Chaah: Premium Tea — 200 GM | Beverages | 200 gm | ₹90.09 | ₹99 | ₹5 | https://attriindustries.com/product/chaah-premium-tea-200-gm |
+| Neeko Premium Dhoopvati — 100 GM | Spiritual wellness | 100 gm | ₹66.33 | ₹99 | ₹3.50 | https://attriindustries.com/product/neeko-premium-dhoopvati-100-gm |
+| ATTRI 10 Products Mega Combo | Combos | — | ₹2,198.70 | ₹3,141 | ₹175 | https://attriindustries.com/product/attri-10-products-mega-combo |
+
+## Products: Hair care
+
+Category page: https://attriindustries.com/category/hair
+
+### Onion Shampoo
+
+- URL: https://attriindustries.com/product/onion-shampoo
+- Category: Hair care (https://attriindustries.com/category/hair)
+- Price: ₹299.25 (MRP ₹399, 25% off)
+- Pack size: 200ml
+- What it is: ATTRI Onion Hair Shampoo is enriched with the goodness of red onion extract to strengthen roots, reduce hair fall, and promote healthy growth. Its gentle, sulfate-free formula cleanses the scalp, adds shine, and nourishes every strand—leaving your hair stronger, smoother, and visibly healthier with every wash.
+- Key benefits / highlights: Strengthens Roots & Reduces Hair Fall; Enriched with Red Onion Extract; Gentle & Nourishing Formula; Paraben & Sulphate Free
+- Key ingredients: Onion Extract (Rich in sulfur, it strengthens roots and helps reduce hair fall naturally); Aloe Vera Extract (Soothes the scalp, hydrates hair, and promotes a healthy shine); Glycerine (A powerful humectant that locks in moisture and keeps hair soft)
+- Common questions:
+  - Q: Is ATTRI Onion Hair Shampoo suitable for all hair types? A: Yes, it is formulated to suit all hair types including dry, oily, curly, and chemically treated hair.
+  - Q: How often should I use this shampoo? A: For best results, use it 2–3 times a week, or as needed based on your hair type and scalp condition.
+  - Q: Will it smell like onions? A: No worries! Although it contains red onion extract, the shampoo has a pleasant, mild fragrance that leaves your hair smelling fresh.
+  - Q: Does this shampoo help with hair fall? A: Yes! Enriched with red onion extract, it helps strengthen roots, reduce hair fall, and promote healthier hair growth over time.
+- Earn by recommending it: distribution value ₹100. You earn ₹25 per direct sale (level 1). Full 7-level split per unit sold: L1 ₹25, L2 ₹21, L3 ₹18, L4 ₹12, L5 ₹9, L6 ₹7, L7 ₹5.
+- Also searched as: onion hair shampoo, red onion shampoo, hair fall shampoo, sulphate-free shampoo, paraben-free shampoo, pyaz shampoo, anti hair fall shampoo India
+
+### Attri Onion Oil
+
+- URL: https://attriindustries.com/product/attri-onion-oil
+- Category: Hair care (https://attriindustries.com/category/hair)
+- Price: ₹295.26 (MRP ₹399, 26% off)
+- Pack size: 200ml
+- What it is: Experience the natural goodness of Attri Onion Oil, a powerful blend of Onion Oil, Black Seed Oil, and Almond Oil, specially formulated to target hair fall and dandruff while promoting healthy hair growth. Infused with nutrient-rich botanical oils, this Ayurvedic-inspired formula strengthens hair from the roots, revitalizes your scalp, and restores lost shine – giving your hair the nourishment it truly deserves. Lightweight and non-sticky, this oil penetrates deep into the scalp to repair damaged strands, reduce breakage, and improve overall hair texture. Whether you’re dealing with thinning, dryness, or dull hair, Attri Onion Oil is your go-to solution for soft, shiny, and stronger hair – naturally.
+- Key benefits / highlights: Strengthens Hair Roots; Boosts Hair Growth; Suitable for All Hair Types; Controls Dandruff; Reduces Hair Fall
+- Key ingredients: Onion Oil (Rich in sulfur, helps reduce hair fall and boosts strong, healthy hair growth); Vitamin E (Promotes hair health, boosts shine, and repairs damaged strands for smoother hair); Almond Oil (Deeply nourishes and conditions hair, leaving it soft, shiny, and manageable)
+- Ingredient list (from pack): Olive Oil,Soya Oil,Black Seed Oil,Onion Oil
+- Common questions:
+  - Q: What are the main benefits of Attri Onion Oil? A: This oil helps reduce hair fall, controls dandruff, and promotes healthy hair growth. It also nourishes the scalp and improves hair texture.
+  - Q: How often should I use this oil? A: For best results, use it 2 to 3 times a week. Apply gently to the scalp, massage in circular motions, and leave it overnight or for a few hours before washing.
+  - Q: Is this oil suitable for all hair types? A: Yes, Attri Onion Oil is formulated for all hair types – including dry, oily, frizzy, curly, or chemically treated hair.
+  - Q: Does this oil have a strong onion smell? A: No! While it contains Onion Oil, the blend of almond oil, black seed oil, and natural fragrance gives it a pleasant and mild scent.
+  - Q: Is this product free from harmful chemicals? A: Yes, it is free from parabens, sulfates, and mineral oils, making it safe for regular use.
+  - Q: Will this oil make my hair sticky or greasy? A: No, it has a lightweight, non-sticky formula that gets absorbed easily into the scalp.
+- Earn by recommending it: distribution value ₹98. You earn ₹24.50 per direct sale (level 1). Full 7-level split per unit sold: L1 ₹24.50, L2 ₹20.58, L3 ₹17.64, L4 ₹11.76, L5 ₹8.82, L6 ₹6.86, L7 ₹4.90.
+- Also searched as: onion hair oil, pyaz ka tel, hair growth oil, anti-dandruff hair oil, black seed onion oil, hair fall oil
+
+## Products: Skin care
+
+Category page: https://attriindustries.com/category/attri-skin
+
+### Papaya Face Wash
+
+- URL: https://attriindustries.com/product/papaya-face-wash
+- Category: Skin care (https://attriindustries.com/category/attri-skin)
+- Price: ₹149.25 (MRP ₹199, 25% off)
+- Pack size: 100ml
+- What it is: Daily exfoliating face wash with papaya extract. Gently removes dead skin cells, unclogs pores and brightens dull skin without stripping moisture. For men and women, all skin types.
+- Key benefits / highlights: Brightens Dull Skin; Refreshes Tired Skin; Deep Pore Cleanse; Removes Dead Cells
+- Key ingredients: Papaya Extract (Rich in enzymes that exfoliate and help lighten blemishes naturally); Cocodiethanol Amide (A mild cleanser derived from coconut oil for gentle yet effective cleansing); Polyquaternium-7 (Forms a protective film to lock in moisture and soften the skin)
+- Ingredient list (from pack): Papaya Extract,Polyquaternium 7, Fragnance,Peurified Water,Cocamido Propyl,Betaine,Approved Color.
+- Common questions:
+  - Q: Is this face wash suitable for dry skin? A: Yes, its hydrating ingredients make it ideal for dry, oily, and combination skin types.
+  - Q: Can I use it daily? A: Absolutely! It’s designed for everyday use and gentle on the skin.
+  - Q: Does it have any harsh chemicals? A: No, it contains approved and mild cleansing agents, free from harsh parabens or sulfates.
+  - Q: Will it lighten my dark spots? A: Papaya extract helps with skin brightening and may reduce spots over time.
+  - Q: Is it good for men too? A: Yes, it works equally well for both men and women.
+- Earn by recommending it: distribution value ₹50. You earn ₹12.50 per direct sale (level 1). Full 7-level split per unit sold: L1 ₹12.50, L2 ₹10.50, L3 ₹9, L4 ₹6, L5 ₹4.50, L6 ₹3.50, L7 ₹2.50.
+- Also searched as: papaya facewash, exfoliating face wash, brightening face wash, face wash for dull skin, face wash for men
+
+### Glutathione Skin Glowing Cream
+
+- URL: https://attriindustries.com/product/glutathione-skin-glowing-cream
+- Category: Skin care (https://attriindustries.com/category/attri-skin)
+- Price: ₹401.33 (MRP ₹599, 33% off)
+- Pack size: 30gm
+- What it is: Reveal your radiant glow this summer with the power of Glutathione! Formulated to brighten, even out skin tone, and deeply nourish your skin, this cream is your perfect daily companion for a luminous, healthy complexion.
+- Key benefits / highlights: Brightens dull, tired skin; Reduces pigmentation and dark spots; Hydrates and revitalizes skin deeply; Powerful antioxidant protection with Glutathione
+- Key ingredients: Vitamin E (Protects against environmental damage, deeply nourishes, and improves skin texture and elasticity); Glutathione (A powerful antioxidant that brightens skin, reduces dark spots, and evens out complexion)
+- Ingredient list (from pack): Glutathione, Vitamin C , Vitamin E
+- Common questions:
+  - Q: What is Glutathione Skin Glowing Cream used for? A: It is used to brighten the skin, reduce pigmentation, and enhance your natural glow.
+  - Q: Is it suitable for all skin types? A: Yes, the cream is formulated for all skin types including oily, dry, sensitive, and combination skin.
+  - Q: How often should I use it? A: For best results, apply twice daily—once in the morning and once at night.
+  - Q: How long will it take to see results? A: Visible improvement can be seen within 2 to 4 weeks of regular use.
+- Earn by recommending it: distribution value ₹150. You earn ₹37.50 per direct sale (level 1). Full 7-level split per unit sold: L1 ₹37.50, L2 ₹31.50, L3 ₹27, L4 ₹18, L5 ₹13.50, L6 ₹10.50, L7 ₹7.50.
+- Also searched as: glutathione cream, skin glow cream, skin brightening cream, pigmentation cream, dark spot cream, vitamin C cream, fairness/glow cream
+
+### ATTRI Aloe Vera Face Wash
+
+- URL: https://attriindustries.com/product/attri-aloe-vera-face-wash
+- Category: Skin care (https://attriindustries.com/category/attri-skin)
+- Price: ₹149.25 (MRP ₹199, 25% off)
+- Pack size: 100ml
+- What it is: Enriched with the goodness of Aloe Vera Extract, Glycolic Acid, Vitamin E, and Salicylic Acid, this gentle yet effective face wash deeply cleanses your skin while maintaining its natural moisture. Designed to help reduce acne, soothe irritation, and revitalize dull skin, it leaves your face feeling fresh, soft, and visibly clearer.
+- Key benefits / highlights: Aloe Vera Extract; Glycolic Acid & Salicylic Acid; Vitamin E; Suitable for All Skin Types
+- Key ingredients: Aloe Vera Extract (Soothes and hydrates the skin while reducing inflammation and redness. A natural healer that helps in calming acne-prone or irritated skin); Vitamin E (A powerful antioxidant that protects skin from environmental damage while moisturizing and healing dry or damaged skin)
+- Common questions:
+  - Q: Is this face wash suitable for oily or acne-prone skin? A: Yes, it contains Salicylic Acid and Aloe Vera which help control oil, prevent breakouts, and soothe acne-prone skin.
+  - Q: Can I use it daily? A: Absolutely! It is gentle enough for everyday use and helps maintain a clear, soft, and healthy complexion.
+  - Q: Is it safe for sensitive skin? A: Yes, it’s free from harsh chemicals and is enriched with soothing Aloe Vera, making it safe for sensitive skin types.
+- Earn by recommending it: distribution value ₹50. You earn ₹12.50 per direct sale (level 1). Full 7-level split per unit sold: L1 ₹12.50, L2 ₹10.50, L3 ₹9, L4 ₹6, L5 ₹4.50, L6 ₹3.50, L7 ₹2.50.
+- Also searched as: aloe vera facewash, salicylic acid face wash, acne face wash, pimple face wash, face wash for oily skin
+
+## Products: Wellness & supplements
+
+Category page: https://attriindustries.com/category/wellness
+
+### Tulsi Drops
+
+- URL: https://attriindustries.com/product/tulsi-drops
+- Category: Wellness & supplements (https://attriindustries.com/category/wellness)
+- Price: ₹200.33 (MRP ₹299, 33% off)
+- Pack size: 30ml
+- What it is: ATTRI Tulsi Drops – A Miracle Stress Buster Packed with the powerful blend of 5 types of Tulsi, ATTRI Tulsi Drops support immunity, relieve stress, and boost overall wellness. Just a few drops in water daily can help detoxify your body, promote mental clarity, and restore natural energy—your perfect wellness companion in a bottle.
+- Key benefits / highlights: Just a Few Drops Daily for Maximum Benefits; Boosts Immunity & Fights Infections Naturally; Helps Relieve Stress & Enhances Mental Clarity; Supports Respiratory Health & Detoxifies the Body; Made from 5 Powerful Types of Tulsi
+- Key ingredients: Rama Tulsi (Known for its cooling effect, supports immunity and respiratory health); ShyamaTulsi (Rich in antioxidants, helps fight infections and reduce inflammation naturally); Vana Tulsi (Detoxifies the body and enhances overall physical and mental wellness)
+- The 5 tulsi varieties: Rama Tulsi, shyama Tulsi, Vana Tulsi, Marua Tulsi, Aranya Tulsi
+- Common questions:
+  - Q: How do I use ATTRI Tulsi Drops? A: Add 5 drops to a glass of warm water, tea, or juice. Consume 1–3 times daily.
+  - Q: Can children use Tulsi Drops? A: Yes, it’s safe for children above 5 years in smaller doses. Always consult a doctor if unsure.
+  - Q: Do ATTRI Tulsi Drops have any side effects? A: No, it’s made from natural tulsi extracts and is free from harmful chemicals. However, take as directed.
+  - Q: What are the main benefits of using Tulsi Drops daily? A: It helps boost immunity, reduces stress, supports respiratory health, and promotes overall wellness.
+- Earn by recommending it: distribution value ₹75. You earn ₹18.75 per direct sale (level 1). Full 7-level split per unit sold: L1 ₹18.75, L2 ₹15.75, L3 ₹13.50, L4 ₹9, L5 ₹6.75, L6 ₹5.25, L7 ₹3.75.
+- Also searched as: tulsi drops, tulsi ark, panch tulsi drops, 5 tulsi drops, basil drops, immunity drops, holy basil extract
+
+### Herbal Toothpaste
+
+- URL: https://attriindustries.com/product/herbal-toothpaste
+- Category: Wellness & supplements (https://attriindustries.com/category/wellness)
+- Price: ₹99 (MRP ₹150, 34% off)
+- Pack size: 100gm
+- What it is: Discover the power of ancient Ayurvedic care with ATTRI Herbal Toothpaste, a perfect blend of nature and science. Each 10gm is enriched with potent herbal ingredients like Aloe Vera, Tulsi, Neem Oil, Clove Oil, and Menthol Crystals that work together to provide long-lasting freshness, strong gums, and protection against cavities. Infused with extracts of Babool, Manjistha, Lemon, Peppermint, Rose, and rare herbs like Vidanga, Tumburu, and Majuphal, this toothpaste is your daily solution for complete oral wellness. Crafted as an Ayurvedic Proprietary Medicine, it not only cleanses but also nourishes the gums and strengthens your teeth naturally—without the use of harsh chemicals.
+- Key benefits / highlights: Herbal Toothpaste; Clove & Aloe Vera Extract; Gum & Cavity Protection; Freshens Breath
+- Key ingredients: Clove Extract (Natural antiseptic that helps reduce gum pain and fight cavity-causing bacteria); Aloe Vera Extract (Soothes gums, heals mouth ulcers, and reduces plaque formation); Mint Leaf Oil (Provides a burst of freshness and helps eliminate bad breath naturally)
+- Common questions:
+  - Q: What makes ATTRI Herbal Toothpaste different from regular toothpaste? A: It contains natural extracts like Clove and Aloe Vera for effective and safe oral care.
+  - Q: Is it safe for kids? A: Yes, it’s gentle and chemical-free, making it suitable for kids under supervision.
+  - Q: How often should I use it? A: Use twice daily—morning and night—for best oral health benefits.
+  - Q: Does it help with bad breath? A: Absolutely! Its natural ingredients help freshen breath and keep your mouth clean all day.
+- Earn by recommending it: distribution value ₹35. You earn ₹8.75 per direct sale (level 1). Full 7-level split per unit sold: L1 ₹8.75, L2 ₹7.35, L3 ₹6.30, L4 ₹4.20, L5 ₹3.15, L6 ₹2.45, L7 ₹1.75.
+- Also searched as: ayurvedic toothpaste, clove toothpaste, laung toothpaste, neem toothpaste, herbal dant manjan, toothpaste for gums and bad breath
+
+### Realdays Sanitary Pads – Premium Cotton Feel
+
+- URL: https://attriindustries.com/product/realdays-sanitary-pads-premium-cotton-feel
+- Category: Wellness & supplements (https://attriindustries.com/category/wellness)
+- Price: ₹55.30 (MRP ₹79, 30% off)
+- What it is: Experience all-day freshness and unbeatable comfort with Realdays Sanitary Pads. Designed with your well-being in mind, these ultra-absorbent, super thin pads offer 12-hour protection with 100% absorption. Say goodbye to irritation, odor, and discomfort — and say hello to confidence.
+- Key benefits / highlights: Ultra-thin absorbent core; Leak-lock side barriers; Fragrance-free & chemical-free materials; Super soft cotton top sheet
+- Key ingredients: Fragrance-free & chemical-free materials (Realdays pads are free from artificial fragrance and harsh chemicals)
+- Common questions:
+  - Q: Are these pads safe for sensitive skin? A: Yes! Realdays Sanitary Pads are made with premium cotton feel and are free from artificial fragrances, making them ideal for sensitive skin.
+  - Q: How long can one pad be used? A: Each pad provides up to 12 hours of protection, depending on your flow.
+  - Q: Do the pads contain any fragrance or chemicals? A: No, Realdays pads are free from artificial fragrance and harsh chemicals.
+- Earn by recommending it: distribution value ₹10. You earn ₹2.50 per direct sale (level 1). Full 7-level split per unit sold: L1 ₹2.50, L2 ₹2.10, L3 ₹1.80, L4 ₹1.20, L5 ₹0.90, L6 ₹0.70, L7 ₹0.50.
+- Also searched as: sanitary pads, sanitary napkins, cotton sanitary pads, pads for periods, Realdays pads
+
+### Realdays Sanitary Pads – Premium Cotton Feel (7+1 FREE)
+
+- URL: https://attriindustries.com/product/realdays-sanitary-pads-premium-cotton-feel-71-free
+- Category: Wellness & supplements (https://attriindustries.com/category/wellness)
+- Price: ₹79.20 (MRP ₹99, 20% off)
+- What it is: Enjoy freedom and freshness every day with Realdays Sanitary Pads. Made for comfort, built for protection — with a soft cotton feel, 12-hour absorption, and breathable design. Feel secure, confident, and irritation-free, day or night.
+- Key benefits / highlights: Promotes General Hygiene; Prevents Infection & Odour; No Artificial Fragrance; 12 Hours Protection; 100% Absorption
+- Key ingredients: Cotton-Feel Top Sheet (Soft and gentle on skin, designed to reduce friction and prevent rashes for all-day comfort); No Artificial Fragrance or Dye (Fragrance-free design helps avoid irritation and allergic reactions, making it safe for all skin types); Skin-Friendly Base Sheet (Hypoallergenic and chemical-free base to protect sensitive skin and maintain hygiene)
+- Common questions:
+  - Q: Are these pads suitable for sensitive skin? A: Yes, Realdays are crafted from cotton-feel, irritation-free material with no fragrance.
+  - Q: How long can I wear one pad? A: Up to 12 hours of leak-proof protection.
+  - Q: Does this pack contain 8 pads? A: Yes! 7 + 1 FREE pad is included.
+- Earn by recommending it: distribution value ₹25. You earn ₹6.25 per direct sale (level 1). Full 7-level split per unit sold: L1 ₹6.25, L2 ₹5.25, L3 ₹4.50, L4 ₹3, L5 ₹2.25, L6 ₹1.75, L7 ₹1.25.
+- Also searched as: sanitary pads 8 pack, 7+1 free sanitary napkins, Realdays pads offer
+
+### Attri UT-Syrup
+
+- URL: https://attriindustries.com/product/attri-ut-syrup
+- Category: Wellness & supplements (https://attriindustries.com/category/wellness)
+- Price: ₹230.23 (MRP ₹299, 23% off)
+- Pack size: 200 ml
+- What it is: Attri UT-Syrup is a powerful Ayurvedic formulation crafted to support women’s reproductive health and hormonal balance. Enriched with time-tested herbs like Ashoka, Shatavari, Ashwagandha, and Dashmool, this herbal tonic helps regulate menstrual cycles, relieve cramps, and boost overall vitality. It is especially beneficial for women dealing with irregular periods, fatigue, and hormonal imbalances. The gentle yet effective blend also aids in strengthening the uterus, improving immunity, and reducing stress levels.
+- Key benefits / highlights: Comfort in Every Dose; 100% Ayurvedic Formula; Relieves Stress & Fatigue
+- Key ingredients: Dashmool (A blend of ten roots used in Ayurveda to relieve inflammation and support uterine health); Ashwagandha (An adaptogen that helps reduce stress, improve vitality, and support reproductive health)
+- Common questions:
+  - Q: What is UT-Syrup used for? A: UT-Syrup is designed to support female reproductive health, regulate menstrual cycles, and ease related discomforts.
+  - Q: Is it safe for regular use? A: Yes, it is made from 100% Ayurvedic ingredients and is safe when consumed as directed.
+  - Q: Can this be taken during menstruation? A: Yes, it can help relieve cramps and discomfort during periods.
+  - Q: Are there any side effects? A: Generally no, but consult your physician if you’re pregnant or lactating.
+- Earn by recommending it: distribution value ₹100. You earn ₹25 per direct sale (level 1). Full 7-level split per unit sold: L1 ₹25, L2 ₹21, L3 ₹18, L4 ₹12, L5 ₹9, L6 ₹7, L7 ₹5.
+- Also searched as: UT syrup, uterine tonic, women's health syrup, ashoka shatavari syrup, period syrup, menstrual health syrup, irregular periods ayurvedic syrup
+
+### ATTRI Kids Protein Powder – Chocolate Flavour, 200 g
+
+- URL: https://attriindustries.com/product/attri-kids-protein-powder-chocolate-flavour-200-g
+- Category: Wellness & supplements (https://attriindustries.com/category/wellness)
+- Price: ₹349.30 (MRP ₹499, 30% off)
+- Pack size: 200 g
+- What it is: Chocolate-flavoured balanced nutrition powder for children, 200 g. Front of pack highlights 78 kcal, 3.76 g protein, 11 vitamins and 6 minerals, and states it supports growth and strength, focus and learning, immunity, bones and teeth, and energy for active kids.
+- Key benefits / highlights: Supports Growth & Strength; Helps Improve Focus & Learning; Supports Immunity; Strengthens Bones & Teeth; Provides Energy for Active Kids; Delicious Chocolate Flavour
+- Common questions:
+  - Q: What is ATTRI Kids Protein? A: It is a chocolate-flavoured balanced nutrition powder for children, supplied in a 200 g pack.
+  - Q: What benefits does the product claim? A: The front label states that it supports growth and strength, helps improve focus and learning, supports immunity, strengthens bones and teeth, and provides energy for active kids.
+  - Q: What flavour is it? A: It is chocolate flavoured.
+  - Q: What is the net weight? A: The pack contains 200 g.
+- Earn by recommending it: distribution value ₹150. You earn ₹37.50 per direct sale (level 1). Full 7-level split per unit sold: L1 ₹37.50, L2 ₹31.50, L3 ₹27, L4 ₹18, L5 ₹13.50, L6 ₹10.50, L7 ₹7.50.
+- Also searched as: kids protein powder, protein powder for children, chocolate health drink for kids, bachon ka protein
+
+### ATTRI Immunity Booster Multi Berry Juice – 500 ml
+
+- URL: https://attriindustries.com/product/attri-immunity-booster-multi-berry-juice-500-ml
+- Category: Wellness & supplements (https://attriindustries.com/category/wellness)
+- Price: ₹549.45 (MRP ₹999, 45% off)
+- Pack size: 500 ml
+- What it is: 500 ml multi-berry (blueberry, blackberry, raspberry) juice, labelled as a dietary food supplement for everyday immunity support and an energy boost. Vegetarian, made in India. Not a medicine — follow the directions on the pack.
+- Key benefits / highlights: Supports Immunity; Energy Booster; Natural Ingredients; Multi-Berry Juice; Dietary Food Supplement; Made in India
+- Key ingredients: Blueberry (Blueberries contribute a mildly sweet-tart dark-berry profile and are naturally known for their deep blue anthocyanin pigments. Featured in the product artwork as part of its multi-berry identity); Blackberry (Blackberries add a rich, deep berry character and naturally occurring plant pigments to a mixed-berry flavour profile. Featured in the product artwork as part of its multi-berry identity); Raspberry (Raspberries provide bright, tangy fruit notes that complement the rounded flavour of a multi-berry blend. Featured in the product artwork as part of its multi-berry identity)
+- Common questions:
+  - Q: What is ATTRI Immunity Booster Multi Berry Juice? A: It is a 500 ml multi-berry dietary food supplement presented for everyday nutrition and wellness support.
+  - Q: What benefits are highlighted on the bottle? A: The front label highlights support for immunity, natural ingredients, and an energy boost. The product should be used as part of a balanced diet and healthy lifestyle.
+  - Q: How should I consume this product? A: Shake the bottle before use and follow the exact serving directions printed on the product label or provided by a qualified healthcare professional. A specific dosage will not be published until the back-label directions are available.
+  - Q: Is this product a medicine? A: No. It is labelled as a dietary food supplement and is not intended to diagnose, treat, cure, or prevent any disease.
+  - Q: Who should seek professional advice before use? A: Children, pregnant or breastfeeding individuals, people with a medical condition, and anyone taking regular medication should consult a qualified healthcare professional before using a dietary supplement.
+  - Q: How should the bottle be stored? A: Keep the cap tightly closed and store the bottle away from direct sunlight. Follow any additional storage instructions printed on the product pack.
+- Earn by recommending it: distribution value ₹300. You earn ₹75 per direct sale (level 1). Full 7-level split per unit sold: L1 ₹75, L2 ₹63, L3 ₹54, L4 ₹36, L5 ₹27, L6 ₹21, L7 ₹15.
+- Also searched as: multi berry juice, immunity juice, berry juice supplement, immunity booster drink
+
+### ATTRI Green Energy Green Juice – 500 ml
+
+- URL: https://attriindustries.com/product/attri-green-energy-green-juice-500-ml
+- Category: Wellness & supplements (https://attriindustries.com/category/wellness)
+- Price: ₹499.50 (MRP ₹999, 50% off)
+- Pack size: 500 ml
+- What it is: 500 ml green juice, labelled as a dietary food supplement for detoxification, natural energy and overall wellness. Vegetarian, 100% natural, no added sugar, no preservatives. Not a medicine — follow the directions on the pack.
+- Key benefits / highlights: Supports Detoxification; Natural Energy Support; Rich in Nutrients; Promotes Overall Wellness; 100% Natural; No Added Sugar or Preservatives
+- Key ingredients: Young Green Shoots; Green Plant Powder; Green Juice Blend
+- Common questions:
+  - Q: What is ATTRI Green Energy Green Juice? A: It is a 500 ml green-juice dietary food supplement presented for detoxification and everyday wellness support.
+  - Q: What benefits are highlighted on the front label? A: The front label highlights support for detoxification, natural energy, nutrient richness, and overall wellness. These statements describe the product's positioning and are not a substitute for medical advice.
+  - Q: Does the product contain added sugar or preservatives? A: The front artwork states “No Added Sugar” and “No Preservatives.” The nutrition panel and complete formula should be checked on the physical pack for detailed dietary information.
+  - Q: Is Green Energy Green Juice a medicine? A: No. It is labelled as a dietary food supplement and is not intended to diagnose, treat, cure, or prevent any disease.
+  - Q: Who should seek professional advice before use? A: Children, pregnant or breastfeeding individuals, people with a medical condition, and anyone taking regular medication should consult a qualified healthcare professional before using a dietary supplement.
+  - Q: How should the bottle be stored? A: Keep the cap tightly closed and protect the bottle from direct sunlight. Follow any additional storage and refrigeration instructions printed on the physical product pack.
+- Earn by recommending it: distribution value ₹260. You earn ₹65 per direct sale (level 1). Full 7-level split per unit sold: L1 ₹65, L2 ₹54.60, L3 ₹46.80, L4 ₹31.20, L5 ₹23.40, L6 ₹18.20, L7 ₹13.
+- Also searched as: green juice, detox juice, green energy juice, wheatgrass-style green drink
+
+### ATTRI Neem Haldi Dietary Supplement – 30 N
+
+- URL: https://attriindustries.com/product/attri-neem-haldi-dietary-supplement-30-n
+- Category: Wellness & supplements (https://attriindustries.com/category/wellness)
+- Price: ₹299.25 (MRP ₹399, 25% off)
+- Pack size: 30 N
+- What it is: Dietary supplement (30 N pack) combining neem and haldi (turmeric), positioned for overall wellness. 100% natural, no artificial colours, flavours or preservatives. FSSAI Lic. No. 23324003002536. A dietary supplement, not a medicine — follow the directions on the pack.
+- Key benefits / highlights: Neem & Haldi Botanical Combination; 100% Natural; Made with Natural Ingredients; Supports Overall Wellness; No Artificial Colours, Flavours or Preservatives; 30 N Pack
+- Key ingredients: Neem; Haldi (Turmeric)
+- Common questions:
+  - Q: What is ATTRI Neem Haldi? A: It is a 30 N dietary supplement whose front label names neem and haldi and presents the product for overall wellness support.
+  - Q: What benefit is stated on the front label? A: The front label states that the product supports overall wellness. It is a dietary supplement and should not be represented as diagnosing, treating, curing, or preventing a disease.
+  - Q: Does it contain artificial colours, flavours, or preservatives? A: The front label states “No Artificial Colors, Flavors or Preservatives.” Check the complete physical pack for the full formulation and allergen information.
+  - Q: Is ATTRI Neem Haldi a medicine? A: No. The front label identifies it as a dietary supplement. It is not intended to replace a varied diet or professional medical care.
+  - Q: Who should seek advice before using it? A: Children, pregnant or breastfeeding individuals, people with a medical condition, and anyone taking regular medication should consult a qualified healthcare professional before using a dietary supplement.
+- Earn by recommending it: distribution value ₹120. You earn ₹30 per direct sale (level 1). Full 7-level split per unit sold: L1 ₹30, L2 ₹25.20, L3 ₹21.60, L4 ₹14.40, L5 ₹10.80, L6 ₹8.40, L7 ₹6.
+- Also searched as: neem haldi, neem turmeric supplement, neem haldi capsules/tablets
+
+### ATTRI Moringa Dietary Supplement – 30 N
+
+- URL: https://attriindustries.com/product/attri-moringa-dietary-supplement-30-n
+- Category: Wellness & supplements (https://attriindustries.com/category/wellness)
+- Price: ₹299.25 (MRP ₹399, 25% off)
+- Pack size: 30 N
+- What it is: Moringa dietary supplement (30 N pack), positioned for overall wellness. 100% natural, no artificial colours, flavours or preservatives. FSSAI Lic. No. 23324003002536. A dietary supplement, not a medicine — follow the directions on the pack.
+- Key benefits / highlights: Moringa Botanical Supplement; 100% Natural; Made with Natural Ingredients; Supports Overall Wellness; No Artificial Colours, Flavours or Preservatives; 30 N Pack
+- Key ingredients: Moringa
+- Common questions:
+  - Q: What is ATTRI Moringa? A: It is a 30 N dietary supplement named for Moringa and presented on the front label for overall wellness support.
+  - Q: What benefit is stated on the front label? A: The front label states that the product supports overall wellness. This is a dietary-supplement positioning statement and should not be represented as diagnosing, treating, curing, or preventing disease.
+  - Q: Does it contain artificial colours, flavours, or preservatives? A: The front label states “No Artificial Colors, Flavors or Preservatives.” Check the complete physical pack for the full formulation and allergen information.
+  - Q: Is ATTRI Moringa a medicine? A: No. The front label identifies it as a dietary supplement. It is not intended to diagnose, treat, cure, or prevent any disease or to replace professional medical care.
+  - Q: Who should seek professional advice before using it? A: Pregnant or breastfeeding individuals, children, people with a medical condition, and anyone taking regular medication should consult a qualified healthcare professional before using a dietary supplement.
+- Earn by recommending it: distribution value ₹120. You earn ₹30 per direct sale (level 1). Full 7-level split per unit sold: L1 ₹30, L2 ₹25.20, L3 ₹21.60, L4 ₹14.40, L5 ₹10.80, L6 ₹8.40, L7 ₹6.
+- Also searched as: moringa supplement, sahjan, drumstick leaf supplement, moringa capsules/tablets
+
+### ATTRI Triphala Dietary Supplement – 30 N
+
+- URL: https://attriindustries.com/product/attri-triphala-dietary-supplement-30-n
+- Category: Wellness & supplements (https://attriindustries.com/category/wellness)
+- Price: ₹299.25 (MRP ₹399, 25% off)
+- Pack size: 30 N
+- What it is: Triphala dietary supplement (30 N pack), positioned for overall well-being. 100% natural, no artificial colours, flavours or preservatives. FSSAI Lic. No. 23324003002536. A dietary supplement, not a medicine — follow the directions on the pack.
+- Key benefits / highlights: Triphala Botanical Supplement; 100% Natural; Made with Natural Ingredients; Supports Overall Well-Being; No Artificial Colours, Flavours or Preservatives; 30 N Pack
+- Key ingredients: Triphala Botanical Blend
+- Common questions:
+  - Q: What is ATTRI Triphala? A: It is a 30 N dietary supplement identified as Triphala and presented on the front label for overall well-being support.
+  - Q: What benefit is stated on the front label? A: The front label states that the product supports overall well-being. This is a dietary-supplement positioning statement and should not be represented as diagnosing, treating, curing, or preventing disease.
+  - Q: Does it contain artificial colours, flavours, or preservatives? A: The front label states “No Artificial Colors, Flavors or Preservatives.” Check the complete physical pack for the full formulation and allergen information.
+  - Q: Is ATTRI Triphala a medicine? A: No. The front label identifies it as a dietary supplement. It is not intended to diagnose, treat, cure, or prevent any disease or to replace professional medical care.
+  - Q: Who should seek professional advice before using it? A: Pregnant or breastfeeding individuals, children, people with a medical condition, and anyone taking regular medication should consult a qualified healthcare professional before using a dietary supplement.
+- Earn by recommending it: distribution value ₹120. You earn ₹30 per direct sale (level 1). Full 7-level split per unit sold: L1 ₹30, L2 ₹25.20, L3 ₹21.60, L4 ₹14.40, L5 ₹10.80, L6 ₹8.40, L7 ₹6.
+- Also searched as: triphala supplement, triphala tablets, amla harad baheda
+
+## Products: Kitchen masale (spices)
+
+Category page: https://attriindustries.com/category/kitchen-masale
+
+### ATTRI Kitchen Masala Combo
+
+- URL: https://attriindustries.com/product/attri-kitchen-masala-combo
+- Category: Kitchen masale (spices) (https://attriindustries.com/category/kitchen-masale)
+- Price: ₹463.73 (MRP ₹587, 21% off)
+- What it is: Bring home the authentic flavors of Indian kitchens with the ATTRI Kitchen Masala Combo – a handpicked selection of premium spices that are essential for everyday cooking. This combo includes Red Chilli Powder (200g), Turmeric Powder (200g), Coriander Powder (200g), and Cumin Seeds (100g) – each sourced from the finest farms and processed with care to retain their natural aroma, taste, and nutritional value. Crafted with purity and tradition in mind, these masalas are ground and packed by rural women, supporting sustainable livelihoods and ensuring you get spices free from additives, preservatives, and artificial colors. Whether you’re preparing a spicy curry, a comforting dal, or flavorful sabzi, this combo has everything you need to enhance your culinary creations with natural richness and taste. Perfect for every household, this masala combo is your go-to companion for everyday Indian cooking.
+- Key benefits / highlights: Red Chilli Powder (200g); Haldi (Turmeric) Powder (200g); Dhaniya (Coriander) Powder (200g); Jeera (Cumin) Seeds (100g); Garam Masala – (100gm)
+- Key ingredients: Red Chilli Powder (Made from sun-dried, handpicked red chillies to add vibrant color and spicy heat to your dishes); Cumin (Jeera) (Aromatic cumin seeds packed with flavor, perfect for tempering, seasoning, and aiding digestion); Coriander (Freshly ground from whole coriander seeds, offering a citrusy, mildly sweet flavor for curries and dals); Turmeric (Pure haldi powder ground from high-quality turmeric roots—known for its earthy flavor and health benefits); Garam masala
+- Ingredient list (from pack): Red Chilli Powder (200 gm), Turmeric Powder (200 gm), Coriander Powder (200 gm), and Cumin Seeds (100 gm) , Garam Masala – (100gm).
+- Common questions:
+  - Q: What is included in the ATTRI Kitchen Masala Combo? A: The combo includes Red Chilli Powder (200 gm), Turmeric Powder (200 gm), Coriander Powder (200 gm), and Cumin Seeds (100 gm).
+  - Q: Are these spices pure and free from additives? A: Yes, all the spices are 100% pure, naturally processed, and free from artificial colors or preservatives.
+  - Q: Are the ingredients handpicked and hygienically packed? A: Absolutely. All spices are handpicked, sun-dried, and packed in hygienic conditions to ensure freshness and safety.
+  - Q: Is this combo suitable for daily Indian cooking? A: Yes, these essential spices are perfect for everyday Indian meals like curries, dals, sabzis, and tadkas.
+- Earn by recommending it: distribution value ₹30. You earn ₹7.50 per direct sale (level 1). Full 7-level split per unit sold: L1 ₹7.50, L2 ₹6.30, L3 ₹5.40, L4 ₹3.60, L5 ₹2.70, L6 ₹2.10, L7 ₹1.50.
+- Also searched as: masala combo, spice combo, kitchen spice set, haldi mirch dhaniya jeera garam masala set
+
+### Annapurna Jeera (Cumin) Seeds - 100g
+
+- URL: https://attriindustries.com/product/annapurna-jeera-cumin-seeds-100g
+- Category: Kitchen masale (spices) (https://attriindustries.com/category/kitchen-masale)
+- Price: ₹85.14 (MRP ₹99, 14% off)
+- Pack size: 100g
+- What it is: Annapurna Jeera (Cumin) Seeds are packed with rich aroma and authentic flavor to elevate your culinary creations. Carefully sourced from the best farms, these 100% natural cumin seeds are crafted to retain natural oils and freshness. Perfect for tempering dishes, enhancing curries, dals, and more, this kitchen essential is a must-have for Indian households
+- Key benefits / highlights: Boosts Digestion Naturally; Sourced from Trusted Farms; Enhances Food Aroma & Taste; Helps Regulate Metabolism
+- Ingredient list (from pack): Cumin Seeds (Jeera) – 100% Natural, high-quality seeds with no additives.
+- Common questions:
+  - Q: Is this product 100% pure and natural? A: Yes, Annapurna Jeera is free from additives, preservatives, and artificial colors.
+  - Q: Can I use it daily in cooking? A: Absolutely! It’s ideal for everyday use in Indian recipes like dal, sabzi, pulao, and tadkas.
+  - Q: Does it help in digestion? A: Yes, cumin is known for its digestive benefits and is widely used in Ayurvedic practices.
+- Earn by recommending it: distribution value ₹14. You earn ₹3.50 per direct sale (level 1). Full 7-level split per unit sold: L1 ₹3.50, L2 ₹2.94, L3 ₹2.52, L4 ₹1.68, L5 ₹1.26, L6 ₹0.98, L7 ₹0.70.
+- Also searched as: jeera, cumin seeds, whole cumin, Annapurna jeera
+
+### Annapurna Turmeric Powder – 200g
+
+- URL: https://attriindustries.com/product/annapurna-turmeric-powder-200g
+- Category: Kitchen masale (spices) (https://attriindustries.com/category/kitchen-masale)
+- Price: ₹89.10 (MRP ₹99, 10% off)
+- Pack size: 200g
+- What it is: Annapurna Turmeric Powder is a 100% natural and premium-quality spice made from whole turmeric roots. Carefully hand-ground to retain its natural oils and rich color, it adds vibrant flavor, aroma, and health benefits to every dish. Ideal for cooking, health drinks, and skincare remedies.
+- Key benefits / highlights: Supports Healthy Glowing Skin; Rich in Curcumin Antioxidants; Promotes Liver & Joint Health; Adds Bold Color to Dishes
+- Key ingredients: Pure Turmeric Root Powder (Made from high-quality, naturally dried turmeric roots rich in curcumin)
+- Ingredient list (from pack): Pure Turmeric Root Powder – Made from high-quality, naturally dried turmeric roots rich in curcumin.
+- Common questions:
+  - Q: Is this turmeric powder 100% natural? A: Yes, it’s made from whole turmeric without artificial color or additives.
+  - Q: Can I use it for skincare? A: Absolutely! It’s suitable for DIY skincare packs and masks.
+  - Q: Is it suitable for daily cooking? A: Yes, it’s ideal for everyday Indian recipes and health drinks.
+- Earn by recommending it: distribution value ₹15. You earn ₹3.75 per direct sale (level 1). Full 7-level split per unit sold: L1 ₹3.75, L2 ₹3.15, L3 ₹2.70, L4 ₹1.80, L5 ₹1.35, L6 ₹1.05, L7 ₹0.75.
+- Also searched as: haldi powder, turmeric powder, pure haldi, Annapurna haldi
+
+### Annapurna Red Chilli Powder – 200g
+
+- URL: https://attriindustries.com/product/annapurna-red-chilli-powder-200g
+- Category: Kitchen masale (spices) (https://attriindustries.com/category/kitchen-masale)
+- Price: ₹89.10 (MRP ₹99, 10% off)
+- Pack size: 200g
+- What it is: Experience the bold flavor and vibrant color of Annapurna Red Chilli Powder. Made from premium whole red chillies, it enhances your dishes with authentic taste, natural spice, and unmatched aroma. 100% natural, free from artificial color—crafted for kitchens that value purity and taste.
+- Key benefits / highlights: Ideal for daily cooking use; Hygienically packed for purity; Enhances flavor & color naturally; 0% artificial color or additives
+- Key ingredients: Red Chilli Powder (Made from premium whole red chillies)
+- Ingredient list (from pack): 100% Pure Red Chilli – Handpicked, sun-dried, and finely ground to retain natural oil and flavor.
+- Common questions:
+  - Q: Is this chilli powder 100% natural? A: Yes, it is made from whole red chillies with no artificial colors or preservatives.
+  - Q: Can it be used for daily cooking? A: Absolutely! It’s perfect for everyday Indian meals like curries, dals, and sabzis.
+  - Q: Is it spicy or mild? A: It offers medium to strong heat, perfect for Indian cooking preferences.
+- Earn by recommending it: distribution value ₹15. You earn ₹3.75 per direct sale (level 1). Full 7-level split per unit sold: L1 ₹3.75, L2 ₹3.15, L3 ₹2.70, L4 ₹1.80, L5 ₹1.35, L6 ₹1.05, L7 ₹0.75.
+- Also searched as: lal mirch powder, red chilli powder, mirchi powder, Annapurna mirch
+
+### Annapurna Dhaniya Powder – 200g
+
+- URL: https://attriindustries.com/product/annapurna-dhaniya-powder-200g
+- Category: Kitchen masale (spices) (https://attriindustries.com/category/kitchen-masale)
+- Price: ₹67.15 (MRP ₹79, 15% off)
+- Pack size: 200g
+- What it is: Add a touch of freshness and earthy aroma to your food with Annapurna Dhaniya Powder. Cryogenically ground to retain its rich natural oils and nutrients, this spice is perfect for curries, sabzis, dals, and gravies. With no artificial colors and 100% purity, it ensures a homemade touch to every dish.
+- Key benefits / highlights: Supports Blood Pressure Regulation; Helps Control Cholesterol; 100% Natural & Pure; 0% Artificial Color
+- Key ingredients: 100% Natural Coriander Seeds (Cleaned, sun-dried, and ground at ultra-low temperatures to retain essential oils)
+- Ingredient list (from pack): 100% Natural Coriander Seeds – Cleaned, sun-dried, and ground at ultra-low temperatures to retain essential oils.
+- Common questions:
+  - Q: Is it made with pure coriander seeds? A: Yes, it contains 100% natural, high-quality coriander seeds with no additives.
+  - Q: What is cryogenic grinding? A: It is a cold grinding process that retains natural oils, aroma, and nutrients by preventing heat generation.
+  - Q: Is it safe for daily use? A: Absolutely! It’s ideal for daily cooking and enhances the taste of traditional dishes.
+- Earn by recommending it: distribution value ₹18. You earn ₹4.50 per direct sale (level 1). Full 7-level split per unit sold: L1 ₹4.50, L2 ₹3.78, L3 ₹3.24, L4 ₹2.16, L5 ₹1.62, L6 ₹1.26, L7 ₹0.90.
+- Also searched as: dhaniya powder, coriander powder, cryogenic ground coriander, Annapurna dhaniya
+
+### Annapurna Garam Masala – 100g
+
+- URL: https://attriindustries.com/product/annapurna-garam-masala-100g
+- Category: Kitchen masale (spices) (https://attriindustries.com/category/kitchen-masale)
+- Price: ₹92.07 (MRP ₹99, 7% off)
+- Pack size: 100g
+- What it is: Crafted from nature and made for flavor, Annapurna Garam Masala brings the soul of Indian kitchens into every dish. A rich blend of aromatic spices, cryogenically ground to retain natural oils and enhance flavor. Perfect for sabzis, dals, biryanis, and gravies, it’s the secret behind your favorite traditional dishes.
+- Key benefits / highlights: Rich Aroma & Bold Flavor; 100% Natural; Balanced Spice Mix; Handmade Goodness
+- Ingredient list (from pack): Black Pepper,Cumin,Coriander,Clove,Cardamom,Bay Leaf
+- Common questions:
+  - Q: Can it be used daily in cooking? A: Yes! It’s ideal for everyday Indian meals, including dals, curries, vegetables, and rice dishes.
+  - Q: Does it contain preservatives? A: No, Annapurna Garam Masala is 100% natural and free from artificial preservatives or colors.
+  - Q: What makes this different from others? A: Cryogenic grinding retains aroma and nutrients, and its unique small-batch formula offers consistent flavor in every pinch.
+  - Q: Is it spicy? A: It offers a perfect balance of warmth and spice without being overwhelmingly hot.
+- Earn by recommending it: distribution value ₹15. You earn ₹3.75 per direct sale (level 1). Full 7-level split per unit sold: L1 ₹3.75, L2 ₹3.15, L3 ₹2.70, L4 ₹1.80, L5 ₹1.35, L6 ₹1.05, L7 ₹0.75.
+- Also searched as: garam masala, Indian spice blend, Annapurna garam masala
+
+## Products: Beverages
+
+Category page: https://attriindustries.com/category/beverages
+
+### Chaah: Premium Tea — 200 GM
+
+- URL: https://attriindustries.com/product/chaah-premium-tea-200-gm
+- Category: Beverages (https://attriindustries.com/category/beverages)
+- Price: ₹90.09 (MRP ₹99, 9% off)
+- Pack size: 200 gm
+- What it is: Start your day the right way — with a cup of Chaah: Premium Tea. Blended from carefully selected tea leaves sourced from India's finest tea gardens, Chaah: delivers a perfectly balanced brew that is rich in colour, bold in aroma, and smooth on the palate. Whether you prefer it with milk, ginger, cardamom, or just plain — Chaah: adapts beautifully to your taste. This is not just tea. This is your daily ritual, your morning moment, your chai break.
+- Key benefits / highlights: Economical pack — 200 GM lasts weeks; FSSAI Certified; Ideal for milk tea, masala chai, kadak chai & more
+- Key ingredients: Premium Blended Tea Leaves; 100% Natural — No Additives
+- Common questions:
+  - Q: How do I brew the perfect cup of Chaah: Premium Tea? A: For the best cup, bring water to a full boil and add one heaped teaspoon of Chaah: Premium Tea per cup. Simmer for 2 to 3 minutes, then add milk and sugar to taste and boil for another minute. For masala chai, add crushed ginger, cardamom, and tulsi leaves while boiling the water. Strain and serve hot. The longer you simmer, the stronger and richer your cup becomes.
+  - Q: Is Chaah: Premium Tea safe for everyday use? Is it FSSAI certified? A: Yes, absolutely. Chaah: Premium Tea is 100% pure with no artificial flavours, added colours, or chemical preservatives. It is manufactured under strict hygiene and quality standards and is FSSAI certified (Lic. No. 23324003002536), making it completely safe for daily consumption by all family members including children and elderly.
+  - Q: How many cups can I get from one 200 GM pack and how should I store it? A: A 200 GM pack of Chaah: Premium Tea yields approximately 80 to 100 cups depending on your preferred brew strength — making it excellent everyday value for a household. To preserve its freshness, aroma, and flavour, always store the pack in a cool, dry place away from direct sunlight and moisture. Keep the pack tightly sealed after every use and use within 12 months of the manufacturing date.
+- Earn by recommending it: distribution value ₹20. You earn ₹5 per direct sale (level 1). Full 7-level split per unit sold: L1 ₹5, L2 ₹4.20, L3 ₹3.60, L4 ₹2.40, L5 ₹1.80, L6 ₹1.40, L7 ₹1.
+- Also searched as: chai patti, tea leaves, CTC dust tea, kadak chai, masala chai tea, Chaah tea
+
+## Products: Spiritual wellness
+
+Category page: https://attriindustries.com/category/spiritual-wellness
+
+### Neeko Premium Dhoopvati — 100 GM
+
+- URL: https://attriindustries.com/product/neeko-premium-dhoopvati-100-gm
+- Category: Spiritual wellness (https://attriindustries.com/category/spiritual-wellness)
+- Price: ₹66.33 (MRP ₹99, 33% off)
+- Pack size: 100 gm
+- What it is: Shudh sugandhit Dhoopvati — apne ghar ko pavitra banayein, har pooja ko khaas banayein. Neeko Premium Dhoopvati is a traditional Indian incense cone crafted from natural ingredients to purify your home, uplift your spirit, and create the perfect ambience for daily worship and rituals.
+- Key benefits / highlights: Purifies home environment and removes negative energy; Perfect for Diwali, Navratri, and all Hindu festivals; Long-lasting, rich, and calming fragrance
+- Key ingredients: Pure Plant-Based Aromatic Oils; Natural Herbs & Sacred Resins
+- Common questions:
+  - Q: How do I use Neeko Premium Dhoopvati? A: Using Dhoopvati is simple. Place the cone in a heat-resistant holder or ceramic bowl. Light the tip of the cone with a matchstick or lighter and let it flame for 5 to 10 seconds, then gently blow it out. A glowing ember will remain and the cone will slowly release its rich, sacred fragrance. Keep it on a stable, non-flammable surface and enjoy. One cone typically burns for 20 to 30 minutes, filling your entire room with a pure, natural aroma.
+  - Q: Is Neeko Dhoopvati safe to use around children and elderly family members? A: Yes. Neeko Premium Dhoopvati is made entirely from natural herbs, plant-based resins, and pure aromatic oils — with no synthetic fragrance, no harmful chemicals, and no toxic binders. It burns cleanly with minimal smoke, making it safe for everyday home use. However, we recommend burning it in a well-ventilated room and always keeping it out of direct reach of small children. Never leave a burning cone unattended.
+  - Q: How many cones are included in one 100 GM pack and how long will it last? A: Each 100 GM pack of Neeko Premium Dhoopvati contains multiple cones that together provide several weeks of daily worship use depending on how frequently you light them. A single cone burns for approximately 20 to 30 minutes — perfect for one complete pooja or meditation session. For a family doing daily morning and evening puja, one pack comfortably lasts 3 to 4 weeks, making it excellent value for a premium, all-natural product.
+- Earn by recommending it: distribution value ₹14. You earn ₹3.50 per direct sale (level 1). Full 7-level split per unit sold: L1 ₹3.50, L2 ₹2.94, L3 ₹2.52, L4 ₹1.68, L5 ₹1.26, L6 ₹0.98, L7 ₹0.70.
+- Also searched as: dhoop, dhoop cone, dhoopbatti, dhoopvati, incense cones, pooja dhoop, agarbatti alternative, Neeko dhoop
+
+## Products: Combos
+
+Category page: https://attriindustries.com/category/attri-combos
+
+### ATTRI 10 Products Mega Combo
+
+- URL: https://attriindustries.com/product/attri-10-products-mega-combo
+- Category: Combos (https://attriindustries.com/category/attri-combos)
+- Price: ₹2,198.70 (MRP ₹3,141, 30% off)
+- What it is: Attri's biggest value pack: 10 items covering personal care, wellness and women's hygiene for the whole family — Herbal Toothpaste, Realdays Sanitary Pads (2 packs), Glutathione Skin Glowing Cream, Papaya Face Wash, Kids Protein Powder, Onion Shampoo, Onion Oil, UT-Syrup and Tulsi Drops. All items are also sold individually.
+- Common questions:
+  - Q: Is this combo suitable for the whole family? A: Yes, it includes products for men, women, and children, covering daily needs.
+  - Q: Can I buy individual products separately? A: Yes, all products are also available individually at regular prices.
+- Earn by recommending it: distribution value ₹700. You earn ₹175 per direct sale (level 1). Full 7-level split per unit sold: L1 ₹175, L2 ₹147, L3 ₹126, L4 ₹84, L5 ₹63, L6 ₹49, L7 ₹35.
+- Also searched as: Attri combo, family combo pack, mega combo, value pack, starter combo for distributors
+
+## Earn with Attri: how the commission works
+
+Source page: https://attriindustries.com/earn-from-instagram#seven-levels
+
+- Joining is free. There is no joining fee, no starter kit and no compulsory purchase, ever. You need a phone number and a referral code. If nobody invited you, the signup page suggests codes.
+- Every member gets a personal referral code and QR code right after signing up. Both are in My Account under "Share & earn", with copy and WhatsApp share buttons.
+- Every product has a distribution value. This is the fixed rupee amount from its price that is set aside for the people who brought the customer. The distribution value of each product is listed in the catalogue sections above.
+- When an order is paid, that value is split up the buyer's referral chain, 7 levels deep:
+  - Level 1 (the person whose code the buyer joined with): 25%
+  - Level 2 (whoever referred level 1): 21%
+  - Level 3: 18%
+  - Level 4: 12%
+  - Level 5: 9%
+  - Level 6: 7%
+  - Level 7: 5%
+- Joining bonus: the referrer gets ₹10 of real, withdrawable money when someone joins with their code, before that person buys anything. The new member gets ₹200 welcome cashback.
+- When you are paid: commission goes to your wallet once the order is paid, not when it is placed.
+- Withdrawal: go to the Withdraw page and transfer your wallet balance to a bank account saved in your profile. The minimum withdrawal is ₹100.
+- Legality: commission comes only from real product purchases. Nobody earns anything for recruiting alone. This follows India's Consumer Protection (Direct Selling) Rules, 2021. There is no joining fee and no compulsory purchase, so it is not a pyramid scheme.
+
+### Worked example: Onion Shampoo (distribution value ₹100)
+
+A follower joins with your code and buys one Onion Shampoo. You get ₹25 as their level 1. That follower then refers a friend who buys the same shampoo. The follower gets ₹25 and you get ₹21 as level 2. Across the 7 levels of any single sale, the payouts are ₹25, ₹21, ₹18, ₹12, ₹9, ₹7 and ₹5.
+
+### Worked example: a month on paper (illustration only)
+
+Say 20 followers buy an Onion Shampoo through your code in a month: 20 × ₹25 = ₹500. If each of them refers 2 people who also buy one: 40 × ₹21 = ₹840. That is ₹1,340 before counting levels 3 to 7. The biggest earners per order are the ATTRI 10 Products Mega Combo (₹175 per direct sale), the Immunity Booster Multi Berry Juice (₹75) and the Green Energy Green Juice (₹65). Real earnings depend entirely on what people actually buy. Most people start with a few hundred rupees a month. Nothing here is a guarantee of income.
+
+## How to earn money from Instagram in India with Attri
+
+Source page: https://attriindustries.com/earn-from-instagram
+
+Short answer: you do not need a big following to make money on Instagram. For a small account, the quickest route is a referral programme. You recommend products you actually use, and you are paid when people buy. With Attri, joining is free and you get a QR code and referral code the moment you sign up. You earn 25% of a product's distribution value when a follower buys through your code, then 21%, 18%, 12%, 9%, 7% and 5% on purchases made further down your team, to 7 levels. There is no follower minimum. You are paid on purchases, not on reach, so 300 real followers who trust you can beat a large account nobody listens to.
+
+### Steps (about 10 minutes for the first two)
+
+1. Create your free Attri account at https://attriindustries.com/signup with your phone number. There is no fee, no kit and nothing to buy.
+2. Get your QR code and referral code. Open My Account, then Share & earn. Save the QR as an image and copy your code.
+3. Post a story with your code. Put the QR image in a story about a product you actually use. Add a Link sticker pointing to your signup link, and write one honest line. Pin it to a highlight so it keeps working after 24 hours. Anyone can now add link stickers. The old 10,000-follower rule is gone.
+4. Earn every time they buy. When someone joins with your code and pays for an order, your commission lands in your wallet. You also earn on purchases by the people they bring in, down to 7 levels. Withdraw to your bank once your balance reaches ₹100.
+
+### Three story formats that get scanned
+
+- The seven-day check-in: show yourself using the product for a week (shampoo in the shower caddy, cream on the dresser, juice on the desk). Example caption: "Day 7 with the onion shampoo. Less hair in the drain, honestly. Scan for ₹200 off your first order. #partnership". Put the QR sticker bottom-right and a link sticker to your signup URL.
+- The QR flash: a full-screen QR code on a plain background, with your referral code typed large underneath. Example caption: "Joining Attri is free. My code is inside. New members get ₹200 cashback. #partnership". Pin it to a highlight called "Shop with me".
+- The routine and the poll: film your morning or night routine with the product in frame. Add a poll sticker asking "Want the link?", then DM the link to everyone who votes yes. A DM reply converts far better than a link tap.
+
+Rotate the formats and do not post the same one twice in a row.
+
+### Where else to put your code
+
+- Your Instagram bio link, pointing at your signup URL, so it works between stories.
+- A highlight named "Shop with me" that keeps your QR flash story permanently.
+- The last two seconds of every Reel about the product.
+- WhatsApp status, and family or college broadcast groups.
+- YouTube descriptions.
+- A printed card with your QR at your shop, salon, tuition centre, hostel or college notice board. Your code and QR work anywhere, on or off Instagram.
+
+### Best products to promote
+
+- Everyday repeat buys that sell most often: Onion Shampoo (you earn ₹25 per direct sale), Onion Oil (₹24.50), Papaya and Aloe Vera face washes (₹12.50 each), Herbal Toothpaste (₹8.75) and Tulsi Drops (₹18.75).
+- Highest commission per order: ATTRI 10 Products Mega Combo (₹175), Immunity Booster Multi Berry Juice (₹75), Green Energy Green Juice (₹65), Glutathione Skin Glowing Cream (₹37.50), Kids Protein Powder (₹37.50), and the Neem Haldi, Moringa and Triphala supplements (₹30 each).
+- Your followers' incentives: ₹200 welcome cashback, 10% cashback on orders of ₹299 or more, and free delivery from ₹699.
+
+### Disclosure and claims
+
+Under ASCI's influencer guidelines, earning a commission is a material connection. Disclose it clearly and upfront: put #ad or #partnership in the first line of the caption, and add on-screen text for video. Talk only about what the product did for you and avoid medical claims. These are Ayurvedic personal care products and dietary supplements, not medicines.
+
+### How Instagram earning methods compare in India
+
+| Method | Followers needed | Upfront cost | When you see money | Works best for |
+|---|---|---|---|---|
+| Brand deals / sponsored posts | Usually 10,000+ with steady engagement | ₹0 | After weeks of pitching; paid per post | Niche creators who post daily |
+| Reels ads and creator bonuses | Eligibility rules, often invite-only | ₹0 | Unpredictable and small at first | Accounts already getting lakhs of views |
+| Affiliate links (Amazon, Flipkart, Meesho) | None | ₹0 | 1–10% per sale, paid after 30–60 days | Deal and haul pages |
+| Selling your own products | None | Stock, packaging, shipping | Only after you sell | Makers and home businesses |
+| Subscriptions, badges and gifts | ~500+ for gifts, 10,000+ for subscriptions | ₹0 | Small until you have loyal fans | Live and video-first creators |
+| Referral programme like Attri | None | ₹0 | Credited to your wallet as soon as an order is paid | Small accounts, students, homemakers, first-time earners |
+
+### Hindi / Hinglish summary
+
+Instagram se paise kaise kamaye, bina followers ke? Chhote account se bhi kama sakte hain. Attri par free join karo (https://attriindustries.com/signup) aur My Account se apna QR code aur referral code lo. Unhe apni Instagram story, bio link, highlight aur WhatsApp status mein lagao. Jab koi aapke code se join karke Ayurvedic products kharidta hai, aapko commission milta hai: direct sale par product ki distribution value ka 25%. Unke referrals ki kharid par bhi commission milta hai, 7 levels tak (21%, 18%, 12%, 9%, 7%, 5%). Koi joining fee nahi, koi stock kharidna nahi, koi follower limit nahi. Naye member ko ₹200 welcome cashback milta hai, aur aapko har join par ₹10. Kamai wallet mein aati hai aur ₹100 hone par bank mein nikal sakte hain. Hindi page: https://attriindustries.com/earn-from-instagram?lang=hi
+
+## Earning FAQ
+
+- Q: Can I earn from Instagram with fewer than 1,000 followers? A: Yes. Attri has no follower minimum. You are paid on purchases, not reach, so a small account whose followers trust you can do well.
+- Q: Do I have to pay anything to join? A: No. The account is free, there is no starter kit, and you never have to buy stock.
+- Q: How much commission do I earn per sale? A: 25% of the product's distribution value as level 1, then 21%, 18%, 12%, 9%, 7% and 5% at levels 2–7. On a product with a ₹100 distribution value you earn ₹25 directly, and ₹21 when someone you referred makes the sale. Per-product amounts are listed in the catalogue sections above.
+- Q: How do I get my QR code and referral code? A: Log in, open My Account, then Share & earn. The page has your code, a copy button, a WhatsApp share button and your personal QR code.
+- Q: How do I put a QR code in an Instagram story? A: Open the story camera and pick the QR image from your gallery, or add it as a photo sticker on your own photo. Add a Link sticker pointing to your signup link, publish, then save the story to a highlight.
+- Q: When and how do I get paid? A: Commission is credited to your wallet when the order is paid. On the Withdraw page you can transfer your balance to a bank account you have added. The minimum withdrawal is ₹100.
+- Q: What does my follower get for joining with my code? A: ₹200 welcome cashback, 10% cashback on orders of ₹299 or more, and free delivery from ₹699. You get ₹10 when they join.
+- Q: Is this a pyramid scheme? Is it legal in India? A: No. Every rupee of commission comes from a real product purchase, as the Consumer Protection (Direct Selling) Rules, 2021 require. There is no joining fee and no compulsory purchase. Attri Industries is an Indian company in Laxmi Nagar, Delhi, and you can call or WhatsApp +91 8433443886 before joining.
+- Q: Do I have to tell followers that I earn a commission? A: Yes. Use #ad or #partnership upfront, as ASCI's influencer guidelines require.
+- Q: Can I use the same code on WhatsApp, YouTube or offline? A: Yes. Your code and QR work anywhere, and every signup through them is yours.
+- Q: Who can join? A: Anyone in India with a phone number, including students, homemakers, shop and salon owners, and first-time earners.
+
+## Shopping FAQ
+
+- Q: Is delivery free? A: Yes, on orders of ₹699 or more. Orders below that pay a flat ₹55.
+- Q: Is there cashback? A: Yes. You get 10% store-credit cashback on orders with a subtotal of ₹299 or more, and new members who join with a referral code get ₹200 welcome cashback.
+- Q: Are Attri products natural? A: The range is built around natural and Ayurvedic ingredients. The hair and skin care is paraben-free, and the Annapurna spices contain no artificial colours or preservatives. Check each product section above for its ingredients.
+- Q: Are the supplements medicines? A: No. The juices, Kids Protein, Neem Haldi, Moringa and Triphala are dietary or food supplements. They are not meant to diagnose, treat or prevent disease. Follow the directions on the pack, and consult a doctor if you are pregnant, breastfeeding, taking medication or giving them to children.
+- Q: How do I contact Attri? A: Call or WhatsApp +91 8433443886, email attrilaboratories@gmail.com, or see https://attriindustries.com/help-center
+
+## Optional
+
+- [Vision](https://attriindustries.com/vision): Building lasting businesses grounded in natural products and community-driven entrepreneurship.
 - [Privacy policy](https://attriindustries.com/privacypolicy)
